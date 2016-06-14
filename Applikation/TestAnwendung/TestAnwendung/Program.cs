@@ -10,7 +10,8 @@ namespace TestAnwendung
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Stefan Groinig");
+            Console.WriteLine("Hallo Welt");
+            Console.WriteLine("MEIN schöner Text");
         }
     }
 }
