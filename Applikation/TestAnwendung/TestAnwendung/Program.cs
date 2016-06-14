@@ -11,11 +11,8 @@ namespace TestAnwendung
         static void Main(string[] args)
         {
             int i = 1234;
-            Console.WriteLine("Hallo Welt");
-            Console.WriteLine("MEIN schöner Text" + i);
-            string s = "§asdf";
-            Console.WriteLine("pilgerstorfer Franz" + s);
-            Console.WriteLine("Marco war hier");
+            int j = 546;
+            Console.WriteLine("Summe: "+(i+j));
         }
     }
 }
