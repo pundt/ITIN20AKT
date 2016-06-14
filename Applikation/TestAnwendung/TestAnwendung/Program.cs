@@ -13,6 +13,7 @@ namespace TestAnwendung
             int i = 1234;
             int j = 546;
             Console.WriteLine("Summe: "+(i+j));
+            int k = 786;
         }
     }
 }
