@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        .carousel-inner > .item > img{
+            height: 300px;
+            width: 500px;
+
+        }
+        
+        .carousel-inner > .item > a > img {
+            position:absolute;
+            top:0;
+            left:0;
+            min-height: 70%!important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-xs-3">
+            <img src="bilder/reisebuero.jpg" height="200" width="250" />
+        </div>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="col-xs-6">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+
+                    <div class="item active">
+                        <img src="bilder/1.jpg" alt="Chania">
+                        <div class="carousel-caption">
+                            <h3>Chania</h3>
+                            <p>Gindl</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="bilder/2.jpg" alt="Chania">
+                        <div class="carousel-caption">
+                            <h3>Chania</h3>
+                            <p>ghj</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="bilder/3.jpg" alt="Flower">
+                        <div class="carousel-caption">
+                            <h3>Flowers</h3>
+                            <p>eigghjgjn</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="bilder/4.jpg" alt="Flower">
+                        <div class="carousel-caption">
+                            <h3>Flowers</h3>
+                            <p>ghjgjghj</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="www.google.at">login</a>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="col-xs-12">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Impressum</a></li>
+                    <li><a href="#">AGB</a></li>
+                    <li><a href="#">Über uns</a></li>
+                </ul>
+            </div>
+        </div>
+            </nav>
+    
+</body>
+</html>
