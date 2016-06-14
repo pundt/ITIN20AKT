@@ -15,6 +15,7 @@ namespace TestAnwendung
             Console.WriteLine("MEIN schöner Text" + i);
             string s = "§asdf";
             Console.WriteLine("pilgerstorfer Franz" + s);
+            Console.WriteLine("Marco war hier");
         }
     }
 }
