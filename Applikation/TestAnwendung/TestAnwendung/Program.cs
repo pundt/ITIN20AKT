@@ -11,8 +11,7 @@ namespace TestAnwendung
         static void Main(string[] args)
         {
             Console.WriteLine("Hallo Welt");
-            Console.WriteLine("noch KEIN schöner Text");
-            Console.WriteLine("das bin ich");
+            Console.WriteLine("MEIN schöner Text");
         }
     }
 }
