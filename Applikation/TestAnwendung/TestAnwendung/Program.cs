@@ -13,7 +13,8 @@ namespace TestAnwendung
             int i = 1234;
             Console.WriteLine("Hallo Welt");
             Console.WriteLine("MEIN schöner Text" + i);
-            Console.WriteLine("pilgerstorfer Franz");
+            string s = "§asdf";
+            Console.WriteLine("pilgerstorfer Franz" + s);
         }
     }
 }
