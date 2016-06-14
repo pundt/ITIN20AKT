@@ -10,9 +10,8 @@ namespace TestAnwendung
     {
         static void Main(string[] args)
         {
-            int i = 1234;
-            int j = 546;
-            Console.WriteLine("Summe: "+(i+j));
+            string i = "Nur eine hohe Rechnung ist eine ho´he Rechnung";
+            Console.WriteLine(i);
         }
     }
 }
