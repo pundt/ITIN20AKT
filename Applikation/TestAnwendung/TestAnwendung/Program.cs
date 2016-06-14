@@ -12,14 +12,13 @@ namespace TestAnwendung
         {
             int i = 1234;
             Console.WriteLine("Hallo Welt");
-            Console.WriteLine("MEIN schöner Text" + i);
             string s = "§asdf";
             Console.WriteLine("pilgerstorfer Franz" + s);
             string niveau = "";
             bool pichler = true;
             if (pichler ==true)
             {
-                niveau = "nivea";
+                niveau = "Monchichi";
             }
 
         }
