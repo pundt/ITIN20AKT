@@ -11,9 +11,16 @@ namespace TestAnwendung
         static void Main(string[] args)
         {
             int i = 1234;
-            int j = 546;
-            Console.WriteLine("Summe: "+(i+j));
-            int k = 786;
+            Console.WriteLine("Hallo Welt");
+            string s = "§asdf";
+            Console.WriteLine("pilgerstorfer Franz" + s);
+            string niveau = "";
+            bool pichler = true;
+            if (pichler ==true)
+            {
+                niveau = "Monchichi";
+            }
+
         }
     }
 }
