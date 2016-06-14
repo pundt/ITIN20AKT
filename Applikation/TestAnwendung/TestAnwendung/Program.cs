@@ -10,7 +10,7 @@ namespace TestAnwendung
     {
         static void Main(string[] args)
         {
-            string i = "Nur eine hohe Rechnung ist eine ho´he Rechnung";
+            string i = "Nur eine hohe Rechnung ist eine gute Rechnung";
             Console.WriteLine(i);
         }
     }
