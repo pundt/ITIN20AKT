@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Reisen</title>
+
+    <!-- Bootstrap -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet">
+    <link href="Content/eigeneStyles.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Reiseliste</a></li>
+            <li><a data-toggle="tab" href="#top">Topreisen</a></li>
+            <li><a data-toggle="tab" href="#lastminute">Last-Minute-Reisen</a></li>
+            <li><a data-toggle="tab" href="#schnaeppchen">Schnäppchenreisen</a></li>
+            <li><a data-toggle="tab" href="#merk">Merkliste</a></li>
+        </ul>
+        <br />
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <div class="container">
+                    <div class="row reise">
+                        <div class="col-md-2 col-xs-6 bild">
+                            <img class="img-responsive" src="bilder/Desert.jpg" />
+                            <div class="carousel-caption bildschrift">€1500,00</div>
+                            <div class="Restplätze">Freie Plätze <span class="badge">5</span></div>
+                        </div>
+                        <div class="col-md-4 col-xs-6 details">
+                            <ul class="list-inline list-unstyled liste">
+                                <li>Wandern in der Toskana</li>
+                                <li class="Kommentar">letztmöglicher Buchungstermin 20.7.2016</li>
+                                <li><img src="bilder/Ort.png" /> Lucca, Toskana, Italien</li>
+                            </ul>
+
+                        </div>
+                        <div class="col-md-3 col-xs-6 details">
+                            <ul class="list-inline list-unstyled liste">
+                                <li><img src="bilder/Haus.png" /> Hotel Toska</li>
+                                <li><img src="bilder/Uhr.png" />21.12.2016-1.1.2017</li>
+                                <li><img src="bilder/Verpflegung.png" /> Halbpension</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-xs-6 details">
+                            <div>
+                                Merken
+                                <a href=""><img class="img-circle" src="bilder/Sonne.png" width="100" /></a>
+                            </div>
+                            <button class="btn btn-lg platziert">Details >></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="top" class="tab-pane fade">
+                Hier kommen Topreisen
+            </div>
+            <div id="lastminute" class="tab-pane fade">
+                Hier kommen Last Minute Reisen 
+            </div>            
+            <div id="schnaeppchen" class="tab-pane fade">
+                Hier kommen Schnäppchenreisen
+            </div>
+            <div id="merk" class="tab-pane fade">
+                Hier kommen gemerkte Reisen
+            </div>
+        </div>
+    </div>
+</body>
+</html>
