@@ -28,9 +28,25 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Fügt eine neue Reise hinzu
+        /// </summary>
+        /// <param name="neueReise">Model mit den entsprechenden Daten</param>
+        /// <returns></returns>
         public ActionResult Hinzufuegen(ReiseModel neueReise)
         {
-            return View();
+
+        }
+
+        /// <summary>
+        /// Löscht das übergebene ReiseModel
+        /// </summary>
+        /// <param name="reise">Das ReiseModel das gelöscht werden soll</param>
+        /// <returns>Redirect to Index (Reise)</returns>
+        public ActionResult Loeschen(ReiseModel reise)
+        {
+
+            return RedirectToAction("Index");
         }
     }
 }
