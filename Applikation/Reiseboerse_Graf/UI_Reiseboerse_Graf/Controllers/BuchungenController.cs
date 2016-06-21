@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UI_Reiseboerse_Graf.Models;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -40,7 +41,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Fügt eine Buchung hinzu anhand des übergebenen Models
         /// </summary>
         /// <returns></returns>
-        public ActionResult Hinzufuegen(BuchungsModel neueBuchung)
+        public ActionResult Hinzufuegen(BuchungenModel neueBuchung)
         {
             return View();
         }

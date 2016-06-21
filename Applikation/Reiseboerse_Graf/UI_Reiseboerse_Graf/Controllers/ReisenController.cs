@@ -35,7 +35,8 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns></returns>
         public ActionResult Hinzufuegen(ReiseModel neueReise)
         {
-
+            
+            return View();
         }
 
         /// <summary>
