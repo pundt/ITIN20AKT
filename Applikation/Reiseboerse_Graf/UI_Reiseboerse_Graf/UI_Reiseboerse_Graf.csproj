@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Models\BenutzerModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
+    <Compile Include="Models\KundenModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,10 +166,10 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Benutzer\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Benutzer\" />
     <Folder Include="Views\Reisen\" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 {
     public class BenutzerController : Controller
     {
-        // GET: Benutzer
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -32,13 +32,37 @@ namespace UI_Reiseboerse_Graf.Controllers
             passwort = bm.Passwort;
 
             return View("~/Views/Home/Index.cshtml");
-
         }
         [HttpPost]
         public ActionResult Logout()
         {
             /// Session variable von derzeitigem benutzer wird auf null gesetzt.
             return View();
+        }
+        /// <summary>
+        /// Benutzer view zum eingeben der notwendigen daten.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult BenutzerErstellen()
+        {
+
+            return View();
+
+        }
+        /// <summary>
+        /// Erhält das benutzerModel, schreibt die Daten in die Datenbank
+        /// </summary>
+        /// <param name="bm">BenutzerModel Datentyp</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult BenutzerErstellen(BenutzerModel bm)
+        {
+            DBNull context = new DBNull();
+
+
+            return View();
+        
         }
 
     }
