@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="Models\BenutzerModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
+    <Compile Include="Models\KundenModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Benutzer\" />
     <Folder Include="Views\Buchungen\" />
   </ItemGroup>
   <ItemGroup>
