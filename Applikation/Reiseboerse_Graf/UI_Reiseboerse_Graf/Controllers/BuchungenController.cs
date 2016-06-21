@@ -15,6 +15,19 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         /// <summary>
+        /// Lädt alle Buchungen aus der Datenbank zu einer bestimmten Reise
+        /// </summary>
+        /// <param name="reise_id"></param>
+        /// <returns></returns>
+        public ActionResult LadeAlleBuchungen(int reise_id)
+        {
+
+            return View();
+        }
+
+
+
+        /// <summary>
         /// Fügt eine Buchung hinzu
         /// </summary>
         /// <returns>den View zum Eingeben der Daten</returns>
