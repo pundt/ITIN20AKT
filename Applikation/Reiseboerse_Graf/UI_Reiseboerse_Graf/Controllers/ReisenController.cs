@@ -28,9 +28,9 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
 
-        public ActionResult Hinzufuegen(UI_ReiseModel neueReise)
+        public ActionResult Hinzufuegen(ReiseModel neueReise)
         {
-
+            return View();
         }
     }
 }
