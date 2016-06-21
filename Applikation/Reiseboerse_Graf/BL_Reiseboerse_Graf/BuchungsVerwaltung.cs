@@ -23,9 +23,10 @@ namespace BL_Reiseboerse_Graf
         /// </summary>
         /// <param name="reise_id">die ID der Reise deren Buchungen geladen werden</param>
         /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
-        //public static List<Buchung> LadeAlleBuchungen(int reise_id)
-        //{
-
-        //}
+        public static List<int> LadeAlleBuchungen(int reise_id)
+        {
+            
+            return null;
+        }
     }
 }

@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI_Reiseboerse_Graf", "UI_Reiseboerse_Graf\UI_Reiseboerse_Graf.csproj", "{058DDECC-E851-4740-9CBA-71D34A472710}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_Reiseboerse_Graf", "BL_Reiseboerse_Graf\BL_Reiseboerse_Graf.csproj", "{EDE9ECFB-9053-491D-87DF-F13874AE5B2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAusgabe", "ConsoleApplication1\TestAusgabe.csproj", "{C364E219-79B4-42E1-83CA-7BAC0543A0CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EDE9ECFB-9053-491D-87DF-F13874AE5B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDE9ECFB-9053-491D-87DF-F13874AE5B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDE9ECFB-9053-491D-87DF-F13874AE5B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C364E219-79B4-42E1-83CA-7BAC0543A0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C364E219-79B4-42E1-83CA-7BAC0543A0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C364E219-79B4-42E1-83CA-7BAC0543A0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C364E219-79B4-42E1-83CA-7BAC0543A0CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

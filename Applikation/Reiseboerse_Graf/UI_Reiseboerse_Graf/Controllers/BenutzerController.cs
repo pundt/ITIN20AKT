@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UI_Reiseboerse_Graf.Models;
+using BL_Reiseboerse_Graf;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -58,7 +59,9 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult BenutzerErstellen(BenutzerModel bm)
         {
-            DBNull context = new DBNull();
+            testdbEntities context = new testdbEntities();
+
+            
 
 
             return View();
