@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BL_Reiseboerse_Graf
 {
     public class ReiseVerwaltung
@@ -12,11 +13,11 @@ namespace BL_Reiseboerse_Graf
         /// Lädt alle Reisen aus der Datenbank
         /// </summary>
         /// <returns>eine Liste von Reisen oder bei einem Fehler null</returns>
-        public static List<Reise> LadeAlleReisen()
-        {
+        //public static List<Reise> LadeAlleReisen()
+        //{
 
-            return null;
-        }
+        //    return null;
+        //}
 
         /// <summary>
         /// Lädt alle Reisen, die den Filterkriterien entsprechen
@@ -26,11 +27,11 @@ namespace BL_Reiseboerse_Graf
         /// <param name="stadt_id">ID der ausgewählten Stadt aus der Dropdownbox</param>
         /// <param name="kategorien_id">Alle IDs der ausgewählten Kategorien (Checkboxen)</param>
         /// <returns>eine Liste von Reisen</returns>
-        public static List<Reise> LadeReisenGefiltert(int kontinent_id, int land_id, int stadt_id, List<int> kategorien_id)
-        {
+        //public static List<Reise> LadeReisenGefiltert(int kontinent_id, int land_id, int stadt_id, List<int> kategorien_id)
+        //{
 
-            return null;
-        }
+        //    return null;
+        //}
 
        
 
