@@ -25,7 +25,8 @@ namespace UI_Reiseboerse_Graf
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/eigeneStyles.css"));
         }
     }
 }

@@ -15,7 +15,6 @@ namespace BL_Reiseboerse_Graf
         /// <returns>eine Liste von Reisen oder bei einem Fehler null</returns>
         //public static List<Reise> LadeAlleReisen()
         //{
-
         //    return null;
         //}
 
@@ -33,12 +32,20 @@ namespace BL_Reiseboerse_Graf
         //    return null;
         //}
 
-        
-       
+        ///liefert die aktuellen Restplätze der Reise mit der entsprechenden ID aus der DB zurück
+        public static int Restplätze(int reise_id)
+        {
+            
 
-       
+            return 1;
+        }
 
 
-        
+
+
+
+
+
+
     }
 }

@@ -40,9 +40,9 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Fügt eine Buchung hinzu anhand des übergebenen Models
         /// </summary>
         /// <returns></returns>
-        public ActionResult Hinzufuegen(BuchungsModel neueBuchung)
-        {
-            return View();
-        }
+        //public ActionResult Hinzufuegen(BuchungsModel neueBuchung)
+        //{
+        //    return View();
+        //}
     }
 }

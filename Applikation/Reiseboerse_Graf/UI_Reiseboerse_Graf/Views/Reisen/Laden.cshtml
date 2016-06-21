@@ -1,0 +1,43 @@
+﻿@model IEnumerable<UI_Reiseboerse_Graf.Models.ReiseModel>
+
+@{
+    ViewBag.Title = "Laden";
+}
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="row reise">
+            <div class="col-md-2 col-xs-6">
+                @*<img src="/Models/ReiseModel/" />*@
+                <div class="carousel-caption bildschrift">
+                    @Html.DisplayFor(modelItem => item.Preis)
+                </div>
+                <!--Restplätze aus der Datenbank auslesen-->
+                <div class="Restplätze">
+                    <span class="badge"></span>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-6 details">
+                <ul class="list-unstyled list">
+                    <li>@Html.DisplayFor(modelItem => item.Titel)</li>
+                    <li class="Kommentar">Letztmögliche Buchung: @Html.DisplayFor(modelItem => item.Anmeldefrist)</li>
+                    <li>@Html.DisplayFor(modelItem => item.Ort)</li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-xs-6 details">
+                <ul class="list-inline list-unstyled list">
+                    <li>@Html.DisplayFor(modelItem => item.Hotel)</li>
+                    <li>@Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
+                    <li>@Html.DisplayFor(modelItem => item.Verpflegung)</li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-xs-6 details">
+                <!--Wenn der Benutzer eingeloogt, dann wird hier der Merkenbutton eingezeigt-->
+                <!--Link zu den Details der entsprechenden Reise-->
+                    <a class="btn btn-lg platziert" href="/Reise/Details/@item.ID">Details >></a>
+            </div>
+        </div>
+        <br />
+    }
+</div>

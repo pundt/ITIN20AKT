@@ -1,0 +1,52 @@
+﻿.reise {
+    border:solid;
+    border-color:#41aaef;
+    border-radius:20px;
+    border-width:0.5em;
+}
+
+.Restplätze {
+    background-color:#41aaef;
+    text-align:center;
+    color:#ffffff;
+}
+
+.preisanzeige {
+    font-size: 20px;
+    font-weight: bold;
+    border: solid;
+    border-color:#ffd800;
+}
+
+.details {
+    font-size: 1.5em;
+    padding-top: 2%;
+}
+.bild{
+    padding:0;
+    float:left;
+}
+.Kommentar{
+    font-size:15px;
+    font-style:italic;
+}
+.liste >li{
+  margin:1%;
+}
+.Pfeil{
+    color:#41aaef;
+    font-size:20px;
+    padding-left:4%;
+}
+.listitem{
+    margin:2%;
+}
+.bildschrift{
+    font-size:2em !important;
+}
+.platziert{
+    background-color:#41aaef;
+    color:#ffffff;
+    margin-left:20%;
+    margin-top:15%;
+}
