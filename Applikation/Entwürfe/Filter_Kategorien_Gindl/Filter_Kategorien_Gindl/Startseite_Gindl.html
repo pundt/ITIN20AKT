@@ -1,0 +1,119 @@
+﻿
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Unser Reisebüro</title>
+
+    <!-- Bootstrap -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet">
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/star-rating.css" rel="stylesheet" />
+    <link href="Content/StyleSheet1.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-4" form-group">
+                <label for="sel1">Wählen sie einen Kontinent:</label>
+                <select name="Landauswahl" class="form-control" id="sel1">
+                    <option value="Europa">Europa</option>
+                    <option>Asien</option>
+                    <option>Afrika</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-4" form-group">
+                <label>Wählen sie ein Land:</label>
+                <select name="Landauswahl" class="form-control" id="sel1">
+                    <option value="Deutschland">Deutschland</option>
+                    <option>Schweiz</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-4" form-group">
+                <label>Wählen sie Ort/Stadt:</label>
+                <select name="Landauswahl" class="form-control" id="sel1">
+                    <option value="Wien">Wien</option>
+                    <option>Kärtnen</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="acidjs-rating-stars">
+                <label>Wählen sie</label>
+                <form>
+                    <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label>
+                    <input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label>
+                    <input type="radio" checked="checked" name="group-2" id="group-2-2" value="3" /><label for="group-2-2"></label>
+                    <input type="radio" name="group-2" id="group-2-3" value="2" /><label for="group-2-3"></label>
+                    <input type="radio" name="group-2" id="group-2-4" value="1" /><label for="group-2-4"></label>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    Reisekategorie:<br>
+    <div class="row">
+        <div class="col-md-6">
+            <input type="checkbox" name="CheckReise" value="1" checked>Abenteuerreise<br>
+            <input type="checkbox" name="CheckReise" value="2">Busreise<br>
+            <input type="checkbox" name="CheckReise" value="3">Familienreise<br>
+            <input type="checkbox" name="CheckReise" value="4">Pärchenreise<br>
+        </div>
+    </div>
+    <br>
+
+    Preis: Von-Bis:<br>
+    <div class="row">
+        <div class="col-md-6">
+            <input type="radio" name="RadioPreisspanne" checked value="1">Alle<br>
+            <input type="radio" name="RadioPreisspanne" value="2">bis 499€<br>
+            <input type="radio" name="RadioPreisspanne" value="3">von 500€ bis 1499€<br>
+            <input type="radio" name="RadioPreisspanne" value="4">ab 1500€<br>
+        </div>
+    </div>
+    <br>
+    Verpflegung:<br>
+    <div class="row">
+        <div class="col-md-6">
+            <input type="checkbox" name="CheckVerpflegung" value="1" checked>Halb-Pension<br>
+            <input type="checkbox" name="CheckVerpflegung" value="2">Voll-Pension<br>
+            <input type="checkbox" name="CheckVerpflegung" value="3">Frühstück<br>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+                $("#datepicker2").datepicker();
+            });
+        </script>
+        <p>Datum von: <input type="text" id="datepicker"></p>
+    </div>
+
+    <div>
+        <p>Datum bis: <input type="text" id="datepicker2"></p>
+    </div>
+    </body>
+</html>
