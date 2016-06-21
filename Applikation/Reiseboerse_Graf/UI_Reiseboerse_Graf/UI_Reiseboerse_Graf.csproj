@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BenutzerController.cs" />
     <Compile Include="Controllers\BuchungenController.cs" />
+    <Compile Include="Controllers\Globals.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReisenController.cs" />
     <Compile Include="Global.asax.cs">
@@ -129,12 +130,9 @@
     </Compile>
     <Compile Include="Models\BenutzerModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\KundenModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
-=======
->>>>>>> origin/develop
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -173,11 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
     <Folder Include="Views\Benutzer\" />
-=======
     <Folder Include="Views\Buchungen\" />
->>>>>>> origin/develop
     <Folder Include="Views\Reisen\" />
   </ItemGroup>
   <ItemGroup>
