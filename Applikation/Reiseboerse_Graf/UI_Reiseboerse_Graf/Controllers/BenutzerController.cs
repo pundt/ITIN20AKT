@@ -58,9 +58,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult BenutzerErstellen(BenutzerModel bm)
         {
-            DBNull context = new DBNull();
-
-
+            
             return View();
         
         }

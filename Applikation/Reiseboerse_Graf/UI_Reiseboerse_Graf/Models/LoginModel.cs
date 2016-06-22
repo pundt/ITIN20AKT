@@ -7,7 +7,6 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class LoginModel
     {
-        private string email;
 
         private string passwort;
 
@@ -17,6 +16,8 @@ namespace UI_Reiseboerse_Graf.Models
             set { passwort = value; }
         }
 
+        //Wir als Benutzername zum Einloggen verwendet.
+        private string email;
 
         public string Email
         {
