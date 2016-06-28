@@ -51,7 +51,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             try
             {
-                using (testdbEntities1 context = new testdbEntities1())
+                using (testdbEntities context = new testdbEntities())
                 {
                     //List<Benutzer> bl = context.AlleBenutzer.ToList();
 
