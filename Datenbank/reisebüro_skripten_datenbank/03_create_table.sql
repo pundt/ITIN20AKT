@@ -65,7 +65,7 @@ CREATE TABLE Reise (
 
 CREATE TABLE Verpflegung (
 	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50) NOT NULL,
+	bezeichnung NVARCHAR(50) NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
