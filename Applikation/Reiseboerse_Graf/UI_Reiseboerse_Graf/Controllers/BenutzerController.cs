@@ -15,6 +15,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult GebuchteReisen()
         {

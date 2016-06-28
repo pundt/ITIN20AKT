@@ -1,0 +1,15 @@
+Drop Database testdb;
+GO
+
+create database testdb;
+Go
+
+create table Benutzer(
+Id int identity(1,1) not null,
+Email VARCHAR(50) NOT NULL,
+Passwort VARCHAR(10) NOT NULL,
+Vorname VARCHAR(10) NULL,
+Nachname VARCHAR(10) NULL,
+Geschlecht bit NOT NULL
+);
+Go
