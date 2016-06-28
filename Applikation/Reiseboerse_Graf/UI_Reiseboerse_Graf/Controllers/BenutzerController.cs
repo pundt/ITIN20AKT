@@ -41,28 +41,53 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
         /// <summary>
-        /// Benutzer view zum eingeben der notwendigen daten.
+        /// Erhält das Model, schreibt die Daten in die Datenbank
         /// </summary>
+        /// <param name="bm">RegistrierungsModel Datentyp</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult BenutzerErstellen()
+        public ActionResult BenutzerErstellen(RegistrierungsModel rm)
         {
+            try
+            {
+                using (testdbEntities context = new testdbEntities())
+                {
+                    List<Benutzer> bl = context.AlleBenutzer.ToList();
 
+                    Benutzer b = new Benutzer()
+                    {
+                        Email = rm.Email,
+                        Geschlecht = rm.Geschlecht,
+                        Nachname = rm.Nachname,
+                        Vorname = rm.Vorname,
+                        Passwort = rm.Passwort   
+                };
+                    context.AlleBenutzer.Add(b);
+                    //foreach (var item in bl)
+                    //{
+                    //    rm.Email = item.email
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
             return View();
 
         }
         /// <summary>
-        /// Erhält das benutzerModel, schreibt die Daten in die Datenbank
+        /// Benutzer view zum eingeben der notwendigen daten.
         /// </summary>
-        /// <param name="bm">BenutzerModel Datentyp</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult BenutzerErstellen(BenutzerModel bm)
+        public ActionResult BenutzerRegistrieren()
         {
-            testdbEntities context = new testdbEntities();
-
+           
             
 
+    
 
             return View();
         

@@ -53,7 +53,7 @@ FROM [dbo].[Benutzer] AS [Benutzer]</DefiningQuery>
           <Property Name="Geschlecht" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="testdbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Benutzer" EntityType="Self.Benutzer" />
+          <EntitySet Name="AlleBenutzer" EntityType="Self.Benutzer" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -61,7 +61,7 @@ FROM [dbo].[Benutzer] AS [Benutzer]</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="testdbModelStoreContainer" CdmEntityContainer="testdbEntities">
-          <EntitySetMapping Name="Benutzer">
+          <EntitySetMapping Name="AlleBenutzer">
             <EntityTypeMapping TypeName="testdbModel.Benutzer">
               <MappingFragment StoreEntitySet="Benutzer">
                 <ScalarProperty Name="Id" ColumnName="Id" />
