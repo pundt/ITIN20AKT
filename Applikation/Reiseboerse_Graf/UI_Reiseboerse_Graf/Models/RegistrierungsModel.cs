@@ -37,8 +37,6 @@ namespace UI_Reiseboerse_Graf.Models
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         public string Adresse { get; set; }
-        [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        public DateTime GeburtsDatum { get; set; }
 
         /// <summary>
         /// Dropdown feld in view mit männlich oder weiblich.
