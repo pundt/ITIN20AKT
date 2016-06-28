@@ -9,13 +9,15 @@ CREATE TABLE Benutzer (
 	nachname NVARCHAR(50) NOT NULL,
 	geschlecht BIT NOT NULL,
 	adresse_id INT NOT NULL,
-	telefon INT NOT NULL
+	telefon INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
 CREATE TABLE Mitarbeiter (
 	id INT IDENTITY NOT NULL,
 	benutzer_id INT NOT NULL,
-	svnr INT NOT NULL
+	svnr INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
 CREATE TABLE Adresse (
@@ -24,7 +26,8 @@ CREATE TABLE Adresse (
 	ort_id INT NOT NULL,
 	plz INT NOT NULL,
 	strasse NVARCHAR(50) NOT NULL,
-	nummer NVARCHAR(25) NOT NULL
+	nummer NVARCHAR(25) NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
 CREATE TABLE Kunde (
@@ -32,13 +35,15 @@ CREATE TABLE Kunde (
 	benutzer_id INT NOT NULL,
 	geburtsdatum DATETIME NOT NULL,
 	titel NVARCHAR(25),
-	land_id INT NOT NULL
+	land_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE buchung (
+CREATE TABLE Buchung (
 	id INT IDENTITY NOT NULL,
 	kunde_id INT NOT NULL,
-	createdate DATETIME DEFAULT GETDATE()
+	reisedetail_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
 CREATE TABLE buchungsdetail (
