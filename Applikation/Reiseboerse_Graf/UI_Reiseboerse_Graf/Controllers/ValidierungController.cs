@@ -35,7 +35,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
             else
                 return Json(false, JsonRequestBehavior.AllowGet);
-        }
+        } 
 
     }
 
