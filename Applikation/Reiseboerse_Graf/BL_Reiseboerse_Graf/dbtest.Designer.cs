@@ -1,4 +1,4 @@
-﻿// Die T4-Codegenerierung ist für Modell 'C:\Users\aktuser\Desktop\Reiseboerse_Graf\BL_Reiseboerse_Graf\testdb.edmx' aktiviert. 
+﻿// Die T4-Codegenerierung ist für Modell 'C:\Users\aktuser\Desktop\GitHub\ITIN20AKT\Applikation\Reiseboerse_Graf\BL_Reiseboerse_Graf\dbtest.edmx' aktiviert. 
 // Um die Generierung von Legacycode zu aktivieren, ändern Sie den Wert der Designer-Eigenschaft 'Code Generation Strategy'
 // in 'Legacy ObjectContext'. Diese Eigenschaft wird im Eigenschaftenfenster angezeigt, wenn das Modell
 // im Designer geöffnet ist.
