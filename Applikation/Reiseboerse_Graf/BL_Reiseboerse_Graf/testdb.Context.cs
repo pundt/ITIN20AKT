@@ -13,10 +13,10 @@ namespace BL_Reiseboerse_Graf
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class testdbEntities : DbContext
+    public partial class testdbEntities1 : DbContext
     {
-        public testdbEntities()
-            : base("name=testdbEntities")
+        public testdbEntities1()
+            : base("name=testdbEntities1")
         {
         }
     

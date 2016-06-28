@@ -9,50 +9,30 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <p align="right">
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-user"></span> Login
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-            </p>
-        </div>
-        <div class="col-xs-6">
-            <img src="C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Applikation\Entwürfe\reisebüro_logo" class="img-responsive" />
-        </div>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <div class="col-xs-6">
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="http://de.web.img1.acsta.net/c_100_100/b_1_d6d6d6/pictures/14/08/13/12/56/509049.jpg" alt="Chania">
-                    </div>
-                    <div class="item">
-                        <img src="http://de.web.img1.acsta.net/c_100_100/b_1_d6d6d6/pictures/14/08/13/12/56/509049.jpg" alt="Chania">
-                    </div>
-                    <div class="item">
-                        <img src="bilder/33.jpg" alt="Chania">
-                    </div>
-                    <div class="item">
-                        <img src="bilder/44.jpg" alt="Chania">
-                    </div>
-                </div>
+                @Html.ActionLink("Anwendungsname", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Info", "About", "Home")</li>
+                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer class="navbar  navbar-fixed-bottom">
-            <div class="container-fluid">
-                <div class="col-xs-12">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">AGB</a></li>
-                        <li><a href="#">Über uns</a></li>
-                    </ul>
-                </div>
-            </div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Meine ASP.NET-Anwendung</p>
         </footer>
     </div>
 
