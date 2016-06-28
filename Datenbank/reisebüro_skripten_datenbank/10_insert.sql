@@ -24,16 +24,16 @@ VALUES(4, 4, 40215, 'Bankenplatz', '4/Top 1');
 INSERT INTO Adresse(land_id, ort_id, plz, strasse, nummer)
 VALUES(5, 5, 51243, 'Plaza de Chateau', '5');
 
-INSERT INTO Benutzer(email, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('muster@itfox.at', 'Max', 'Muster', 0, 1, 0043676123456);
-INSERT INTO Benutzer(email, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('marco@itfox.at', 'Marco', 'Wurz', 0, 2, 0049743212121);
-INSERT INTO Benutzer(email, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('claudia@itfox.at', 'Claudia', 'Stiegl', 1, 3, 003256124565);
-INSERT INTO Benutzer(email, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('daniel@itfox.at', 'Daniel', 'Zalli', 0, 4, 00396123456);
-INSERT INTO Benutzer(email, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('stefan@itfox.at', 'Stefan', 'Groig', 0, 5, 0055236458);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
+VALUES('muster@itfox.at', 1234, 'Max', 'Muster', 0, 1, 0043676123456);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
+VALUES('marco@itfox.at', '123user!', 'Marco', 'Wurz', 0, 2, 0049743212121);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
+VALUES('claudia@itfox.at', 3456, 'Claudia', 'Stiegl', 1, 3, 003256124565);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
+VALUES('daniel@itfox.at', 4567, 'Daniel', 'Zalli', 0, 4, 00396123456);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
+VALUES('stefan@itfox.at', 5678, 'Stefan', 'Groig', 0, 5, 0055236458);
 
 INSERT INTO Kunde(benutzer_id, geburtsdatum, titel, land_id)
 VALUES(1, '1990/1/1', 'Mag.', 1);
