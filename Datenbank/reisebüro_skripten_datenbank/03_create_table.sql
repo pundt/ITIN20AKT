@@ -1,13 +1,13 @@
 USE reisebuero;
 GO
 
-CREATE TABLE [user] (
+CREATE TABLE Benutzer (
 	id INT IDENTITY NOT NULL,
 	email NVARCHAR(50) NOT NULL,
-	pwd NVARCHAR(50) NOT NULL,
-	vn NVARCHAR(50) NOT NULL,
-	nn NVARCHAR(50) NOT NULL,
-	geschlecht NVARCHAR(10) NOT NULL
+	passwort VARBINARY NOT NULL,
+	vorname NVARCHAR(50) NOT NULL,
+	nachname NVARCHAR(50) NOT NULL,
+	geschlecht BIT NOT NULL
 );
 
 CREATE TABLE ma (
