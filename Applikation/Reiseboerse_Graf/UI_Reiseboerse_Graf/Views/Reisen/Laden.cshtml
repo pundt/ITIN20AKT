@@ -4,7 +4,7 @@
     ViewBag.Title = "Laden";
 }
 
-<div class="container">
+<div class="container-fluid">
     <div class="col-xs-3">
         <div class="row">
             <div class="col-md-12 form-group">
@@ -110,27 +110,28 @@
                     </div>
                     <!--Restplätze aus der Datenbank auslesen-->
                     <div class="Restplätze">
-                        <span class="badge">@Html.DisplayFor(modelItem => item.Restplätze)</span>
+                       <span class="badge">@Html.DisplayFor(modelItem => item.Restplätze)</span> Restplätze
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-6 details">
                     <ul class="list-unstyled list">
                         <li>@Html.DisplayFor(modelItem => item.Titel)</li>
                         <li class="Kommentar">Letztmögliche Buchung: @Html.DisplayFor(modelItem => item.Anmeldefrist)</li>
-                        <li>@Html.DisplayFor(modelItem => item.Ort)</li>
+                        <br />
+                        <li><img src="~/Content/bilder/Ort.png" /> @Html.DisplayFor(modelItem => item.Ort)</li>
                     </ul>
                 </div>
-                <div class="col-md-3 col-xs-6 details">
+                <div class="col-md-4 col-xs-6 details">
                     <ul class="list-inline list-unstyled list">
-                        <li>@Html.DisplayFor(modelItem => item.Hotel)</li>
-                        <li>@Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
-                        <li>@Html.DisplayFor(modelItem => item.Verpflegung)</li>
+                        <li><img src="~/Content/bilder/Haus.png" /> @Html.DisplayFor(modelItem => item.Hotel)</li>
+                        <li><img src="~/Content/bilder/Uhr.png" /> @Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
+                        <li><img src="~/Content/bilder/Verpflegung.png" /> @Html.DisplayFor(modelItem => item.Verpflegung)</li>
                     </ul>
                 </div>
-                <div class="col-md-3 col-xs-6 details">
+                <div class="col-md-2 col-xs-6 details">
                     <!--Wenn der Benutzer eingeloogt, dann wird hier der Merkenbutton eingezeigt-->
                     <!--Link zu den Details der entsprechenden Reise-->
-                    <a class="btn btn-lg platziert" href="/Reise/Details/@item.ID">Details >></a>
+                    <a class="btn platziert" href="/Reise/Details/@item.ID">Details >></a>
                 </div>
             </div>
             <br />

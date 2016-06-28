@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
@@ -9,40 +9,40 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <p align="right">
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-user"></span> Login
-                </button>
-            </p>
-        </div>
-        <div class="col-xs-6">
-            <img src="C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Applikation\Entwürfe\reisebüro_logo" class="img-responsive" />
-        </div>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <div class="col-xs-6">
+            <div class="col-xs-4">
+                <img src="~/Content/bilder/reisebüro_logo.jpg" class="img-responsive" />
+            </div>
+            <div class="col-xs-3">
+                Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen
+                <div class="row login">
+                    @Html.ActionLink("Login", "Login", "Benutzer", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+            <div id="myCarousel" class="carousel slide col-xs-5" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="http://de.web.img1.acsta.net/c_100_100/b_1_d6d6d6/pictures/14/08/13/12/56/509049.jpg" alt="Chania">
+                        <img src="http://www.art-bijou.de/sites/default/files/VeedelK%C3%B6lnEinrahmung.jpg" class="img-responsive" alt="Chania">
                     </div>
                     <div class="item">
-                        <img src="http://de.web.img1.acsta.net/c_100_100/b_1_d6d6d6/pictures/14/08/13/12/56/509049.jpg" alt="Chania">
+                        <img src="http://www.stefan-niggemeier.de/blog/wp-content/ne8.jpg" class="img-responsive" alt="Chania">
                     </div>
                     <div class="item">
-                        <img src="bilder/33.jpg" alt="Chania">
+                        <img src="http://www.eisenbahn-exklusiv-reisen.com/assets/images/4/skandinavien-nordlicht-69221-a6275d84.jpg" class="img-responsive" alt="Chania">
                     </div>
-                    <div class="item">
-                        <img src="bilder/44.jpg" alt="Chania">
-                    </div>
+
                 </div>
+            </div>
+            <div class="col-xs-1" align="right">
+
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @RenderBody()
         <hr />
-        <footer class="navbar  navbar-fixed-bottom">
+        <footer class="footer navbar navbar-fixed-bottom">
             <div class="container-fluid">
                 <div class="col-xs-12">
                     <ul class="nav navbar-nav">

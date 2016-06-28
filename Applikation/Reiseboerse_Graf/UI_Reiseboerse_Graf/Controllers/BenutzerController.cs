@@ -52,7 +52,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 using (testdbEntities context = new testdbEntities())
                 {
-                    List<Benutzer> bl = context.AlleBenutzer.ToList();
+                    //List<Benutzer> bl = context.AlleBenutzer.ToList();
 
                     Benutzer b = new Benutzer()
                     {
@@ -62,7 +62,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Vorname = rm.Vorname,
                         Passwort = rm.Passwort   
                 };
-                    context.AlleBenutzer.Add(b);
+                    //context.AlleBenutzer.Add(b);
                     //foreach (var item in bl)
                     //{
                     //    rm.Email = item.email

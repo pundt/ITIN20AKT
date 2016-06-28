@@ -37,6 +37,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                             Beschreibung = "Das ist eine ganz tolle Reise in ein wundervolles Weingebiet in Österreich. Ganz besonders toll im Herbst",
                             Ort = "Spitz" + i,
                             Hotel = "Schlosshotel Burckhardt " + i,
+                            Verpflegung="Halbpension"+i%2,
                             Hotel_ID = i,
                             Restplätze = i %5
                         };

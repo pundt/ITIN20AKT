@@ -2,13 +2,13 @@
     border:solid;
     border-color:#41aaef;
     border-radius:20px;
-    border-width:0.5em;
+    border-width:0.2em;
 }
 
 .Restplätze {
-    background-color:#41aaef;
     text-align:center;
-    color:#ffffff;
+    color:#41aaef;
+    font-weight:bold;
 }
 
 .preisanzeige {
@@ -19,7 +19,7 @@
 }
 
 .details {
-    font-size: 1.5em;
+    font-size: 1.2em;
     padding-top: 2%;
 }
 .bild{
@@ -48,7 +48,7 @@
     background-color:#41aaef;
     color:#ffffff;
     margin-left:20%;
-    margin-top:15%;
+    margin-top:35%;
 }
 .acidjs-rating-stars,
 .acidjs-rating-stars label::before
@@ -100,4 +100,12 @@
 }
 .acidjs-rating-stars {
     padding-top: 1em;
+}
+
+.footer{
+    background-color:#ffd800;
+    text-align:center;
+}
+.login{
+    margin-left:80%;
 }
