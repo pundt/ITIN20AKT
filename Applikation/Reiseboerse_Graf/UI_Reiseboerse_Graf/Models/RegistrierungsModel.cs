@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace UI_Reiseboerse_Graf.Models
 {
@@ -10,7 +11,9 @@ namespace UI_Reiseboerse_Graf.Models
     {
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         [DataType(DataType.EmailAddress, ErrorMessage = "ungültige Mail")]
+        [Remote("EmailFrei", "Validation", ErrorMessage = "Email Adresse bereits vergeben")]
         public string Email { get; set; }
+
         [StringLength(maximumLength: 16, MinimumLength = 8, ErrorMessage = "Mind 8 Zeichen")]
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         [DataType(DataType.Password)]

@@ -126,10 +126,10 @@
     <Compile Include="Controllers\Globals.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReisenController.cs" />
+    <Compile Include="Controllers\ValidierungController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BenutzerCheckerModel.cs" />
     <Compile Include="Models\BenutzerModel.cs" />
     <Compile Include="Models\BuchungenModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
@@ -191,6 +191,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Buchungen\" />
+    <Folder Include="Views\Validierungs\" />
+    <Folder Include="Views\Validierung\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

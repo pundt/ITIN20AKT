@@ -24,7 +24,12 @@ namespace BL_Reiseboerse_Graf
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        public static bool UserExists(string username)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<Benutzer> Benutzer { get; set; }
     }
 }
