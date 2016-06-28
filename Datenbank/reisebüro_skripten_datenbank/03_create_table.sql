@@ -12,9 +12,9 @@ CREATE TABLE Benutzer (
 	telefon INT NOT NULL
 );
 
-CREATE TABLE ma (
+CREATE TABLE Mitarbeiter (
 	id INT IDENTITY NOT NULL,
-	[user_id] INT NOT NULL,
+	benutzer_id INT NOT NULL,
 	svnr INT NOT NULL
 );
 
