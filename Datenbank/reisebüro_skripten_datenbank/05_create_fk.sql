@@ -51,7 +51,7 @@ ALTER TABLE Buchung
 ADD
 CONSTRAINT FK_Buchung_Reisedetail
 FOREIGN KEY (reisedetail_id)
-REFENECES Reisedetail(id);
+REFERENCES Reisedetail(id);
 GO
 
 ALTER TABLE Benutzer
@@ -82,9 +82,9 @@ FOREIGN KEY (buchung_id)
 REFERENCES Buchung(id);
 GO
 
-ALTER TABLE Bild_Reise_Bild
+ALTER TABLE Bild_Reise
 ADD
-CONSTRAINT FK_Bild_Reise
+CONSTRAINT FK_Bild_Reise_Bild
 FOREIGN KEY (bild_id)
 REFERENCES Bild(id);
 GO
