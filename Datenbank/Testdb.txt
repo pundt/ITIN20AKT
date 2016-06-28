@@ -4,7 +4,7 @@ GO
 create database testdb;
 Go
 
-create table Benutzer
+create table Benutzer(
 Id int identity(1,1) not null,
 Email VARCHAR(50) NOT NULL,
 Passwort VARCHAR(10) NOT NULL,
