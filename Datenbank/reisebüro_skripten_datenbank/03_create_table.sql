@@ -18,10 +18,13 @@ CREATE TABLE Mitarbeiter (
 	svnr INT NOT NULL
 );
 
-CREATE TABLE adresse (
+CREATE TABLE Adresse (
 	id INT IDENTITY NOT NULL,
-	nr NVARCHAR(10) NOT NULL,
-	str_id INT NOT NULL
+	land_id INT NOT NULL,
+	ort_id INT NOT NULL,
+	plz INT NOT NULL,
+	strasse NVARCHAR(50) NOT NULL,
+	nummer NVARCHAR(25) NOT NULL
 );
 
 CREATE TABLE strasse (
