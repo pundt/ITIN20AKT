@@ -12,5 +12,9 @@ namespace UI_Reiseboerse_Graf.Models
         public int Ort_ID { get; set; }
         public List<int> Kategorien_ID { get; set; }
         public int Preis_ID { get; set; }
+        
     }
+
+
+
 }

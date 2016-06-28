@@ -61,15 +61,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(liste);
         }
 
-        /// <summary>
-        /// Filtert die Reisen nach dem übergebenen FilterModel 
-        /// und ruft die BL_Reiseverwaltung.LadeReisenGefiltert auf
-        /// </summary>
-        /// <returns>den View Index</returns>
-        public ActionResult LadenGefiltert(FilterModel filterung)
-        {
-            return View();
-        }
+        
 
         /// <summary>
         /// Zeigt alle Details der Reise (Beschreibung, Hotelbeschreibung)
