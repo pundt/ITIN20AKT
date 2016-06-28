@@ -25,6 +25,6 @@ namespace BL_Reiseboerse_Graf
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Benutzer> Benutzer { get; set; }
+        public DbSet<Benutzer> AlleBenutzer { get; set; }
     }
 }
