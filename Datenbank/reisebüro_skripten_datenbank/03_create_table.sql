@@ -27,41 +27,12 @@ CREATE TABLE Adresse (
 	nummer NVARCHAR(25) NOT NULL
 );
 
-CREATE TABLE strasse (
+CREATE TABLE Kunde (
 	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50),
-	plz_id INT NOT NULL
-);
-
-CREATE TABLE plz (
-	id INT IDENTITY NOT NULL,
-	nr NVARCHAR(10),
-	stadt_id INT NOT NULL
-);
-
-CREATE TABLE stadt (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50),
+	benutzer_id INT NOT NULL,
+	geburtsdatum DATETIME NOT NULL,
+	titel NVARCHAR(25),
 	land_id INT NOT NULL
-);
-
-CREATE TABLE land (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50)
-);
-
-CREATE TABLE user_adresse (
-	id INT IDENTITY NOT NULL,
-	adresse_id INT NOT NULL,
-	[user_id] INT NOT NULL
-);
-
-CREATE TABLE kunde (
-	id INT IDENTITY NOT NULL,
-	[user_id] INT NOT NULL,
-	gebDatum DATETIME NOT NULL,
-	titel NVARCHAR(50),
-	staatsbuergerschaft NVARCHAR(50)
 );
 
 CREATE TABLE buchung (
