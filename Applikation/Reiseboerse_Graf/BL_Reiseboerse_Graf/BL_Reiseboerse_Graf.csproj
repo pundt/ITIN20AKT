@@ -49,51 +49,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benutzer.cs">
-      <DependentUpon>testdb.tt</DependentUpon>
+      <DependentUpon>dbtest.tt</DependentUpon>
     </Compile>
     <Compile Include="BuchungsVerwaltung.cs" />
+    <Compile Include="dbtest.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbtest.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbtest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbtest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbtest.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbtest.edmx</DependentUpon>
+    </Compile>
     <Compile Include="ReiseVerwaltung.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="testdb.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>testdb.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="testdb.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>testdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="testdb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>testdb.edmx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="packages.config" />
-    <EntityDeploy Include="testdb.edmx">
+    <EntityDeploy Include="dbtest.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>testdb.Designer.cs</LastGenOutput>
+      <LastGenOutput>dbtest.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="testdb.edmx.diagram">
-      <DependentUpon>testdb.edmx</DependentUpon>
+    <None Include="dbtest.edmx.diagram">
+      <DependentUpon>dbtest.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="testdb.Context.tt">
+    <Content Include="dbtest.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>testdb.edmx</DependentUpon>
-      <LastGenOutput>testdb.Context.cs</LastGenOutput>
+      <DependentUpon>dbtest.edmx</DependentUpon>
+      <LastGenOutput>dbtest.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="testdb.tt">
+    <Content Include="dbtest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>testdb.edmx</DependentUpon>
-      <LastGenOutput>testdb.cs</LastGenOutput>
+      <DependentUpon>dbtest.edmx</DependentUpon>
+      <LastGenOutput>dbtest.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
