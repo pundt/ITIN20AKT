@@ -7,7 +7,9 @@ CREATE TABLE Benutzer (
 	passwort VARBINARY NOT NULL,
 	vorname NVARCHAR(50) NOT NULL,
 	nachname NVARCHAR(50) NOT NULL,
-	geschlecht BIT NOT NULL
+	geschlecht BIT NOT NULL,
+	adresse_id INT NOT NULL,
+	telefon INT NOT NULL
 );
 
 CREATE TABLE ma (
