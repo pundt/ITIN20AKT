@@ -9,7 +9,7 @@ CREATE TABLE Benutzer (
 	nachname NVARCHAR(50) NOT NULL,
 	geschlecht BIT NOT NULL,
 	adresse_id INT NOT NULL,
-	telefon INT NOT NULL,
+	telefon NVARCHAR(25) NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE Reise (
 
 CREATE TABLE Verpflegung (
 	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50) NOT NULL,
+	bezeichnung NVARCHAR(50) NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 

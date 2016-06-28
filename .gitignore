@@ -250,3 +250,5 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+Datenbank/reisebüro_skripten_datenbank/05_create_fk.sql
+Datenbank/reisebüro_skripten_datenbank/05_create_fk.sql

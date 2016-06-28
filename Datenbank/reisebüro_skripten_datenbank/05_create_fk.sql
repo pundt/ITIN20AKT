@@ -1,163 +1,113 @@
-ALTER TABLE ma
+ALTER TABLE Reisedetail
 ADD
-CONSTRAINT fk_ma_user
-FOREIGN KEY( [user_id] )
-REFERENCES [user](id);
-
-ALTER TABLE phone
-ADD
-CONSTRAINT fk_phone_vw
-FOREIGN KEY( vw_id )
-REFERENCES vw(id);
-
-ALTER TABLE phone
-ADD
-CONSTRAINT fk_phone_lvw
-FOREIGN KEY( lvw_id )
-REFERENCES lvw(id);
-
-ALTER TABLE user_phone
-ADD
-CONSTRAINT fk_user_phone_user
-FOREIGN KEY( [user_id] )
-REFERENCES [user](id);
-
-ALTER TABLE user_phone
-ADD
-CONSTRAINT fk_user_phone_phone
-FOREIGN KEY( phone_id )
-REFERENCES phone(id);
-
-ALTER TABLE adresse
-ADD
-CONSTRAINT fk_adresse_strasse
-FOREIGN KEY( str_id )
-REFERENCES strasse(id);
-
-ALTER TABLE strasse
-ADD
-CONSTRAINT fk_strasse_plz
-FOREIGN KEY( plz_id )
-REFERENCES plz(id);
-
-ALTER TABLE plz
-ADD
-CONSTRAINT fk_plz_stadt
-FOREIGN KEY( stadt_id )
-REFERENCES stadt(id);
-
-ALTER TABLE stadt
-ADD
-CONSTRAINT fk_stadt_land
-FOREIGN KEY( land_id )
-REFERENCES land(id);
-
-ALTER TABLE user_adresse
-ADD
-CONSTRAINT fk_user_adresse_user
-FOREIGN KEY( [user_id] )
-REFERENCES [user](id);
-
-ALTER TABLE user_adresse
-ADD
-CONSTRAINT fk_user_adresse_adresse
-FOREIGN KEY( adresse_id )
-REFERENCES adresse(id);
-
-ALTER TABLE kunde
-ADD
-CONSTRAINT fk_kunde_user
-FOREIGN KEY( [user_id] )
-REFERENCES [user](id);
-
-ALTER TABLE buchung
-ADD
-CONSTRAINT fk_buchung_kunde
-FOREIGN KEY( kunde_id )
-REFERENCES kunde(id);
-
-ALTER TABLE buchungsdetail
-ADD
-CONSTRAINT fk_buchungsdetail_buchung
-FOREIGN KEY( buchung_id )
-REFERENCES buchung(id);
-
-ALTER TABLE buchungsdetail
-ADD
-CONSTRAINT fk_buchungsdetail_reise
-FOREIGN KEY( reise_id )
-REFERENCES reise(id);
-
-ALTER TABLE buchungsdetail
-ADD
-CONSTRAINT fk_buchungsdetail_zahlung
-FOREIGN KEY( zahlung_id )
-REFERENCES zahlungsmittel(id);
-
-ALTER TABLE buchungsdetail
-ADD
-CONSTRAINT fk_buchungsdetail_preiskategorie
-FOREIGN KEY( preiskategorie_id )
-REFERENCES preiskategorie(id);
-
-ALTER TABLE buchungsdetail_bewertung
-ADD
-CONSTRAINT fk_buchungsdetail_bewertung_buchungsdetail
-FOREIGN KEY( buchungsdetail_id )
-REFERENCES buchungsdetail(id);
-
-ALTER TABLE buchungsdetail_bewertung
-ADD
-CONSTRAINT fk_buchungsdetail_bewertung_bewertung
-FOREIGN KEY( bewertung_id )
-REFERENCES bewertung(id);
-
-ALTER TABLE reise
-ADD
-CONSTRAINT fk_reise_dauer
-FOREIGN KEY( dauer_id )
-REFERENCES dauer(id);
-
-ALTER TABLE reise
-ADD
-CONSTRAINT fk_reise_beginndatum
-FOREIGN KEY( beginndatum_id )
-REFERENCES beginndatum(id);
-
-ALTER TABLE reise
-ADD
-CONSTRAINT fk_reise_verpflegung
-FOREIGN KEY( verpflegung_id )
-REFERENCES verpflegung(id)
-
-ALTER TABLE reise_reiseart
-ADD
-CONSTRAINT fk_reise_reiseart_reise
-FOREIGN KEY( reise_id )
-REFERENCES reise(id);
-
-ALTER TABLE reise_reiseart
-ADD
-CONSTRAINT fk_reise_reiseart_reiseart
-FOREIGN KEY( reiseart_id )
-REFERENCES reiseart(id);
-
-ALTER TABLE hotel
-ADD
-CONSTRAINT fk_hotel_hotelkat
-FOREIGN KEY( hotelkat_id )
-REFERENCES hotelkategorie(id);
-
-ALTER TABLE reise_hotel
-ADD
-CONSTRAINT fk_reise_hotel_reise
-FOREIGN KEY( reise_id )
-REFERENCES reise(id);
-
-ALTER TABLE reise_hotel
-ADD
-CONSTRAINT fk_reise_hotel_hotel
-FOREIGN KEY( hotel_id )
-REFERENCES hotel(id);
-
+CONSTRAINT FK_Reisedetail_Reise
+FOREIGN KEY (reise_id)
+REFERENCES Reise(id);
 GO
+
+ALTER TABLE Buchung
+ADD
+CONSTRAINT FK_Buchung_Kunde
+FOREIGN KEY (kunde_id)
+REFERENCES Kunde(id);
+GO
+
+ALTER TABLE Adresse
+ADD
+CONSTRAINT FK_Adresse_Land
+FOREIGN KEY (land_id)
+REFERENCES Land(id);
+GO
+
+ALTER TABLE Mitarbeiter
+ADD
+CONSTRAINT FK_Mitarbeiter_Benutzer
+FOREIGN KEY (benutzer_id)
+REFERENCES Benutzer(id);
+GO
+
+ALTER TABLE Kunde
+ADD
+CONSTRAINT FK_Kunde_Land
+FOREIGN KEY (land_id)
+REFERENCES Land(id);
+GO
+
+ALTER TABLE Reise
+ADD 
+CONSTRAINT FK_Reise_Unterkunft
+FOREIGN KEY (unterkunft_id)
+REFERENCES Unterkunft(id);
+GO
+
+ALTER TABLE Adresse
+ADD
+CONSTRAINT FK_Adresse_Ort
+FOREIGN KEY (ort_id)
+REFERENCES Ort(id);
+GO
+
+ALTER TABLE Buchung
+ADD
+CONSTRAINT FK_Buchung_Reisedetail
+FOREIGN KEY (reisedetail_id)
+REFERENCES Reisedetail(id);
+GO
+
+ALTER TABLE Benutzer
+ADD
+CONSTRAINT FK_Benutzer_Adresse
+FOREIGN KEY (adresse_id)
+REFERENCES Adresse(id);
+GO
+
+ALTER TABLE Kunde
+ADD
+CONSTRAINT FK_Kunde_Benutzer
+FOREIGN KEY (benutzer_id)
+REFERENCES Benutzer(id);
+GO
+
+ALTER TABLE Bild_Reise
+ADD
+CONSTRAINT FK_Bild_Reise_Reise
+FOREIGN KEY (reise_id)
+REFERENCES Reise(id);
+GO
+
+ALTER TABLE Bewertung
+ADD
+CONSTRAINT FK_Bewertung_Buchung
+FOREIGN KEY (buchung_id)
+REFERENCES Buchung(id);
+GO
+
+ALTER TABLE Bild_Reise
+ADD
+CONSTRAINT FK_Bild_Reise_Bild
+FOREIGN KEY (bild_id)
+REFERENCES Bild(id);
+GO
+
+ALTER TABLE Bild_Unterkunft
+ADD
+CONSTRAINT FK_Bild_Unterkunft_Bild
+FOREIGN KEY (bild_id)
+REFERENCES Bild(id);
+GO
+
+ALTER TABLE Unterkunft
+ADD
+CONSTRAINT FK_Unterkunft_Verpflegung
+FOREIGN KEY (verpflegung_id)
+REFERENCES Verpflegung(id);
+GO
+
+ALTER TABLE Bild_Unterkunft
+ADD
+CONSTRAINT FK_Bild_Unterkunft_Unterkunft
+FOREIGN KEY (unterkunft_id)
+REFERENCES Unterkunft(id);
+GO
+
+
