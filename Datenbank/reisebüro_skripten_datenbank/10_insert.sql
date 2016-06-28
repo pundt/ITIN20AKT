@@ -83,3 +83,74 @@ INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(4, '2017/01/07', '2017/01/21', '2016/12/23');
 INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(5, '2017/03/01', '2017/03/15', '2017/02/02');
+
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\1_hotel_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\2_hotel_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\3_hotel_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\4_hotel_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\5_hotel_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\1_reise_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\2_reise_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\3_reise_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\4_reise_test.jpg', Single_Blob) 
+AS IMAGE;
+INSERT INTO Bild (bild) 
+SELECT BulkColumn 
+FROM Openrowset( 
+Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\5_reise_test.jpg', Single_Blob) 
+AS IMAGE;
+
+INSERT INTO Buchung(kunde_id, reisedetail_id) VALUES(1, 5);
+INSERT INTO Buchung(kunde_id, reisedetail_id) VALUES(2, 4);
+INSERT INTO Buchung(kunde_id, reisedetail_id) VALUES(3, 3);
+
+INSERT INTO Bewertung(buchung_id, bewertung) VALUES(1, 5);
+INSERT INTO Bewertung(buchung_id, bewertung) VALUES(2, 4);
+INSERT INTO Bewertung(buchung_id, bewertung) VALUES(3, 3);
+
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(1,1);
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(2,2);
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(3,3);
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(4,4);
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(5,5);
+
+INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(6, 1);
+INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(7, 2);
+INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(8, 3);
+INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(9, 4);
+INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(10, 5);
