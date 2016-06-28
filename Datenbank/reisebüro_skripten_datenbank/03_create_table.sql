@@ -46,31 +46,10 @@ CREATE TABLE Buchung (
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE buchungsdetail (
+CREATE TABLE Bewertung (
 	id INT IDENTITY NOT NULL,
-	buchung_id INT NOT NULL,
-	reise_id INT NOT NULL,
-	zahlung_id INT NOT NULL,
-	bewertung_id INT NOT NULL,
-	preiskategorie_id INT NOT NULL
-);
-
-CREATE TABLE zahlungsmittel (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50) NOT NULL
-);
-
-CREATE TABLE preiskategorie (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50) NOT NULL,
-	von NVARCHAR(30) NOT NULL,
-	bis NVARCHAR(30) NOT NULL,
-	val NVARCHAR(50) NOT NULL
-);
-
-CREATE TABLE bewertung (
-	id INT IDENTITY NOT NULL,
-	sterne INT NOT NULL
+	bewertung INT NOT NULL,
+	buchung_id INT NOT NULL
 );
 
 CREATE TABLE buchungsdetail_bewertung (
