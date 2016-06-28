@@ -1,0 +1,139 @@
+﻿@model IEnumerable<UI_Reiseboerse_Graf.Models.ReiseModel>
+
+@{
+    ViewBag.Title = "Laden";
+}
+
+<div class="container">
+    <div class="col-xs-3">
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <label for="sel1">Wählen sie einen Kontinent:</label>
+                <select name="Landauswahl" class="form-control" id="sel1">
+                    <option value="Europa">Europa</option>
+                    <option>Asien</option>
+                    <option>Afrika</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <label>Wählen sie ein Land:</label>
+                <select name="Landauswahl" class="form-control" id="sel1">
+                    <option value="Deutschland">Deutschland</option>
+                    <option>Schweiz</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <label>Wählen sie Ort/Stadt:</label>
+                <select name="Landauswahl" class="form-control" id="sel1">
+                    <option value="Wien">Wien</option>
+                    <option>Kärtnen</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="acidjs-rating-stars">
+                    <label>Wählen sie</label>
+                    <form>
+                        <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label>
+                        <input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label>
+                        <input type="radio" checked="checked" name="group-2" id="group-2-2" value="3" /><label for="group-2-2"></label>
+                        <input type="radio" name="group-2" id="group-2-3" value="2" /><label for="group-2-3"></label>
+                        <input type="radio" name="group-2" id="group-2-4" value="1" /><label for="group-2-4"></label>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        Reisekategorie:<br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="checkbox" name="CheckReise" value="1" checked>Abenteuerreise<br>
+                <input type="checkbox" name="CheckReise" value="2">Busreise<br>
+                <input type="checkbox" name="CheckReise" value="3">Familienreise<br>
+                <input type="checkbox" name="CheckReise" value="4">Pärchenreise<br>
+            </div>
+        </div>
+        <br>
+
+        Preis: Von-Bis:<br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="radio" name="RadioPreisspanne" checked value="1">Alle<br>
+                <input type="radio" name="RadioPreisspanne" value="2">bis 499€<br>
+                <input type="radio" name="RadioPreisspanne" value="3">von 500€ bis 1499€<br>
+                <input type="radio" name="RadioPreisspanne" value="4">ab 1500€<br>
+            </div>
+        </div>
+        <br>
+        Verpflegung:<br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="checkbox" name="CheckVerpflegung" value="1" checked>Halb-Pension<br>
+                <input type="checkbox" name="CheckVerpflegung" value="2">Voll-Pension<br>
+                <input type="checkbox" name="CheckVerpflegung" value="3">Frühstück<br>
+            </div>
+        </div>
+        <br>
+
+        <div>
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <link rel="stylesheet" href="/resources/demos/style.css">
+            <script>
+                $(function () {
+                    $("#datepicker").datepicker();
+                    $("#datepicker2").datepicker();
+                });
+            </script>
+            <p>Datum von: <input type="text" id="datepicker"></p>
+        </div>
+
+        <div>
+            <p>Datum bis: <input type="text" id="datepicker2"></p>
+        </div>
+    </div>
+    <div class="col-xs-9">
+        @foreach (var item in Model)
+        {
+            <div class="row reise">
+                <div class="col-md-2 col-xs-6">
+                    <img src="http://www.skwei.de/skwei2014/wp-content/uploads/2014/07/erde3.gif" class="img-responsive" />
+                    <div class="carousel-caption bildschrift">
+                        <text>ab </text>@Html.DisplayFor(modelItem => item.Preis)
+                    </div>
+                    <!--Restplätze aus der Datenbank auslesen-->
+                    <div class="Restplätze">
+                        <span class="badge">@Html.DisplayFor(modelItem => item.Restplätze)</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-6 details">
+                    <ul class="list-unstyled list">
+                        <li>@Html.DisplayFor(modelItem => item.Titel)</li>
+                        <li class="Kommentar">Letztmögliche Buchung: @Html.DisplayFor(modelItem => item.Anmeldefrist)</li>
+                        <li>@Html.DisplayFor(modelItem => item.Ort)</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-xs-6 details">
+                    <ul class="list-inline list-unstyled list">
+                        <li>@Html.DisplayFor(modelItem => item.Hotel)</li>
+                        <li>@Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
+                        <li>@Html.DisplayFor(modelItem => item.Verpflegung)</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-xs-6 details">
+                    <!--Wenn der Benutzer eingeloogt, dann wird hier der Merkenbutton eingezeigt-->
+                    <!--Link zu den Details der entsprechenden Reise-->
+                    <a class="btn btn-lg platziert" href="/Reise/Details/@item.ID">Details >></a>
+                </div>
+            </div>
+            <br />
+        }
+    </div>
+</div>
