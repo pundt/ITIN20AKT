@@ -1,136 +1,90 @@
-ALTER TABLE [user]
+ALTER TABLE Ort
 ADD
-CONSTRAINT pk_user
+CONSTRAINT PK_Ort
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE ma
+ALTER TABLE Adresse
 ADD
-CONSTRAINT pk_ma
+CONSTRAINT PK_Adresse
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE user_phone
+ALTER TABLE Land
 ADD
-CONSTRAINT pk_user_phone
+CONSTRAINT PK_Land
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE phone
+ALTER TABLE Mitarbeiter
 ADD
-CONSTRAINT pk_phone
+CONSTRAINT PK_Mitarbeiter
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE vw
+ALTER TABLE Benutzer
 ADD
-CONSTRAINT pk_vw
-PRIMARY KEY (id);
+CONSTRAINT PK_Benutzer
+PRIMARY KEY(id);
+GO
 
-ALTER TABLE lvw
+ALTER TABLE Kunde
 ADD
-CONSTRAINT pk_lvw
-PRIMARY KEY (id);
+CONSTRAINT PK_Kunde
+PRIMARY KEY(id);
+GO
 
-ALTER TABLE adresse
+ALTER TABLE Buchung
 ADD
-CONSTRAINT pk_adresse
+CONSTRAINT PK_Buchung
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE user_adresse
+ALTER TABLE Reisedetail
 ADD
-CONSTRAINT pk_user_adresse
+CONSTRAINT PK_Reisedetail
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE strasse
+ALTER TABLE Reise
 ADD
-CONSTRAINT pk_strasse
+CONSTRAINT PK_Reise
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE plz
+ALTER TABLE Bewertung
 ADD
-CONSTRAINT pk_plz
+CONSTRAINT PK_Bewertung
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE stadt
+ALTER TABLE Bild_Reise
 ADD
-CONSTRAINT pk_stadt
-PRIMARY KEY (id);
+CONSTRAINT PK_Bild_Reise
+PRIMARY KEY(id);
+GO
 
-ALTER TABLE land
+ALTER TABLE Bild
 ADD
-CONSTRAINT pk_land
-PRIMARY KEY (id);
+CONSTRAINT PK_Bild
+PRIMARY KEY(id);
+GO
 
-ALTER TABLE kunde
+ALTER TABLE Bild_Unterkunft
 ADD
-CONSTRAINT pk_kunde
+CONSTRAINT PK_Bild_Unterkunft
 PRIMARY KEY (id);
+GO
 
-ALTER TABLE buchung
+ALTER TABLE Unterkunft
 ADD
-CONSTRAINT pk_buchung
-PRIMARY KEY (id);
+CONSTRAINT PK_Unterkunft
+PRIMARY KEY(id);
+GO
 
-ALTER TABLE buchungsdetail
+
+ALTER TABLE Verpflegung
 ADD
-CONSTRAINT pk_buchungsdetail
-PRIMARY KEY (id);
-
-ALTER TABLE zahlungsmittel
-ADD
-CONSTRAINT pk_zahlungsmittel
-PRIMARY KEY (id);
-
-ALTER TABLE preiskategorie
-ADD
-CONSTRAINT pk_preiskategorie
-PRIMARY KEY (id);
-
-ALTER TABLE bewertung
-ADD
-CONSTRAINT pk_bewertung
-PRIMARY KEY (id);
-
-ALTER TABLE buchungsdetail_bewertung
-ADD
-CONSTRAINT pk_buchungsdetail_bewertung
-PRIMARY KEY (id);
-
-ALTER TABLE reise
-ADD
-CONSTRAINT pk_reise
-PRIMARY KEY (id);
-
-ALTER TABLE dauer
-ADD
-CONSTRAINT pk_dauer
-PRIMARY KEY (id);
-
-ALTER TABLE beginndatum
-ADD
-CONSTRAINT pk_beginndatum
-PRIMARY KEY (id);
-
-ALTER TABLE hotel
-ADD
-CONSTRAINT pk_hotel
-PRIMARY KEY (id);
-
-ALTER TABLE hotelkategorie
-ADD
-CONSTRAINT pk_hotelkategorie
-PRIMARY KEY (id);
-
-ALTER TABLE reise_hotel
-ADD
-CONSTRAINT pk_reise_hotel
-PRIMARY KEY (id);
-
-ALTER TABLE reiseart
-ADD
-CONSTRAINT pk_reiseart
-PRIMARY KEY (id);
-
-ALTER TABLE verpflegung
-ADD
-CONSTRAINT pk_verpflegung
-PRIMARY KEY (id);
-
+CONSTRAINT PK_Verpflegung
+PRIMARY KEY(id);
 GO

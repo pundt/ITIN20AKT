@@ -9,6 +9,10 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class RegistrierungsModel
     {
+        /// <summary>
+        /// model zum registrierungs view.
+        /// User input es werden felder validiert und auf vollständigkeit geprüft.
+        /// </summary>
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         [DataType(DataType.EmailAddress, ErrorMessage = "ungültige Mail")]
         [Remote("EmailFrei", "Validation", ErrorMessage = "Email Adresse bereits vergeben")]
@@ -46,11 +50,6 @@ namespace UI_Reiseboerse_Graf.Models
         /// prüfung bei männlich set = true bei weiblich set = false
         /// </summary>
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        private bool geschlecht;
-        public bool Geschlecht
-        {
-            get { return geschlecht; }
-            set { geschlecht = value; }
-        }
+        public bool Geschlecht { get; set; }
     }
 }
