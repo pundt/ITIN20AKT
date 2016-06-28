@@ -18,29 +18,6 @@ CREATE TABLE Mitarbeiter (
 	svnr INT NOT NULL
 );
 
-CREATE TABLE phone (
-	id INT IDENTITY NOT NULL,
-	vw_id INT NOT NULL,
-	lvw_id INT NOT NULL,
-	nummer NVARCHAR(20) NOT NULL
-);
-
-CREATE TABLE user_phone (
-	id INT IDENTITY NOT NULL,
-	phone_id INT NOT NULL,
-	[user_id] INT NOT NULL
-);
-
-CREATE TABLE vw (
-	id INT IDENTITY NOT NULL,
-	nummer NVARCHAR(10)
-);
-
-CREATE TABLE lvw (
-	id INT IDENTITY NOT NULL,
-	nummer NVARCHAR(10)
-);
-
 CREATE TABLE adresse (
 	id INT IDENTITY NOT NULL,
 	nr NVARCHAR(10) NOT NULL,
