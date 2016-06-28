@@ -49,67 +49,73 @@ CREATE TABLE Buchung (
 CREATE TABLE Bewertung (
 	id INT IDENTITY NOT NULL,
 	bewertung INT NOT NULL,
-	buchung_id INT NOT NULL
+	buchung_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE buchungsdetail_bewertung (
-	id INT IDENTITY NOT NULL,
-	buchungsdetail_id INT NOT NULL,
-	bewertung_id INT NOT NULL
-);
-
-CREATE TABLE reise (
+CREATE TABLE Reise (
 	id INT IDENTITY NOT NULL,
 	titel NVARCHAR(50) NOT NULL,
 	beschreibung NVARCHAR(MAX) NOT NULL,
-	dauer_id INT NOT NULL,
-	beginndatum_id INT NOT NULL,
-	verpflegung_id INT NOT NULL,
-	bez NVARCHAR(50) NOT NULL
+	unterkunft_id INT NOT NULL,
+	preis_erwachsener DECIMAL(6,2) NOT NULL,
+	preis_kind DECIMAL(6,2) NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE dauer (
+CREATE TABLE Verpflegung (
 	id INT IDENTITY NOT NULL,
-	tage INT NOT NULL
-);
-
-CREATE TABLE beginndatum (
-	id INT IDENTITY NOT NULL,
-	datum DATETIME NOT NULL
-);
-
-CREATE TABLE verpflegung (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50) NOT NULL
-);
-
-CREATE TABLE reiseart (
-	id INT IDENTITY NOT NULL,
-	bez NVARCHAR(50) NOT NULL
-);
-
-CREATE TABLE reise_reiseart (
-	id INT IDENTITY NOT NULL,
-	reise_id INT NOT NULL,
-	reiseart_id INT NOT NULL
-);
-
-CREATE TABLE hotel (
-	id INT IDENTITY NOT NULL,
-	hotelkat_id INT NOT NULL,
 	bez NVARCHAR(50) NOT NULL,
-	beschr NVARCHAR(MAX) NOT NULL
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE hotelkategorie (
+CREATE TABLE Unterkunft (
 	id INT IDENTITY NOT NULL,
-	sterne INT NOT NULL
+	bezeichnung NVARCHAR(50) NOT NULL,
+	beschreibung NVARCHAR(MAX) NOT NULL,
+	kategorie NVARCHAR(50) NOT NULL,
+	verpflegung_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE reise_hotel (
+CREATE TABLE Reisedetail (
 	id INT IDENTITY NOT NULL,
 	reise_id INT NOT NULL,
-	hotel_id INT NOT NULL
+	startdatum DATETIME NOT NULL,
+	enddatum DATETIME NOT NULL,
+	anmeldefrist DATETIME NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
+CREATE TABLE Land (
+	id INT IDENTITY NOT NULL,
+	bezeichnung NVARCHAR(50),
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Ort (
+	id INT IDENTITY NOT NULL,
+	bezeichnung NVARCHAR(50) NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Bild (
+	id INT IDENTITY NOT NULL,
+	bild VARBINARY(MAX) NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Bild_Unterkunft (
+	id INT IDENTITY NOT NULL,
+	bild_id INT NOT NULL,
+	unterkunft_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Bild_Reise (
+	id INT IDENTITY NOT NULL,
+	bild_id INT NOT NULL,
+	reise_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
 GO
