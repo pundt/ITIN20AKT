@@ -37,7 +37,7 @@ GO
 ALTER TABLE Buchung
 ADD
 CONSTRAINT PK_Buchung
-PRIMARY KEY (id);
+PRIMARY KEY (reisedetail_id);
 GO
 
 ALTER TABLE Reisedetail

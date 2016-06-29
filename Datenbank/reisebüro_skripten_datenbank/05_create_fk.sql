@@ -79,7 +79,7 @@ ALTER TABLE Bewertung
 ADD
 CONSTRAINT FK_Bewertung_Buchung
 FOREIGN KEY (buchung_id)
-REFERENCES Buchung(id);
+REFERENCES Buchung(reisedetail_id);
 GO
 
 ALTER TABLE Bild_Reise
