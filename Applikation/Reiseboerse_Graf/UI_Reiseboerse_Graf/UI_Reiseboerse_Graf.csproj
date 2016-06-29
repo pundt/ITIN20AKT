@@ -142,8 +142,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bilder\arrows.png" />
+    <Content Include="Content\bilder\bullets.png" />
+    <Content Include="Content\bilder\FontAwesome_f015%280%29_24.png" />
+    <Content Include="Content\bilder\FontAwesome_f015%280%29_32.png" />
     <Content Include="Content\bilder\Haus.png" />
     <Content Include="Content\bilder\Ort.png" />
+    <Content Include="Content\bilder\slidertestimg\1_hotel_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\1_reise_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\2_hotel_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\2_reise_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\3_hotel_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\3_reise_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\4_hotel_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\4_reise_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\5_hotel_test.jpg" />
+    <Content Include="Content\bilder\slidertestimg\5_reise_test.jpg" />
     <Content Include="Content\bilder\Uhr.png" />
     <Content Include="Content\bilder\Verpflegung.png" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -171,6 +185,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.anyslider.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

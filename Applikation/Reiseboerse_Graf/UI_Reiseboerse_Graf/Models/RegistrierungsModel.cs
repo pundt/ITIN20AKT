@@ -29,7 +29,7 @@ namespace UI_Reiseboerse_Graf.Models
         [StringLength(maximumLength: 16, MinimumLength = 8, ErrorMessage = "Mind 8 Zeichen")]
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         [DataType(DataType.Password)]
-        [Compare("Passwort", ErrorMessage = "Passwörter stimmen nicht überein")]
+      //  [Compare("Passwort", ErrorMessage = "Passwörter stimmen nicht überein")]
         public string PasswortWiederholung { get; set; }
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         public string Vorname { get; set; }
