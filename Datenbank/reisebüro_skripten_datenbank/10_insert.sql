@@ -52,15 +52,15 @@ INSERT INTO Verpflegung(bezeichnung) VALUES('Vollpension');
 INSERT INTO Verpflegung(bezeichnung) VALUES('All Inclusive');
 
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Hotel Arosa', 'Dieses Hotel bietet außergewöhnlichen Komfort', '4 Sterne', 4);
+VALUES('Hotel Arosa', 'Dieses Hotel bietet außergewöhnlichen Komfort', 4, 4);
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Hotel de Croissant', 'Dieses Hotel schmeckt nach Croissants', '3 Sterne', 2);
+VALUES('Hotel de Croissant', 'Dieses Hotel schmeckt nach Croissants', 3, 2);
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Pension Pomp', 'Luxus in seiner schönsten Form', '5 Sterne', 5);
+VALUES('Pension Pomp', 'Luxus in seiner schönsten Form', 5, 5);
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Almhütte zum Sepp', 'Gute urige Küche und Jausen', '2 Sterne', 1);
+VALUES('Almhütte zum Sepp', 'Gute urige Küche und Jausen', 2, 1);
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Hotel Allin', 'Dieses Hotel bietet alles außer Vollpension', '4 Sterne', 3);
+VALUES('Hotel Allin', 'Dieses Hotel bietet alles außer Vollpension', 4, 3);
 
 INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind)
 VALUES('Wandern in den Bergen', 'Erleben Sie die schöne Bergwelt in Österreich', 4, 65.99, 32.99);
@@ -84,73 +84,73 @@ VALUES(4, '2017-07-01', '2017-21-01', '2016-23-12');
 INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(5, '2017-01-03', '2017-15-03', '2017-02-02');
 
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\1_hotel_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\2_hotel_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\3_hotel_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\4_hotel_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\5_hotel_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\1_reise_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\2_reise_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\3_reise_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\4_reise_test.jpg', Single_Blob) 
-AS IMAGE;
-INSERT INTO Bild (bild) 
-SELECT BulkColumn 
-FROM Openrowset( 
-Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\5_reise_test.jpg', Single_Blob) 
-AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\1_hotel_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\2_hotel_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\3_hotel_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\4_hotel_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\5_hotel_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\1_reise_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\2_reise_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\3_reise_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\4_reise_test.jpg', Single_Blob) 
+--AS IMAGE;
+--INSERT INTO Bild (bild) 
+--SELECT BulkColumn 
+--FROM Openrowset( 
+--Bulk 'C:\Users\aktuser\Documents\GitHub\ITIN20AKT\Datenbank\reisebüro_skripten_datenbank\testimages\5_reise_test.jpg', Single_Blob) 
+--AS IMAGE;
 
 INSERT INTO Buchung(kunde_id, reisedetail_id) VALUES(1, 5);
 INSERT INTO Buchung(kunde_id, reisedetail_id) VALUES(2, 4);
 INSERT INTO Buchung(kunde_id, reisedetail_id) VALUES(3, 3);
 
-INSERT INTO Bewertung(buchung_id, bewertung) VALUES(1, 5);
-INSERT INTO Bewertung(buchung_id, bewertung) VALUES(2, 4);
-INSERT INTO Bewertung(buchung_id, bewertung) VALUES(3, 3);
+INSERT INTO Bewertung(buchung_id, bewertung) VALUES(3, 5);
+INSERT INTO Bewertung(buchung_id, bewertung) VALUES(4, 4);
+INSERT INTO Bewertung(buchung_id, bewertung) VALUES(5, 3);
 
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(1,1);
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(2,2);
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(3,3);
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(4,4);
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(5,5);
+--INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(1,1);
+--INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(2,2);
+--INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(3,3);
+--INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(4,4);
+--INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(5,5);
 
-INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(6, 1);
-INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(7, 2);
-INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(8, 3);
-INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(9, 4);
-INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(10, 5);
+--INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(6, 1);
+--INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(7, 2);
+--INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(8, 3);
+--INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(9, 4);
+--INSERT INTO Bild_Unterkunft(bild_id, unterkunft_id) VALUES(10, 5);

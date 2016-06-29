@@ -40,9 +40,8 @@ CREATE TABLE Kunde (
 );
 
 CREATE TABLE Buchung (
-	id INT IDENTITY NOT NULL,
-	kunde_id INT NOT NULL,
 	reisedetail_id INT NOT NULL,
+	kunde_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
@@ -73,7 +72,7 @@ CREATE TABLE Unterkunft (
 	id INT IDENTITY NOT NULL,
 	bezeichnung NVARCHAR(50) NOT NULL,
 	beschreibung NVARCHAR(MAX) NOT NULL,
-	kategorie NVARCHAR(50) NOT NULL,
+	kategorie INT NOT NULL,
 	verpflegung_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
