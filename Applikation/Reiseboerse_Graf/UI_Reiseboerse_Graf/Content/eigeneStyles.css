@@ -1,111 +1,159 @@
 ﻿.reise {
-    border:solid;
-    border-color:#41aaef;
-    border-radius:20px;
-    border-width:0.2em;
+    border: solid;
+    border-color: #005ead;
+    border-radius: 20px;
+    border-width: 0.2em;
 }
 
 .Restplätze {
-    text-align:center;
-    color:#41aaef;
-    font-weight:bold;
+    text-align: center;
+    color: #005ead;
+    font-weight: bold;
 }
 
 .preisanzeige {
     font-size: 20px;
     font-weight: bold;
     border: solid;
-    border-color:#ffd800;
+    border-color: #ffd800;
 }
 
 .details {
     font-size: 1.2em;
     padding-top: 2%;
 }
-.bild{
-    padding:0;
-    float:left;
+
+.bild {
+    padding: 0;
+    float: left;
 }
-.Kommentar{
-    font-size:15px;
-    font-style:italic;
+
+.Kommentar {
+    font-size: 15px;
+    font-style: italic;
 }
-.liste >li{
-  margin:1%;
+
+.liste > li {
+    margin: 1%;
 }
-.Pfeil{
-    color:#41aaef;
-    font-size:20px;
-    padding-left:4%;
+
+.Pfeil {
+    color: #41aaef;
+    font-size: 20px;
+    padding-left: 4%;
 }
-.listitem{
-    margin:2%;
+
+.listitem {
+    margin: 2%;
 }
-.bildschrift{
-    font-size:1.6em !important;
+
+.bildschrift {
+    font-size: 1.2em !important;
 }
-.platziert{
-    background-color:#41aaef;
-    color:#ffffff;
-    margin-left:20%;
-    margin-top:35%;
+
+.platziert {
+    background-color: #FF4C00;
+    color: #ffffff;
+    margin-left: 20%;
+    margin-top: 35%;
 }
+
 .acidjs-rating-stars,
-.acidjs-rating-stars label::before
-{
+.acidjs-rating-stars label::before {
     display: inline-block;
 }
- 
-.acidjs-rating-stars label:hover,
-.acidjs-rating-stars label:hover ~ label
-{
-    color: #189800;
-}
- 
-.acidjs-rating-stars
-{
+
+    .acidjs-rating-stars label:hover,
+    .acidjs-rating-stars label:hover ~ label {
+        color: #efbd20;
+    }
+
+.acidjs-rating-stars {
     margin: 0;
     padding: 0;
 }
- 
-.acidjs-rating-stars input
-{
-    display: none;
-}
- 
-.acidjs-rating-stars
-{
+
+    .acidjs-rating-stars input {
+        display: none;
+    }
+
+.acidjs-rating-stars {
     unicode-bidi: bidi-override;
     direction: rtl;
 }
- 
-.acidjs-rating-stars label
-{
-    color: #ccc;
-}
- 
-.acidjs-rating-stars label::before
-{
-    content: "\2600";
-    width: 18px;
-    line-height: 18px;
-    text-align: center;
-    font-size: 18px;
-    cursor: pointer;
-}
- 
-.acidjs-rating-stars input:checked ~ label
-{
-    color: #ffcb00;
-}
+
+    .acidjs-rating-stars label {
+        color: #ccc;
+    }
+
+        .acidjs-rating-stars label::before {
+            content: "\2605";
+            width: 18px;
+            line-height: 18px;
+            text-align: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+    .acidjs-rating-stars input:checked ~ label {
+        color: #efbd20;
+    }
+
 .acidjs-rating-stars {
     padding-top: 1em;
 }
 
-.footer{
-    background-color:#ffd800;
-    text-align:center;
+.footer {
+    background-color: #ffd800;
+    text-align: center;
 }
-.login{
-    margin-left:80%;
+
+.login {
+    margin-left: 80%;
+}
+
+.crop {
+    width: 282px;
+    height: 282px;
+    overflow: hidden;
+}
+
+    .crop span.img {
+        background-position: center;
+        background-size: cover;
+        height: 282px;
+        display: block;
+    }
+
+.logoschrift {
+    font-family: 'Bradley Hand ITC';
+    font-weight: bold;
+    color: #005EAD;
+    font-size: 1.6em;
+}
+
+.anmeldung {
+    background-color: #FF4C00;
+}
+
+.slider {
+    overflow: auto;
+    position: relative;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+}
+
+.filter {
+    border: solid;
+    border-color: #ff4C00;
+    border-radius: 20px;
+    border-width: 0.2em;
+}
+
+.filterüberschrift {
+    font-family: 'Bradley Hand ITC';
+    font-weight: bold;
+    color: #ff4c00;
+    font-size: 2em;
+    text-align: center;
 }

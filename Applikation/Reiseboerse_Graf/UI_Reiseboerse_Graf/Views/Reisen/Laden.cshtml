@@ -66,8 +66,8 @@
         <div class="row">
             <div class="col-md-12">
                 <input type="radio" name="RadioPreisspanne" checked value="1">Alle<br>
-                <input type="radio" name="RadioPreisspanne" value="2">bis 499€<br>
-                <input type="radio" name="RadioPreisspanne" value="3">von 500€ bis 1499€<br>
+                <input type="radio" name="RadioPreisspanne" value="2">bis 499 €<br>
+                <input type="radio" name="RadioPreisspanne" value="3">von 500 € bis 1499€<br>
                 <input type="radio" name="RadioPreisspanne" value="4">ab 1500€<br>
             </div>
         </div>
@@ -81,24 +81,25 @@
             </div>
         </div>
         <br>
-
-        <div>
-            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-            <link rel="stylesheet" href="/resources/demos/style.css">
-            <script>
+        @section   scripts {
+            <script type="text/javascript">
                 $(function () {
-                    $("#datepicker").datepicker();
-                    $("#datepicker2").datepicker();
+                    $('#datetimepicker6').datetimepicker({
+                        format:"DD.MM.YYYY"});
+                    $('#datetimepicker7').datetimepicker({
+                        format: "DD.MM.YYYY",
+                        useCurrent: false //Important! See issue #1075
+                    });
+                    $("#datetimepicker6").on("dp.change", function (e) {
+                        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                    });
+                    $("#datetimepicker7").on("dp.change", function (e) {
+                        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                    });
                 });
             </script>
-            <p>Datum von: <input type="text" id="datepicker"></p>
-        </div>
-
-        <div>
-            <p>Datum bis: <input type="text" id="datepicker2"></p>
-        </div>
+        }
+      
     </div>
     <div class="col-xs-9">
         @foreach (var item in Model)
