@@ -74,15 +74,15 @@ INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_k
 VALUES('Pokern wie die Pros', 'Fahren Sie zur World Pokers Tour nach Las Vegas!', 5, 1200.00, 600.00);
 
 INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
-VALUES(1, '07312016', '08062016', '06302016');
+VALUES(1, '2016-31-07', '2016-06-08', '2016-30-06');
 INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
-VALUES(2, '12012016', '12062016', '11012016');
+VALUES(2, '2016-01-12', '2016-06-12', '2016-10-11');
 INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
-VALUES(3, '07252016', '07302016', '06152016');
+VALUES(3, '2016-25-07', '2016-30-07', '2016-15-06');
 INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
-VALUES(4, '01072017', '01212017', '12232016');
+VALUES(4, '2017-07-01', '2017-21-01', '2016-23-12');
 INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
-VALUES(5, '03012017', '03152017', '02022017');
+VALUES(5, '2017-01-03', '2017-15-03', '2017-02-02');
 
 INSERT INTO Bild (bild) 
 SELECT BulkColumn 
