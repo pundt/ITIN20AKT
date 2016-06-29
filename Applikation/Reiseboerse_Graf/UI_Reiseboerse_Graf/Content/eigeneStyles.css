@@ -1,4 +1,8 @@
-﻿.reise {
+﻿body{
+    font-family:Tahoma;
+}
+
+.reise {
     border: solid;
     border-color: #005ead;
     border-radius: 20px;
@@ -104,8 +108,9 @@
 }
 
 .footer {
-    background-color: #ffd800;
+    background-color: #003a6a ;
     text-align: center;
+    color: #ffffff;
 }
 
 .login {
@@ -151,22 +156,19 @@
 
 .filter {
     border: solid;
-    border-color: #ff4C00;
+    border-color: #cfe9ff ;
+    background-color:#cfe9ff ;
     border-radius: 20px;
     border-width: 0.2em;
 }
 
-.filterüberschrift {
-    font-family: 'Bradley Hand ITC';
-    font-weight: bold;
-    color: #ff4c00;
+.überschrift {
+    color: #ffffff;
     font-size: 2em;
     text-align: center;
 }
 
-.senden{
-    margin-bottom:4%;
-    background-color:#ff4c00;
-    font-family:'Bradley Hand ITC';
-
+.button{
+    margin:4%;
+    background-color:#ffd800;
 }
