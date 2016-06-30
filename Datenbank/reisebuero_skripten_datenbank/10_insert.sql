@@ -90,3 +90,75 @@ FROM Openrowset(
 Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\1_hotel_test.jpg', Single_Blob) 
 AS import;
 GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\2_hotel_test.jpg', Single_Blob) 
+AS import;
+GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\3_hotel_test.jpg', Single_Blob) 
+AS import;
+GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\4_hotel_test.jpg', Single_Blob) 
+AS import;
+GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\5_hotel_test.jpg', Single_Blob) 
+AS import;
+GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\1_reise_test.jpg', Single_Blob) 
+AS import;
+GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\2_reise_test.jpg', Single_Blob) 
+AS import;
+GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\3_reise_test.jpg', Single_Blob) 
+AS import;
+GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\4_reise_test.jpg', Single_Blob) 
+AS import;
+GO
+INSERT INTO Bild (bild)
+SELECT *
+FROM Openrowset( 
+Bulk 'C:\ITIN20AKT\Datenbank\reisebuero_skripten_datenbank\testimages\5_reise_test.jpg', Single_Blob) 
+AS import;
+GO
+
+INSERT INTO Buchung(reisedetail_id, kunde_id) VALUES(1, 1);
+INSERT INTO Buchung(reisedetail_id, kunde_id) VALUES(2, 2);
+INSERT INTO Buchung(reisedetail_id, kunde_id) VALUES(3, 3);
+GO
+
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(1, 1);
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(2, 2);
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(3, 3);
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(4, 4);
+INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(5, 5);
+GO
+
+INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(1, 6);
+INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(2, 7);
+INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(3, 8);
+INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(4, 9);
+INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(5, 10);
