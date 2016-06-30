@@ -9,11 +9,17 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-xs-4">
                 <img src="~/Content/bilder/reisebüro_logo.jpg" class="img-responsive" />
-                <p class="kontakt">Kontaktieren Sie uns: 00800/123456</p>
+                <div class="row kontakt">
+                    <div class="col-xs-11 center-block">
+                        Kontaktieren Sie uns
+
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-2">0800/206894</div>
+                </div>
             </div>
             <div class="col-xs-3 logoschrift">
                 "Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen"
@@ -33,12 +39,12 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid body-content">
+    <div class="body-content">
         @RenderBody()
         <hr />
         <footer class="footer navbar navbar-bottom">
-            <div class="container-fluid">
-                <div class="row">
+            <div class="row">
+                <div class="container-fluid">
                     <div class="col-xs-12">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Startseite</a></li>

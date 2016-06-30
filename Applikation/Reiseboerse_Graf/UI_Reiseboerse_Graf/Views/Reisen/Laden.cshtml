@@ -3,9 +3,8 @@
 @{
     ViewBag.Title = "Laden";
 }
-
-<div class="container-fluid">
-    <div class="col-xs-3 filter">
+<div class="container">
+    <div class="col-xs-2 filter">
         <div class="überschrift">Filter</div>
         <div class="row">
             <div class="col-md-12 form-group">
@@ -83,9 +82,9 @@
             </div>
         </div>
         <br>
-        <div class='col-md-12 form-group'>
-            <label>Starttermin</label>
-            <div class="form-group">
+        <div class="row">
+            <div class='col-md-12'>
+                <label>Starttermin</label>
                 <div class='input-group date' id='datetimepicker6'>
                     <input type='text' class="form-control" />
                     <span class="input-group-addon">
@@ -94,19 +93,20 @@
                 </div>
             </div>
         </div>
-        <div class='col-md-12 form-group'>
-            <label>Endtermin</label>
-            <div class="form-group">
+        <div class="row">
+            <div class='col-md-12'>
+                <label>Endtermin</label>
                 <div class='input-group date' id='datetimepicker7'>
                     <input type='text' class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
+                <div class="divcenter">
+                    <input class="btn button" type="submit" value="Filtern" />
+                </div>
             </div>
-            <div class="divcenter">
-                <input class="btn button" type="submit" value="Filtern" />
-            </div>
+
         </div>
 
 
@@ -132,7 +132,7 @@
 
     </div>
 
-    <div class="col-xs-8 col-xs-offset-1">
+    <div class="col-xs-9 col-xs-offset-1">
         @foreach (var item in Model)
         {
             <div class="row reise">
@@ -150,8 +150,6 @@
                     <ul class="list-unstyled list">
                         <li><img src="~/Content/bilder/themify_e691(1)_32.png" />@Html.DisplayFor(modelItem => item.Titel)</li>
                         <li class="Kommentar"><img src="~/Content/bilder/FontAwesome_f017(6)_32.png" />Buchen Sie bis: @Html.DisplayFor(modelItem => item.Anmeldefrist)</li>
-                        
-                      
                         <li><img src="~/Content/bilder/themify_e6a9(3)_32.png" /> @Html.DisplayFor(modelItem => item.Ort)</li>
                     </ul>
                 </div>
@@ -162,7 +160,7 @@
                         <li><img src="~/Content/bilder/FontAwesome_f0f5(0)_32.png" /> @Html.DisplayFor(modelItem => item.Verpflegung)</li>
                     </ul>
                 </div>
-                <div class="col-md-2 col-xs-6 details">
+                <div class="col-md-1 col-xs-6 details">
                     <!--Wenn der Benutzer eingeloogt, dann wird hier der Merkenbutton eingezeigt-->
                     <!--Link zu den Details der entsprechenden Reise-->
                     <a class="btn platziert" href="/Reise/Details/@item.ID">Details</a>
@@ -171,4 +169,5 @@
             <br />
         }
     </div>
+
 </div>

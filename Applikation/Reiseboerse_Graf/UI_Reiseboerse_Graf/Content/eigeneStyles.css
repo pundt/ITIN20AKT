@@ -60,10 +60,10 @@
 }
 
 .platziert {
-    background-color: #FF4C00;
-    color: #ffffff;
-    margin-left: 20%;
-    margin-top: 35%;
+    background-color: #efbd20;
+    color: #003a6a;
+    margin-left: 30%;
+    margin-top: 80%;
 }
 
 .acidjs-rating-stars,
@@ -148,7 +148,7 @@
     font-weight:bold;
     color:#005ead;
     font-size:2em;
-    text-align:center;
+    /*text-align:center;*/
 }
 .anmeldung {
     background-color: #FF4C00;
@@ -187,6 +187,9 @@
     text-align:center;
 
     
+}
+.content{
+    margin-left:5px;
 }
 
 
