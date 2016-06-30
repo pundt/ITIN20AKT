@@ -9,35 +9,27 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4">
                 <img src="~/Content/bilder/reisebüro_logo.jpg" class="img-responsive" />
+                <p class="kontakt">Kontaktieren Sie uns: 00800/123456</p>
             </div>
             <div class="col-xs-3 logoschrift">
-                Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen
-                <div class="row login">
-                    @Html.ActionLink("Anmelden", "Login", "Benutzer", null, new { @class = "btn button" })
-                </div>
+                "Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen"
             </div>
             <div class="col-xs-5">
-            <div class="slider">
-                <div class="crop">
-                    <span class="img" style="background-image:url('../../Content/bilder/slidertestimg/1_hotel_test.jpg');"></span>
+                <div class="slider">
+                    <div class="crop">
+                        <span class="img" style="background-image:url('../../Content/bilder/slidertestimg/1_hotel_test.jpg');"></span>
+                    </div>
+                    <div class="crop">
+                        <span class="img" style="background-image: url('../../Content/bilder/slidertestimg/1_reise_test.jpg');"></span>
+                    </div>
+                    <div class="crop">
+                        <span class="img" style="background-image: url('../../Content/bilder/slidertestimg/2_hotel_test.jpg');"></span>
+                    </div>
                 </div>
-                <div class="crop">
-                    <span class="img" style="background-image: url('../../Content/bilder/slidertestimg/1_reise_test.jpg');"></span>
-                </div>
-                <div class="crop">
-                    <span class="img" style="background-image: url('../../Content/bilder/slidertestimg/2_hotel_test.jpg');"></span>
-                </div>
-                </div>
-
-
-              
-            </div>
-            <div class="col-xs-1" align="right">
-
             </div>
         </div>
     </div>
@@ -46,12 +38,14 @@
         <hr />
         <footer class="footer navbar navbar-bottom">
             <div class="container-fluid">
-                <div class="col-xs-12">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Startseite</a></li>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">AGB</a></li>
-                    </ul>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Startseite</a></li>
+                            <li><a href="#">Impressum</a></li>
+                            <li><a href="#">AGB</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </footer>
@@ -60,7 +54,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/slider")
     @Scripts.Render("~/bundles/bootstrap")
-  
+
     <script>
         $('.slider').anyslider();
     </script>
