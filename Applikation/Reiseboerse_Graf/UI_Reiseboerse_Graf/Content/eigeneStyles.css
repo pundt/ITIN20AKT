@@ -138,10 +138,18 @@
 .logoschrift {
     font-family: 'Bradley Hand ITC';
     font-weight: bold;
-    color: #005EAD;
+    color: #005ead;
     font-size: 1.6em;
+    text-align:right;
+    margin-top:6%;
 }
-
+.kontakt{
+    font-family:'Bradley Hand ITC';
+    font-weight:bold;
+    color:#005ead;
+    font-size:2em;
+    text-align:center;
+}
 .anmeldung {
     background-color: #FF4C00;
 }
