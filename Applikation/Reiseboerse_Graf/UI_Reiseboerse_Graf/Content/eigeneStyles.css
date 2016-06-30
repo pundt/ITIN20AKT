@@ -22,6 +22,10 @@
     border-color: #ffd800;
 }
 
+.divcenter{
+    text-align:center;
+}
+
 .details {
     font-size: 1.2em;
     padding-top: 2%;
@@ -134,10 +138,18 @@
 .logoschrift {
     font-family: 'Bradley Hand ITC';
     font-weight: bold;
-    color: #005EAD;
+    color: #005ead;
     font-size: 1.6em;
+    text-align:right;
+    margin-top:6%;
 }
-
+.kontakt{
+    font-family:'Bradley Hand ITC';
+    font-weight:bold;
+    color:#005ead;
+    font-size:2em;
+    text-align:center;
+}
 .anmeldung {
     background-color: #FF4C00;
 }
@@ -156,10 +168,11 @@
 
 .filter {
     border: solid;
-    border-color: #cfe9ff ;
+    border-color: #005ead ;
     background-color:#cfe9ff ;
     border-radius: 20px;
-    border-width: 0.2em;
+    border-width:0.2em;
+    
 }
 
 .überschrift {
@@ -170,5 +183,11 @@
 
 .button{
     margin:4%;
-    background-color:#ffd800;
+    background-color:#eea32c;
+    text-align:center;
+
+    
 }
+
+
+

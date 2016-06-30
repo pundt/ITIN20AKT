@@ -6,11 +6,11 @@
 
 <div class="container-fluid">
     <div class="col-xs-3 filter">
-        <div class="überschrift">Filter</div>   
+        <div class="überschrift">Filter</div>
         <div class="row">
             <div class="col-md-12 form-group">
                 <label>Kontinent</label>
-                <select name="Landauswahl" class="form-control" id="sel1">               
+                <select name="Landauswahl" class="form-control" id="sel1">
                     <option value="Europa">Europa</option>
                     <option>Asien</option>
                     <option>Afrika</option>
@@ -30,7 +30,7 @@
             <div class="col-md-12 form-group">
                 <label>Ort</label>
                 <select name="Landauswahl" class="form-control" id="sel1">
-                    
+
                     <option value="Wien">Wien</option>
                     <option>Kärtnen</option>
                 </select>
@@ -41,7 +41,7 @@
             <div class="col-md-12">
                 <label>Hotelkategorie</label>
                 <div class="acidjs-rating-stars">
-                   
+
                     <form>
                         <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label>
                         <input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label>
@@ -64,7 +64,7 @@
         </div>
         <br>
 
-      <label>Preis</label><br>
+        <label>Preis</label><br>
         <div class="row">
             <div class="col-md-12">
                 <input type="radio" name="RadioPreisspanne" checked value="1"> Alle<br>
@@ -95,7 +95,7 @@
             </div>
         </div>
         <div class='col-md-12 form-group'>
-            <label>Endtermin</label> 
+            <label>Endtermin</label>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker7'>
                     <input type='text' class="form-control" />
@@ -104,13 +104,18 @@
                     </span>
                 </div>
             </div>
+            <div class="divcenter">
+                <input class="btn button" type="submit" value="Filtern" />
+            </div>
         </div>
-        <input class="btn button"  type="submit" value="Filtern"  />
+
+
         @section   scripts {
             <script type="text/javascript">
                 $(function () {
                     $('#datetimepicker6').datetimepicker({
-                        format:"DD.MM.YYYY"});
+                        format: "DD.MM.YYYY"
+                    });
                     $('#datetimepicker7').datetimepicker({
                         format: "DD.MM.YYYY",
                         useCurrent: false //Important! See issue #1075
@@ -124,9 +129,9 @@
                 });
             </script>
         }
-      
+
     </div>
-   
+
     <div class="col-xs-8 col-xs-offset-1">
         @foreach (var item in Model)
         {
@@ -138,22 +143,23 @@
                     </div>
                     <!--Restplätze aus der Datenbank auslesen-->
                     <div class="Restplätze">
-                       <span class="badge">@Html.DisplayFor(modelItem => item.Restplätze)</span> Restplätze
+                        <span class="badge">@Html.DisplayFor(modelItem => item.Restplätze)</span> Restplätze
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-6 details">
                     <ul class="list-unstyled list">
-                        <li>@Html.DisplayFor(modelItem => item.Titel)</li>
-                        <li class="Kommentar">Buchen Sie bis: @Html.DisplayFor(modelItem => item.Anmeldefrist)</li>
-                        <br />
-                        <li><img src="~/Content/bilder/Ort.png" /> @Html.DisplayFor(modelItem => item.Ort)</li>
+                        <li><img src="~/Content/bilder/themify_e691(1)_32.png" />@Html.DisplayFor(modelItem => item.Titel)</li>
+                        <li class="Kommentar"><img src="~/Content/bilder/FontAwesome_f017(6)_32.png" />Buchen Sie bis: @Html.DisplayFor(modelItem => item.Anmeldefrist)</li>
+                        
+                      
+                        <li><img src="~/Content/bilder/themify_e6a9(3)_32.png" /> @Html.DisplayFor(modelItem => item.Ort)</li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-xs-6 details">
                     <ul class="list-inline list-unstyled list">
                         <li><img src="~/Content/bilder/FontAwesome_f015(0)_32.png" /> @Html.DisplayFor(modelItem => item.Hotel)</li>
-                        <li><img src="~/Content/bilder/Uhr.png" /> @Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
-                        <li><img src="~/Content/bilder/Verpflegung.png" /> @Html.DisplayFor(modelItem => item.Verpflegung)</li>
+                        <li><img src="~/Content/bilder/FontAwesome_f133(0)_32.png" /> @Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
+                        <li><img src="~/Content/bilder/FontAwesome_f0f5(0)_32.png" /> @Html.DisplayFor(modelItem => item.Verpflegung)</li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-xs-6 details">
