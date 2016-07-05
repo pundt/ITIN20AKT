@@ -46,48 +46,74 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="bm">BenutzerModel Datentyp</param>
         /// <returns></returns>
-        [HttpPost]
-        public ActionResult BenutzerErstellen(BenutzerModel bm)
+        [HttpGet]
+        public List<Benutzer> BenutzerAnzeigen()
         {
-            List<Benutzer> bl = new List<Benutzer>();
+            List<Benutzer> AlleBenutzer = new List<Benutzer>();
+
             //neuer benutzer b der mit den daten aus dem benutzermodel aus der view gefüttert 
             //wird und dann in eine liste hinzugefügt wird
-            Benutzer b = new Benutzer()
-            {
-                Email = bm.Email,
-                Geschlecht = bm.Geschlecht,
-                Nachname = bm.Nachname,
-                Vorname = bm.Vorname,
-                Passwort = bm.Passwort
-            };
-            bl.Add(b);
-            // dummy daten erstellen 30 testbenutzer die abgefragt werden können
+            //Benutzer benutzer = new Benutzer()
+            //{
+            //    Email = benutzer.Email,
+            //    Geschlecht = benutzer.Geschlecht,
+            //    Nachname = benutzer.Nachname,
+            //    Vorname = benutzer.Vorname,
+            //    Passwort = benutzer.Passwort
+            //};
+            //AlleBenutzer.Add(benutzer);
+
             if (Globals.IST_TESTSYSTEM)
             {
-                //for (int i = 0; i < 30; i++)
-                //{
-                //    Benutzer TestBenutzer = new Benutzer()
-                //    {
-                //        b.Id = i,
-                //        b.Email = "daniel" + i + "@gmx.at",
-                //        b.Geschlecht = false,
-                //        b.Nachname = "Nachname" + i,
-                //        b.Vorname = "Vorname" + i,
-                //        b.Passwort = "123" + i
-                //    };
-                //    bl.Add(TestBenutzer);
-                //}
+                // dummy daten erstellen 30 testbenutzer die abgefragt werden können
+                for (int i = 0; i < 30; i++)
+                {
+                    Benutzer neuerBenutzer = new Benutzer()
+                    {
+                        Id = i,
+                        Email = "Max" + i + "@gmx.at",
+                        Geschlecht = false,
+                        Nachname = "Nachname" + i,
+                        Vorname = "Vorname" + i,
+                        Passwort = "12345678" + i
+                    };
+                    if (neuerBenutzer.Geschlecht== false)
+                    {
+                        neuerBenutzer.Geschlecht = true;
+                    }
+                    else
+                    {
+                        neuerBenutzer.Geschlecht = false;
+                    }
+                    AlleBenutzer.Add(neuerBenutzer);
+                }
             }
             else
             {
-
-
             }
+            return AlleBenutzer;
+
+        }
+        [HttpPost]
+        public ActionResult BenutzerAnlegen(BenutzerModel bm, List<Benutzer> AlleBenutzer)
+        {
+
+            //Benutzer neuerBenutzer = new Benutzer();
+            //neuerBenutzer.Id = bm.ID;
+            //neuerBenutzer.Vorname = bm.Vorname;
+            //neuerBenutzer.Nachname = bm.Nachname;
+            //neuerBenutzer.Passwort = bm.Passwort;
+            //neuerBenutzer.Geschlecht = bm.Geschlecht;
+            //foreach (var item in AlleBenutzer)
+            //{
+            //    item.
+            //}
+
+
             return RedirectToAction("Laden","Reisen");
 
+        }
+
+
     }
-
-
-
-}
 }
