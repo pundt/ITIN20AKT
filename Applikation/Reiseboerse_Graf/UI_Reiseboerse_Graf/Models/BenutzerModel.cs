@@ -9,7 +9,7 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class BenutzerModel
     {
-
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         [DataType(DataType.EmailAddress, ErrorMessage = "ungültige Mail")]
