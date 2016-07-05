@@ -1,4 +1,0 @@
-Neuer Speicherort für Github (wegen Bildern in der DB):
-C:\
-
-da es wegen "Users" sonst zu Problemen beim Aufrufen der Bilder kommt!
