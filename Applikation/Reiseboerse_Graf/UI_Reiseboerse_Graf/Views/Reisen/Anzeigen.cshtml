@@ -1,0 +1,54 @@
+﻿@model UI_Reiseboerse_Graf.Models.ReisedetailModel
+
+@{
+    ViewBag.Title = "Anzeigen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <!--Bilder von Reise-->
+        </div>
+        <div class="col-xs-6">
+            <h4>@Html.DisplayFor(model => model.Titel), @Html.DisplayFor(model => model.Ort)</h4> <hr />
+
+            @Html.DisplayFor(model => model.Beschreibung)
+            <br />
+            @Html.DisplayFor(model => model.Beginndatum) - @Html.DisplayFor(model => model.Enddatum)
+        </div>
+        <div class="col-xs-3">
+            @using (Html.BeginForm("Hinzufuegen", "Buchungen"))
+            {
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(x => x.Preis_Kind)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(x => x.Preis_Kind)
+                    </dd>
+                    <!--Hier benötigt man noch eine Auswahl für die Plätze(aber in Bezug auf mögliche Restplätze)-->
+                    <dt>
+                        @Html.DisplayNameFor(x => x.Preis_Erwachsene)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(x => x.Preis_Erwachsene)
+                    </dd>
+                    <!--Hier benötigt man noch eine Auswahl für die Plätze (aber in Bezug auf mögliche Restplätze)-->
+                </dl>
+
+            }
+        </div>
+
+
+    </div>
+    <div class="row">
+
+
+
+    </div>
+</div>
+    <p>
+        @Html.ActionLink("Zurück zur Reiseliste", "Index")
+    </p>

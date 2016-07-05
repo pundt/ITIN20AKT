@@ -25,24 +25,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 try
                 {
                     Debug.WriteLine("Testsystem");
-                    for (int i = 0; i < 50; i++)
-                    {
-                        ReiseModel reise = new ReiseModel()
-                        {
-                            Anmeldefrist = new DateTime(2016, 08, 30),
-                            Beginndatum = new DateTime(2016, 10, 01),
-                            Enddatum = new DateTime(2016, 10, 30),
-                            Preis = 599 + i * 3,
-                            Titel = "Wandern in der Wachau " + i,
-                            Beschreibung = "Das ist eine ganz tolle Reise in ein wundervolles Weingebiet in Österreich. Ganz besonders toll im Herbst",
-                            Ort = "Spitz" + i,
-                            Hotel = "Schlosshotel Burckhardt " + i,
-                            Verpflegung="Halbpension"+i%2,
-                            Hotel_ID = i,
-                            Restplätze = i %5
-                        };
-                        liste.Add(reise);
-                    }
+                    liste = ReiseAnzeigeListeTest();
                     Debug.WriteLine($"{liste.Count} Reisen geladen");
                 }
 
@@ -61,19 +44,31 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(liste);
         }
 
-        
-
         /// <summary>
         /// Zeigt alle Details der Reise (Beschreibung, Hotelbeschreibung)
         /// </summary>
         /// <param name="reise_ID">ID der anzuzeigenden Reise</param>
         /// <returns></returns>
-        public ActionResult Anzeigen(int reise_ID)
+        public ActionResult Anzeigen(int id)
         {
-
-            return View();
+            Debug.WriteLine("Reisedetails- Anzeigen - GET");
+            Debug.Indent();
+            ReisedetailModel rm = new ReisedetailModel();
+            if (Globals.IST_TESTSYSTEM)
+            {
+                Debug.Indent();
+                List<ReisedetailModel> liste = ReiseDetailListeTest();
+                //die entsprechende Reise aus der Liste finden (anhand der ID)
+                rm = liste.Find(x => x.ID == id);
+            }
+            else
+            {
+                //ReiseDetails aus DB auslesen
+            }
+            Debug.Unindent();
+            return View(rm);
         }
-
+        
         /// <summary>
         /// Fügt eine neue Reise hinzu
         /// </summary>
@@ -94,5 +89,65 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// Befüllen mit Daten im Testsytem für Reise anzeigen 
+        /// </summary>
+        /// <returns></returns>
+        private List<ReiseModel> ReiseAnzeigeListeTest()
+        {
+            List<ReiseModel> liste = new List<ReiseModel>();
+            for (int i = 0; i < 50; i++)
+            {
+                ReiseModel reise = new ReiseModel()
+                {
+                    ID=i,
+                    Anmeldefrist = new DateTime(2016, 08, 30),
+                    Beginndatum = new DateTime(2016, 10, 01),
+                    Enddatum = new DateTime(2016, 10, 30),
+                    Preis = 599 + i * 3,
+                    Titel = "Wandern in der Wachau " + i,
+                    Ort = "Spitz" + i,
+                    Unterkunft = "Schlosshotel Burckhardt " + i,
+                    Verpflegung = "Halbpension" + i % 2,
+                    Restplätze = i % 5
+                };
+                liste.Add(reise);
+            }
+            return liste;
+        }
+
+        /// <summary>
+        /// Befüllen mit Daten im Testsystem für die Reisedetails
+        /// </summary>
+        /// <returns></returns>
+        private List<ReisedetailModel> ReiseDetailListeTest()
+        {
+            List<ReisedetailModel> liste = new List<ReisedetailModel>();
+            for (int i = 0; i < 50; i++)
+            {
+                ReisedetailModel reise = new ReisedetailModel()
+                {
+                    ID=i,
+                    Anmeldefrist = new DateTime(2016, 08, 30),
+                    Beginndatum = new DateTime(2016, 10, 01),
+                    Enddatum = new DateTime(2016, 10, 30),
+                    Preis = 599 + i * 3,
+                    Titel = "Wandern in der Wachau " + i,
+                    Ort = "Spitz" + i,
+                    Beschreibung= "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                    Preis_Erwachsene=i*156,
+                    Preis_Kind=i*133,
+                    Unterkunft = "Schlosshotel Burckhardt " + i,
+                    Unterkunft_ID=i,
+                    Verpflegung = "Halbpension" + i % 2,
+                    Restplätze = i % 5
+                };
+                liste.Add(reise);
+            }
+            return liste;
+        }
+
+
     }
 }

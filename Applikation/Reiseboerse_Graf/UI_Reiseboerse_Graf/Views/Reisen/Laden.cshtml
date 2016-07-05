@@ -155,7 +155,7 @@
                 </div>
                 <div class="col-md-4 col-xs-6 details">
                     <ul class="list-inline list-unstyled list">
-                        <li><img src="~/Content/bilder/FontAwesome_f015(0)_32.png" /> @Html.DisplayFor(modelItem => item.Hotel)</li>
+                        <li><img src="~/Content/bilder/FontAwesome_f015(0)_32.png" /> @Html.DisplayFor(modelItem => item.Unterkunft)</li>
                         <li><img src="~/Content/bilder/FontAwesome_f133(0)_32.png" /> @Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
                         <li><img src="~/Content/bilder/FontAwesome_f0f5(0)_32.png" /> @Html.DisplayFor(modelItem => item.Verpflegung)</li>
                     </ul>
@@ -163,7 +163,7 @@
                 <div class="col-md-1 col-xs-6 details">
                     <!--Wenn der Benutzer eingeloogt, dann wird hier der Merkenbutton eingezeigt-->
                     <!--Link zu den Details der entsprechenden Reise-->
-                    <a class="btn platziert" href="/Reise/Details/@item.ID">Details</a>
+                    @Html.ActionLink("Details", "Anzeigen",new { id = item.ID },new { @class="btn platziert"})
                 </div>
             </div>
             <br />
