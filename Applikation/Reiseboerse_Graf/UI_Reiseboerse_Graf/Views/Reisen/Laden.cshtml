@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = "Laden";
 }
-
-<div class="container-fluid">
-    <div class="col-xs-3">
+<div class="container">
+    <div class="col-xs-2 filter">
+        <div class="überschrift">Filter</div>
         <div class="row">
             <div class="col-md-12 form-group">
-                <label for="sel1">Wählen sie einen Kontinent:</label>
-                <select name="Landauswahl" class="form-control" id="sel1">               
+                <label>Kontinent</label>
+                <select name="Landauswahl" class="form-control" id="sel1">
                     <option value="Europa">Europa</option>
                     <option>Asien</option>
                     <option>Afrika</option>
@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 form-group">
-                <label>Wählen sie ein Land:</label>
+                <label>Land</label>
                 <select name="Landauswahl" class="form-control" id="sel1">
                     <option value="Deutschland">Deutschland</option>
                     <option>Schweiz</option>
@@ -27,9 +27,9 @@
         </div>
         <div class="row">
             <div class="col-md-12 form-group">
-                <label>Wählen sie Ort/Stadt:</label>
+                <label>Ort</label>
                 <select name="Landauswahl" class="form-control" id="sel1">
-                    
+
                     <option value="Wien">Wien</option>
                     <option>Kärtnen</option>
                 </select>
@@ -38,8 +38,9 @@
 
         <div class="row">
             <div class="col-md-12">
+                <label>Hotelkategorie</label>
                 <div class="acidjs-rating-stars">
-                    <label>Wählen sie</label>
+
                     <form>
                         <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label>
                         <input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label>
@@ -51,56 +52,87 @@
             </div>
         </div>
 
-        Reisekategorie:<br>
+        <label>Kategorie</label> <br>
         <div class="row">
             <div class="col-md-12">
-                <input type="checkbox" name="CheckReise" value="1" checked>Abenteuerreise<br>
-                <input type="checkbox" name="CheckReise" value="2">Busreise<br>
-                <input type="checkbox" name="CheckReise" value="3">Familienreise<br>
-                <input type="checkbox" name="CheckReise" value="4">Pärchenreise<br>
+                <input type="checkbox" name="CheckReise" value="1" checked> Abenteuerreise<br>
+                <input type="checkbox" name="CheckReise" value="2"> Busreise<br>
+                <input type="checkbox" name="CheckReise" value="3"> Familienreise<br>
+                <input type="checkbox" name="CheckReise" value="4"> Pärchenreise<br>
             </div>
         </div>
         <br>
 
-        Preis: Von-Bis:<br>
+        <label>Preis</label><br>
         <div class="row">
             <div class="col-md-12">
-                <input type="radio" name="RadioPreisspanne" checked value="1">Alle<br>
-                <input type="radio" name="RadioPreisspanne" value="2">bis 499€<br>
-                <input type="radio" name="RadioPreisspanne" value="3">von 500€ bis 1499€<br>
-                <input type="radio" name="RadioPreisspanne" value="4">ab 1500€<br>
+                <input type="radio" name="RadioPreisspanne" checked value="1"> Alle<br>
+                <input type="radio" name="RadioPreisspanne" value="2"> bis 499 €<br>
+                <input type="radio" name="RadioPreisspanne" value="3"> 500 € bis 1499 €<br>
+                <input type="radio" name="RadioPreisspanne" value="4"> ab 1500 €<br>
             </div>
         </div>
         <br>
-        Verpflegung:<br>
+        <label>Verpflegung</label><br>
         <div class="row">
             <div class="col-md-12">
-                <input type="checkbox" name="CheckVerpflegung" value="1" checked>Halb-Pension<br>
-                <input type="checkbox" name="CheckVerpflegung" value="2">Voll-Pension<br>
-                <input type="checkbox" name="CheckVerpflegung" value="3">Frühstück<br>
+                <input type="checkbox" name="CheckVerpflegung" value="1" checked> Halb-Pension<br>
+                <input type="checkbox" name="CheckVerpflegung" value="2"> Voll-Pension<br>
+                <input type="checkbox" name="CheckVerpflegung" value="3"> Frühstück<br>
             </div>
         </div>
         <br>
+        <div class="row">
+            <div class='col-md-12'>
+                <label>Starttermin</label>
+                <div class='input-group date' id='datetimepicker6'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class='col-md-12'>
+                <label>Endtermin</label>
+                <div class='input-group date' id='datetimepicker7'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <div class="divcenter">
+                    <input class="btn button" type="submit" value="Filtern" />
+                </div>
+            </div>
 
-        <div>
-            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-            <link rel="stylesheet" href="/resources/demos/style.css">
-            <script>
+        </div>
+
+
+        @section   scripts {
+            <script type="text/javascript">
                 $(function () {
-                    $("#datepicker").datepicker();
-                    $("#datepicker2").datepicker();
+                    $('#datetimepicker6').datetimepicker({
+                        format: "DD.MM.YYYY"
+                    });
+                    $('#datetimepicker7').datetimepicker({
+                        format: "DD.MM.YYYY",
+                        useCurrent: false //Important! See issue #1075
+                    });
+                    $("#datetimepicker6").on("dp.change", function (e) {
+                        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                    });
+                    $("#datetimepicker7").on("dp.change", function (e) {
+                        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                    });
                 });
             </script>
-            <p>Datum von: <input type="text" id="datepicker"></p>
-        </div>
+        }
 
-        <div>
-            <p>Datum bis: <input type="text" id="datepicker2"></p>
-        </div>
     </div>
-    <div class="col-xs-9">
+
+    <div class="col-xs-9 col-xs-offset-1">
         @foreach (var item in Model)
         {
             <div class="row reise">
@@ -111,31 +143,31 @@
                     </div>
                     <!--Restplätze aus der Datenbank auslesen-->
                     <div class="Restplätze">
-                       <span class="badge">@Html.DisplayFor(modelItem => item.Restplätze)</span> Restplätze
+                        <span class="badge">@Html.DisplayFor(modelItem => item.Restplätze)</span> Restplätze
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-6 details">
                     <ul class="list-unstyled list">
-                        <li>@Html.DisplayFor(modelItem => item.Titel)</li>
-                        <li class="Kommentar">Letztmögliche Buchung: @Html.DisplayFor(modelItem => item.Anmeldefrist)</li>
-                        <br />
-                        <li><img src="~/Content/bilder/Ort.png" /> @Html.DisplayFor(modelItem => item.Ort)</li>
+                        <li><img src="~/Content/bilder/themify_e691(1)_32.png" />@Html.DisplayFor(modelItem => item.Titel)</li>
+                        <li class="Kommentar"><img src="~/Content/bilder/FontAwesome_f017(6)_32.png" />Buchen Sie bis: @Html.DisplayFor(modelItem => item.Anmeldefrist)</li>
+                        <li><img src="~/Content/bilder/themify_e6a9(3)_32.png" /> @Html.DisplayFor(modelItem => item.Ort)</li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-xs-6 details">
                     <ul class="list-inline list-unstyled list">
-                        <li><img src="~/Content/bilder/Haus.png" /> @Html.DisplayFor(modelItem => item.Hotel)</li>
-                        <li><img src="~/Content/bilder/Uhr.png" /> @Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
-                        <li><img src="~/Content/bilder/Verpflegung.png" /> @Html.DisplayFor(modelItem => item.Verpflegung)</li>
+                        <li><img src="~/Content/bilder/FontAwesome_f015(0)_32.png" /> @Html.DisplayFor(modelItem => item.Hotel)</li>
+                        <li><img src="~/Content/bilder/FontAwesome_f133(0)_32.png" /> @Html.DisplayFor(modelItem => item.Beginndatum)<text>-</text>@Html.DisplayFor(modelItem => item.Enddatum)</li>
+                        <li><img src="~/Content/bilder/FontAwesome_f0f5(0)_32.png" /> @Html.DisplayFor(modelItem => item.Verpflegung)</li>
                     </ul>
                 </div>
-                <div class="col-md-2 col-xs-6 details">
+                <div class="col-md-1 col-xs-6 details">
                     <!--Wenn der Benutzer eingeloogt, dann wird hier der Merkenbutton eingezeigt-->
                     <!--Link zu den Details der entsprechenden Reise-->
-                    <a class="btn platziert" href="/Reise/Details/@item.ID">Details >></a>
+                    <a class="btn platziert" href="/Reise/Details/@item.ID">Details</a>
                 </div>
             </div>
             <br />
         }
     </div>
+
 </div>

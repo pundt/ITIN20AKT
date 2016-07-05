@@ -28,13 +28,7 @@ namespace UI_Reiseboerse_Graf.Models
         /// prüfung bei männlich set = true bei weiblich set = false
         /// </summary>
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        private bool geschlecht;
-
-        public bool Geschlecht
-        {
-            get { return geschlecht; }
-            set { geschlecht = value; }
-        }
+        public bool Geschlecht { get; set; }
 
     }
 }

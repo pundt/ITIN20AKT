@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace UI_Reiseboerse_Graf.Models
 {
     public class RegistrierungsModel
     {
+        /// <summary>
+        /// model zum registrierungs view.
+        /// User input es werden felder validiert und auf vollständigkeit geprüft.
+        /// </summary>
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         [DataType(DataType.EmailAddress, ErrorMessage = "ungültige Mail")]
+        [Remote("EmailFrei", "Validation", ErrorMessage = "Email Adresse bereits vergeben")]
         public string Email { get; set; }
+
         [StringLength(maximumLength: 16, MinimumLength = 8, ErrorMessage = "Mind 8 Zeichen")]
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         [DataType(DataType.Password)]
@@ -22,7 +29,7 @@ namespace UI_Reiseboerse_Graf.Models
         [StringLength(maximumLength: 16, MinimumLength = 8, ErrorMessage = "Mind 8 Zeichen")]
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         [DataType(DataType.Password)]
-        [Compare("Passwort", ErrorMessage = "Passwörter stimmen nicht überein")]
+      //  [Compare("Passwort", ErrorMessage = "Passwörter stimmen nicht überein")]
         public string PasswortWiederholung { get; set; }
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         public string Vorname { get; set; }
@@ -43,11 +50,6 @@ namespace UI_Reiseboerse_Graf.Models
         /// prüfung bei männlich set = true bei weiblich set = false
         /// </summary>
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        private bool geschlecht;
-        public bool Geschlecht
-        {
-            get { return geschlecht; }
-            set { geschlecht = value; }
-        }
+        public bool Geschlecht { get; set; }
     }
 }
