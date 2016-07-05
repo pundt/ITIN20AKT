@@ -42,15 +42,16 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
         /// <summary>
-        /// Erhält das Model, schreibt die Daten in die Datenbank
+        /// Erhält das Model, sendet daten an Bl zur weitergabe in die datenbank
         /// </summary>
-        /// <param name="bm">RegistrierungsModel Datentyp</param>
+        /// <param name="bm">BenutzerModel Datentyp</param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult BenutzerErstellen(BenutzerModel bm)
         {
             List<Benutzer> bl = new List<Benutzer>();
-
+            //neuer benutzer b der mit den daten aus dem benutzermodel aus der view gefüttert 
+            //wird und dann in eine liste hinzugefügt wird
             Benutzer b = new Benutzer()
             {
                 Email = bm.Email,
@@ -60,6 +61,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 Passwort = bm.Passwort
             };
             bl.Add(b);
+            // dummy daten erstellen 30 testbenutzer die abgefragt werden können
             if (Globals.IST_TESTSYSTEM)
             {
                 //for (int i = 0; i < 30; i++)
