@@ -49,45 +49,43 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult BenutzerErstellen(BenutzerModel bm)
         {
+            List<Benutzer> bl = new List<Benutzer>();
 
+            Benutzer b = new Benutzer()
+            {
+                Email = bm.Email,
+                Geschlecht = bm.Geschlecht,
+                Nachname = bm.Nachname,
+                Vorname = bm.Vorname,
+                Passwort = bm.Passwort
+            };
+            bl.Add(b);
             if (Globals.IST_TESTSYSTEM)
             {
-                try
-                {
-                
-                        List<Benutzer> bl = new List<Benutzer>();
-
-                        Benutzer b = new Benutzer()
-                        {
-                            Email = bm.Email,
-                            Geschlecht = bm.Geschlecht,
-                            Nachname = bm.Nachname,
-                            Vorname = bm.Vorname,
-                            Passwort = bm.Passwort
-                        };
-                        //context.AlleBenutzer.Add(b);
-                        //foreach (var item in bl)
-                        //{
-                        //    rm.Email = item.email
-                        //}
-                    
-                }
-                catch (Exception ex)
-                {
-
-                    throw ex;
-                }
+                //for (int i = 0; i < 30; i++)
+                //{
+                //    Benutzer TestBenutzer = new Benutzer()
+                //    {
+                //        b.Id = i,
+                //        b.Email = "daniel" + i + "@gmx.at",
+                //        b.Geschlecht = false,
+                //        b.Nachname = "Nachname" + i,
+                //        b.Vorname = "Vorname" + i,
+                //        b.Passwort = "123" + i
+                //    };
+                //    bl.Add(TestBenutzer);
+                //}
             }
             else
             {
-                    
+
 
             }
-            return View();
-
-        }
-
-
+            return RedirectToAction("Laden","Reisen");
 
     }
+
+
+
+}
 }
