@@ -29,7 +29,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Login(string email, string passwort)
         {
-            BenutzerModel bm = new BenutzerModel();
+            KundenAnlegenModel bm = new KundenAnlegenModel();
             email = bm.Email;
             passwort = bm.Passwort;
 
@@ -95,7 +95,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
         }
         [HttpPost]
-        public ActionResult BenutzerAnlegen(BenutzerModel bm, List<Benutzer> AlleBenutzer)
+        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm, List<Benutzer> AlleBenutzer)
         {
 
             //Benutzer neuerBenutzer = new Benutzer();
@@ -104,10 +104,10 @@ namespace UI_Reiseboerse_Graf.Controllers
             //neuerBenutzer.Nachname = bm.Nachname;
             //neuerBenutzer.Passwort = bm.Passwort;
             //neuerBenutzer.Geschlecht = bm.Geschlecht;
-            //foreach (var item in AlleBenutzer)
-            //{
-            //    item.
-            //}
+            foreach (var item in AlleBenutzer)
+            {
+                item.
+            }
 
 
             return RedirectToAction("Laden","Reisen");
