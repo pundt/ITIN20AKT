@@ -47,52 +47,47 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <param name="bm">RegistrierungsModel Datentyp</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult BenutzerErstellen(RegistrierungsModel rm)
+        public ActionResult BenutzerErstellen(BenutzerModel bm)
         {
-            try
-            {
-                using (testdbEntities context = new testdbEntities())
-                {
-                    //List<Benutzer> bl = context.AlleBenutzer.ToList();
 
-                    Benutzer b = new Benutzer()
-                    {
-                        Email = rm.Email,
-                        Geschlecht = rm.Geschlecht,
-                        Nachname = rm.Nachname,
-                        Vorname = rm.Vorname,
-                        Passwort = rm.Passwort   
-                };
-                    //context.AlleBenutzer.Add(b);
-                    //foreach (var item in bl)
-                    //{
-                    //    rm.Email = item.email
-                    //}
+            if (Globals.IST_TESTSYSTEM)
+            {
+                try
+                {
+                
+                        List<Benutzer> bl = new List<Benutzer>();
+
+                        Benutzer b = new Benutzer()
+                        {
+                            Email = bm.Email,
+                            Geschlecht = bm.Geschlecht,
+                            Nachname = bm.Nachname,
+                            Vorname = bm.Vorname,
+                            Passwort = bm.Passwort
+                        };
+                        //context.AlleBenutzer.Add(b);
+                        //foreach (var item in bl)
+                        //{
+                        //    rm.Email = item.email
+                        //}
+                    
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
                 }
             }
-            catch (Exception ex)
+            else
             {
+                    
 
-                throw ex;
             }
             return View();
 
         }
-        /// <summary>
-        /// Benutzer view zum eingeben der notwendigen daten.
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult BenutzerRegistrieren()
-        {
-           
-            
 
-    
 
-            return View();
-        
-        }
 
     }
 }

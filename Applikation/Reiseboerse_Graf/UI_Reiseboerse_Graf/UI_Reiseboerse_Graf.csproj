@@ -137,7 +137,6 @@
     <Compile Include="Models\KundenModel.cs" />
     <Compile Include="Models\LandModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\RegistrierungsModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
