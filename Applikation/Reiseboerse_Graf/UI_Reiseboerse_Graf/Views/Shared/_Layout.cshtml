@@ -9,53 +9,61 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-xs-4">
                 <img src="~/Content/bilder/reisebüro_logo.jpg" class="img-responsive" />
-            </div>
-            <div class="col-xs-3">
-                Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen
-                <div class="row login">
-                    @Html.ActionLink("Login", "Login", "Benutzer", null, new { @class = "btn btn-default" })
-                </div>
-            </div>
-            <div class="slider col-xs-5">
-                <div>
-                    <img src="http://www.art-bijou.de/sites/default/files/VeedelK%C3%B6lnEinrahmung.jpg" class="img-responsive" alt="Chania">
-                </div>
-                <div>
-                    <img src="http://www.eisenbahn-exklusiv-reisen.com/assets/images/4/skandinavien-nordlicht-69221-a6275d84.jpg" class="img-responsive" alt="Chania">
-                </div>
-                <div>
-                    <img src="http://www.stefan-niggemeier.de/blog/wp-content/ne8.jpg" class="img-responsive" alt="Chania">
-                </div>
+                <div class="row kontakt">
+                    <div class="col-xs-11 center-block">
+                        Kontaktieren Sie uns
 
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-2">0800/206894</div>
+                </div>
             </div>
-           
-  
+            <div class="col-xs-3 logoschrift">
+                "Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen"
+            </div>
+            <div class="col-xs-5">
+                <div class="slider">
+                    <div class="crop">
+                        <span class="img" style="background-image:url('../../Content/bilder/slidertestimg/1_hotel_test.jpg');"></span>
+                    </div>
+                    <div class="crop">
+                        <span class="img" style="background-image: url('../../Content/bilder/slidertestimg/1_reise_test.jpg');"></span>
+                    </div>
+                    <div class="crop">
+                        <span class="img" style="background-image: url('../../Content/bilder/slidertestimg/2_hotel_test.jpg');"></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
-    <div class="container-fluid body-content">
+    <div class="body-content">
         @RenderBody()
         <hr />
-        <footer class="footer navbar navbar-fixed-bottom">
-            <div class="container-fluid">
-                <div class="col-xs-12">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">AGB</a></li>
-                        <li><a href="#">Über uns</a></li>
-                    </ul>
+        <footer class="footer navbar navbar-bottom">
+            <div class="row">
+                <div class="container-fluid">
+                    <div class="col-xs-12">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Startseite</a></li>
+                            <li><a href="#">Impressum</a></li>
+                            <li><a href="#">AGB</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/slider")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        $('.slider').anyslider();
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
