@@ -12,15 +12,10 @@ namespace UI_Reiseboerse_Graf.Models
         /// Auto increment
         /// </summary>
         public int ID { get; set; }
-
-
+        
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         public string Titel { get; set; }
-
-        [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        [StringLength(30, MinimumLength = 4, ErrorMessage = "Mind 4 Zeichen")]
-        public string Beschreibung { get; set; }
-
+       
         [Required(ErrorMessage = "Pflichtfeld")]
         [DisplayFormat(DataFormatString ="{0:dd.MM.yy}")]
         public DateTime Beginndatum { get; set; }
@@ -36,10 +31,7 @@ namespace UI_Reiseboerse_Graf.Models
         public string Ort { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        public string Hotel { get; set; }
-
-        [Required(ErrorMessage = "Pflichtfeld")]
-        public int Hotel_ID { get; set; }
+        public string Unterkunft { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
         public decimal Preis { get; set; }
@@ -50,9 +42,6 @@ namespace UI_Reiseboerse_Graf.Models
 
         [Required(ErrorMessage = "Pflichtfeld")]
         public int Restplätze { get; set; }
-
-        [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        public string LinkzuBild { get; set; }
 
     }
 }

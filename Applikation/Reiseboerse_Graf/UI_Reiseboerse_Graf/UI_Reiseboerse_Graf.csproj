@@ -137,6 +137,7 @@
     <Compile Include="Models\KundenModel.cs" />
     <Compile Include="Models\LandModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ReisedetailModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -229,6 +230,7 @@
     <Content Include="Views\Benutzer\Login.cshtml" />
     <Content Include="Views\Reisen\Laden.cshtml" />
     <Content Include="Views\Benutzer\BenutzerErstellen.cshtml" />
+    <Content Include="Views\Reisen\Anzeigen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
