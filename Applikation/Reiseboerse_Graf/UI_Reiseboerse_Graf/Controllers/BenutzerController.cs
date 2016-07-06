@@ -106,7 +106,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             //neuerBenutzer.Geschlecht = bm.Geschlecht;
             foreach (var item in AlleBenutzer)
             {
-                item.
+                //item.
             }
 
 

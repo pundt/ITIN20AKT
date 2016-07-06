@@ -148,6 +148,74 @@ namespace UI_Reiseboerse_Graf.Controllers
             return liste;
         }
 
+        [HttpGet]
+        public ActionResult Filter()
+        {
+            Debug.WriteLine("ReisenController - Filter - Get");
+            Debug.Indent();
 
+            if (Globals.IST_TESTSYSTEM)
+            {
+                try
+                {
+                    FilterModel model = new FilterModel();
+                    model.Kategorie = new List<KategorieModel>();
+
+                    for (int i = 1; i < 6; i++)
+                    {
+                        KategorieModel km = new KategorieModel();
+                        km.Bezeichnung = "Kategorie " + i;
+                        km.Id = i;
+                        model.Kategorie.Add(km);
+                    }
+
+                    model.Land = new List<LandModel>();
+
+                    for (int i = 1; i < 6; i++)
+                    {
+                        LandModel lm = new LandModel();
+                        lm.landName = "Land " + i;
+                        lm.land_ID = i;
+                        model.Land.Add(lm);
+                    }
+
+                    model.Ort = new List<OrtModel>();
+
+                    for (int i = 1; i < 6; i++)
+                    {
+                        OrtModel om = new OrtModel();
+                        om.Bezeichnung = "Ort " + i;
+                        om.Id = i;
+                        model.Ort.Add(om);
+                    }
+
+                    model.Verpflegung = new List<VerpflegungModel>();
+
+                    for (int i = 1; i < 6; i++)
+                    {
+                        VerpflegungModel vm = new VerpflegungModel();
+                        vm.Bezeichnung = "Verpflegung " + i;
+                        vm.Id = i;
+                        model.Verpflegung.Add(vm);
+                    }
+
+                    model.Startdatum = DateTime.Now;
+                    model.Enddatum = DateTime.Now;
+
+                    // Temporär noch mit View zur Funktionsprüfung, später mit Redirect
+                    return View(model);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden des FilterModels");
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+
+            Debugger.Break();
+            Debug.Unindent();
+
+            return RedirectToAction("Laden", "Reisen");
+        }
     }
 }
