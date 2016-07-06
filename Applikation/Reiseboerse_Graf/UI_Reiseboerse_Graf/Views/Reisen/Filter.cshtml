@@ -1,0 +1,124 @@
+﻿@model UI_Reiseboerse_Graf.Models.FilterModel
+
+@{
+    ViewBag.Title = "Filter";
+}
+
+@using (Html.BeginForm("Filter", "Reisen"))
+{
+<div class="container">
+    @*<div class="col-xs-2 filter">
+        <div class="überschrift">Filter</div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <label>Kontinent</label>
+                <select name="Landauswahl" class="form-control" id="sel1">
+                    <option value="Europa">Europa</option>
+                    <option>Asien</option>
+                    <option>Afrika</option>
+                </select>
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <label>Land</label>
+                @Html.DropDownListFor(model => model.Land, new SelectList(Model.Land, "land_ID", "landName"))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <label>Ort</label>
+                @Html.DropDownListFor(model => model.Ort, new SelectList(Model.Ort, "Id", "Bezeichnung"))
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>Hotelkategorie</label>
+                <div class="acidjs-rating-stars">
+                    <form>
+                        @Html.RadioButtonFor(model => model.HotelKategorie, Model.HotelKategorie)
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <label>Kategorie</label> <br>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.Kategorie, new SelectList(Model.Kategorie, "Id", "Bezeichnung"))
+            </div>
+        </div>
+        <br>
+
+        <label>Preis</label><br>
+        @*<div class="row">
+            <div class="col-md-12">
+                <input type="radio" name="RadioPreisspanne" checked value="1"> Alle<br>
+                <input type="radio" name="RadioPreisspanne" value="2"> bis 499 €<br>
+                <input type="radio" name="RadioPreisspanne" value="3"> 500 € bis 1499 €<br>
+                <input type="radio" name="RadioPreisspanne" value="4"> ab 1500 €<br>
+            </div>
+        </div>*@
+        
+        <br>
+        <label>Verpflegung</label><br>
+        @*<div class="row">
+            <div class="col-md-12">
+                <input type="checkbox" name="CheckVerpflegung" value="1" checked> Halb-Pension<br>
+                <input type="checkbox" name="CheckVerpflegung" value="2"> Voll-Pension<br>
+                <input type="checkbox" name="CheckVerpflegung" value="3"> Frühstück<br>
+            </div>
+        </div>*@
+        @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"))
+        <br>
+        <div class="row">
+            <div class='col-md-12'>
+                <label>Starttermin</label>
+                <div class='input-group date' id='datetimepicker6'>
+                    <input type='text' class="form-control" value="@Model.Startdatum"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class='col-md-12'>
+                <label>Endtermin</label>
+                <div class='input-group date' id='datetimepicker7'>
+                    <input type='text' class="form-control" value="@Model.Enddatum" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <div class="divcenter">
+                    <input class="btn button" type="submit" value="Filtern" />
+                </div>
+            </div>
+
+        </div>
+
+
+        @section   scripts {
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker6').datetimepicker({
+                        format: "DD.MM.YYYY"
+                    });
+                    $('#datetimepicker7').datetimepicker({
+                        format: "DD.MM.YYYY",
+                        useCurrent: false //Important! See issue #1075
+                    });
+                    $("#datetimepicker6").on("dp.change", function (e) {
+                        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                    });
+                    $("#datetimepicker7").on("dp.change", function (e) {
+                        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                    });
+                });
+            </script>
+        }
+
+    </div>
+}
