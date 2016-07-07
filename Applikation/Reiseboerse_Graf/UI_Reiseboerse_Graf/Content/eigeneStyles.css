@@ -60,14 +60,14 @@
 }
 
 .platziert {
-    margin-left: 30%;
-    margin-top: 80%;
+    margin-left: 30%!important;
+    margin-top: 80%!important;
 }
 
-.button{
+/*.button{
     background-color: #efbd20;
     color: #003a6a;
-}
+}*/
 
 .acidjs-rating-stars,
 .acidjs-rating-stars label::before {
@@ -214,7 +214,7 @@
     text-align: center;
 }
 
-.button{
+.buttonind{
     margin:4%;
     background-color:#eea32c;
     text-align:center;
