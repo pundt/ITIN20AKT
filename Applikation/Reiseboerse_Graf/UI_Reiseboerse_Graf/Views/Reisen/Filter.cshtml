@@ -38,7 +38,7 @@
                 <label>Hotelkategorie</label>
                 <div class="acidjs-rating-stars">
                     <form>
-                        @Html.RadioButtonFor(model => model.HotelKategorie, Model.HotelKategorie)
+                        
                     </form>
                 </div>
             </div>
@@ -53,14 +53,15 @@
         <br>
 
         <label>Preis</label><br>
-        @*<div class="row">
-            <div class="col-md-12">
-                <input type="radio" name="RadioPreisspanne" checked value="1"> Alle<br>
-                <input type="radio" name="RadioPreisspanne" value="2"> bis 499 €<br>
-                <input type="radio" name="RadioPreisspanne" value="3"> 500 € bis 1499 €<br>
-                <input type="radio" name="RadioPreisspanne" value="4"> ab 1500 €<br>
-            </div>
-        </div>*@
+        <div class="row">
+            @foreach (var item in Model.Preis)
+            {
+                <div class="col-md-12">
+                    @Html.Label(item.ToString())
+                    @Html.RadioButtonFor(model => model.Preis, item)
+                </div>
+            }
+        </div>
         
         <br>
         <label>Verpflegung</label><br>
