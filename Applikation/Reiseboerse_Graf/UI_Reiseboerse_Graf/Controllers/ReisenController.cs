@@ -68,6 +68,28 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Unindent();
             return View(rm);
         }
+
+        /// <summary>
+        /// erzeugt die Partialview zum Einbinden auf die jeweilige Reisedetailseite
+        /// </summary>
+        /// <param name="id">ID der Unterkunft</param>
+        /// <returns></returns>
+        public ActionResult UnterkunftAnzeigen(int id)
+        {
+            UnterkunftdetailModel um = new UnterkunftdetailModel()
+            {
+                ID = id,
+                Bezeichnung = "Hotel Sonne",
+                Beschreibung = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                Kategorie = 3,
+                Verpflegung = new VerpflegungModel()
+                {
+                    Id = 3,
+                    Bezeichnung = "Halbpension"
+                }
+            };
+            return PartialView(um);
+        }
         
         /// <summary>
         /// Fügt eine neue Reise hinzu
