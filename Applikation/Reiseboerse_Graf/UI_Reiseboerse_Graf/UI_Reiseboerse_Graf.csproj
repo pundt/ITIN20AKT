@@ -235,6 +235,7 @@
     <Content Include="Views\Benutzer\BenutzerErstellen.cshtml" />
     <Content Include="Views\Reisen\Anzeigen.cshtml" />
     <Content Include="Views\Reisen\Filter.cshtml" />
+    <Content Include="Views\Shared\_Slider.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
