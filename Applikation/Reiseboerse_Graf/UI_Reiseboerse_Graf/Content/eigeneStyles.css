@@ -5,7 +5,7 @@
 .reise {
     border: solid;
     border-color: #005ead;
-    border-radius: 20px;
+    border-radius: 10px;
     border-width: 0.2em;
 }
 
@@ -59,7 +59,7 @@
     font-size: 1.2em !important;
 }
 
-.platziert {    
+.platziert {
     margin-left: 30%;
     margin-top: 80%;
 }
@@ -138,6 +138,16 @@
         display: block;
     }
 
+.logoschriftstartslider{
+       font-family: 'Bradley Hand ITC';
+    font-weight: bold;
+    color: #005ead;
+    font-size: 1.6em;
+    text-align:center;
+    margin-top:6%;
+
+}
+
 .logoschrift {
     font-family: 'Bradley Hand ITC';
     font-weight: bold;
@@ -169,27 +179,36 @@
     position: relative;
     -ms-touch-action: pan-y;
     touch-action: pan-y;
-    border: solid 0.4em #005ead;
-    border-radius: 20px;   
+    border: solid 0.2em #005ead;
+    border-radius: 10px;
+
+    
     
 }
 
-.zentriert{
-    margin-top:10%;
-    margin-left:6%;
-
+.zentriert {
+    margin-top: 10%;
+    margin-left: 6%;
 }
+/*Slider-Full-Screen*/
+.full-screen {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
 
 .filter {
     border: solid;
     border-color: #005ead ;
     background-color:#cfe9ff ;
-    border-radius: 20px;
+    border-radius: 10px;
     border-width:0.2em;
     
 }
 
-.überschrift {
+.ueberschrift {
     color: #ffffff;
     font-size: 2em;
     text-align: center;
