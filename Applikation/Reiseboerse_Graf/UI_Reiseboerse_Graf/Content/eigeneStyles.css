@@ -186,12 +186,10 @@
     
 }
 
+.zentriert {
+    margin-top: 10%;
+    margin-left: 6%;
 }
-    
-.zentriert{
-    margin-top:10%;
-    margin-left:6%;
-    
 /*Slider-Full-Screen*/
 .full-screen {
   background-size: cover;
@@ -210,7 +208,7 @@
     
 }
 
-.überschrift {
+.ueberschrift {
     color: #ffffff;
     font-size: 2em;
     text-align: center;
