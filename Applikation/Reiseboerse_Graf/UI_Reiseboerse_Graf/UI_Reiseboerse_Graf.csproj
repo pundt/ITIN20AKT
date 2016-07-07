@@ -141,6 +141,7 @@
     <Compile Include="Models\OrtModel.cs" />
     <Compile Include="Models\ReisedetailModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
+    <Compile Include="Models\UnterkunftdetailModel.cs" />
     <Compile Include="Models\VerpflegungModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -235,6 +236,7 @@
     <Content Include="Views\Benutzer\BenutzerErstellen.cshtml" />
     <Content Include="Views\Reisen\Anzeigen.cshtml" />
     <Content Include="Views\Reisen\Filter.cshtml" />
+    <Content Include="Views\Reisen\UnterkunftAnzeigen.cshtml" />
     <Content Include="Views\Shared\_Slider.cshtml" />
   </ItemGroup>
   <ItemGroup>

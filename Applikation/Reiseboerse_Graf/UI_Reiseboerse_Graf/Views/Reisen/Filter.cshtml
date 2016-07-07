@@ -35,10 +35,14 @@
 
         <div class="row">
             <div class="col-md-12">
-                <label>Hotelkategorie</label>
+                <label>Hotelkategorie</label> <br />
                 <div class="acidjs-rating-stars">
                     <form>
-                        @Html.RadioButtonFor(model => model.HotelKategorie, Model.HotelKategorie)
+                        <input type="radio" name="group-2" id="group-2-0" value="@Model.HotelKategorie=5" /><label for="group-2-0"></label>
+                        <input type="radio" name="group-2" id="group-2-1" value="@Model.HotelKategorie=4" /><label for="group-2-1"></label>
+                        <input type="radio" name="group-2" id="group-2-2" value="@Model.HotelKategorie=3" /><label for="group-2-2"></label>
+                        <input type="radio" name="group-2" id="group-2-3" value="@Model.HotelKategorie=2" /><label for="group-2-3"></label>
+                        <input type="radio" name="group-2" id="group-2-4" value="@Model.HotelKategorie=1" /><label for="group-2-4"></label>
                     </form>
                 </div>
             </div>
@@ -53,25 +57,24 @@
         <br>
 
         <label>Preis</label><br>
-        @*<div class="row">
-            <div class="col-md-12">
-                <input type="radio" name="RadioPreisspanne" checked value="1"> Alle<br>
-                <input type="radio" name="RadioPreisspanne" value="2"> bis 499 €<br>
-                <input type="radio" name="RadioPreisspanne" value="3"> 500 € bis 1499 €<br>
-                <input type="radio" name="RadioPreisspanne" value="4"> ab 1500 €<br>
-            </div>
-        </div>*@
+        <div class="row">
+            @foreach (var item in Model.Preis)
+            {
+                <div class="col-md-12">
+                    @Html.Label(item.ToString())
+                    @Html.RadioButtonFor(model => model.Preis, item)
+                </div>
+            }
+        </div>
         
         <br>
         <label>Verpflegung</label><br>
-        @*<div class="row">
+        <div class="row">
             <div class="col-md-12">
-                <input type="checkbox" name="CheckVerpflegung" value="1" checked> Halb-Pension<br>
-                <input type="checkbox" name="CheckVerpflegung" value="2"> Voll-Pension<br>
-                <input type="checkbox" name="CheckVerpflegung" value="3"> Frühstück<br>
+                @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung")) <br />
             </div>
-        </div>*@
-        @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"))
+        </div>
+        
         <br>
         <div class="row">
             <div class='col-md-12'>
