@@ -60,13 +60,8 @@
 }
 
 .platziert {
-    margin-left: 30%;
-    margin-top: 80%;
-}
-
-.button{
-    background-color: #efbd20;
-    color: #003a6a;
+    margin-left: 30% !important;
+    margin-top: 80% !important;
 }
 
 .acidjs-rating-stars,
@@ -214,7 +209,7 @@
     text-align: center;
 }
 
-.button{
+.buttonind{
     margin:4%;
     background-color:#eea32c;
     text-align:center;    
