@@ -16,10 +16,10 @@ namespace UI_Reiseboerse_Graf.Models
         [StringLength(30, MinimumLength = 4, ErrorMessage = "Mind 4 Zeichen")]
         public string Beschreibung { get; set; }
 
-        [Display(Name ="Preis Erwachsene (bis 13 Jahre)")]
+        [Display(Name ="Preis Erwachsene")]
         public decimal Preis_Erwachsene { get; set; }
 
-        [Display(Name = "Preis Kinder (ab 14 Jahre)")]
+        [Display(Name = "Preis Kinder")]
         public decimal Preis_Kind { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
