@@ -1,0 +1,16 @@
+﻿@model Login_Modal.Models.LoginModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@Html.Partial("Login")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#myBtn").click(function () {
+                $("#myModal").modal();
+            });
+        });
+    </script>
+}
