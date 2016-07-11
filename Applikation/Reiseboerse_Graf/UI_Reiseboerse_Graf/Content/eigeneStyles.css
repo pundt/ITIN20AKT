@@ -1,5 +1,5 @@
-﻿body{
-    font-family:Tahoma;
+﻿body {
+    font-family: Tahoma;
 }
 
 .reise {
@@ -22,8 +22,8 @@
     border-color: #ffd800;
 }
 
-.divcenter{
-    text-align:center;
+.divcenter {
+    text-align: center;
 }
 
 .details {
@@ -110,7 +110,7 @@
 }
 
 .footer {
-    background-color: #003a6a ;
+    background-color: #003a6a;
     text-align: center;
     color: #ffffff;
 }
@@ -128,19 +128,18 @@
     .crop span.img {
         background-position: center;
         background-size: cover;
-        height:100%;
-        width:auto;
+        height: 100%;
+        width: auto;
         display: block;
     }
 
-.logoschriftstartslider{
-       font-family: 'Bradley Hand ITC';
+.logoschriftstartslider {
+    font-family: 'Bradley Hand ITC';
     font-weight: bold;
     color: #005ead;
     font-size: 1.6em;
-    text-align:center;
-    margin-top:6%;
-
+    text-align: center;
+    margin-top: 6%;
 }
 
 .logoschrift {
@@ -148,37 +147,36 @@
     font-weight: bold;
     color: #005ead;
     font-size: 1.6em;
-    text-align:right;
-    margin-top:6%;
+    text-align: right;
+    margin-top: 6%;
 }
 
-.Schriftartblau{
+.Schriftartblau {
     font-family: 'Bradley Hand ITC';
     font-weight: bold;
     color: #005ead;
-    font-size:1.6em;
+    font-size: 1.6em;
 }
-.kontakt{
-    font-family:'Bradley Hand ITC';
-    font-weight:bold;
-    color:#005ead;
-    font-size:2em;
+
+.kontakt {
+    font-family: 'Bradley Hand ITC';
+    font-weight: bold;
+    color: #005ead;
+    font-size: 2em;
     /*text-align:center;*/
 }
+
 .anmeldung {
     background-color: #FF4C00;
 }
 
 .slider {
-    overflow:auto;
+    overflow: auto;
     position: relative;
     -ms-touch-action: pan-y;
     touch-action: pan-y;
     border: solid 0.2em #005ead;
     border-radius: 10px;
-
-    
-    
 }
 
 .zentriert {
@@ -187,20 +185,19 @@
 }
 /*Slider-Full-Screen*/
 .full-screen {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 
 
 .filter {
     border: solid;
-    border-color: #005ead ;
-    background-color:#cfe9ff ;
+    border-color: #005ead;
+    background-color: #cfe9ff;
     border-radius: 10px;
-    border-width:0.2em;
-    
+    border-width: 0.2em;
 }
 
 .ueberschrift {
@@ -209,25 +206,38 @@
     text-align: center;
 }
 
-.buttonind{
-    margin:4%;
-    background-color:#eea32c;
-    text-align:center;
-}
-.content{
-    margin-left:5px;
+.buttonind {
+    margin: 4%;
+    background-color: #eea32c;
+    text-align: center;
 }
 
-.termin{
-    background-color:#cfe9ff;
-    border-radius:5px;
-    color:#003a6a;
-    font-size:1.4em;
-    text-align:center;
-    padding:1%;
-    margin-top:10%;
-    margin-left:5%;
+.content {
+    margin-left: 5px;
 }
 
+.termin {
+    background-color: #cfe9ff;
+    border-radius: 5px;
+    color: #003a6a;
+    font-size: 1.4em;
+    text-align: center;
+    padding: 1%;
+    margin-top: 10%;
+    margin-left: 5%;
+}
 
+.startlink {
+    background-color: #005ead;
+    font-family: 'Bradley Hand ITC';
+    padding: 1%;
+    text-align: center;
+}
 
+    .startlink > a {
+        color: #efbd20;
+        font-size: 1.8em;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+    }
