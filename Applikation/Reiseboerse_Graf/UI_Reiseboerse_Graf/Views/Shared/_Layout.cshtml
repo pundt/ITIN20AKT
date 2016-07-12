@@ -14,38 +14,41 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-4">
-                <img src="~/Content/bilder/reisebüro_logo.jpg" class="img-responsive" />
-                <div class="row kontakt">
-                    <div class="col-xs-11 center-block">
-                        Kontaktieren Sie uns
+                <img src="~/Content/reisebuero_Graf.jpg" class="img-responsive" />
 
-                    </div>
-                    <div class="col-xs-10 col-xs-offset-2">0800/206894</div>
+            <div class="kontakt">
+                <div class="col-xs-11 center-block">
+                    Kontaktieren Sie uns
+
                 </div>
+                <div class="col-xs-10 col-xs-offset-2">
+                    0800/206894
+                </div>
+            </div>
             </div>
             <div class="col-xs-3 logoschrift">
                 "Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen"
             </div>
             <div class="col-xs-5">
                 <div class="row">
-                    <div class="pull-right">@Html.ActionLink("Anmelden", "Login", "Benutzer", null, new { @class = "btn anmeldung" })</div>
+                    <div class="pull-right">
+                        @Html.ActionLink("Anmelden", "Login", "Benutzer", null, new { @class = "btn anmeldung" })
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="slider">
-                        <div class="crop">
-                            <span class="img" style="background-image:url('../../Content/bilder/slidertestimg/1_hotel_test.jpg');"></span>
-                        </div>
-                        <div class="crop">
-                            <span class="img" style="background-image: url('../../Content/bilder/slidertestimg/1_reise_test.jpg');"></span>
-                        </div>
-                        <div class="crop">
-                            <span class="img" style="background-image: url('../../Content/bilder/slidertestimg/2_hotel_test.jpg');"></span>
-                        </div>
-                    </div>
+
+                    <img src="~/Content/bilder/reisebüro_logo.jpg" class="img-responsive" />
+                 
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
+
+
     <div class="body-content">
         @RenderBody()
         <hr />
@@ -54,7 +57,7 @@
                 <div class="container-fluid">
                     <div class="col-xs-12">
                         <ul class="nav navbar-nav">
-                            <li class="active">@Html.ActionLink("Reiseimpressionen","Index","Home")</li>
+                            <li class="active">@Html.ActionLink("Reiseimpressionen", "Index", "Home")</li>
                             <li><a href="#">Impressum</a></li>
                             <li><a href="#">AGB</a></li>
                         </ul>
