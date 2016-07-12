@@ -5,6 +5,9 @@
 }
 <div class="container">   
     <!--FilternView muss hier eingebunden werden als partialView-->
+    <div class="col-xs-2">
+        @Html.Action("Filter")
+    </div>
     <div class="col-xs-9 col-xs-offset-1">
         @foreach (var item in Model)
         {
@@ -42,5 +45,61 @@
             <br />
         }
     </div>
+    @section   scripts {
+        <script src="~/Scripts/nouislider.min.js"></script>
 
+        <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker6').datetimepicker({
+                            format: "DD.MM.YYYY"
+                        });
+                        $('#datetimepicker7').datetimepicker({
+                            format: "DD.MM.YYYY",
+                            useCurrent: false //Important! See issue #1075
+                        });
+                        $("#datetimepicker6").on("dp.change", function (e) {
+                            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                        });
+                        $("#datetimepicker7").on("dp.change", function (e) {
+                            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                        });
+                    });
+
+                    var slider = document.getElementById('preis');
+
+                    noUiSlider.create(slider, {
+                        start: [0, 1000],
+                        range: {
+                            'min': [0],
+                            'max': [1000]
+                        },
+                        connect: true,
+                        pips: {
+                            mode: 'steps',
+                            density: 5
+                        },
+                        step: 200,
+                        margin: 200
+                    });
+
+
+                    var preisMin = document.getElementById("preis-min"),
+	                    preisMax = document.getElementById("preis-max");
+
+                    slider.noUiSlider.on('update', function ( values, handle ) {
+                        if ( handle ) {
+                            preisMax.value = values[handle];
+                        } else {
+                            preisMin.value = values[handle];
+                        }
+                    });
+
+                    var preisArray = slider.noUiSlider.get();
+                    preisMin.value = preisArray[0];
+                    preisMax.value = preisArray[1];
+
+
+
+        </script>
+    }
 </div>

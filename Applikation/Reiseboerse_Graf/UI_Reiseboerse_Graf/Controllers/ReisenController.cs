@@ -171,7 +171,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         [HttpGet]
-        public ActionResult Filter()
+        public PartialViewResult Filter()
         {
             Debug.WriteLine("ReisenController - Filter - Get");
             Debug.Indent();
@@ -225,7 +225,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     model.Enddatum = DateTime.Now;
 
                     // Temporär noch mit View zur Funktionsprüfung, später mit Redirect
-                    return View(model);
+                    return PartialView(model);
                 }
                 catch (Exception ex)
                 {
@@ -237,7 +237,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debugger.Break();
             Debug.Unindent();
 
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
