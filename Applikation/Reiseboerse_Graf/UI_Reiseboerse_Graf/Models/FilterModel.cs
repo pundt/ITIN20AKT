@@ -9,15 +9,9 @@ namespace UI_Reiseboerse_Graf.Models
     public class FilterModel
     {
 
-        private decimal[,] preis = new decimal[3, 2] { { 0, 499 }, { 500, 1499 }, { 1500, 9999 } };
+        public decimal MinPreis { get; set; }
 
-        /// <summary>
-        /// Preis-Array für die Checkbox zur Auswahl
-        /// </summary>
-        public decimal[,] Preis
-        {
-            get { return preis = new decimal[3, 2] { { 0, 499 }, { 500, 1499 }, { 1500, 9999 } }; }
-        }
+        public decimal MaxPreis { get; set; }
 
         /// <summary>
         /// Liste von LandModel für die DropDownListe

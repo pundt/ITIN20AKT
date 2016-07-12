@@ -167,7 +167,11 @@
 }
 
 .anmeldung {
-    background-color: #FF4C00;
+    color: #003a6a;
+    background-color:#ffd800;
+    font-family:'Bradley Hand ITC';
+    font-weight:bold;
+    font-size:1.1em;
 }
 
 .slider {
