@@ -73,7 +73,7 @@ namespace UI_Reiseboerse_Graf.Models
 
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
-        [DataType(DataType.DateTime, ErrorMessage = "Ungültige E-Mail Adresse!")]
+        [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yy}")]
         [DisplayName("Geburtsdatum")]
         public DateTime GeburtsDatum { get; set; }

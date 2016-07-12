@@ -126,7 +126,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     ID = i,
                     Anmeldefrist = new DateTime(2016, 08, 30),
                     Beginndatum = new DateTime(2016, 10, 01),
-                    Enddatum = new DateTime(2016, 10, 30),
+                    Enddatum = new DateTime(2016, 10, 30),                    
                     Preis = 599 + i * 3,
                     Titel = "Wandern in der Wachau " + i,
                     Ort = "Spitz" + i,
