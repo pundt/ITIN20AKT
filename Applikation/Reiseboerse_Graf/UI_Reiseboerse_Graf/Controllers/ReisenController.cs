@@ -351,12 +351,21 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
 
                 }
-                return View(gefilterteReisen);
+                gesuchteReisen(gefilterteReisen);
             }
             else
             {
+                return null;
                 // Datenbankverbindung List auslesen
             }
+
         }
+        [HttpGet]
+        public ActionResult gesuchteReisen(List<ReiseModel> gefReisen)
+        {
+            List<ReiseModel> gesReisen = gefReisen;
+            return View("gesuchteReisen", gesReisen);
+        }
+
     }
 }
