@@ -7,18 +7,8 @@
 @using (Html.BeginForm("Filter", "Reisen"))
 {
 <div class="container">
-    @*<div class="col-xs-2 filter">
-        <div class="überschrift">Filter</div>
-        <div class="row">
-            <div class="col-md-12 form-group">
-                <label>Kontinent</label>
-                <select name="Landauswahl" class="form-control" id="sel1">
-                    <option value="Europa">Europa</option>
-                    <option>Asien</option>
-                    <option>Afrika</option>
-                </select>
-            </div>
-        </div>*@
+    <div class="col-xs-2 filter">
+        
 
         <div class="row">
             <div class="col-md-12 form-group">
@@ -58,13 +48,9 @@
 
         <label>Preis</label><br>
         <div class="row">
-            @foreach (var item in Model.Preis)
-            {
-                <div class="col-md-12">
-                    @Html.Label(item.ToString())
-                    @Html.RadioButtonFor(model => model.Preis, item)
-                </div>
-            }
+            <div class="col-md-12">
+
+            </div>
         </div>
         
         <br>
@@ -125,4 +111,5 @@
         }
 
     </div>
+</div>
 }
