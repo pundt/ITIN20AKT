@@ -9,7 +9,8 @@ namespace UI_Reiseboerse_Graf
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/nouislider.min.js"));
                       
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -32,7 +33,8 @@ namespace UI_Reiseboerse_Graf
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/eigeneStyles.css",
-                      "~/Content/bootstrap-datetimepicker.min.css"));
+                      "~/Content/bootstrap-datetimepicker.min.css",
+                      "~/Content/nouislider.*"));
 
         }
     }
