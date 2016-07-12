@@ -48,8 +48,8 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Logout()
         {
-            /// Session variable von derzeitigem benutzer wird auf null gesetzt.
-            return View();
+            
+            return View("~/Views/Home/Index.cshtml");
         }
         /// <summary>
         /// Erhält das Model, sendet daten an Bl zur weitergabe in die datenbank
@@ -135,7 +135,20 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult BenutzerAnlegen()
         {
-            return View();
+            KundenAnlegenModel modell = new KundenAnlegenModel()
+            {
+                Land = new List<LandModel>()
+
+            };
+            for (int i = 0; i < 3; i++)
+            {
+                modell.Land.Add(new LandModel()
+                {
+                    landName = "Land" + i,
+                    land_ID = i + 1
+                });
+            }
+            return View(modell);
         }
     }
 }

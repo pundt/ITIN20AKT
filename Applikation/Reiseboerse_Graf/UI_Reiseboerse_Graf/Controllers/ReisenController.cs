@@ -90,7 +90,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             };
             return PartialView(um);
         }
-        
+
         /// <summary>
         /// Fügt eine neue Reise hinzu
         /// </summary>
@@ -123,7 +123,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 ReiseModel reise = new ReiseModel()
                 {
-                    ID=i,
+                    ID = i,
                     Anmeldefrist = new DateTime(2016, 08, 30),
                     Beginndatum = new DateTime(2016, 10, 01),
                     Enddatum = new DateTime(2016, 10, 30),
@@ -150,18 +150,18 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 ReisedetailModel reise = new ReisedetailModel()
                 {
-                    ID=i,
+                    ID = i,
                     Anmeldefrist = new DateTime(2016, 08, 30),
                     Beginndatum = new DateTime(2016, 10, 01),
                     Enddatum = new DateTime(2016, 10, 30),
                     Preis = 599 + i * 3,
                     Titel = "Wandern in der Wachau " + i,
                     Ort = "Spitz" + i,
-                    Beschreibung= "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                    Preis_Erwachsene=i*156,
-                    Preis_Kind=i*133,
+                    Beschreibung = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                    Preis_Erwachsene = i * 156,
+                    Preis_Kind = i * 133,
                     Unterkunft = "Schlosshotel Burckhardt " + i,
-                    Unterkunft_ID=i,
+                    Unterkunft_ID = i,
                     Verpflegung = "Halbpension" + i % 2,
                     Restplätze = i % 5
                 };
@@ -237,7 +237,126 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debugger.Break();
             Debug.Unindent();
 
-            return RedirectToAction("Laden", "Reisen");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Filter(FilterModel fm)
+        {
+            List<ReiseModel> alleReisen = ReiseAnzeigeListeTest();
+            List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
+
+            if (Globals.IST_TESTSYSTEM)
+            {
+                // kontrolliert Validierung
+                if (ModelState.IsValid)
+                {
+                    // holt sich die FakeReisen von ReiseAnzeigeListeTest
+                    if (fm.Land != null)
+                    {
+                        gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
+                    }
+                    else
+                    {
+                        gefilterteReisen = alleReisen.ToList();
+                    }
+                    if (fm.Ort_ID != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Ort_id != fm.Ort_ID)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.Kategorie_ID != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Kategorie_id != fm.Kategorie_ID)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.HotelKategorie != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Hotelkategorie != fm.HotelKategorie)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.MinPreis != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Preis < fm.MinPreis)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+                    if (fm.MaxPreis != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Preis > fm.MaxPreis)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.Verpflegungs_ID != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Verpflegungs_id != fm.Verpflegungs_ID)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.Startdatum != null)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Beginndatum > fm.Startdatum)
+                            {
+                                {
+                                    gefilterteReisen.Remove(eineReise);
+                                }
+                            }
+                        }
+                    }
+                    if (fm.Enddatum != null)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Enddatum < fm.Enddatum)
+                            {
+                                {
+                                    gefilterteReisen.Remove(eineReise);
+                                }
+                            }
+                        }
+                    }
+
+                }
+                return View(gefilterteReisen);
+            }
+            else
+            {
+                // Datenbankverbindung List auslesen
+            }
         }
     }
 }

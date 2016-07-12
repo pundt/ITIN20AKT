@@ -2,11 +2,16 @@
     font-family: Tahoma;
 }
 
+
+
 .reise {
     border: solid;
-    border-color: #005ead;
-    border-radius: 10px;
+    border-color: #576a8f;
+    border-radius: 4px;
     border-width: 0.2em;
+    background-color:rgba(193, 193, 193, 0.24);
+
+    
 }
 
 .Restplätze {
@@ -29,6 +34,7 @@
 .details {
     font-size: 1.2em;
     padding-top: 2%;
+    
 }
 
 .bild {
@@ -119,19 +125,9 @@
     margin-left: 80%;
 }
 
-.crop {
-    width: 200px;
-    height: 282px;
-    overflow: hidden;
-}
 
-    .crop span.img {
-        background-position: center;
-        background-size: cover;
-        height: 100%;
-        width: auto;
-        display: block;
-    }
+
+
 
 .logoschriftstartslider {
     font-family: 'Bradley Hand ITC';

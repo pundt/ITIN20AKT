@@ -6,110 +6,115 @@
 
 @using (Html.BeginForm("Filter", "Reisen"))
 {
-<div class="container">
-    <div class="col-xs-2 filter">
-        
-
-        <div class="row">
-            <div class="col-md-12 form-group">
-                <label>Land</label>
-                @Html.DropDownListFor(model => model.Land, new SelectList(Model.Land, "land_ID", "landName"))
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 form-group">
-                <label>Ort</label>
-                @Html.DropDownListFor(model => model.Ort, new SelectList(Model.Ort, "Id", "Bezeichnung"))
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <label>Hotelkategorie</label> <br />
-                <div class="acidjs-rating-stars">
-                    <form>
-                        <input type="radio" name="group-2" id="group-2-0" value="@Model.HotelKategorie=5" /><label for="group-2-0"></label>
-                        <input type="radio" name="group-2" id="group-2-1" value="@Model.HotelKategorie=4" /><label for="group-2-1"></label>
-                        <input type="radio" name="group-2" id="group-2-2" value="@Model.HotelKategorie=3" /><label for="group-2-2"></label>
-                        <input type="radio" name="group-2" id="group-2-3" value="@Model.HotelKategorie=2" /><label for="group-2-3"></label>
-                        <input type="radio" name="group-2" id="group-2-4" value="@Model.HotelKategorie=1" /><label for="group-2-4"></label>
-                    </form>
+    <div class="container">
+        <div class="col-xs-2 filter">
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(model => model.Land)
+                    @Html.DropDownListFor(model => model.Land, new SelectList(Model.Land, "land_ID", "landName"), new { @class = "form-control" })
                 </div>
             </div>
-        </div>
-
-        <label>Kategorie</label> <br>
-        <div class="row">
-            <div class="col-md-12">
-                @Html.DropDownListFor(model => model.Kategorie, new SelectList(Model.Kategorie, "Id", "Bezeichnung"))
-            </div>
-        </div>
-        <br>
-
-        <label>Preis</label><br>
-        <div class="row">
-            <div class="col-md-12">
-
-            </div>
-        </div>
-        
-        <br>
-        <label>Verpflegung</label><br>
-        <div class="row">
-            <div class="col-md-12">
-                @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung")) <br />
-            </div>
-        </div>
-        
-        <br>
-        <div class="row">
-            <div class='col-md-12'>
-                <label>Starttermin</label>
-                <div class='input-group date' id='datetimepicker6'>
-                    <input type='text' class="form-control" value="@Model.Startdatum"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class='col-md-12'>
-                <label>Endtermin</label>
-                <div class='input-group date' id='datetimepicker7'>
-                    <input type='text' class="form-control" value="@Model.Enddatum" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-                <div class="divcenter">
-                    <input class="btn button" type="submit" value="Filtern" />
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(model => model.Ort)
+                    @Html.DropDownListFor(model => model.Ort, new SelectList(Model.Ort, "Id", "Bezeichnung"), new { @class = "form-control" })
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.HotelKategorie)<br />
+                    <div class="acidjs-rating-stars">
+                        <form>
+                            <input type="radio" name="group-2" id="group-2-0" value="@Model.HotelKategorie=5" /><label for="group-2-0"></label>
+                            <input type="radio" name="group-2" id="group-2-1" value="@Model.HotelKategorie=4" /><label for="group-2-1"></label>
+                            <input type="radio" name="group-2" id="group-2-2" value="@Model.HotelKategorie=3" /><label for="group-2-2"></label>
+                            <input type="radio" name="group-2" id="group-2-3" value="@Model.HotelKategorie=2" /><label for="group-2-3"></label>
+                            <input type="radio" name="group-2" id="group-2-4" value="@Model.HotelKategorie=1" /><label for="group-2-4"></label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Kategorie)
+                    @Html.DropDownListFor(model => model.Kategorie, new SelectList(Model.Kategorie, "Id", "Bezeichnung"), new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div data-role="main" class="ui-content">
+                        <div data-role="rangeslider">
+                            @Html.LabelFor(model => model.MinPreis)
+                            <input type="range" name="price-min" id="price-min" value="@Model.MinPreis" min="0" max="1500">
+                            @Html.LabelFor(model => model.MaxPreis)
+                            <input type="range" name="price-max" id="price-max" value="@Model.MaxPreis" min="0" max="1500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(model => model.Verpflegung)
+                    @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"), new { @class = "form-control" }) <br />
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(model => model.Startdatum)
+                    <div class='input-group date' id='datetimepicker6'>
+                        <input type='text' class="form-control" value="@Model.Startdatum" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(model => model.Enddatum)
+                    <div class='input-group date' id='datetimepicker7'>
+                        <input type='text' class="form-control" value="@Model.Enddatum" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="divcenter">
+                <input class="btn button" type="submit" value="Filtern" />
+            </div>
+
+
+            @section   scripts {
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker6').datetimepicker({
+                            format: "DD.MM.YYYY"
+                        });
+                        $('#datetimepicker7').datetimepicker({
+                            format: "DD.MM.YYYY",
+                            useCurrent: false //Important! See issue #1075
+                        });
+                        $("#datetimepicker6").on("dp.change", function (e) {
+                            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                        });
+                        $("#datetimepicker7").on("dp.change", function (e) {
+                            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                        });
+                    });
+                </script>
+            }
+
         </div>
-
-
-        @section   scripts {
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker6').datetimepicker({
-                        format: "DD.MM.YYYY"
-                    });
-                    $('#datetimepicker7').datetimepicker({
-                        format: "DD.MM.YYYY",
-                        useCurrent: false //Important! See issue #1075
-                    });
-                    $("#datetimepicker6").on("dp.change", function (e) {
-                        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                    });
-                    $("#datetimepicker7").on("dp.change", function (e) {
-                        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-                    });
-                });
-            </script>
-        }
-
     </div>
-</div>
 }
