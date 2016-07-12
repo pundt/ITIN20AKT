@@ -233,16 +233,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Benutzer\Login.cshtml" />
     <Content Include="Views\Reisen\Laden.cshtml" />
-    <Content Include="Views\Benutzer\BenutzerErstellen.cshtml" />
     <Content Include="Views\Reisen\Anzeigen.cshtml" />
     <Content Include="Views\Reisen\Filter.cshtml" />
     <Content Include="Views\Reisen\UnterkunftAnzeigen.cshtml" />
     <Content Include="Views\Shared\_Slider.cshtml" />
     <Content Include="Views\Benutzer\BenutzerAnlegen.cshtml" />
+    <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Buchungen\" />
     <Folder Include="Views\Validierungs\" />
     <Folder Include="Views\Validierung\" />
   </ItemGroup>
