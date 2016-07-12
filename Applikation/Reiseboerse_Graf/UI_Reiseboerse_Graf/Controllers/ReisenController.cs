@@ -358,7 +358,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return null;
                 // Datenbankverbindung List auslesen
             }
-
+            return null;
         }
         [HttpGet]
         public ActionResult gesuchteReisen(List<ReiseModel> gefReisen)
