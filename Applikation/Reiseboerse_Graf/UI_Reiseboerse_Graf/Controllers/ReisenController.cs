@@ -225,7 +225,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     model.Enddatum = DateTime.Now;
 
                     // Temporär noch mit View zur Funktionsprüfung, später mit Redirect
-                    return PartialView(model);
+                    return View(model);
                 }
                 catch (Exception ex)
                 {
@@ -237,7 +237,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debugger.Break();
             Debug.Unindent();
 
-            return RedirectToAction("Laden", "Reisen");
+            return View();
         }
 
         [HttpPost]
