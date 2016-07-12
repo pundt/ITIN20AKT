@@ -8,9 +8,9 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class FilterModel
     {
-
+        [Display(Name ="Preis von")]
         public decimal MinPreis { get; set; }
-
+        [Display(Name ="bis")]
         public decimal MaxPreis { get; set; }
 
         /// <summary>
@@ -31,6 +31,7 @@ namespace UI_Reiseboerse_Graf.Models
 
         public int Ort_ID { get; set; }
 
+        [Display(Name ="Kategorie Unterkunft")]
         public int HotelKategorie { get; set; }
 
         /// <summary>

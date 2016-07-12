@@ -225,7 +225,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     model.Enddatum = DateTime.Now;
 
                     // Temporär noch mit View zur Funktionsprüfung, später mit Redirect
-                    return View(model);
+                    return PartialView(model);
                 }
                 catch (Exception ex)
                 {
@@ -248,7 +248,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
             if (fm.Land != null)
             {
-                gefilterteReisen = alleReisen.Where(x => x.);
+                //gefilterteReisen = alleReisen.Where(x => x.);
             }
 
             return null;
