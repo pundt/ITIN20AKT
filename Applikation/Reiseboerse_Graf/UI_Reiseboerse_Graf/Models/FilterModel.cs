@@ -57,7 +57,4 @@ namespace UI_Reiseboerse_Graf.Models
         /// </summary>
         public DateTime Enddatum { get; set; }
     }
-
-
-
 }

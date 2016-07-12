@@ -248,7 +248,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
             if (fm.Land != null)
             {
-                gefilterteReisen = alleReisen.Where(x => x. == fm.Land);
+                gefilterteReisen = alleReisen.Where(x => x.);
             }
 
             return null;
