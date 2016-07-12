@@ -237,7 +237,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debugger.Break();
             Debug.Unindent();
 
-            return RedirectToAction("Laden", "Reisen");
+            return View();
         }
 
         [HttpPost]

@@ -55,6 +55,7 @@ namespace UI_Reiseboerse_Graf.Models
 
         public int Ort_ID { get; set; }
 
+        [Display(Name ="Kategorie Unterkunft")]
         public int HotelKategorie { get; set; }
 
         /// <summary>

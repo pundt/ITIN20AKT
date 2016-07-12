@@ -39,8 +39,8 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Logout()
         {
-            /// Session variable von derzeitigem benutzer wird auf null gesetzt.
-            return View();
+            
+            return View("~/Views/Home/Index.cshtml");
         }
         /// <summary>
         /// Erhält das Model, sendet daten an Bl zur weitergabe in die datenbank
