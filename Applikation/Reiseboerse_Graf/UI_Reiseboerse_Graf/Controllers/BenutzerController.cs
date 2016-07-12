@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using UI_Reiseboerse_Graf.Models;
 using BL_Reiseboerse_Graf;
 using System.Diagnostics;
+using System.Web.Security;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -28,11 +29,19 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string email, string passwort)
+        public ActionResult Login(LoginModel lm)
         {
-            KundenAnlegenModel bm = new KundenAnlegenModel();
-            email = bm.Email;
-            passwort = bm.Passwort;
+            if (ModelState.IsValid)
+            {
+                if (lm.AngemeldetBleiben)
+                {
+                    FormsAuthentication.SetAuthCookie(lm.Email, true);
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(lm.Email, false);
+                }
+            }
 
             return View("~/Views/Home/Index.cshtml");
         }

@@ -31,8 +31,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Nachname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Nachname, new { htmlAttributes = new { @class = "form-control" } })
+                
+                    @Html.EditorFor(model => model.Nachname, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nachname, "", new { @class = "text-danger" })
+             
             </div>
         </div>
 
@@ -71,7 +73,7 @@
             @Html.LabelFor(model => model.Geschlecht, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.Geschlecht)
+                    @Html.EditorFor(model => model.Geschlecht)                   
                     @Html.ValidationMessageFor(model => model.Geschlecht, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -119,7 +121,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Zurück zu Reisen", "Laden","Reisen")
 </div>
 
 @section Scripts {

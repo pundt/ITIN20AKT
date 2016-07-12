@@ -30,8 +30,15 @@ namespace UI_Reiseboerse_Graf.Models
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         public string Ort { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        public string Land { get; set; }
+        public int Ort_id { get; set; }
+
+        public int Land_id { get; set; }
+
+        public int Kategorie_id { get; set; }
+
+        public int Hotelkategorie { get; set; }
+
+        public int Verpflegungs_id { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         public string Unterkunft { get; set; }

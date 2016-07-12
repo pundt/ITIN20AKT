@@ -126,7 +126,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     ID = i,
                     Anmeldefrist = new DateTime(2016, 08, 30),
                     Beginndatum = new DateTime(2016, 10, 01),
-                    Enddatum = new DateTime(2016, 10, 30),                    
+                    Enddatum = new DateTime(2016, 10, 30),
                     Preis = 599 + i * 3,
                     Titel = "Wandern in der Wachau " + i,
                     Ort = "Spitz" + i,
@@ -171,7 +171,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         [HttpGet]
-        public ActionResult Filter()
+        public PartialViewResult Filter()
         {
             Debug.WriteLine("ReisenController - Filter - Get");
             Debug.Indent();
@@ -225,7 +225,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     model.Enddatum = DateTime.Now;
 
                     // Temporär noch mit View zur Funktionsprüfung, später mit Redirect
-                    return View(model);
+                    return PartialView(model);
                 }
                 catch (Exception ex)
                 {
@@ -237,21 +237,134 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debugger.Break();
             Debug.Unindent();
 
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
-        public ActionResult Filtern(FilterModel fm)
-        {        
-
+        public ActionResult Filter(FilterModel fm)
+        {
             List<ReiseModel> alleReisen = ReiseAnzeigeListeTest();
             List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
-            if (fm.Land != null)
+
+            if (Globals.IST_TESTSYSTEM)
             {
-                //gefilterteReisen = alleReisen.Where(x => x.);
+                // kontrolliert Validierung
+                if (ModelState.IsValid)
+                {
+                    // holt sich die FakeReisen von ReiseAnzeigeListeTest
+                    if (fm.Land != null)
+                    {
+                        gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
+                    }
+                    else
+                    {
+                        gefilterteReisen = alleReisen.ToList();
+                    }
+                    if (fm.Ort_ID != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Ort_id != fm.Ort_ID)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.Kategorie_ID != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Kategorie_id != fm.Kategorie_ID)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.HotelKategorie != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Hotelkategorie != fm.HotelKategorie)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.MinPreis != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Preis < fm.MinPreis)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+                    if (fm.MaxPreis != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Preis > fm.MaxPreis)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.Verpflegungs_ID != 0)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Verpflegungs_id != fm.Verpflegungs_ID)
+                            {
+                                gefilterteReisen.Remove(eineReise);
+                            }
+                        }
+                    }
+
+                    if (fm.Startdatum != null)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Beginndatum > fm.Startdatum)
+                            {
+                                {
+                                    gefilterteReisen.Remove(eineReise);
+                                }
+                            }
+                        }
+                    }
+                    if (fm.Enddatum != null)
+                    {
+                        foreach (ReiseModel eineReise in alleReisen)
+                        {
+                            if (eineReise.Enddatum < fm.Enddatum)
+                            {
+                                {
+                                    gefilterteReisen.Remove(eineReise);
+                                }
+                            }
+                        }
+                    }
+
+                }
+                gesuchteReisen(gefilterteReisen);
+            }
+            else
+            {
+                return null;
+                // Datenbankverbindung List auslesen
             }
 
-            return null;
+        }
+        [HttpGet]
+        public ActionResult gesuchteReisen(List<ReiseModel> gefReisen)
+        {
+            List<ReiseModel> gesReisen = gefReisen;
+            return View("gesuchteReisen", gesReisen);
         }
 
     }

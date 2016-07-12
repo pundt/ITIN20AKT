@@ -13,18 +13,20 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-xs-4">
-                <img src="~/Content/reisebuero_Graf.jpg" class="img-responsive" />
-
-            <div class="kontakt">
-                <div class="col-xs-11 center-block">
-                    Kontaktieren Sie uns
-
+            <div class="col-xs-4 ">
+                <div>
+                    <img src="~/Content/reisebuero_Graf.jpg" class="img-responsive img" />
                 </div>
-                <div class="col-xs-10 col-xs-offset-2">
-                    0800/206894
+
+                <div class="kontakt">
+                    <div class="col-xs-11 center-block">
+                        Kontaktieren Sie uns
+
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-2">
+                        <span class="glyphicon glyphicon-phone-alt"><a href:teL class="logoschrift">0800/206894</a></span>
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="col-xs-3 logoschrift">
                 "Wir sind seit 1979 Ihr Ansprechpartner für preisgünstige und qualitative Pauschalreisen"
@@ -36,13 +38,7 @@
                     </div>
                 </div>
                 <div class="row">
-
                     <img src="~/Content/bilder/reisebüro_logo.jpg" class="img-responsive" />
-                 
-
-
-
-
                 </div>
             </div>
         </div>
@@ -71,9 +67,6 @@
     @Scripts.Render("~/bundles/slider")
     @Scripts.Render("~/bundles/bootstrap")
 
-    <script>
-        $('.slider').anyslider();
-    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

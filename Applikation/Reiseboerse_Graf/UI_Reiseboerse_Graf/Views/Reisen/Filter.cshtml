@@ -2,12 +2,15 @@
 
 @{
     ViewBag.Title = "Filter";
+
 }
 
 @using (Html.BeginForm("Filter", "Reisen"))
 {
     <div class="container">
         <div class="col-xs-2 filter">
+            <div class="Schriftartblau">Filter</div>
+            <hr />
             <div class="row">
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Land)
@@ -45,18 +48,17 @@
             <br />
             <div class="row">
                 <div class="col-md-12">
-                    <div data-role="main" class="ui-content">
-                        <div data-role="rangeslider">
-                            @Html.LabelFor(model => model.MinPreis)
-                            <input type="range" name="price-min" id="price-min" value="@Model.MinPreis" min="0" max="1500">
-                            @Html.LabelFor(model => model.MaxPreis)
-                            <input type="range" name="price-max" id="price-max" value="@Model.MaxPreis" min="0" max="1500">
-                        </div>
-                    </div>
+                    @Html.Label("Preis")
+                   <div class="noUi-base noUi-background noUi-horizontal noUi-target" id="preis">
+                       <div class="noUi-origin">
+                       </div>
+                   </div>
+                    <input type="hidden" id="preis-min" value="" name="preisMin"/>
+                    <input type="hidden" id="preis-max" value="" name="preisMax"/>
                 </div>
             </div>
 
-            <br />
+            <br /><br />
             <div class="row">
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Verpflegung)
@@ -95,25 +97,7 @@
             </div>
 
 
-            @section   scripts {
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker6').datetimepicker({
-                            format: "DD.MM.YYYY"
-                        });
-                        $('#datetimepicker7').datetimepicker({
-                            format: "DD.MM.YYYY",
-                            useCurrent: false //Important! See issue #1075
-                        });
-                        $("#datetimepicker6").on("dp.change", function (e) {
-                            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                        });
-                        $("#datetimepicker7").on("dp.change", function (e) {
-                            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-                        });
-                    });
-                </script>
-            }
+           
 
         </div>
     </div>
