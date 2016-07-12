@@ -24,6 +24,5 @@ namespace UI_Reiseboerse_Graf.Models
 
         [Required(ErrorMessage = "Pflichtfeld")]
         public int Unterkunft_ID { get; set; }
-
     }
 }

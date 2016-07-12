@@ -109,7 +109,14 @@ namespace UI_Reiseboerse_Graf.Controllers
                 //item.
             }
 
-
+            Benutzer neuerBenutzer = new Benutzer();
+            {
+                neuerBenutzer.Id = bm.ID;
+                neuerBenutzer.Vorname = bm.Vorname;
+                neuerBenutzer.Nachname = bm.Nachname;
+                neuerBenutzer.Passwort = bm.Passwort;
+                neuerBenutzer.Geschlecht = bm.Geschlecht;
+            }
             return RedirectToAction("Laden","Reisen");
 
         }
