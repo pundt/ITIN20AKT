@@ -31,7 +31,7 @@ namespace UI_Reiseboerse_Graf.Models
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DataType(DataType.Password)]
         [System.ComponentModel.DataAnnotations.Compare("Passwort")]
-        [DisplayName("PasswortWiederholung")]
+        [DisplayName("Passwort wiederholen")]
         public string PasswortWiederholung { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
@@ -43,12 +43,15 @@ namespace UI_Reiseboerse_Graf.Models
         public string Nachname { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
-        [DisplayName("Telefon")]
+        [DisplayName("Telefonnummer")]
         public string Telefon { get; set; }
+
+        [Required]
+        public int Land_ID { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DisplayName("Land")]
-        public string Land { get; set; }
+        public List<LandModel> Land { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DisplayName("Plz")]
@@ -72,7 +75,7 @@ namespace UI_Reiseboerse_Graf.Models
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DataType(DataType.DateTime, ErrorMessage = "Ungültige E-Mail Adresse!")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yy}")]
-        [DisplayName("GeburtsDatum")]
+        [DisplayName("Geburtsdatum")]
         public DateTime GeburtsDatum { get; set; }
 
     }

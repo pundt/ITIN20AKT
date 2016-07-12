@@ -126,7 +126,20 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult BenutzerAnlegen()
         {
-            return View();
+            KundenAnlegenModel modell = new KundenAnlegenModel()
+            {
+                Land = new List<LandModel>()
+
+            };
+            for (int i = 0; i < 3; i++)
+            {
+                modell.Land.Add(new LandModel()
+                {
+                    landName = "Land" + i,
+                    land_ID = i + 1
+                });
+            }
+            return View(modell);
         }
     }
 }
