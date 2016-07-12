@@ -7,8 +7,6 @@ using System.Web;
 namespace UI_Reiseboerse_Graf.Models
 {
     public class FilterModel 
-
-
     {
         // Dieses Feld sind nur für die Oberfläche
         [Display(Name = "Preis von")]
