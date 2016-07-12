@@ -47,18 +47,17 @@
             <br />
             <div class="row">
                 <div class="col-md-12">
-                    <div data-role="main" class="ui-content">
-                        <div data-role="rangeslider">
-                            @Html.LabelFor(model => model.MinPreis)
-                            <input type="range" name="price-min" id="price-min" value="@Model.MinPreis" min="0" max="1500">
-                            @Html.LabelFor(model => model.MaxPreis)
-                            <input type="range" name="price-max" id="price-max" value="@Model.MaxPreis" min="0" max="1500">
-                        </div>
-                    </div>
+                    @Html.Label("Preis")
+                   <div class="noUi-base noUi-background noUi-horizontal noUi-target" id="preis">
+                       <div class="noUi-origin">
+                       </div>
+                   </div>
+                    <input type="hidden" id="preis-min" value="" name="preisMin"/>
+                    <input type="hidden" id="preis-max" value="" name="preisMax"/>
                 </div>
             </div>
 
-            <br />
+            <br /><br />
             <div class="row">
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Verpflegung)
@@ -98,7 +97,9 @@
 
 
             @section   scripts {
-                <script type="text/javascript">
+            <script src="~/Scripts/nouislider.min.js"></script>
+
+            <script type="text/javascript">
                     $(function () {
                         $('#datetimepicker6').datetimepicker({
                             format: "DD.MM.YYYY"
@@ -114,6 +115,42 @@
                             $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
                         });
                     });
+
+                    var slider = document.getElementById('preis');
+
+                    noUiSlider.create(slider, {
+                        start: [0, 1000],
+                        range: {
+                            'min': [0],
+                            'max': [1000]
+                        },
+                        connect: true,
+                        pips: {
+                            mode: 'steps',
+                            density: 5
+                        },
+                        step: 200,
+                        margin: 200
+                    });
+
+
+                    var preisMin = document.getElementById("preis-min"),
+	                    preisMax = document.getElementById("preis-max");
+
+                    slider.noUiSlider.on('update', function ( values, handle ) {
+                        if ( handle ) {
+                            preisMax.value = values[handle];
+                        } else {
+                            preisMin.value = values[handle];
+                        }
+                    });
+
+                    var preisArray = slider.noUiSlider.get();
+                    preisMin.value = preisArray[0];
+                    preisMax.value = preisArray[1];
+
+                    
+
                 </script>
             }
 
