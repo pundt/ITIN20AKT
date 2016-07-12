@@ -8,10 +8,33 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class FilterModel
     {
+        // minPreis, wenn kein Preis gesetzt wird, dann ist der Wert 0 
+        private decimal minPreis;
+        public decimal MinPreis {
+            get {
+                if(this.minPreis == 0){
+                    this.minPreis = 0;
+                }
+                return this.minPreis;
+            }
+            set {
+                this.minPreis = value;
+            }
+        }
+        // maxValue vergeben
+        // wenn kein Wert eingegeben wird, dann wird ein maximaler gesetzt
+        private int maxPreis;
 
-        public decimal MinPreis { get; set; }
-
-        public decimal MaxPreis { get; set; }
+        public int MaxPreis
+        {
+            get {
+                if (this.maxPreis == 0)
+                {
+                    this.maxPreis = 1000000;
+                }
+                return this.maxPreis; }
+            set { this.maxPreis = value; }
+        }
 
         /// <summary>
         /// Liste von LandModel für die DropDownListe
@@ -19,6 +42,7 @@ namespace UI_Reiseboerse_Graf.Models
         public List<LandModel> Land { get; set; }
 
         public int Land_id { get; set; }
+
         /// <summary>
         /// Liste von OrtModel für die DropDownListe
         /// </summary>
