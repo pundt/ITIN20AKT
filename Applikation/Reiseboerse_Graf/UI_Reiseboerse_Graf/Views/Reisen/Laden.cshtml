@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Reisen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 <div class="container">   
     <!--FilternView muss hier eingebunden werden als partialView-->
@@ -15,7 +17,7 @@
                 <div class="col-md-2 col-xs-6">
                     <img src="http://www.skwei.de/skwei2014/wp-content/uploads/2014/07/erde3.gif" class="img-responsive" />
                     <div class="carousel-caption bildschrift">
-                        <text>ab </text>@Html.DisplayFor(modelItem => item.Preis)
+                        <text>ab € </text>@Html.DisplayFor(modelItem => item.Preis)
                     </div>
                     <!--Restplätze aus der Datenbank auslesen-->
                     <div class="Restplätze">

@@ -241,7 +241,6 @@
     <Content Include="Views\Reisen\Laden.cshtml" />
     <Content Include="Views\Reisen\Anzeigen.cshtml" />
     <Content Include="Views\Reisen\UnterkunftAnzeigen.cshtml" />
-    <Content Include="Views\Shared\_Slider.cshtml" />
     <Content Include="Views\Benutzer\BenutzerAnlegen.cshtml" />
     <Content Include="Views\Reisen\Filter.cshtml" />
     <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
