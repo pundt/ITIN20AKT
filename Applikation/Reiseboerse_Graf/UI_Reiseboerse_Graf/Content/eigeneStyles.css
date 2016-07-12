@@ -2,11 +2,16 @@
     font-family: Tahoma;
 }
 
+
+
 .reise {
     border: solid;
     border-color: #005ead;
     border-radius: 10px;
     border-width: 0.2em;
+    background-color:rgba(193, 193, 193, 0.24);
+
+    
 }
 
 .Restplätze {
@@ -29,6 +34,7 @@
 .details {
     font-size: 1.2em;
     padding-top: 2%;
+    
 }
 
 .bild {

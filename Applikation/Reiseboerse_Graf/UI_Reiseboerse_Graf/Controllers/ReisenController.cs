@@ -90,7 +90,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             };
             return PartialView(um);
         }
-        
+
         /// <summary>
         /// Fügt eine neue Reise hinzu
         /// </summary>
@@ -123,10 +123,10 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 ReiseModel reise = new ReiseModel()
                 {
-                    ID=i,
+                    ID = i,
                     Anmeldefrist = new DateTime(2016, 08, 30),
                     Beginndatum = new DateTime(2016, 10, 01),
-                    Enddatum = new DateTime(2016, 10, 30),
+                    Enddatum = new DateTime(2016, 10, 30),                    
                     Preis = 599 + i * 3,
                     Titel = "Wandern in der Wachau " + i,
                     Ort = "Spitz" + i,
@@ -150,18 +150,18 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 ReisedetailModel reise = new ReisedetailModel()
                 {
-                    ID=i,
+                    ID = i,
                     Anmeldefrist = new DateTime(2016, 08, 30),
                     Beginndatum = new DateTime(2016, 10, 01),
                     Enddatum = new DateTime(2016, 10, 30),
                     Preis = 599 + i * 3,
                     Titel = "Wandern in der Wachau " + i,
                     Ort = "Spitz" + i,
-                    Beschreibung= "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                    Preis_Erwachsene=i*156,
-                    Preis_Kind=i*133,
+                    Beschreibung = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                    Preis_Erwachsene = i * 156,
+                    Preis_Kind = i * 133,
                     Unterkunft = "Schlosshotel Burckhardt " + i,
-                    Unterkunft_ID=i,
+                    Unterkunft_ID = i,
                     Verpflegung = "Halbpension" + i % 2,
                     Restplätze = i % 5
                 };
@@ -225,7 +225,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     model.Enddatum = DateTime.Now;
 
                     // Temporär noch mit View zur Funktionsprüfung, später mit Redirect
-                    return View(model);
+                    return PartialView(model);
                 }
                 catch (Exception ex)
                 {
@@ -239,5 +239,20 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Laden", "Reisen");
         }
+
+        [HttpPost]
+        public ActionResult Filtern(FilterModel fm)
+        {        
+
+            List<ReiseModel> alleReisen = ReiseAnzeigeListeTest();
+            List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
+            if (fm.Land != null)
+            {
+                //gefilterteReisen = alleReisen.Where(x => x.);
+            }
+
+            return null;
+        }
+
     }
 }

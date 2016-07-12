@@ -106,40 +106,7 @@
             });
         }
 
-        // Add navigation bullets
-        if (options.showBullets && orgNumSlides > 1) {
-            var out = '<div class="as-nav"></div>';
-            var nav = $(out);
-            var active;
-            var i;
-
-            for (i = 1; i <= orgNumSlides; i++) {
-                active = '';
-
-                if (i === current) {
-                    active = ' class="as-active"';
-                }
-
-                nav.append('<a href="#"' + active + '>' + i + '</a>');
-            }
-
-            nav.on('click.as', 'a', function (e) {
-                var index = $(this).index();
-
-                e.preventDefault();
-
-                if ($(this).hasClass('as-active') || running) {
-                    return;
-                }
-
-                nav.find('a').removeClass('as-active').eq(index).addClass('as-active');
-
-                goTo(index + 1);
-            });
-
-            slider.after(nav);
-        }
-
+      
         // Enable keyboard navigation
         if (options.keyboard) {
             $(document).on('keydown.as', function (e) {
