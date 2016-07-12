@@ -12,6 +12,10 @@ namespace UI_Reiseboerse_Graf.Models
         public int ReisePassNummer { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public int Zahlungsart_id { get; set; }
-        
+        [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        public int Versicherung_id { get; set; }
+
+
+
     }
 }

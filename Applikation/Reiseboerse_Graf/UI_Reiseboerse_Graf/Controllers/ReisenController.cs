@@ -240,115 +240,115 @@ namespace UI_Reiseboerse_Graf.Controllers
             return PartialView();
         }
 
-        [HttpPost]
-        public ActionResult Filter(FilterModel fm)
-        {
-            List<ReiseModel> alleReisen = ReiseAnzeigeListeTest();
-            List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
+        //[HttpPost]
+        //public ActionResult Filter(FilterModel fm)
+        //{
+        //    List<ReiseModel> alleReisen = ReiseAnzeigeListeTest();
+        //    List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
 
-            if (Globals.IST_TESTSYSTEM)
-            {
-                // kontrolliert Validierung
-                if (ModelState.IsValid)
-                {
-                    // holt sich die FakeReisen von ReiseAnzeigeListeTest
-                    if (fm.Land != null)
-                    {
-                        gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
-                    }
-                    else
-                    {
-                        gefilterteReisen = alleReisen.ToList();
-                    }
-                    if (fm.Ort_ID != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Ort_id != fm.Ort_ID)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
+        //    if (Globals.IST_TESTSYSTEM)
+        //    {
+        //        // kontrolliert Validierung
+        //        if (ModelState.IsValid)
+        //        {
+        //            // holt sich die FakeReisen von ReiseAnzeigeListeTest
+        //            if (fm.Land != null)
+        //            {
+        //                gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
+        //            }
+        //            else
+        //            {
+        //                gefilterteReisen = alleReisen.ToList();
+        //            }
+        //            if (fm.Ort_ID != 0)
+        //            {
+        //                foreach (ReiseModel eineReise in alleReisen)
+        //                {
+        //                    if (eineReise.Ort_id != fm.Ort_ID)
+        //                    {
+        //                        gefilterteReisen.Remove(eineReise);
+        //                    }
+        //                }
+        //            }
 
-                    if (fm.Kategorie_ID != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Kategorie_id != fm.Kategorie_ID)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
+        //            if (fm.Kategorie_ID != 0)
+        //            {
+        //                foreach (ReiseModel eineReise in alleReisen)
+        //                {
+        //                    if (eineReise.Kategorie_id != fm.Kategorie_ID)
+        //                    {
+        //                        gefilterteReisen.Remove(eineReise);
+        //                    }
+        //                }
+        //            }
 
-                    if (fm.HotelKategorie != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Hotelkategorie != fm.HotelKategorie)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
+        //            if (fm.HotelKategorie != 0)
+        //            {
+        //                foreach (ReiseModel eineReise in alleReisen)
+        //                {
+        //                    if (eineReise.Hotelkategorie != fm.HotelKategorie)
+        //                    {
+        //                        gefilterteReisen.Remove(eineReise);
+        //                    }
+        //                }
+        //            }
 
-                    if (fm.MinPreis != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Preis < fm.MinPreis)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-                    if (fm.MaxPreis != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Preis > fm.MaxPreis)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
+        //            if (fm.MinPreis != 0)
+        //            {
+        //                foreach (ReiseModel eineReise in alleReisen)
+        //                {
+        //                    if (eineReise.Preis < fm.MinPreis)
+        //                    {
+        //                        gefilterteReisen.Remove(eineReise);
+        //                    }
+        //                }
+        //            }
+        //            if (fm.MaxPreis != 0)
+        //            {
+        //                foreach (ReiseModel eineReise in alleReisen)
+        //                {
+        //                    if (eineReise.Preis > fm.MaxPreis)
+        //                    {
+        //                        gefilterteReisen.Remove(eineReise);
+        //                    }
+        //                }
+        //            }
 
-                    if (fm.Verpflegungs_ID != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Verpflegungs_id != fm.Verpflegungs_ID)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
+        //            if (fm.Verpflegungs_ID != 0)
+        //            {
+        //                foreach (ReiseModel eineReise in alleReisen)
+        //                {
+        //                    if (eineReise.Verpflegungs_id != fm.Verpflegungs_ID)
+        //                    {
+        //                        gefilterteReisen.Remove(eineReise);
+        //                    }
+        //                }
+        //            }
 
-                    if (fm.Startdatum != null)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Beginndatum > fm.Startdatum)
-                            {
-                                {
-                                    gefilterteReisen.Remove(eineReise);
-                                }
-                            }
-                        }
-                    }
-                    if (fm.Enddatum != null)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Enddatum < fm.Enddatum)
-                            {
-                                {
-                                    gefilterteReisen.Remove(eineReise);
-                                }
-                            }
-                        }
-                    }
+        //            if (fm.Startdatum != null)
+        //            {
+        //                foreach (ReiseModel eineReise in alleReisen)
+        //                {
+        //                    if (eineReise.Beginndatum > fm.Startdatum)
+        //                    {
+        //                        {
+        //                            gefilterteReisen.Remove(eineReise);
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //            if (fm.Enddatum != null)
+        //            {
+        //                foreach (ReiseModel eineReise in alleReisen)
+        //                {
+        //                    if (eineReise.Enddatum < fm.Enddatum)
+        //                    {
+        //                        {
+        //                            gefilterteReisen.Remove(eineReise);
+        //                        }
+        //                    }
+        //                }
+        //            }
 
                 }
                 gesuchteReisen(gefilterteReisen);
