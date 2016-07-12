@@ -252,3 +252,5 @@ paket-files/
 *.sln.iml
 Datenbank/reisebüro_skripten_datenbank/05_create_fk.sql
 Datenbank/reisebüro_skripten_datenbank/05_create_fk.sql
+Applikation/Reiseboerse_Graf/UI_Reiseboerse_Graf/Content/eigeneStyles.css
+Applikation/Reiseboerse_Graf/UI_Reiseboerse_Graf/Views/Reisen/Filter.cshtml

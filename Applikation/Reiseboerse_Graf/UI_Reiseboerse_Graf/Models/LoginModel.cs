@@ -17,7 +17,12 @@ namespace UI_Reiseboerse_Graf.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
+        [StringLength(16, ErrorMessage = "8-16 Zeichen", MinimumLength = 8)]
         [DataType(DataType.Password)]
         public string Passwort { get; set; }
+
+        [Display(Name = "angemeldet bleiben?")]
+        public bool AngemeldetBleiben { get; set; }
+
     }
 }

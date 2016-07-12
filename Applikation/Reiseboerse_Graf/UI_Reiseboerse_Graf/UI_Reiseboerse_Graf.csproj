@@ -188,6 +188,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\eigeneStyles.css" />
     <Content Include="Content\bilder\reisebüro_logo.jpg" />
+    <Content Include="Content\nouislider.css" />
+    <Content Include="Content\nouislider.min.css" />
+    <Content Include="Content\nouislider.pips.css" />
+    <Content Include="Content\nouislider.tooltips.css" />
     <Content Include="Content\reisebuero_Graf.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -198,13 +202,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.anythingslider.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -215,10 +220,12 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\nouislider.js" />
+    <Content Include="Scripts\nouislider.min.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -231,14 +238,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Benutzer\Login.cshtml" />
     <Content Include="Views\Reisen\Laden.cshtml" />
     <Content Include="Views\Reisen\Anzeigen.cshtml" />
     <Content Include="Views\Reisen\UnterkunftAnzeigen.cshtml" />
-    <Content Include="Views\Shared\_Slider.cshtml" />
     <Content Include="Views\Benutzer\BenutzerAnlegen.cshtml" />
     <Content Include="Views\Reisen\Filter.cshtml" />
     <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
+    <Content Include="Views\Benutzer\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
