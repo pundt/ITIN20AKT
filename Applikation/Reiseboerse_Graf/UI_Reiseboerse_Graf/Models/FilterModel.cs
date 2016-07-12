@@ -6,8 +6,18 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
-    public class FilterModel
+    public class FilterModel 
+
+
     {
+        // Dieses Feld sind nur für die Oberfläche
+        [Display(Name = "Preis von")]
+        public decimal DisplayMinPreis { get; set; }
+
+        // Dieses Feld sind nur für die Oberfläche
+        [Display(Name = "bis")]
+        public decimal DisplayMaxPreis { get; set; }
+
         // minPreis, wenn kein Preis gesetzt wird, dann ist der Wert 0 
         private decimal minPreis;
         public decimal MinPreis {
