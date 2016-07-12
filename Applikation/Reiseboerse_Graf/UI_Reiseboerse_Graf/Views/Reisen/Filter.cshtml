@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Filter";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
@@ -10,6 +9,8 @@
 {
     <div class="container">
         <div class="col-xs-2 filter">
+            <div class="Schriftartblau">Filter</div>
+            <hr />
             <div class="row">
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Land)
