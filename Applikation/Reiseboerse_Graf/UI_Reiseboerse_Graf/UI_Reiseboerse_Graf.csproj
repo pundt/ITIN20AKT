@@ -238,6 +238,7 @@
     <Content Include="Views\Reisen\Filter.cshtml" />
     <Content Include="Views\Reisen\UnterkunftAnzeigen.cshtml" />
     <Content Include="Views\Shared\_Slider.cshtml" />
+    <Content Include="Views\Benutzer\BenutzerAnlegen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

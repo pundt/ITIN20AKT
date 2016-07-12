@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using UI_Reiseboerse_Graf.Models;
 using BL_Reiseboerse_Graf;
+using System.Diagnostics;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -95,7 +96,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
         }
         [HttpPost]
-        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm, List<Benutzer> AlleBenutzer)
+        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm)
         {
 
             //Benutzer neuerBenutzer = new Benutzer();
@@ -104,23 +105,28 @@ namespace UI_Reiseboerse_Graf.Controllers
             //neuerBenutzer.Nachname = bm.Nachname;
             //neuerBenutzer.Passwort = bm.Passwort;
             //neuerBenutzer.Geschlecht = bm.Geschlecht;
-            foreach (var item in AlleBenutzer)
-            {
-                //item.
-            }
 
-            Benutzer neuerBenutzer = new Benutzer();
+            if (Globals.IST_TESTSYSTEM)
             {
-                neuerBenutzer.Id = bm.ID;
-                neuerBenutzer.Vorname = bm.Vorname;
-                neuerBenutzer.Nachname = bm.Nachname;
-                neuerBenutzer.Passwort = bm.Passwort;
-                neuerBenutzer.Geschlecht = bm.Geschlecht;
+                if (ModelState.IsValid)
+                {
+                    Debug.WriteLine("Erfolgreich");
+                    return RedirectToAction("Laden", "Reisen");
+                }
+                else
+                {
+                    return View(bm);
+                }
             }
-            return RedirectToAction("Laden","Reisen");
-
+            else
+            {
+                // benutzer in DB speichern
+            }        
         }
-
-
+        [HttpGet]
+        public ActionResult BenutzerAnlegen()
+        {
+            return View();
+        }
     }
 }
