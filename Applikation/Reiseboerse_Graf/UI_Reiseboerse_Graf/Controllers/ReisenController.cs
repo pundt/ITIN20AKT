@@ -121,20 +121,49 @@ namespace UI_Reiseboerse_Graf.Controllers
             List<ReiseModel> liste = new List<ReiseModel>();
             for (int i = 0; i < 50; i++)
             {
-                ReiseModel reise = new ReiseModel()
+                if (i % 5 == 0)
                 {
-                    ID = i,
-                    Anmeldefrist = new DateTime(2016, 08, 30),
-                    Beginndatum = new DateTime(2016, 10, 01),
-                    Enddatum = new DateTime(2016, 10, 30),
-                    Preis = 599 + i * 3,
-                    Titel = "Wandern in der Wachau " + i,
-                    Ort = "Spitz" + i,
-                    Unterkunft = "Schlosshotel Burckhardt " + i,
-                    Verpflegung = "Halbpension" + i % 2,
-                    Restplätze = i % 5
-                };
-                liste.Add(reise);
+                    ReiseModel reise = new ReiseModel()
+                    {
+                        ID = i,
+                        Anmeldefrist = new DateTime(2016, 08, 30),
+                        Beginndatum = new DateTime(2016, 10, 01),
+                        Enddatum = new DateTime(2016, 10, 30),
+                        Preis = 599 + i * 3,
+                        Titel = "Wandern in der Wachau ",
+                        Ort = "Spitz",
+                        Ort_id=1,
+                        Kategorie_id=2,
+                        Hotelkategorie=4,
+                        Unterkunft = "Schlosshotel Burckhardt ",
+                        Verpflegung = "Halbpension",
+                        Verpflegungs_id=2,
+                        Restplätze = i % 5
+                    };
+                    liste.Add(reise);
+                }
+                else
+                {
+                    ReiseModel reise = new ReiseModel()
+                    {
+                        ID = i,
+                        Anmeldefrist = new DateTime(2016, 07, 10),
+                        Beginndatum = new DateTime(2016, 08, 20),
+                        Enddatum = new DateTime(2016, 09, 01),
+                        Preis = 895 + i * 3,
+                        Titel = "Baden in Ligurien" + i,
+                        Ort = "Genua",
+                        Ort_id=2,
+                        Kategorie_id=3,
+                        Hotelkategorie=3,
+                        Unterkunft = "Pension Dolce Vita ",
+                        Verpflegung = "Übernachtung/Frühstück",
+                        Verpflegungs_id=1,
+                        Restplätze = i % 10
+                    };
+                    liste.Add(reise);
+                }
+
             }
             return liste;
         }
@@ -351,13 +380,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
 
                 }
-                gesuchteReisen(gefilterteReisen);
+                return gesuchteReisen(gefilterteReisen);
             }
             else
             {
                 // Datenbankverbindung List auslesen
             }
-            return null;
         }
         [HttpGet]
         public ActionResult gesuchteReisen(List<ReiseModel> gefReisen)
