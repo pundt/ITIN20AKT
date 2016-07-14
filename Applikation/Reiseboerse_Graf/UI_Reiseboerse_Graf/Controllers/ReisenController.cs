@@ -135,6 +135,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Ort_id=1,
                         Kategorie_id=2,
                         Hotelkategorie=4,
+                        Land="Österreich",
+                        Land_id=2,
                         Unterkunft = "Schlosshotel Burckhardt ",
                         Verpflegung = "Halbpension",
                         Verpflegungs_id=2,
@@ -156,6 +158,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Ort_id=2,
                         Kategorie_id=3,
                         Hotelkategorie=3,
+                        Land="Italien",
+                        Land_id=3,
                         Unterkunft = "Pension Dolce Vita ",
                         Verpflegung = "Übernachtung/Frühstück",
                         Verpflegungs_id=1,
@@ -381,7 +385,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
 
                 //}
-                return View("Laden",gefilterteReisen);
+                return RedirectToAction("Laden",gefilterteReisen);
             }
             else
             {

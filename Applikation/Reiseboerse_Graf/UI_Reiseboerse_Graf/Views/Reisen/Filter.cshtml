@@ -14,13 +14,13 @@
             <div class="row">
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Land)
-                    @Html.DropDownListFor(model => model.Land, new SelectList(Model.Land, "land_ID", "landName"), new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Land_id, new SelectList(Model.Land, "land_ID", "landName"), new { @class = "form-control" })
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Ort)
-                    @Html.DropDownListFor(model => model.Ort, new SelectList(Model.Ort, "Id", "Bezeichnung"), new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Ort_ID, new SelectList(Model.Ort, "Id", "Bezeichnung"), new { @class = "form-control" })
                 </div>
             </div>
 
@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-md-12">
                     @Html.LabelFor(model => model.Kategorie)
-                    @Html.DropDownListFor(model => model.Kategorie, new SelectList(Model.Kategorie, "Id", "Bezeichnung"), new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Kategorie_ID, new SelectList(Model.Kategorie, "Id", "Bezeichnung"), new { @class = "form-control" })
                 </div>
             </div>
             <br />
@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Verpflegung)
-                    @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"), new { @class = "form-control" }) <br />
+                    @Html.DropDownListFor(model => model.Verpflegungs_ID, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"), new { @class = "form-control" }) <br />
                 </div>
             </div>
 
