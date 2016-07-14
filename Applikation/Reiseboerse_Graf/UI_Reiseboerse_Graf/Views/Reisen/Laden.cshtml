@@ -8,6 +8,7 @@
 <div class="container">
     <!--FilternView muss hier eingebunden werden als partialView-->
     <div class="col-xs-2">
+        <!-- Beim ersten Aufruf funktioniert Action(Filter), doch nach dem Filtern wird eine noch unbekannte Exception geworfen -->
         @Html.Action("Filter")
     </div>
     <div class="col-xs-9 col-xs-offset-1">

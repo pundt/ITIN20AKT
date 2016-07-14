@@ -24,14 +24,14 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Login()
+        public PartialViewResult Login()
         {
             return PartialView();
         }
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {
-            if (ModelState.IsValid)
+            if (lm.Email == "sa@sa.sa" && lm.Passwort == "123user!")
             {
                 if (lm.AngemeldetBleiben)
                 {
@@ -43,12 +43,13 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
             }
 
-            return View("~/Views/Home/Index.cshtml");
+            return RedirectToAction("Laden", "Reisen");
         }
         [HttpPost]
         public ActionResult Logout()
         {
-            
+            FormsAuthentication.SignOut();
+
             return View("~/Views/Home/Index.cshtml");
         }
         /// <summary>

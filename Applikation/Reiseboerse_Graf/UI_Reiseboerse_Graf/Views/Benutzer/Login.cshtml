@@ -13,8 +13,8 @@
                 <h4 class="Schriftartblau"><span class="glyphicon glyphicon-lock"></span> Anmelden</h4>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm())
-                {
+                @using (Html.BeginForm("Login", "Benutzer"))
+                            {
                     <div class="form-group">
                         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
