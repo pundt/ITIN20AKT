@@ -286,7 +286,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 //if (ModelState.IsValid)
                 //{
                     
-                    if (fm.Land != null)
+                    if (fm.Land_id != 0)
                     {
                         gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
                     }
@@ -327,21 +327,21 @@ namespace UI_Reiseboerse_Graf.Controllers
                         }
                     }
 
-                    if (fm.MinPreis != 0)
+                    if (fm.PreisMin != 0)
                     {
                         foreach (ReiseModel eineReise in alleReisen)
                         {
-                            if (eineReise.Preis < fm.MinPreis)
+                            if (eineReise.Preis < fm.PreisMin)
                             {
                                 gefilterteReisen.Remove(eineReise);
                             }
                         }
                     }
-                    if (fm.MaxPreis != 0)
+                    if (fm.PreisMax != 0)
                     {
                         foreach (ReiseModel eineReise in alleReisen)
                         {
-                            if (eineReise.Preis > fm.MaxPreis)
+                            if (eineReise.Preis > fm.PreisMax)
                             {
                                 gefilterteReisen.Remove(eineReise);
                             }

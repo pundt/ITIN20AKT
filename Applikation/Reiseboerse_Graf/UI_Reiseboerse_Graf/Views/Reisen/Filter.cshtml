@@ -28,13 +28,11 @@
                 <div class="col-md-12">
                     @Html.LabelFor(model => model.HotelKategorie)<br />
                     <div class="acidjs-rating-stars">
-                        <form>
-                            <input type="radio" name="group-2" id="group-2-0" value="@Model.HotelKategorie=5" /><label for="group-2-0"></label>
-                            <input type="radio" name="group-2" id="group-2-1" value="@Model.HotelKategorie=4" /><label for="group-2-1"></label>
-                            <input type="radio" name="group-2" id="group-2-2" value="@Model.HotelKategorie=3" /><label for="group-2-2"></label>
-                            <input type="radio" name="group-2" id="group-2-3" value="@Model.HotelKategorie=2" /><label for="group-2-3"></label>
-                            <input type="radio" name="group-2" id="group-2-4" value="@Model.HotelKategorie=1" /><label for="group-2-4"></label>
-                        </form>
+                            <input type="radio" name="HotelKategorie" id="group-2-0" value="@Model.HotelKategorie=5" /><label for="group-2-0"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-1" value="@Model.HotelKategorie=4" /><label for="group-2-1"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-2" value="@Model.HotelKategorie=3" /><label for="group-2-2"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-3" value="@Model.HotelKategorie=2" /><label for="group-2-3"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-4" value="@Model.HotelKategorie=1" /><label for="group-2-4"></label>
                     </div>
                 </div>
             </div>
@@ -53,8 +51,10 @@
                        <div class="noUi-origin">
                        </div>
                    </div>
-                    <input type="hidden" id="preis-min" value="" name="preisMin"/>
-                    <input type="hidden" id="preis-max" value="" name="preisMax"/>
+                    @Html.HiddenFor(model=>model.PreisMin,new { id= "preis-min" })
+                    @Html.HiddenFor(model=>model.PreisMax, new { id= "preis-max" })
+                    @*<input type="hidden" id="preis-min" value="" name="preisMin"/>
+                    <input type="hidden" id="preis-max" value="" name="preisMax"/>*@
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Startdatum)
                     <div class='input-group date' id='datetimepicker6'>
-                        <input type='text' class="form-control" value="@Model.Startdatum" />
+                        <input type='text' class="form-control" name="Startdatum"value="@Model.Startdatum" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -83,7 +83,7 @@
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Enddatum)
                     <div class='input-group date' id='datetimepicker7'>
-                        <input type='text' class="form-control" value="@Model.Enddatum" />
+                        <input type='text' class="form-control" name="Enddatum" value="@Model.Enddatum" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
