@@ -380,7 +380,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
 
                 }
-                return gesuchteReisen(gefilterteReisen);
+                return View("Laden",gefilterteReisen);
             }
             else
             {
