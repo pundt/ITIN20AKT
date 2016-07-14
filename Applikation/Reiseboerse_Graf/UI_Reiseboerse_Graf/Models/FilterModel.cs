@@ -9,39 +9,39 @@ namespace UI_Reiseboerse_Graf.Models
     public class FilterModel 
     {
         // minPreis, wenn kein Preis gesetzt wird, dann ist der Wert 0 
-        private decimal preisMin;
-        [Display(Name = "Preis von")]
-        public decimal PreisMin
-        {
-            get
-            {
-                if (this.preisMin == 0)
-                {
-                    this.preisMin = 0;
-                }
-                return this.preisMin;
-            }
-            set
-            {
-                this.preisMin = value;
-            }
-        }
+        //private decimal preisMin;
+        //[Display(Name = "Preis von")]
+        public int PreisMin { get; set; }
+        //{
+        //    get
+        //    {
+        //        if (this.preisMin == 0)
+        //        {
+        //            this.preisMin = 0;
+        //        }
+        //        return this.preisMin;
+        //    }
+        //    set
+        //    {
+        //        this.preisMin = value;
+        //    }
+        //}
         // maxValue vergeben
         // wenn kein Wert eingegeben wird, dann wird ein maximaler gesetzt
-        private int preisMax;
-        [Display(Name = "bis")]
-        public int PreisMax
-        {
-            get
-            {
-                if (this.preisMax == 0)
-                {
-                    this.preisMax = 1000000;
-                }
-                return this.preisMax;
-            }
-            set { this.preisMax = value; }
-        }
+        //private int preisMax;
+        //[Display(Name = "bis")]
+        public int PreisMax { get; set; }
+        //{
+        //    get
+        //    {
+        //        if (this.preisMax == 0)
+        //        {
+        //            this.preisMax = 1000000;
+        //        }
+        //        return this.preisMax;
+        //    }
+        //    set { this.preisMax = value; }
+        //}
 
         /// <summary>
         /// Liste von LandModel für die DropDownListe

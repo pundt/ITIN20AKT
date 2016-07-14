@@ -28,11 +28,11 @@
                 <div class="col-md-12">
                     @Html.LabelFor(model => model.HotelKategorie)<br />
                     <div class="acidjs-rating-stars">
-                            <input type="radio" name="HotelKategorie" id="group-2-0" value="@Model.HotelKategorie=5" /><label for="group-2-0"></label>
-                            <input type="radio" name="HotelKategorie" id="group-2-1" value="@Model.HotelKategorie=4" /><label for="group-2-1"></label>
-                            <input type="radio" name="HotelKategorie" id="group-2-2" value="@Model.HotelKategorie=3" /><label for="group-2-2"></label>
-                            <input type="radio" name="HotelKategorie" id="group-2-3" value="@Model.HotelKategorie=2" /><label for="group-2-3"></label>
-                            <input type="radio" name="HotelKategorie" id="group-2-4" value="@Model.HotelKategorie=1" /><label for="group-2-4"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-0" value="5" /><label for="group-2-0"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-1" value="4" /><label for="group-2-1"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-2" value="3" /><label for="group-2-2"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-3" value="2" /><label for="group-2-3"></label>
+                            <input type="radio" name="HotelKategorie" id="group-2-4" value="1" /><label for="group-2-4"></label>
                     </div>
                 </div>
             </div>
@@ -51,10 +51,8 @@
                        <div class="noUi-origin">
                        </div>
                    </div>
-                    @Html.HiddenFor(model=>model.PreisMin,new { id= "preis-min" })
-                    @Html.HiddenFor(model=>model.PreisMax, new { id= "preis-max" })
-                    @*<input type="hidden" id="preis-min" value="" name="preisMin"/>
-                    <input type="hidden" id="preis-max" value="" name="preisMax"/>*@
+                    @Html.HiddenFor(model=>model.PreisMin,new { id= "PreisMin" })
+                    @Html.HiddenFor(model=>model.PreisMax, new { id= "PreisMax" })
                 </div>
             </div>
 
