@@ -272,15 +272,16 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Filter(FilterModel fm)
         {
+            // holt sich die FakeReisen von ReiseAnzeigeListeTest
             List<ReiseModel> alleReisen = ReiseAnzeigeListeTest();
             List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
 
             if (Globals.IST_TESTSYSTEM)
             {
                 // kontrolliert Validierung
-                if (ModelState.IsValid)
-                {
-                    // holt sich die FakeReisen von ReiseAnzeigeListeTest
+                //if (ModelState.IsValid)
+                //{
+                    
                     if (fm.Land != null)
                     {
                         gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
@@ -379,7 +380,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         }
                     }
 
-                }
+                //}
                 return View("Laden",gefilterteReisen);
             }
             else

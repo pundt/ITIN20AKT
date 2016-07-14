@@ -56,13 +56,13 @@ namespace UI_Reiseboerse_Graf.Models
         /// </summary>
         public List<OrtModel> Ort { get; set; }
 
-        /// <summary>
-        /// Hotelkategorie (Sterne) für Auswahl der Sterne (Checkbox)
-        /// </summary>
-        [Range(1, 5, ErrorMessage = "Nur 1 bis 5 zulässig!")]
 
         public int Ort_ID { get; set; }
 
+        /// <summary>
+        /// Hotelkategorie (Sterne) für Auswahl der Sterne (Checkbox)
+        /// </summary>
+        //[Range(1, 5, ErrorMessage = "Nur 1 bis 5 zulässig!")]
         [Display(Name ="Kategorie Unterkunft")]
         public int HotelKategorie { get; set; }
 
