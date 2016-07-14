@@ -8,40 +8,41 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class FilterModel 
     {
+        // Dieses Feld sind nur für die Oberfläche
+        [Display(Name = "Preis von")]
+        public decimal DisplayMinPreis { get; set; }
+
+        // Dieses Feld sind nur für die Oberfläche
+        [Display(Name = "bis")]
+        public decimal DisplayMaxPreis { get; set; }
+
         // minPreis, wenn kein Preis gesetzt wird, dann ist der Wert 0 
-        //private decimal preisMin;
-        //[Display(Name = "Preis von")]
-        public int PreisMin { get; set; }
-        //{
-        //    get
-        //    {
-        //        if (this.preisMin == 0)
-        //        {
-        //            this.preisMin = 0;
-        //        }
-        //        return this.preisMin;
-        //    }
-        //    set
-        //    {
-        //        this.preisMin = value;
-        //    }
-        //}
+        private decimal minPreis;
+        public decimal MinPreis {
+            get {
+                if(this.minPreis == 0){
+                    this.minPreis = 0;
+                }
+                return this.minPreis;
+            }
+            set {
+                this.minPreis = value;
+            }
+        }
         // maxValue vergeben
         // wenn kein Wert eingegeben wird, dann wird ein maximaler gesetzt
-        //private int preisMax;
-        //[Display(Name = "bis")]
-        public int PreisMax { get; set; }
-        //{
-        //    get
-        //    {
-        //        if (this.preisMax == 0)
-        //        {
-        //            this.preisMax = 1000000;
-        //        }
-        //        return this.preisMax;
-        //    }
-        //    set { this.preisMax = value; }
-        //}
+        private int maxPreis;
+
+        public int MaxPreis
+        {
+            get {
+                if (this.maxPreis == 0)
+                {
+                    this.maxPreis = 1000000;
+                }
+                return this.maxPreis; }
+            set { this.maxPreis = value; }
+        }
 
         /// <summary>
         /// Liste von LandModel für die DropDownListe
@@ -55,13 +56,13 @@ namespace UI_Reiseboerse_Graf.Models
         /// </summary>
         public List<OrtModel> Ort { get; set; }
 
-
-        public int Ort_ID { get; set; }
-
         /// <summary>
         /// Hotelkategorie (Sterne) für Auswahl der Sterne (Checkbox)
         /// </summary>
-        //[Range(1, 5, ErrorMessage = "Nur 1 bis 5 zulässig!")]
+        [Range(1, 5, ErrorMessage = "Nur 1 bis 5 zulässig!")]
+
+        public int Ort_ID { get; set; }
+
         [Display(Name ="Kategorie Unterkunft")]
         public int HotelKategorie { get; set; }
 

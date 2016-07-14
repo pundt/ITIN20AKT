@@ -262,7 +262,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Land_id=2,
                         Unterkunft = "Schlosshotel Burckhardt ",
                         Verpflegung = "Halbpension",
-                        Verpflegungs_id=2,
+                        Verpflegungs_id = 2,
                         Restplätze = i % 5
                     };
                     liste.Add(reise);
@@ -285,7 +285,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Land_id=3,
                         Unterkunft = "Pension Dolce Vita ",
                         Verpflegung = "Übernachtung/Frühstück",
-                        Verpflegungs_id=1,
+                        Verpflegungs_id = 1,
                         Restplätze = i % 10
                     };
                     liste.Add(reise);
