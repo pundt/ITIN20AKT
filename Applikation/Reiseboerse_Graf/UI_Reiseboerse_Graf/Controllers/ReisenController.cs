@@ -132,12 +132,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Preis = 599 + i * 3,
                         Titel = "Wandern in der Wachau ",
                         Ort = "Spitz",
-                        Ort_id=1,
-                        Kategorie_id=2,
-                        Hotelkategorie=4,
+                        Ort_id = 1,
+                        Kategorie_id = 2,
+                        Hotelkategorie = 4,
                         Unterkunft = "Schlosshotel Burckhardt ",
                         Verpflegung = "Halbpension",
-                        Verpflegungs_id=2,
+                        Verpflegungs_id = 2,
                         Restplätze = i % 5
                     };
                     liste.Add(reise);
@@ -153,12 +153,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Preis = 895 + i * 3,
                         Titel = "Baden in Ligurien" + i,
                         Ort = "Genua",
-                        Ort_id=2,
-                        Kategorie_id=3,
-                        Hotelkategorie=3,
+                        Ort_id = 2,
+                        Kategorie_id = 3,
+                        Hotelkategorie = 3,
                         Unterkunft = "Pension Dolce Vita ",
                         Verpflegung = "Übernachtung/Frühstück",
-                        Verpflegungs_id=1,
+                        Verpflegungs_id = 1,
                         Restplätze = i % 10
                     };
                     liste.Add(reise);
@@ -278,109 +278,57 @@ namespace UI_Reiseboerse_Graf.Controllers
             if (Globals.IST_TESTSYSTEM)
             {
                 // kontrolliert Validierung
-                if (ModelState.IsValid)
+                //if (ModelState.IsValid)
+                //{
+                // holt sich die FakeReisen von ReiseAnzeigeListeTest
+                if (fm.Land != null)
                 {
-                    // holt sich die FakeReisen von ReiseAnzeigeListeTest
-                    if (fm.Land != null)
-                    {
-                        gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
-                    }
-                    else
-                    {
-                        gefilterteReisen = alleReisen.ToList();
-                    }
-                    if (fm.Ort_ID != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Ort_id != fm.Ort_ID)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-
-                    if (fm.Kategorie_ID != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Kategorie_id != fm.Kategorie_ID)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-
-                    if (fm.HotelKategorie != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Hotelkategorie != fm.HotelKategorie)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-
-                    if (fm.MinPreis != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Preis < fm.MinPreis)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-                    if (fm.MaxPreis != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Preis > fm.MaxPreis)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-
-                    if (fm.Verpflegungs_ID != 0)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Verpflegungs_id != fm.Verpflegungs_ID)
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-
-                    if (fm.Startdatum != null)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Beginndatum > fm.Startdatum)
-                            {
-                                {
-                                    gefilterteReisen.Remove(eineReise);
-                                }
-                            }
-                        }
-                    }
-                    if (fm.Enddatum != null)
-                    {
-                        foreach (ReiseModel eineReise in alleReisen)
-                        {
-                            if (eineReise.Enddatum < fm.Enddatum)
-                            {
-                                {
-                                    gefilterteReisen.Remove(eineReise);
-                                }
-                            }
-                        }
-                    }
-
+                    gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
                 }
-                return View("Laden",gefilterteReisen);
+                else
+                {
+                    gefilterteReisen = alleReisen.ToList();
+                }
+                if (fm.Ort_ID != 0)
+                {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Ort_id == fm.Ort_ID).ToList();
+                }
+
+                if (fm.Kategorie_ID != 0)
+                {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Kategorie_id == fm.Kategorie_ID).ToList();
+                }
+
+                if (fm.HotelKategorie != 0)
+                {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Hotelkategorie == fm.HotelKategorie).ToList();
+                }
+
+                if (fm.MinPreis != 0)
+                {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.MinPreis).ToList();
+                }
+                if (fm.MaxPreis != 0)
+                {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.MaxPreis).ToList();
+                }
+
+                if (fm.Verpflegungs_ID != 0)
+                {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Verpflegungs_id == fm.Verpflegungs_ID).ToList();
+                }
+
+                if (fm.Startdatum != null)
+                {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Beginndatum >= fm.Startdatum).ToList();
+                }
+                if (fm.Enddatum != null)
+                {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Enddatum >= fm.Enddatum).ToList();
+                }
+
+                //}
+                return RedirectToAction("Laden", gefilterteReisen);
             }
             else
             {
