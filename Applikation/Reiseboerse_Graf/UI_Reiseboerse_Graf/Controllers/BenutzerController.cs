@@ -45,12 +45,12 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Laden", "Reisen");
         }
-        [HttpPost]
+        [HttpGet]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
 
-            return View("~/Views/Home/Index.cshtml");
+            return RedirectToAction("Index", "Home");
         }
         /// <summary>
         /// Erhält das Model, sendet daten an Bl zur weitergabe in die datenbank
