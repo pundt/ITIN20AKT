@@ -140,6 +140,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OrtModel.cs" />
     <Compile Include="Models\ReisedetailModel.cs" />
+    <Compile Include="Models\ReiseLadenModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
     <Compile Include="Models\UnterkunftdetailModel.cs" />
     <Compile Include="Models\VerpflegungModel.cs" />
@@ -246,6 +247,7 @@
     <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
     <Content Include="Views\Benutzer\Login.cshtml" />
     <Content Include="Views\Reisen\gesuchteReisen.cshtml" />
+    <Content Include="Views\Reisen\_Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

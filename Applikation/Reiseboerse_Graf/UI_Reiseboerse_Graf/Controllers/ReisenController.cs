@@ -20,14 +20,17 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("ReisenController - Laden - Get");
             Debug.Indent();
-            List<ReiseModel> liste = new List<ReiseModel>();
+            ReiseLadenModel model = new ReiseLadenModel();
+
             if (Globals.IST_TESTSYSTEM)
             {
                 try
                 {
                     Debug.WriteLine("Testsystem");
-                    liste = ReiseAnzeigeListeTest();
-                    Debug.WriteLine($"{liste.Count} Reisen geladen");
+                    model.Reisen = ReiseAnzeigeListeTest();
+                    model.Filter = FilterAnzeigeTest();
+
+                    Debug.WriteLine($"{model.Reisen.Count()} Reisen geladen");
                 }
 
                 catch (Exception ex)
@@ -42,108 +45,65 @@ namespace UI_Reiseboerse_Graf.Controllers
                 /// die Liste aus der DB mit der Methode aus BL aufrufen und auf die Liste von ReiseModel 
                 /// mappen
             }
-            return View(liste);
+            return View(model);
         }
 
+        /// <summary>
+        /// Die Liste aller Reisen nach dem Filtermodel filtern und an die View zurückgeben
+        /// </summary>
+        /// <param name="filterModel">Filtermodel mit Daten</param>
+        /// <returns>Die View </returns>
         [HttpPost]
-        public ActionResult Laden(FilterModel fm)
+        public ActionResult Laden(FilterModel filterModel)
         {
-            // holt sich die FakeReisen von ReiseAnzeigeListeTest
-            List<ReiseModel> alleReisen = ReiseAnzeigeListeTest();
-            List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
+            ReiseLadenModel model = new ReiseLadenModel();
+            model.Filter = filterModel;
 
             if (Globals.IST_TESTSYSTEM)
             {
+                // holt sich die FakeReisen von ReiseAnzeigeListeTest
+               model.Reisen = ReiseAnzeigeListeTest();
+
                 // kontrolliert Validierung
                 //if (ModelState.IsValid)
                 //{
 
-                if (fm.Land_id != 0)
-                    gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
-                else
-                    gefilterteReisen = alleReisen.ToList();
+                if (filterModel.Land_id != 0)
+                    model.Reisen = model.Reisen.Where(x => x.Land_id == filterModel.Land_id);
 
-                if (fm.Ort_ID != 0)
-                {
-                    foreach (ReiseModel eineReise in alleReisen)
-                    {
-                        if (eineReise.Ort_id != fm.Ort_ID)
-                        {
-                            gefilterteReisen.Remove(eineReise);
-                        }
-                    }
-                }
+
+                if (filterModel.Ort_ID != 0)
+                    model.Reisen = model.Reisen.Where(x => x.Ort_id== filterModel.Ort_ID);
            
 
-                if (fm.Kategorie_ID != 0)
-                {
-                    foreach (ReiseModel eineReise in alleReisen)
-                    {
-                        if (eineReise.Kategorie_id != fm.Kategorie_ID)
-                        {
-                            gefilterteReisen.Remove(eineReise);
-                        }
-                    }
-                }
+                if (filterModel.Kategorie_ID != 0)
+                    model.Reisen = model.Reisen.Where(x => x.Kategorie_id == filterModel.Kategorie_ID);
 
-                if (fm.HotelKategorie != 0)
-                {
-                    foreach (ReiseModel eineReise in alleReisen)
-                    {
-                        if (eineReise.Hotelkategorie != fm.HotelKategorie)
-                        {
-                            gefilterteReisen.Remove(eineReise);
-                        }
-                    }
-                }
+                if (filterModel.HotelKategorie != 0)
+                    model.Reisen = model.Reisen.Where(x => x.Hotelkategorie == filterModel.HotelKategorie);
 
-                if (fm.PreisMin != 0)
-                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.PreisMin).ToList();
+                if (filterModel.PreisMin != 0)
+                    model.Reisen = model.Reisen.Where(x => x.Preis >= filterModel.PreisMin).ToList();
 
-                if (fm.PreisMax != 0)
-                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.PreisMax).ToList();
+                if (filterModel.PreisMax != 0)
+                    model.Reisen = model.Reisen.Where(x => x.Preis <= filterModel.PreisMax).ToList();
 
-                if (fm.Verpflegungs_ID != 0)
-                {
-                    foreach (ReiseModel eineReise in alleReisen)
-                    {
-                        if (eineReise.Verpflegungs_id != fm.Verpflegungs_ID)
-                        {
-                            gefilterteReisen.Remove(eineReise);
-                        }
-                    }
-                }
+                if (filterModel.Verpflegungs_ID != 0)
+                    model.Reisen = model.Reisen.Where(x => x.Verpflegungs_id == filterModel.Verpflegungs_ID);
 
-                if (fm.Startdatum != null)
-                {
-                    foreach (ReiseModel eineReise in alleReisen)
-                    {
-                        if (eineReise.Beginndatum < fm.Startdatum)
-                        {
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-                }
-                if (fm.Enddatum != null)
-                {
-                    foreach (ReiseModel eineReise in alleReisen)
-                    {
-                        if (eineReise.Enddatum > fm.Enddatum)
-                        {
-                            {
-                                gefilterteReisen.Remove(eineReise);
-                            }
-                        }
-                    }
-                }
+                if (filterModel.Startdatum != null)
+                    model.Reisen = model.Reisen.Where(x => x.Beginndatum >= filterModel.Startdatum);
+             
+                if (filterModel.Enddatum != null)
+                    model.Reisen = model.Reisen.Where(x => x.Enddatum <= filterModel.Enddatum);
+                
+               // model.Reisen = model.Reisen.ToList();
 
                 //}
                 //return RedirectToAction("Laden", gefilterteReisen);
                 ///Wenn ich zur Action Laden gehe bekomm ich alle Reisen, aber zur View Laden
                 /// mit gefilterten Reisen als Model landet in einer Endlosschleife ...
-                return View(gefilterteReisen);
+                return View(model);
             }
             else
             {
@@ -310,74 +270,58 @@ namespace UI_Reiseboerse_Graf.Controllers
             return liste;
         }
 
-        [HttpGet]
-        public PartialViewResult Filter()
+        /// <summary>
+        /// Befüllen des FilterModels mit Testdaten
+        /// </summary>
+        /// <returns></returns>
+        private FilterModel FilterAnzeigeTest()
         {
-            Debug.WriteLine("ReisenController - Filter - Get");
-            Debug.Indent();
+            FilterModel model = new FilterModel();
 
-            if (Globals.IST_TESTSYSTEM)
+            model.Kategorie = new List<KategorieModel>();
+
+            for (int i = 1; i < 6; i++)
             {
-                try
-                {
-                    FilterModel model = new FilterModel();
-                    model.Kategorie = new List<KategorieModel>();
-
-                    for (int i = 1; i < 6; i++)
-                    {
-                        KategorieModel km = new KategorieModel();
-                        km.Bezeichnung = "Kategorie " + i;
-                        km.Id = i;
-                        model.Kategorie.Add(km);
-                    }
-
-                    model.Land = new List<LandModel>();
-
-                    for (int i = 1; i < 6; i++)
-                    {
-                        LandModel lm = new LandModel();
-                        lm.landName = "Land " + i;
-                        lm.land_ID = i;
-                        model.Land.Add(lm);
-                    }
-
-                    model.Ort = new List<OrtModel>();
-
-                    for (int i = 1; i < 6; i++)
-                    {
-                        OrtModel om = new OrtModel();
-                        om.Bezeichnung = "Ort " + i;
-                        om.Id = i;
-                        model.Ort.Add(om);
-                    }
-
-                    model.Verpflegung = new List<VerpflegungModel>();
-
-                    for (int i = 1; i < 6; i++)
-                    {
-                        VerpflegungModel vm = new VerpflegungModel();
-                        vm.Bezeichnung = "Verpflegung " + i;
-                        vm.Id = i;
-                        model.Verpflegung.Add(vm);
-                    }
-
-                    model.Startdatum = DateTime.Now;
-                    model.Enddatum = DateTime.Now;
-
-                    // Temporär noch mit View zur Funktionsprüfung, später mit Redirect
-                    return PartialView(model);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Fehler beim Laden des FilterModels");
-                    Debug.WriteLine(ex.Message);
-                }
+                KategorieModel km = new KategorieModel();
+                km.Bezeichnung = "Kategorie " + i;
+                km.Id = i;
+                model.Kategorie.Add(km);
             }
 
-            Debugger.Break();
-            Debug.Unindent();
+            model.Land = new List<LandModel>();
 
-            return PartialView();
+            for (int i = 1; i < 6; i++)
+            {
+                LandModel lm = new LandModel();
+                lm.landName = "Land " + i;
+                lm.land_ID = i;
+                model.Land.Add(lm);
+            }
+
+            model.Ort = new List<OrtModel>();
+
+            for (int i = 1; i < 6; i++)
+            {
+                OrtModel om = new OrtModel();
+                om.Bezeichnung = "Ort " + i;
+                om.Id = i;
+                model.Ort.Add(om);
+            }
+
+            model.Verpflegung = new List<VerpflegungModel>();
+
+            for (int i = 1; i < 6; i++)
+            {
+                VerpflegungModel vm = new VerpflegungModel();
+                vm.Bezeichnung = "Verpflegung " + i;
+                vm.Id = i;
+                model.Verpflegung.Add(vm);
+            }
+
+            model.Startdatum = DateTime.Now;
+            model.Enddatum = DateTime.Now;
+
+            return model;
         }
 
     }

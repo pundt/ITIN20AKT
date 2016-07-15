@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UI_Reiseboerse_Graf.Models.ReiseModel>
+﻿@model UI_Reiseboerse_Graf.Models.ReiseLadenModel
 
 @{
     ViewBag.Title = "Reisen";
@@ -8,17 +8,16 @@
 <div class="container">   
     <!--FilternView muss hier eingebunden werden als partialView-->
     <div class="col-xs-2">
-        <!-- Beim ersten Aufruf funktioniert Action(Filter), doch nach dem Filtern wird eine noch unbekannte Exception geworfen -->
-        @Html.Action("Filter")
+        @Html.Partial("_Filter", Model.Filter)
     </div>
     <div class="col-xs-9 col-xs-offset-1">
-        @if (Model == null)
+        @if (Model.Reisen == null||Model.Reisen.Count()<=0)
         {
             <h4 class="logoschrift">Keine Suchergebnisse vorhanden <br /> Verändern Sie Ihre Suchkriterien</h4>
         }
         else
         {
-            foreach (var item in Model)
+            foreach (var item in Model.Reisen)
             {
             <div class="row reise">
                 <div class="col-md-2 col-xs-6">
