@@ -245,9 +245,9 @@
     <Content Include="Views\Benutzer\BenutzerAnlegen.cshtml" />
     <Content Include="Views\Reisen\Filter.cshtml" />
     <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
-    <Content Include="Views\Benutzer\Login.cshtml" />
     <Content Include="Views\Reisen\gesuchteReisen.cshtml" />
     <Content Include="Views\Reisen\_Filter.cshtml" />
+    <Content Include="Views\Benutzer\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

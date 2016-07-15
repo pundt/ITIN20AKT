@@ -24,9 +24,9 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
         [HttpGet]
-        public PartialViewResult Login()
+        public ActionResult Login()
         {
-            return PartialView();
+            return View();
         }
         [HttpPost]
         public ActionResult Login(LoginModel lm)

@@ -21,7 +21,7 @@ namespace UI_Reiseboerse_Graf.Models
         [DataType(DataType.Password)]
         public string Passwort { get; set; }
 
-        [Display(Name = "angemeldet bleiben?")]
+        [Display(Name = "Möchten Sie angemeldet bleiben?")]
         public bool AngemeldetBleiben { get; set; }
 
     }
