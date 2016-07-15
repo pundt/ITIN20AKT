@@ -282,53 +282,56 @@ namespace UI_Reiseboerse_Graf.Controllers
                 //{
                 // holt sich die FakeReisen von ReiseAnzeigeListeTest
                 if (fm.Land != null)
-                {
-                    gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
-                }
-                else
-                {
-                    gefilterteReisen = alleReisen.ToList();
-                }
-                if (fm.Ort_ID != 0)
-                {
+                    {
+                        gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
+                    }
+                    else
+                    {
+                        gefilterteReisen = alleReisen.ToList();
+                    }
+                    if (fm.Ort_ID != 0)
+                    {
                     gefilterteReisen = gefilterteReisen.Where(x => x.Ort_id == fm.Ort_ID).ToList();
-                }
+                            }
 
-                if (fm.Kategorie_ID != 0)
-                {
+                    if (fm.Kategorie_ID != 0)
+                    {
                     gefilterteReisen = gefilterteReisen.Where(x => x.Kategorie_id == fm.Kategorie_ID).ToList();
-                }
+                            }
 
-                if (fm.HotelKategorie != 0)
-                {
+                    if (fm.HotelKategorie != 0)
+                    {
                     gefilterteReisen = gefilterteReisen.Where(x => x.Hotelkategorie == fm.HotelKategorie).ToList();
-                }
+                            }
 
-                if (fm.MinPreis != 0)
-                {
-                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.MinPreis).ToList();
-                }
-                if (fm.MaxPreis != 0)
-                {
-                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.MaxPreis).ToList();
-                }
+                if (fm.PreisMin != 0)
+                            {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.PreisMin).ToList();
+                    }
+                if (fm.PreisMax != 0)
+                            {
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.PreisMax).ToList();
+                    }
 
-                if (fm.Verpflegungs_ID != 0)
-                {
+                    if (fm.Verpflegungs_ID != 0)
+                    {
                     gefilterteReisen = gefilterteReisen.Where(x => x.Verpflegungs_id == fm.Verpflegungs_ID).ToList();
-                }
+                    }
 
-                if (fm.Startdatum != null)
-                {
+                    if (fm.Startdatum != null)
+                    {
                     gefilterteReisen = gefilterteReisen.Where(x => x.Beginndatum >= fm.Startdatum).ToList();
-                }
-                if (fm.Enddatum != null)
-                {
+                    }
+                    if (fm.Enddatum != null)
+                    {
                     gefilterteReisen = gefilterteReisen.Where(x => x.Enddatum >= fm.Enddatum).ToList();
-                }
+                    }
 
                 //}
                 return RedirectToAction("Laden", gefilterteReisen);
+                ///Wenn ich zur Action Laden gehe bekomm ich alle Reisen, aber zur View Laden
+                /// mit gefilterten Reisen als Model landet in einer Endlosschleife ...
+                //return View("Laden", gefilterteReisen);
             }
             else
             {
