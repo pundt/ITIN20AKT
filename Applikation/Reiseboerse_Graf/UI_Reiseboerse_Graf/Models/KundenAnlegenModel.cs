@@ -49,25 +49,22 @@ namespace UI_Reiseboerse_Graf.Models
         [Required]
         public int Land_ID { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DisplayName("Land")]
         public List<LandModel> Land { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
-        [DisplayName("Plz")]
-        public int Plz { get; set; }
+        [RegularExpression("^0-9{4-5}$",ErrorMessage ="Nur Ziffern zwischen 4 und 5 Zeichen")]
+        [DisplayName("Postleitzahl")]
+        public string Plz { get; set; }
 
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DisplayName("Adresse")]
         public string Adresse { get; set; }
 
-
-        [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DisplayName("Geschlecht")]
         public bool Geschlecht { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DisplayName("Titel")]
         public string Titel { get; set; }
 
