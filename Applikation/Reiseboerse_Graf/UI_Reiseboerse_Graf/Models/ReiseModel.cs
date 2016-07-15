@@ -33,6 +33,7 @@ namespace UI_Reiseboerse_Graf.Models
         public int Ort_id { get; set; }
 
         public int Land_id { get; set; }
+        public string Land { get; set; }
 
         public int Kategorie_id { get; set; }
 

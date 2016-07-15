@@ -17,32 +17,11 @@ namespace UI_Reiseboerse_Graf.Models
         public decimal DisplayMaxPreis { get; set; }
 
         // minPreis, wenn kein Preis gesetzt wird, dann ist der Wert 0 
-        private decimal minPreis;
-        public decimal MinPreis {
-            get {
-                if(this.minPreis == 0){
-                    this.minPreis = 0;
-                }
-                return this.minPreis;
-            }
-            set {
-                this.minPreis = value;
-            }
-        }
+        public int PreisMin { get; set; }
+
         // maxValue vergeben
         // wenn kein Wert eingegeben wird, dann wird ein maximaler gesetzt
-        private int maxPreis;
-
-        public int MaxPreis
-        {
-            get {
-                if (this.maxPreis == 0)
-                {
-                    this.maxPreis = 1000000;
-                }
-                return this.maxPreis; }
-            set { this.maxPreis = value; }
-        }
+        public int PreisMax { get; set; }
 
         /// <summary>
         /// Liste von LandModel für die DropDownListe

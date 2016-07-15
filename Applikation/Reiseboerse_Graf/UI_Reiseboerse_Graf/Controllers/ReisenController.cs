@@ -44,6 +44,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             return View(liste);
         }
+
         [HttpPost]
         public ActionResult Laden(FilterModel fm)
         {
@@ -58,13 +59,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                 //{
 
                 if (fm.Land_id != 0)
-                {
                     gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
-                }
                 else
-                {
                     gefilterteReisen = alleReisen.ToList();
-                }
+
                 if (fm.Ort_ID != 0)
                 {
                     foreach (ReiseModel eineReise in alleReisen)
@@ -75,6 +73,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         }
                     }
                 }
+           
 
                 if (fm.Kategorie_ID != 0)
                 {
@@ -99,25 +98,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
 
                 if (fm.PreisMin != 0)
-                {
-                    foreach (ReiseModel eineReise in alleReisen)
-                    {
-                        if ((double)eineReise.Preis < fm.PreisMin)
-                        {
-                            gefilterteReisen.Remove(eineReise);
-                        }
-                    }
-                }
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.PreisMin).ToList();
+
                 if (fm.PreisMax != 0)
-                {
-                    foreach (ReiseModel eineReise in alleReisen)
-                    {
-                        if ((double)eineReise.Preis > fm.PreisMax)
-                        {
-                            gefilterteReisen.Remove(eineReise);
-                        }
-                    }
-                }
+                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.PreisMax).ToList();
 
                 if (fm.Verpflegungs_ID != 0)
                 {
@@ -395,123 +379,6 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return PartialView();
         }
-
-        //[HttpPost]
-        //public ActionResult Filter(FilterModel fm)
-        //{
-        //    // holt sich die FakeReisen von ReiseAnzeigeListeTest
-        //    List<ReiseModel> alleReisen = ReiseAnzeigeListeTest();
-        //    List<ReiseModel> gefilterteReisen = new List<ReiseModel>();
-
-        //    if (Globals.IST_TESTSYSTEM)
-        //    {
-        //        // kontrolliert Validierung
-        //        //if (ModelState.IsValid)
-        //        //{
-
-        //        if (fm.Land_id != 0)
-        //        {
-        //            gefilterteReisen = alleReisen.Where(x => x.Land_id == fm.Land_id).ToList();
-        //        }
-        //        else
-        //        {
-        //            gefilterteReisen = alleReisen.ToList();
-        //        }
-        //        if (fm.Ort_ID != 0)
-        //        {
-        //            foreach (ReiseModel eineReise in alleReisen)
-        //            {
-        //                if (eineReise.Ort_id != fm.Ort_ID)
-        //                {
-        //                    gefilterteReisen.Remove(eineReise);
-        //                }
-        //            }
-        //        }
-
-        //        if (fm.Kategorie_ID != 0)
-        //        {
-        //            foreach (ReiseModel eineReise in alleReisen)
-        //            {
-        //                if (eineReise.Kategorie_id != fm.Kategorie_ID)
-        //                {
-        //                    gefilterteReisen.Remove(eineReise);
-        //                }
-        //            }
-        //        }
-
-        //        if (fm.HotelKategorie != 0)
-        //        {
-        //            foreach (ReiseModel eineReise in alleReisen)
-        //            {
-        //                if (eineReise.Hotelkategorie != fm.HotelKategorie)
-        //                {
-        //                    gefilterteReisen.Remove(eineReise);
-        //                }
-        //            }
-        //        }
-
-                if (fm.PreisMin != 0)
-                            {
-                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.PreisMin).ToList();
-                    }
-                if (fm.PreisMax != 0)
-                            {
-                    gefilterteReisen = gefilterteReisen.Where(x => x.Preis >= fm.PreisMax).ToList();
-                    }
-
-        //        if (fm.Verpflegungs_ID != 0)
-        //        {
-        //            foreach (ReiseModel eineReise in alleReisen)
-        //            {
-        //                if (eineReise.Verpflegungs_id != fm.Verpflegungs_ID)
-        //                {
-        //                    gefilterteReisen.Remove(eineReise);
-        //                }
-        //            }
-        //        }
-
-        //        if (fm.Startdatum != null)
-        //        {
-        //            foreach (ReiseModel eineReise in alleReisen)
-        //            {
-        //                if (eineReise.Beginndatum > fm.Startdatum)
-        //                {
-        //                    {
-        //                        gefilterteReisen.Remove(eineReise);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        if (fm.Enddatum != null)
-        //        {
-        //            foreach (ReiseModel eineReise in alleReisen)
-        //            {
-        //                if (eineReise.Enddatum < fm.Enddatum)
-        //                {
-        //                    {
-        //                        gefilterteReisen.Remove(eineReise);
-        //                    }
-        //                }
-        //            }
-        //        }
-
-        //        //}
-        //        return RedirectToAction("Laden", gefilterteReisen);
-        //        ///Wenn ich zur Action Laden gehe bekomm ich alle Reisen, aber zur View Laden
-        //        /// mit gefilterten Reisen als Model landet in einer Endlosschleife ...
-        //        //return View("Laden", gefilterteReisen);
-        //    }
-        //    else
-        //    {
-        //        // Datenbankverbindung List auslesen
-        //    }
-        //}
-        //[HttpGet]
-        //public ActionResult gesuchteReisen(List<ReiseModel> gefReisen)
-        //{
-        //    List<ReiseModel> gesReisen = gefReisen;
-        //    return View("gesuchteReisen", gesReisen);
-                //}
 
     }
 }
