@@ -57,30 +57,30 @@ namespace UI_Reiseboerse_Graf.Controllers
         public ActionResult Laden(FilterModel filterModel)
         {
             ReiseLadenModel model = new ReiseLadenModel();
-            model.Filter = filterModel;
+            model.Filter = FilterAnzeigeTest(filterModel);
 
             if (Globals.IST_TESTSYSTEM)
             {
                 // holt sich die FakeReisen von ReiseAnzeigeListeTest
-               model.Reisen = ReiseAnzeigeListeTest();
+                model.Reisen = ReiseAnzeigeListeTest();
 
                 // kontrolliert Validierung
                 //if (ModelState.IsValid)
                 //{
 
                 if (filterModel.Land_id != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Land_id == filterModel.Land_id);
+                    model.Reisen = model.Reisen.Where(x => x.Land_id == filterModel.Land_id).ToList();
 
 
                 if (filterModel.Ort_ID != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Ort_id== filterModel.Ort_ID);
-           
+                    model.Reisen = model.Reisen.Where(x => x.Ort_id == filterModel.Ort_ID).ToList();
+
 
                 if (filterModel.Kategorie_ID != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Kategorie_id == filterModel.Kategorie_ID);
+                    model.Reisen = model.Reisen.Where(x => x.Kategorie_id == filterModel.Kategorie_ID).ToList();
 
                 if (filterModel.HotelKategorie != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Hotelkategorie == filterModel.HotelKategorie);
+                    model.Reisen = model.Reisen.Where(x => x.Hotelkategorie == filterModel.HotelKategorie).ToList();
 
                 if (filterModel.PreisMin != 0)
                     model.Reisen = model.Reisen.Where(x => x.Preis >= filterModel.PreisMin).ToList();
@@ -89,15 +89,15 @@ namespace UI_Reiseboerse_Graf.Controllers
                     model.Reisen = model.Reisen.Where(x => x.Preis <= filterModel.PreisMax).ToList();
 
                 if (filterModel.Verpflegungs_ID != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Verpflegungs_id == filterModel.Verpflegungs_ID);
+                    model.Reisen = model.Reisen.Where(x => x.Verpflegungs_id == filterModel.Verpflegungs_ID).ToList();
 
                 if (filterModel.Startdatum != null)
-                    model.Reisen = model.Reisen.Where(x => x.Beginndatum >= filterModel.Startdatum);
-             
+                    model.Reisen = model.Reisen.Where(x => x.Beginndatum >= filterModel.Startdatum).ToList();
+
                 if (filterModel.Enddatum != null)
-                    model.Reisen = model.Reisen.Where(x => x.Enddatum <= filterModel.Enddatum);
-                
-               // model.Reisen = model.Reisen.ToList();
+                    model.Reisen = model.Reisen.Where(x => x.Enddatum <= filterModel.Enddatum).ToList();
+
+                //model.Reisen = model.Reisen.ToList();
 
                 //}
                 //return RedirectToAction("Laden", gefilterteReisen);
@@ -199,11 +199,11 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Preis = 599 + i * 3,
                         Titel = "Wandern in der Wachau ",
                         Ort = "Spitz",
-                        Ort_id=1,
-                        Kategorie_id=2,
-                        Hotelkategorie=4,
-                        Land="Österreich",
-                        Land_id=2,
+                        Ort_id = 1,
+                        Kategorie_id = 2,
+                        Hotelkategorie = 4,
+                        Land = "Österreich",
+                        Land_id = 2,
                         Unterkunft = "Schlosshotel Burckhardt ",
                         Verpflegung = "Halbpension",
                         Verpflegungs_id = 2,
@@ -222,11 +222,11 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Preis = 895 + i * 3,
                         Titel = "Baden in Ligurien" + i,
                         Ort = "Genua",
-                        Ort_id=2,
-                        Kategorie_id=3,
-                        Hotelkategorie=3,
-                        Land="Italien",
-                        Land_id=3,
+                        Ort_id = 2,
+                        Kategorie_id = 3,
+                        Hotelkategorie = 3,
+                        Land = "Italien",
+                        Land_id = 3,
                         Unterkunft = "Pension Dolce Vita ",
                         Verpflegung = "Übernachtung/Frühstück",
                         Verpflegungs_id = 1,
@@ -277,8 +277,14 @@ namespace UI_Reiseboerse_Graf.Controllers
         private FilterModel FilterAnzeigeTest()
         {
             FilterModel model = new FilterModel();
-
+            #region Kategorie
             model.Kategorie = new List<KategorieModel>();
+
+            model.Kategorie.Add(new KategorieModel()
+            {
+                Id = 0,
+                Bezeichnung = "Alle"
+            });
 
             for (int i = 1; i < 6; i++)
             {
@@ -287,8 +293,16 @@ namespace UI_Reiseboerse_Graf.Controllers
                 km.Id = i;
                 model.Kategorie.Add(km);
             }
+            #endregion
 
+            #region Land
             model.Land = new List<LandModel>();
+
+            model.Land.Add(new LandModel()
+            {
+                land_ID = 0,
+                landName = "Alle"
+            });
 
             for (int i = 1; i < 6; i++)
             {
@@ -297,8 +311,16 @@ namespace UI_Reiseboerse_Graf.Controllers
                 lm.land_ID = i;
                 model.Land.Add(lm);
             }
+            #endregion
 
+            #region Ort
             model.Ort = new List<OrtModel>();
+
+            model.Ort.Add(new OrtModel()
+            {
+                Id = 0,
+                Bezeichnung = "Alle"
+            });
 
             for (int i = 1; i < 6; i++)
             {
@@ -307,9 +329,16 @@ namespace UI_Reiseboerse_Graf.Controllers
                 om.Id = i;
                 model.Ort.Add(om);
             }
+            #endregion
 
+            #region Verpflegung
             model.Verpflegung = new List<VerpflegungModel>();
 
+            model.Verpflegung.Add(new VerpflegungModel()
+            {
+                Id = 0,
+                Bezeichnung = "Alle"
+            });
             for (int i = 1; i < 6; i++)
             {
                 VerpflegungModel vm = new VerpflegungModel();
@@ -317,12 +346,28 @@ namespace UI_Reiseboerse_Graf.Controllers
                 vm.Id = i;
                 model.Verpflegung.Add(vm);
             }
+            #endregion
 
             model.Startdatum = DateTime.Now;
-            model.Enddatum = DateTime.Now;
+            model.Enddatum = DateTime.Now.AddYears(1);
 
             return model;
         }
 
+        /// <summary>
+        /// Befüllen des FilterModels für Laden POST (wenn bereits Daten ausgewählt wurden)
+        /// </summary>
+        /// <param name="filtermodel">Übergebenen Daten im FilterModel</param>
+        /// <returns>Ein FilterModel mit Werten für DropDown</returns>
+        private FilterModel FilterAnzeigeTest(FilterModel filtermodel)
+        {
+            FilterModel model = FilterAnzeigeTest();
+            model.Startdatum = filtermodel.Startdatum;
+            model.Enddatum = filtermodel.Enddatum;
+            model.PreisMax = filtermodel.PreisMax;
+            model.PreisMin = filtermodel.PreisMin;
+            model.HotelKategorie = filtermodel.HotelKategorie;
+            return model;
+        }
     }
 }

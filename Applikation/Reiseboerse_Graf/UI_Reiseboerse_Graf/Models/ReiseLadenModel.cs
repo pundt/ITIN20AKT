@@ -8,6 +8,7 @@ namespace UI_Reiseboerse_Graf.Models
     public class ReiseLadenModel
     {
         public FilterModel Filter { get; set; }
-        public IEnumerable<UI_Reiseboerse_Graf.Models.ReiseModel> Reisen{ get; set; }
+        public List<ReiseModel> Reisen{ get; set; }
+        //IEnumerable<UI_Reiseboerse_Graf.Models.ReiseModel
     }
 }
