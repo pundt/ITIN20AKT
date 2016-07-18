@@ -141,12 +141,13 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="id">ID der Unterkunft</param>
         /// <returns></returns>
+        [ChildActionOnly]
         public ActionResult UnterkunftAnzeigen(int id)
         {
             UnterkunftdetailModel um = new UnterkunftdetailModel()
             {
                 ID = id,
-                Bezeichnung = "Hotel Sonne",
+                Bezeichnung = "Hotel XYZ",
                 Beschreibung = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 Kategorie = 3,
                 Verpflegung = new VerpflegungModel()
@@ -194,24 +195,47 @@ namespace UI_Reiseboerse_Graf.Controllers
                     {
                         ID = i,
                         Anmeldefrist = new DateTime(2016, 08, 30),
-                        Beginndatum = new DateTime(2016, 10, 01),
-                        Enddatum = new DateTime(2016, 10, 30),
-                        Preis = 599 + i * 3,
-                        Titel = "Wandern in der Wachau ",
-                        Ort = "Spitz",
-                        Ort_id = 1,
-                        Kategorie_id = 2,
+                        Beginndatum = new DateTime(2016, 12, 15),
+                        Enddatum = new DateTime(2016, 12, 20),
+                        Preis = 599,
+                        Titel = "Hamburg im Advent",
+                        Ort = "Hamburg",
+                        Ort_id = 2,
+                        Kategorie_id = 1,
                         Hotelkategorie = 4,
                         Land = "Österreich",
                         Land_id = 2,
-                        Unterkunft = "Schlosshotel Burckhardt ",
+                        Unterkunft = "Hafentower Hotel",
                         Verpflegung = "Halbpension",
                         Verpflegungs_id = 2,
                         Restplätze = i % 5
                     };
                     liste.Add(reise);
                 }
-                else
+                else if (i % 3 == 0)
+                {
+                    ReiseModel reise = new ReiseModel()
+                    {
+                        ID = i,
+                        Anmeldefrist = new DateTime(2016, 10, 30),
+                        Beginndatum = new DateTime(2016, 11, 10),
+                        Enddatum = new DateTime(2016, 11, 15),
+                        Preis = 399,
+                        Titel = "Städtereise Wien",
+                        Ort = "Wien",
+                        Ort_id = 1,
+                        Kategorie_id = 2,
+                        Hotelkategorie = 4,
+                        Land = "Österreich",
+                        Land_id = 1,
+                        Unterkunft = "Schlosshotel Burckhardt",
+                        Verpflegung = "Vollpension",
+                        Verpflegungs_id = 2,
+                        Restplätze = i % 5
+                    };
+
+                    liste.Add(reise);
+                }
                 {
                     ReiseModel reise = new ReiseModel()
                     {
@@ -219,18 +243,18 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Anmeldefrist = new DateTime(2016, 07, 10),
                         Beginndatum = new DateTime(2016, 08, 20),
                         Enddatum = new DateTime(2016, 09, 01),
-                        Preis = 895 + i * 3,
-                        Titel = "Baden in Ligurien" + i,
-                        Ort = "Genua",
-                        Ort_id = 2,
+                        Preis = 895,
+                        Titel = "Kultururlaub Antike",
+                        Ort = "Rom",
+                        Ort_id = 3,
                         Kategorie_id = 3,
                         Hotelkategorie = 3,
                         Land = "Italien",
                         Land_id = 3,
                         Unterkunft = "Pension Dolce Vita ",
-                        Verpflegung = "Übernachtung/Frühstück",
+                        Verpflegung = "Halbpension",
                         Verpflegungs_id = 1,
-                        Restplätze = i % 10
+                        Restplätze = 10
                     };
                     liste.Add(reise);
                 }
@@ -255,15 +279,15 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Beginndatum = new DateTime(2016, 10, 01),
                     Enddatum = new DateTime(2016, 10, 30),
                     Preis = 599 + i * 3,
-                    Titel = "Wandern in der Wachau " + i,
-                    Ort = "Spitz" + i,
+                    Titel = "TestReise",
+                    Ort = "Irgendwohin",
                     Beschreibung = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                     Preis_Erwachsene = i * 156,
                     Preis_Kind = i * 133,
-                    Unterkunft = "Schlosshotel Burckhardt " + i,
+                    Unterkunft = "Hotel XYZ",
                     Unterkunft_ID = i,
-                    Verpflegung = "Halbpension" + i % 2,
-                    Restplätze = i % 5
+                    Verpflegung = "Verpflegung nach Wunsch",
+                    Restplätze = 5
                 };
                 liste.Add(reise);
             }
@@ -286,13 +310,24 @@ namespace UI_Reiseboerse_Graf.Controllers
                 Bezeichnung = "Alle"
             });
 
-            for (int i = 1; i < 6; i++)
+            KategorieModel km1 = new KategorieModel()
             {
-                KategorieModel km = new KategorieModel();
-                km.Bezeichnung = "Kategorie " + i;
-                km.Id = i;
-                model.Kategorie.Add(km);
-            }
+                Id = 1,
+                Bezeichnung = "Flugreise"
+            };
+            KategorieModel km2 = new KategorieModel()
+            {
+                Id = 2,
+                Bezeichnung = "Busreise"
+            };
+            KategorieModel km3 = new KategorieModel()
+            {
+                Id = 3,
+                Bezeichnung = "Rundreise"
+            };
+            model.Kategorie.Add(km1);
+            model.Kategorie.Add(km2);
+            model.Kategorie.Add(km3);
             #endregion
 
             #region Land
@@ -304,13 +339,24 @@ namespace UI_Reiseboerse_Graf.Controllers
                 landName = "Alle"
             });
 
-            for (int i = 1; i < 6; i++)
+            LandModel lm1 = new LandModel()
             {
-                LandModel lm = new LandModel();
-                lm.landName = "Land " + i;
-                lm.land_ID = i;
-                model.Land.Add(lm);
-            }
+                land_ID = 1,
+                landName = "Österreich"
+            };
+            LandModel lm2 = new LandModel()
+            {
+                land_ID = 2,
+                landName = "Deutschland"
+            };
+            LandModel lm3 = new LandModel()
+            {
+                land_ID = 3,
+                landName = "Italien"
+            };
+            model.Land.Add(lm1);
+            model.Land.Add(lm2);
+            model.Land.Add(lm3);
             #endregion
 
             #region Ort
@@ -322,13 +368,25 @@ namespace UI_Reiseboerse_Graf.Controllers
                 Bezeichnung = "Alle"
             });
 
-            for (int i = 1; i < 6; i++)
+            OrtModel om1 = new OrtModel()
             {
-                OrtModel om = new OrtModel();
-                om.Bezeichnung = "Ort " + i;
-                om.Id = i;
-                model.Ort.Add(om);
-            }
+                Id = 1,
+                Bezeichnung = "Wien"
+            };
+            OrtModel om2 = new OrtModel()
+            {
+                Id = 2,
+                Bezeichnung = "Hamburg"
+            };
+            OrtModel om3 = new OrtModel()
+            {
+                Id = 3,
+                Bezeichnung = "Rom"
+            };
+
+            model.Ort.Add(om1);
+            model.Ort.Add(om2);
+            model.Ort.Add(om3);
             #endregion
 
             #region Verpflegung
@@ -339,13 +397,27 @@ namespace UI_Reiseboerse_Graf.Controllers
                 Id = 0,
                 Bezeichnung = "Alle"
             });
-            for (int i = 1; i < 6; i++)
+
+            VerpflegungModel vm1 = new VerpflegungModel()
             {
-                VerpflegungModel vm = new VerpflegungModel();
-                vm.Bezeichnung = "Verpflegung " + i;
-                vm.Id = i;
-                model.Verpflegung.Add(vm);
-            }
+                Id = 1,
+                Bezeichnung = "Halbpension"
+            };
+            VerpflegungModel vm2 = new VerpflegungModel()
+            {
+                Id = 2,
+                Bezeichnung = "Vollpension"
+            };
+            VerpflegungModel vm3 = new VerpflegungModel()
+            {
+                Id = 3,
+                Bezeichnung = "All Inclusive"
+            };
+
+            model.Verpflegung.Add(vm1);
+            model.Verpflegung.Add(vm2);
+            model.Verpflegung.Add(vm3);
+
             #endregion
 
             model.Startdatum = DateTime.Now;
