@@ -147,7 +147,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             UnterkunftdetailModel um = new UnterkunftdetailModel()
             {
                 ID = id,
-                Bezeichnung = "Hotel Sonne",
+                Bezeichnung = "Hotel XYZ",
                 Beschreibung = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                 Kategorie = 3,
                 Verpflegung = new VerpflegungModel()
@@ -279,15 +279,15 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Beginndatum = new DateTime(2016, 10, 01),
                     Enddatum = new DateTime(2016, 10, 30),
                     Preis = 599 + i * 3,
-                    Titel = "Wandern in der Wachau " + i,
-                    Ort = "Spitz" + i,
+                    Titel = "TestReise",
+                    Ort = "Irgendwohin",
                     Beschreibung = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                     Preis_Erwachsene = i * 156,
                     Preis_Kind = i * 133,
-                    Unterkunft = "Schlosshotel Burckhardt " + i,
+                    Unterkunft = "Hotel XYZ",
                     Unterkunft_ID = i,
-                    Verpflegung = "Halbpension" + i % 2,
-                    Restplätze = i % 5
+                    Verpflegung = "Verpflegung nach Wunsch",
+                    Restplätze = 5
                 };
                 liste.Add(reise);
             }
