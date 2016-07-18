@@ -12,6 +12,14 @@
     background-color: rgba(193, 193, 193, 0.24);
 }
 
+.hoteldetailbild {
+    padding: 6px;
+}
+
+.reisedetailbild {
+    padding: 18px 6px 3px 6px;
+}
+
 .reise1 {
     border: solid;
     border-color: #576a8f;
@@ -159,6 +167,20 @@
     font-size: 1.6em;
     text-align: right;
     margin-top: 4%;
+}
+
+.suchergebnis {
+    font-family: 'Bradley Hand ITC';
+    font-weight: bold;
+    color: #005ead;
+    font-size: 1.6em;
+    text-align: center;
+    border-radius: 4px;
+    border-style: dashed;
+    border-width: 0.2em;
+    border-color: #005ead;
+    margin: 15%;
+    padding: 15%;
 }
 
 .Schriftartblau {

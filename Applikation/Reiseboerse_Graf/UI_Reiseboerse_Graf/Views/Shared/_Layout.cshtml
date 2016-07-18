@@ -43,7 +43,7 @@
                         }
                         else
                         {
-                                @Html.Partial("~/Views/Benutzer/_Login.cshtml")
+                            @Html.Partial("~/Views/Benutzer/_Login.cshtml", new UI_Reiseboerse_Graf.Models.LoginModel());
                         }
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="container-fluid">
                     <div class="col-xs-12">
                         <ul class="nav navbar-nav">
-                            <li class="active">@Html.ActionLink("Reiseimpressionen", "Index", "Home")</li>
+                            <li class="active">@Html.ActionLink("Reiseauflistung", "Laden", "Reisen")</li>
                             <li><a href="#">Impressum</a></li>
                             <li><a href="#">AGB</a></li>
                         </ul>

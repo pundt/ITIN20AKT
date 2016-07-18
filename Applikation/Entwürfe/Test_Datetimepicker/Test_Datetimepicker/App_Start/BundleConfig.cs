@@ -23,7 +23,8 @@ namespace Test_Datetimepicker
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/moment.min.js",
-                      "~/Scripts/bootstrap-datetimepicker.min.js"));
+                      "~/Scripts/bootstrap-datetimepicker.min.js",
+                      "~/Scripts/moment-with-locales.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
