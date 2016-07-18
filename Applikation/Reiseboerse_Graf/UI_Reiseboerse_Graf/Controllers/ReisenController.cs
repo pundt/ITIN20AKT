@@ -194,24 +194,47 @@ namespace UI_Reiseboerse_Graf.Controllers
                     {
                         ID = i,
                         Anmeldefrist = new DateTime(2016, 08, 30),
-                        Beginndatum = new DateTime(2016, 10, 01),
-                        Enddatum = new DateTime(2016, 10, 30),
-                        Preis = 599 + i * 3,
-                        Titel = "Wandern in der Wachau ",
-                        Ort = "Spitz",
-                        Ort_id = 1,
-                        Kategorie_id = 2,
+                        Beginndatum = new DateTime(2016, 12, 15),
+                        Enddatum = new DateTime(2016, 12, 20),
+                        Preis = 599,
+                        Titel = "Hamburg im Advent",
+                        Ort = "Hamburg",
+                        Ort_id = 2,
+                        Kategorie_id = 1,
                         Hotelkategorie = 4,
                         Land = "Österreich",
                         Land_id = 2,
-                        Unterkunft = "Schlosshotel Burckhardt ",
+                        Unterkunft = "Hafentower Hotel",
                         Verpflegung = "Halbpension",
                         Verpflegungs_id = 2,
                         Restplätze = i % 5
                     };
                     liste.Add(reise);
                 }
-                else
+                else if (i % 3 == 0)
+                {
+                    ReiseModel reise = new ReiseModel()
+                    {
+                        ID = i,
+                        Anmeldefrist = new DateTime(2016, 10, 30),
+                        Beginndatum = new DateTime(2016, 11, 10),
+                        Enddatum = new DateTime(2016, 11, 15),
+                        Preis = 399,
+                        Titel = "Städtereise Wien",
+                        Ort = "Wien",
+                        Ort_id = 1,
+                        Kategorie_id = 2,
+                        Hotelkategorie = 4,
+                        Land = "Österreich",
+                        Land_id = 1,
+                        Unterkunft = "Schlosshotel Burckhardt",
+                        Verpflegung = "Vollpension",
+                        Verpflegungs_id = 2,
+                        Restplätze = i % 5
+                    };
+
+                    liste.Add(reise);
+                }
                 {
                     ReiseModel reise = new ReiseModel()
                     {
@@ -219,18 +242,18 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Anmeldefrist = new DateTime(2016, 07, 10),
                         Beginndatum = new DateTime(2016, 08, 20),
                         Enddatum = new DateTime(2016, 09, 01),
-                        Preis = 895 + i * 3,
-                        Titel = "Baden in Ligurien" + i,
-                        Ort = "Genua",
-                        Ort_id = 2,
+                        Preis = 895,
+                        Titel = "Kultururlaub Antike",
+                        Ort = "Rom",
+                        Ort_id = 3,
                         Kategorie_id = 3,
                         Hotelkategorie = 3,
                         Land = "Italien",
                         Land_id = 3,
                         Unterkunft = "Pension Dolce Vita ",
-                        Verpflegung = "Übernachtung/Frühstück",
+                        Verpflegung = "Halbpension",
                         Verpflegungs_id = 1,
-                        Restplätze = i % 10
+                        Restplätze = 10
                     };
                     liste.Add(reise);
                 }
