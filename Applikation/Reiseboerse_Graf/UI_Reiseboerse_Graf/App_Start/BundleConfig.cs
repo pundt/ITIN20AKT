@@ -25,10 +25,10 @@ namespace UI_Reiseboerse_Graf
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                        "~/Scripts/moment.min.js",
-                      "~/Scripts/bootstrap-datetimepicker.min.js"));
+                      "~/Scripts/bootstrap-datetimepicker.min.js",
+                      "~/Scripts/moment-with-locales.js"));
 
            
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
