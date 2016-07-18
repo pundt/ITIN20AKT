@@ -12,6 +12,11 @@
     background-color: rgba(193, 193, 193, 0.24);
 }
 
+.hotelanzeigen{
+
+    padding: -2% 0% 0% 2%;
+}
+
 .reise1 {
     border: solid;
     border-color: #576a8f;
