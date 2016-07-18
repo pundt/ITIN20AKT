@@ -141,6 +141,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="id">ID der Unterkunft</param>
         /// <returns></returns>
+        [ChildActionOnly]
         public ActionResult UnterkunftAnzeigen(int id)
         {
             UnterkunftdetailModel um = new UnterkunftdetailModel()
