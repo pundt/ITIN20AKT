@@ -46,7 +46,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Laden", "Reisen");
         }
-        [ChildActionOnly]
+        
         [Authorize]
         [HttpGet]
         public ActionResult Logout()
