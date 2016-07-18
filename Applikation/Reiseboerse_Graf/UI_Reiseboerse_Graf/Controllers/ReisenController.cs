@@ -286,13 +286,24 @@ namespace UI_Reiseboerse_Graf.Controllers
                 Bezeichnung = "Alle"
             });
 
-            for (int i = 1; i < 6; i++)
+            KategorieModel km1 = new KategorieModel()
             {
-                KategorieModel km = new KategorieModel();
-                km.Bezeichnung = "Kategorie " + i;
-                km.Id = i;
-                model.Kategorie.Add(km);
-            }
+                Id = 1,
+                Bezeichnung = "Flugreise"
+            };
+            KategorieModel km2 = new KategorieModel()
+            {
+                Id = 2,
+                Bezeichnung = "Busreise"
+            };
+            KategorieModel km3 = new KategorieModel()
+            {
+                Id = 3,
+                Bezeichnung = "Rundreise"
+            };
+            model.Kategorie.Add(km1);
+            model.Kategorie.Add(km2);
+            model.Kategorie.Add(km3);
             #endregion
 
             #region Land
@@ -304,13 +315,24 @@ namespace UI_Reiseboerse_Graf.Controllers
                 landName = "Alle"
             });
 
-            for (int i = 1; i < 6; i++)
+            LandModel lm1 = new LandModel()
             {
-                LandModel lm = new LandModel();
-                lm.landName = "Land " + i;
-                lm.land_ID = i;
-                model.Land.Add(lm);
-            }
+                land_ID = 1,
+                landName = "Österreich"
+            };
+            LandModel lm2 = new LandModel()
+            {
+                land_ID = 2,
+                landName = "Deutschland"
+            };
+            LandModel lm3 = new LandModel()
+            {
+                land_ID = 3,
+                landName = "Italien"
+            };
+            model.Land.Add(lm1);
+            model.Land.Add(lm2);
+            model.Land.Add(lm3);
             #endregion
 
             #region Ort
@@ -322,13 +344,25 @@ namespace UI_Reiseboerse_Graf.Controllers
                 Bezeichnung = "Alle"
             });
 
-            for (int i = 1; i < 6; i++)
+            OrtModel om1 = new OrtModel()
             {
-                OrtModel om = new OrtModel();
-                om.Bezeichnung = "Ort " + i;
-                om.Id = i;
-                model.Ort.Add(om);
-            }
+                Id = 1,
+                Bezeichnung = "Wien"
+            };
+            OrtModel om2 = new OrtModel()
+            {
+                Id = 2,
+                Bezeichnung = "Hamburg"
+            };
+            OrtModel om3 = new OrtModel()
+            {
+                Id = 3,
+                Bezeichnung = "Rom"
+            };
+
+            model.Ort.Add(om1);
+            model.Ort.Add(om2);
+            model.Ort.Add(om3);
             #endregion
 
             #region Verpflegung
@@ -339,13 +373,27 @@ namespace UI_Reiseboerse_Graf.Controllers
                 Id = 0,
                 Bezeichnung = "Alle"
             });
-            for (int i = 1; i < 6; i++)
+
+            VerpflegungModel vm1 = new VerpflegungModel()
             {
-                VerpflegungModel vm = new VerpflegungModel();
-                vm.Bezeichnung = "Verpflegung " + i;
-                vm.Id = i;
-                model.Verpflegung.Add(vm);
-            }
+                Id = 1,
+                Bezeichnung = "Halbpension"
+            };
+            VerpflegungModel vm2 = new VerpflegungModel()
+            {
+                Id = 2,
+                Bezeichnung = "Vollpension"
+            };
+            VerpflegungModel vm3 = new VerpflegungModel()
+            {
+                Id = 3,
+                Bezeichnung = "All Inclusive"
+            };
+
+            model.Verpflegung.Add(vm1);
+            model.Verpflegung.Add(vm2);
+            model.Verpflegung.Add(vm3);
+
             #endregion
 
             model.Startdatum = DateTime.Now;
