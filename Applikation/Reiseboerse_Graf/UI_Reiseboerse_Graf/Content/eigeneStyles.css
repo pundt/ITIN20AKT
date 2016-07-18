@@ -12,9 +12,12 @@
     background-color: rgba(193, 193, 193, 0.24);
 }
 
-.hotelanzeigen{
+.hoteldetailbild {
+    padding: 6px;
+}
 
-    padding: -2% 0% 0% 2%;
+.reisedetailbild {
+    padding: 18px 6px 3px 6px;
 }
 
 .reise1 {
@@ -24,7 +27,6 @@
     border-width: 0.2em;
     background-color: rgba(193, 193, 193, 0.24);
     text-align: center;
-    padding: 15px 3px 3px 5px;
 }
 
 .Restplätze {
@@ -177,8 +179,8 @@
     border-style: dashed;
     border-width: 0.2em;
     border-color: #005ead;
-    margin:15%;
-    padding:15%;
+    margin: 15%;
+    padding: 15%;
 }
 
 .Schriftartblau {
