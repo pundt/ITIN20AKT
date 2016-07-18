@@ -23,6 +23,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             return View();
         }
+        [ChildActionOnly]
         [HttpGet]
         public ActionResult Login()
         {
@@ -45,6 +46,8 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Laden", "Reisen");
         }
+        [ChildActionOnly]
+        [Authorize]
         [HttpGet]
         public ActionResult Logout()
         {
