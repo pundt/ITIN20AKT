@@ -39,6 +39,7 @@
                                 Herzlich Willkommen, @User.Identity.Name!
                             </div><br />
                             @Html.ActionLink("Abmelden", "Logout", "Benutzer", null, new { @class = "btn anmeldung" })
+                            @Html.ActionLink("Ihr Profil", "Aktualisieren", "Benutzer", null, new { @class = "btn anmeldung" })
                         }
                         else
                         {

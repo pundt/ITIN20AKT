@@ -32,7 +32,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {
-            if (lm.Email == "sa@sa.sa" && lm.Passwort == "123user!")
+            if (lm.Email == "maxmuster@gmx1.at" && lm.Passwort == "1231user!")
             {
                 if (lm.AngemeldetBleiben)
                 {
@@ -46,7 +46,6 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Laden", "Reisen");
         }
-        [ChildActionOnly]
         [Authorize]
         [HttpGet]
         public ActionResult Logout()
@@ -55,59 +54,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        /// <summary>
-        /// Erhält das Model, sendet daten an Bl zur weitergabe in die datenbank
-        /// </summary>
-        /// <param name="bm">BenutzerModel Datentyp</param>
-        /// <returns></returns>
-        [HttpGet]
-        public List<Benutzer> BenutzerAnzeigen()
-        {
-            List<Benutzer> AlleBenutzer = new List<Benutzer>();
 
-            //neuer benutzer b der mit den daten aus dem benutzermodel aus der view gefüttert 
-            //wird und dann in eine liste hinzugefügt wird
-            //Benutzer benutzer = new Benutzer()
-            //{
-            //    Email = benutzer.Email,
-            //    Geschlecht = benutzer.Geschlecht,
-            //    Nachname = benutzer.Nachname,
-            //    Vorname = benutzer.Vorname,
-            //    Passwort = benutzer.Passwort
-            //};
-            //AlleBenutzer.Add(benutzer);
-
-            if (Globals.IST_TESTSYSTEM)
-            {
-                // dummy daten erstellen 30 testbenutzer die abgefragt werden können
-                for (int i = 0; i < 30; i++)
-                {
-                    Benutzer neuerBenutzer = new Benutzer()
-                    {
-                        Id = i,
-                        Email = "Max" + i + "@gmx.at",
-                        Geschlecht = false,
-                        Nachname = "Nachname" + i,
-                        Vorname = "Vorname" + i,
-                        Passwort = "12345678" + i
-                    };
-                    if (neuerBenutzer.Geschlecht== false)
-                    {
-                        neuerBenutzer.Geschlecht = true;
-                    }
-                    else
-                    {
-                        neuerBenutzer.Geschlecht = false;
-                    }
-                    AlleBenutzer.Add(neuerBenutzer);
-                }
-            }
-            else
-            {
-            }
-            return AlleBenutzer;
-
-        }
         [HttpPost]
         public ActionResult BenutzerAnlegen(KundenAnlegenModel bm)
         {
@@ -153,6 +100,92 @@ namespace UI_Reiseboerse_Graf.Controllers
                 });
             }
             return View(modell);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Aktualisieren()
+        {
+            List<KundenModel> kundenListe = DummyKundenAnlegen();
+
+            KundenModel model = kundenListe.Find(x => x.Email == User.Identity.Name);
+
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Aktualisieren(KundenModel model)
+        {
+            /// Die geänderten Daten gehen wieder verloren, da
+            /// bei erneutem Aufruf der Seite die Dummydaten wieder
+            /// aufgerufen werden
+            if (Globals.IST_TESTSYSTEM)
+            {
+                List<KundenModel> kundenListe = DummyKundenAnlegen();
+
+                foreach (KundenModel k in kundenListe)
+                {
+                    if (k.ID == model.ID)
+                    {
+                        k.Adresse = model.Adresse;
+                        k.Email = model.Email;
+                        k.GeburtsDatum = model.GeburtsDatum;
+                        k.Geschlecht = model.Geschlecht;
+                        k.Land = model.Land;
+                        k.Land_ID = model.Land_ID;
+                        k.Nachname = model.Nachname;
+                        k.Passwort = model.Passwort;
+                        k.PasswortWiederholung = model.PasswortWiederholung;
+                        k.Plz = model.Plz;
+                        k.Telefon = model.Telefon;
+                        k.Titel = model.Titel;
+                        k.Vorname = model.Vorname;
+                    }
+                }
+            }
+
+            return RedirectToAction("Laden", "Reisen");
+        }
+
+        private List<KundenModel> DummyKundenAnlegen()
+        {
+            List<KundenModel> kunden = new List<KundenModel>();
+
+            bool geschlechtAnlegen = true;
+
+            for (int i = 1; i <= 30; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    geschlechtAnlegen = false;
+                }
+
+                kunden.Add(new KundenModel
+                {
+                    ID = i,
+                    Email = "maxmuster@gmx" + i + ".at",
+                    GeburtsDatum = new DateTime(1980 + i, 1, 1 + i),
+                    Geschlecht = geschlechtAnlegen,
+                    Vorname = "Maxi",
+                    Nachname = "Muster",
+                    Land = new List<LandModel>()
+                    {
+                        new LandModel { land_ID = 1, landName = "Österreich" },
+                        new LandModel { land_ID = 2, landName = "Deutschland" },
+                        new LandModel { land_ID = 3, landName = "Italien" },
+                    },
+                    Passwort = "123" + i + "user!",
+                    PasswortWiederholung = "123" + i + "user!",
+                    Plz = "101" + i,
+                    Telefon = "067612345" + i,
+                    Titel = "",
+                    Adresse = "Musterstrasse 1" + i,
+                    Land_ID = i + 1
+                });
+            }
+
+            return kunden;
         }
     }
 }

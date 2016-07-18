@@ -9,6 +9,6 @@ namespace UI_Reiseboerse_Graf.Models
     // Kunde erbt von Benutzer
     public class KundenModel : KundenAnlegenModel
     {
-        public int Id { get; set; }
+        
     }
 }
