@@ -6,34 +6,33 @@ INSERT INTO Land(bezeichnung) VALUES('Deutschland');
 INSERT INTO Land(bezeichnung) VALUES('Italien');
 INSERT INTO Land(bezeichnung) VALUES('Schweiz');
 INSERT INTO Land(bezeichnung) VALUES('Frankreich');
+INSERT INTO Land(bezeichnung) VALUES('Spanien');
+INSERT INTO Land(bezeichnung) VALUES('Portugal');
+INSERT INTO Land(bezeichnung) VALUES('Grossbritannien');
+INSERT INTO Land(bezeichnung) VALUES('Belgien');
+INSERT INTO Land(bezeichnung) VALUES('Schweden');
 
-INSERT INTO Ort(bezeichnung) VALUES('Wien');
-INSERT INTO Ort(bezeichnung) VALUES('Hamburg');
-INSERT INTO Ort(bezeichnung) VALUES('Rom');
-INSERT INTO Ort(bezeichnung) VALUES('Zürich');
-INSERT INTO Ort(bezeichnung) VALUES('Paris');
-
-INSERT INTO Adresse(land_id, ort_id, plz, strasse, nummer)
-VALUES(1, 1, 1010, 'Stephansplatz', '1');
-INSERT INTO Adresse(land_id, ort_id, plz, strasse, nummer)
-VALUES(2, 2, 22222, 'Riemerstraße', '2/2');
-INSERT INTO Adresse(land_id, ort_id, plz, strasse, nummer)
-VALUES(3, 3, 31113, 'Via Accia', '33');
-INSERT INTO Adresse(land_id, ort_id, plz, strasse, nummer)
-VALUES(4, 4, 40215, 'Bankenplatz', '4/Top 1');
-INSERT INTO Adresse(land_id, ort_id, plz, strasse, nummer)
-VALUES(5, 5, 51243, 'Plaza de Chateau', '5');
+INSERT INTO Adresse(land_id, adresse)
+VALUES(1, '1010 Stephansplatz 1');
+INSERT INTO Adresse(land_id, adresse)
+VALUES(2, '23456 Domplatz 22');
+INSERT INTO Adresse(land_id, adresse)
+VALUES(3, '31312 Via Roma 3');
+INSERT INTO Adresse(land_id, adresse)
+VALUES(4, '1452 Schweizergarten 4');
+INSERT INTO Adresse(land_id, adresse)
+VALUES(5, '52541 Boulevard du Paris');
 
 INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('muster@itfox.at', CONVERT(VARBINARY(1000), '123user!'), 'Max', 'Muster', 0, 1, 0043676123456);
+VALUES('muster@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Max', 'Muster', 0, 1, 0043676123456);
 INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('marco@itfox.at', CONVERT(VARBINARY(1000), '123user!'), 'Marco', 'Wurz', 0, 2, 0049743212121);
+VALUES('marco@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Marco', 'Wurz', 0, 2, 0049743212121);
 INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('claudia@itfox.at', CONVERT(VARBINARY(1000), '123user!'), 'Claudia', 'Stiegl', 1, 3, 003256124565);
+VALUES('claudia@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Claudia', 'Stiegl', 1, 3, 003256124565);
 INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('daniel@itfox.at', CONVERT(VARBINARY(1000), '123user!'), 'Daniel', 'Zalli', 0, 4, 00396123456);
+VALUES('daniel@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Daniel', 'Zalli', 0, 4, 00396123456);
 INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('stefan@itfox.at', CONVERT(VARBINARY(1000), '123user!'), 'Stefan', 'Groig', 0, 5, 0055236458);
+VALUES('stefan@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Stefan', 'Groig', 0, 5, 0055236458);
 
 INSERT INTO Kunde(benutzer_id, geburtsdatum, titel, land_id)
 VALUES(1, '1990/1/1', 'Mag.', 1);

@@ -23,10 +23,7 @@ CREATE TABLE Mitarbeiter (
 CREATE TABLE Adresse (
 	id INT IDENTITY NOT NULL,
 	land_id INT NOT NULL,
-	ort_id INT NOT NULL,
-	plz INT NOT NULL,
-	strasse NVARCHAR(50) NOT NULL,
-	nummer NVARCHAR(25) NOT NULL,
+	adresse NVARCHAR(255) NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
@@ -89,12 +86,6 @@ CREATE TABLE Reisedetail (
 CREATE TABLE Land (
 	id INT IDENTITY NOT NULL,
 	bezeichnung NVARCHAR(50),
-	erstelldatum DATETIME DEFAULT GETDATE()
-);
-
-CREATE TABLE Ort (
-	id INT IDENTITY NOT NULL,
-	bezeichnung NVARCHAR(50) NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 

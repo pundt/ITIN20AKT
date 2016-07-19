@@ -40,13 +40,6 @@ FOREIGN KEY (unterkunft_id)
 REFERENCES Unterkunft(id);
 GO
 
-ALTER TABLE Adresse
-ADD
-CONSTRAINT FK_Adresse_Ort
-FOREIGN KEY (ort_id)
-REFERENCES Ort(id);
-GO
-
 ALTER TABLE Buchung
 ADD
 CONSTRAINT FK_Buchung_Reisedetail
