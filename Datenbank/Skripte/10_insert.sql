@@ -149,6 +149,10 @@ INSERT INTO Buchung(reisedetail_id, kunde_id) VALUES(2, 2);
 INSERT INTO Buchung(reisedetail_id, kunde_id) VALUES(3, 3);
 GO
 
+INSERT INTO Bewertung(bewertung, buchung_id) VALUES(5,1);
+INSERT INTO Bewertung(bewertung, buchung_id) VALUES(3,2);
+INSERT INTO Bewertung(bewertung, buchung_id) VALUES(4,3);
+
 INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(1, 1);
 INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(2, 2);
 INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(3, 3);
