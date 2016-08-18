@@ -48,9 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Benutzer.cs">
-      <DependentUpon>dbtest.tt</DependentUpon>
-    </Compile>
     <Compile Include="BuchungsVerwaltung.cs" />
     <Compile Include="dbtest.Context.cs">
       <AutoGen>True</AutoGen>
