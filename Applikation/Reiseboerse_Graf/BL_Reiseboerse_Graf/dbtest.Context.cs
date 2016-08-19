@@ -30,6 +30,6 @@ namespace BL_Reiseboerse_Graf
             throw new NotImplementedException();
         }
 
-        public DbSet<Benutzer> Benutzer { get; set; }
+        //public DbSet<Benutzer> Benutzer { get; set; }
     }
 }

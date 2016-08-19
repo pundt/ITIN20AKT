@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BildVerwaltung.cs" />
     <Compile Include="BuchungsVerwaltung.cs" />
     <Compile Include="dbtest.Context.cs">
       <AutoGen>True</AutoGen>

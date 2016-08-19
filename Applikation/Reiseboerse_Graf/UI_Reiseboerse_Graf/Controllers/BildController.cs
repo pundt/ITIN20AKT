@@ -8,13 +8,13 @@ namespace UI_Reiseboerse_Graf.Controllers
 {
     public class BildController : Controller
     {
-        [AllowAnonymous]
-        public ActionResult Laden(int id)
-        {
-            string contentType = "image/jpeg";
-            byte[] data = BL_Reiseboerse_Graf.ReiseVerwaltung.Bildausleser(id);   //de facto - aus db laden / oder aus BL laden
+        //[AllowAnonymous]
+        //public ActionResult Laden(int id)
+        //{
+        //    string contentType = "image/jpeg";
+        //    Bild aktBild = BL_Reiseboerse_Graf.ReiseVerwaltung.LadeBild(id);
 
-            return new FileContentResult(data, contentType);
-        }
+        //    return new FileContentResult(aktBild.Bilddaten, contentType);
+        //}
     }
 }

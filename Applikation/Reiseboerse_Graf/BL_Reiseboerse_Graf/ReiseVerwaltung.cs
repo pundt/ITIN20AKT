@@ -40,23 +40,7 @@ namespace BL_Reiseboerse_Graf
             return 1;
         }
 
-        /// <summary>
-        /// Liest aus der Datebank ein Bild aus
-        /// </summary>
-        /// <param name="id">Id des Bildes</param>
-        /// <returns>Bild als Bytearray</returns>
-        public static byte[] Bildausleser(int id)
-        {
-            //Sobald DB eingebunden wurde funktioniert es so
-
-            //reisebueroEntities ent = new reisebueroEntities();
-            //Bild gesuchtesBild = (from b in ent.Bild where b.id == id select b).FirstOrDefault();
-            //byte[] c = gesuchtesBild.bild1;
-            //return c;
-
-            //damit es jetzt in diesem Zwischenstadium kompiliert
-            return null;
-        }
+        
 
 
 
