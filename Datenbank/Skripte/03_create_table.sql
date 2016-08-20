@@ -10,13 +10,10 @@ CREATE TABLE Benutzer (
 	geschlecht BIT NOT NULL,
 	adresse_id INT NOT NULL,
 	telefon NVARCHAR(25) NOT NULL,
-	erstelldatum DATETIME DEFAULT GETDATE()
-);
-
-CREATE TABLE Mitarbeiter (
-	id INT IDENTITY NOT NULL,
-	benutzer_id INT NOT NULL,
-	svnr INT NOT NULL,
+	titel NVARCHAR(25),
+	geburtsdatum DATETIME NOT NULL,
+	land_id INT NOT NULL,
+	ist_Mitarbeiter BIT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
@@ -27,25 +24,22 @@ CREATE TABLE Adresse (
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE Kunde (
-	id INT IDENTITY NOT NULL,
+CREATE TABLE Buchung (
+	reisedurchführung_id INT NOT NULL,
 	benutzer_id INT NOT NULL,
-	geburtsdatum DATETIME NOT NULL,
-	titel NVARCHAR(25),
-	land_id INT NOT NULL,
+	passnummer NVARCHAR(25) NOT NULL,
+	zahlung_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE Buchung (
-	reisedetail_id INT NOT NULL,
-	kunde_id INT NOT NULL,
-	erstelldatum DATETIME DEFAULT GETDATE()
+CREATE BuchungStorniert(
+	reisedurchführung_id INT NOT NULL
 );
 
 CREATE TABLE Bewertung (
 	id INT IDENTITY NOT NULL,
-	bewertung INT NOT NULL,
-	buchung_id INT NOT NULL,
+	wertung INT NOT NULL,
+	reise_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
@@ -74,12 +68,18 @@ CREATE TABLE Unterkunft (
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE Reisedetail (
+CREATE TABLE Reisedatum (
 	id INT IDENTITY NOT NULL,
 	reise_id INT NOT NULL,
 	startdatum DATETIME NOT NULL,
 	enddatum DATETIME NOT NULL,
 	anmeldefrist DATETIME NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Reisedurchfuehrung(
+	id INT IDENTITY NOT NULL,
+	reisedatum_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
@@ -89,23 +89,33 @@ CREATE TABLE Land (
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE Bild (
+CREATE TABLE ReiseBild (
 	id INT IDENTITY NOT NULL,
-	bild VARBINARY(MAX) NOT NULL,
+	bilddaten VARBINARY(MAX) NOT NULL,
+	reise_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE Bild_Unterkunft (
+CREATE TABLE UnterkunftBild (
 	id INT IDENTITY NOT NULL,
-	bild_id INT NOT NULL,
+	bilddaten VARBINARY(MAX) NOT NULL,
 	unterkunft_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE Bild_Reise (
+CREATE TABLE Zahlungsart(
 	id INT IDENTITY NOT NULL,
-	bild_id INT NOT NULL,
-	reise_id INT NOT NULL,
+	bezeichnung NVARCHAR(50) NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
+
+CREATE TABLE Zahlung(
+	id INT IDENTITY NOT NULL,
+	vorname NVARCHAR(50) NOT NULL,
+	nachname NVARCHAR(50) NOT NULL,
+	nummer NVARCHAR(50) NOT NULL,
+	zahlungsart_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
 GO

@@ -23,26 +23,17 @@ VALUES(4, '1452 Schweizergarten 4');
 INSERT INTO Adresse(land_id, adresse)
 VALUES(5, '52541 Boulevard du Paris');
 
-INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('muster@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Max', 'Muster', 0, 1, 0043676123456);
-INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('marco@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Marco', 'Wurz', 0, 2, 0049743212121);
-INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('claudia@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Claudia', 'Stiegl', 1, 3, 003256124565);
-INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('daniel@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Daniel', 'Zalli', 0, 4, 00396123456);
-INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon)
-VALUES('stefan@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Stefan', 'Groig', 0, 5, 0055236458);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon, land_id, geburtsdatum, titel, ist_Mitarbeiter)
+VALUES('muster@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Max', 'Muster', 0, 1, 0043676123456, 2, '1990/1/1','Mag.',0);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon,land_id, geburtsdatum, titel, ist_Mitarbeiter)
+VALUES('marco@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Marco', 'Wurz', 0, 2, 0049743212121, 1, '1998/5/3', 'Dipl. Ing.',1);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon, land_id, geburtsdatum, titel,ist_Mitarbeiter)
+VALUES('claudia@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Claudia', 'Stiegl', 1, 3, 003256124565, 3, '1987/10/3', 'Prof.',1);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon, land_id, geburtsdatum, titel,ist_Mitarbeiter)
+VALUES('daniel@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Daniel', 'Zalli', 0, 4, 00396123456, 4, '1999/7/7', 'Mag.',0);
+INSERT INTO Benutzer(email, passwort, vorname, nachname, geschlecht, adresse_id, telefon, land_id, geburtsdatum, titel,ist_Mitarbeiter)
+VALUES('stefan@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Stefan', 'Groig', 0, 5, 0055236458, '1960/1/5', 'Mag.',1);
 
-INSERT INTO Kunde(benutzer_id, geburtsdatum, titel, land_id)
-VALUES(1, '1990/1/1', 'Mag.', 1);
-INSERT INTO Kunde(benutzer_id, geburtsdatum, titel, land_id)
-VALUES(2, '1989/3/8', '', 1);
-INSERT INTO Kunde(benutzer_id, geburtsdatum, titel, land_id)
-VALUES(4, '1991/12/12', 'Dr.', 3);
-
-INSERT INTO Mitarbeiter(benutzer_id, svnr) VALUES(3, 1234);
-INSERT INTO Mitarbeiter(benutzer_id, svnr) VALUES(5, 1470);
 
 INSERT INTO Verpflegung(bezeichnung) VALUES('Ohne Verpflegung');
 INSERT INTO Verpflegung(bezeichnung) VALUES('Frühstück');
@@ -72,96 +63,121 @@ VALUES('Urlaub der Creme de la Creme', 'Verbleiben Sie in einem unserer 4000 Zim
 INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind)
 VALUES('Pokern wie die Pros', 'Fahren Sie zur World Pokers Tour nach Las Vegas!', 5, 1200.00, 600.00);
 
-INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
+INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(1, '2016-31-07', '2016-06-08', '2016-30-06');
-INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
+INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(2, '2016-01-12', '2016-06-12', '2016-10-11');
-INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
+INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(3, '2016-25-07', '2016-30-07', '2016-15-06');
-INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
+INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(4, '2017-07-01', '2017-21-01', '2016-23-12');
-INSERT INTO Reisedetail(reise_id, startdatum, enddatum, anmeldefrist)
+INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(5, '2017-01-03', '2017-15-03', '2017-02-02');
 
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\1_hotel_test.jpg', Single_Blob) 
-AS import;
+INSERT INTO UnterkunftBild (bilddaten, unterkunft_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\1_hotel_test.jpg', Single_Blob) 
+	AS import,
+	1);
 GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\2_hotel_test.jpg', Single_Blob) 
-AS import;
+INSERT INTO UnterkunftBild(bilddaten, unterkunft_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\2_hotel_test.jpg', Single_Blob) 
+	AS import,
+	1);
 GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\3_hotel_test.jpg', Single_Blob) 
-AS import;
-GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\4_hotel_test.jpg', Single_Blob) 
-AS import;
-GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\5_hotel_test.jpg', Single_Blob) 
-AS import;
-GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\1_reise_test.jpg', Single_Blob) 
-AS import;
-GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\2_reise_test.jpg', Single_Blob) 
-AS import;
-GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\3_reise_test.jpg', Single_Blob) 
-AS import;
-GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\4_reise_test.jpg', Single_Blob) 
-AS import;
-GO
-INSERT INTO Bild (bild)
-SELECT *
-FROM Openrowset( 
-Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\5_reise_test.jpg', Single_Blob) 
-AS import;
+INSERT INTO UnterkunftBild (bilddaten, unterkunft_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\3_hotel_test.jpg', Single_Blob) 
+	AS import,
+	3);
 GO
 
-INSERT INTO Buchung(reisedetail_id, kunde_id) VALUES(1, 1);
-INSERT INTO Buchung(reisedetail_id, kunde_id) VALUES(2, 2);
-INSERT INTO Buchung(reisedetail_id, kunde_id) VALUES(3, 3);
+INSERT INTO UnterkunftBild (bilddaten, unterkunft_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\4_hotel_test.jpg', Single_Blob) 
+	AS import,
+	4);
+GO
+INSERT INTO UnterkunftBild (bilddaten, unterkunft_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\5_hotel_test.jpg', Single_Blob) 
+	AS import,
+	5);
+GO
+INSERT INTO ReiseBild (bilddaten,reise_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\1_reise_test.jpg', Single_Blob) 
+	AS import,
+	4);	
+GO
+INSERT INTO ReiseBild (bilddaten, reise_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\2_reise_test.jpg', Single_Blob) 
+	AS import,
+	3);
+GO
+INSERT INTO ReiseBild (bilddaten,reise_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\3_reise_test.jpg', Single_Blob) 
+	AS import,
+	1);
+GO
+INSERT INTO ReiseBild (bilddaten, reise_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\4_reise_test.jpg', Single_Blob) 
+	AS import,
+	1);
+GO
+INSERT INTO ReiseBild (bilddaten, reise_id)
+VALUES(
+	SELECT *
+	FROM Openrowset( 
+	Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\5_reise_test.jpg', Single_Blob) 
+	AS import,
+	2);
 GO
 
-INSERT INTO Bewertung(bewertung, buchung_id) VALUES(5,1);
-INSERT INTO Bewertung(bewertung, buchung_id) VALUES(3,2);
-INSERT INTO Bewertung(bewertung, buchung_id) VALUES(4,3);
-
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(1, 1);
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(2, 2);
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(3, 3);
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(4, 4);
-INSERT INTO Bild_Reise(bild_id, reise_id) VALUES(5, 5);
+INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer,zahlung_id) VALUES(1, 1,'AB12345670',1);
+INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer,zahlung_id) VALUES(2, 2,'56484651GHD',2);
+INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer,zahlung_id) VALUES(3, 3,'KHGKFKU265456',3);
 GO
 
-INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(1, 6);
-INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(2, 7);
-INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(3, 8);
-INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(4, 9);
-INSERT INTO Bild_Unterkunft(unterkunft_id, bild_id) VALUES(5, 10);
+INSERT INTO Zahlungsart(bezeichnung) VALUES('Visa');
+INSERT INTO Zahlungsart(bezeichnung) VALUES('Überweisung');
+INSERT INTO Zahlungsart(bezeichnung) VALUES('MasterCard');
+GO
+
+INSERT INO Zahlung(vorname, nachname, nummer, zahlungsart_id) VALUES('Max', 'Bichi','1568744958',1);
+INSERT INO Zahlung(vorname, nachname, nummer, zahlungsart_id) VALUES('Michi', 'Lehnchen','1567774958',2);
+INSERT INO Zahlung(vorname, nachname, nummer, zahlungsart_id) VALUES('Steffi', 'Gindl','177744555445',3);
+GO
+
+INSERT INTO Bewertung(wertung, reise_id) VALUES(5,1);
+INSERT INTO Bewertung(wertung, reise_id) VALUES(3,2);
+INSERT INTO Bewertung(wertung, reise_id) VALUES(4,3);
+GO
+
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(1);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(2);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
+GO
