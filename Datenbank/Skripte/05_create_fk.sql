@@ -1,27 +1,6 @@
 USE reisebuero;
 GO
 
-ALTER TABLE Reisedetail
-ADD
-CONSTRAINT FK_Reisedetail_Reise
-FOREIGN KEY (reise_id)
-REFERENCES Reise(id);
-GO
-
-ALTER TABLE Buchung
-ADD
-CONSTRAINT FK_Buchung_Benutzer
-FOREIGN KEY (benutzer_id)
-REFERENCES Benutzer(id);
-GO
-
-ALTER TABLE Buchung
-ADD
-CONSTRAINT FK_Buchung_Benutzer
-FOREIGN KEY (benutzer_id)
-REFERENCES Benutzer(id);
-GO
-
 ALTER TABLE Buchung
 ADD
 CONSTRAINT FK_Buchung_Benutzer
@@ -38,16 +17,16 @@ GO
 
 ALTER TABLE Buchung
 ADD
-CONSTRAINT FK_Buchung_Reisedurchführung
-FOREIGN KEY (reisedurchführung_id)
-REFERENCES Reisedurchführung(id);
+CONSTRAINT FK_Buchung_Reisedurchfuehrung
+FOREIGN KEY (reisedurchfuehrung_id)
+REFERENCES Reisedurchfuehrung(id);
 GO
 
-ALTER TABLE Buchung
+ALTER TABLE BuchungStorniert
 ADD
-CONSTRAINT FK_Buchung_BuchungStorniert
-FOREIGN KEY (buchungStorniert_id)
-REFERENCES BuchungStorniert(id);
+CONSTRAINT FK_BuchungStorniert_Buchung
+FOREIGN KEY (reisedurchfuehrung_id)
+REFERENCES Buchung(reisedurchfuehrung_id)
 GO
 
 ALTER TABLE Adresse
@@ -62,6 +41,13 @@ ADD
 CONSTRAINT FK_Benutzer_Land
 FOREIGN KEY (land_id)
 REFERENCES Land(id);
+GO
+
+ALTER TABLE Benutzer
+ADD
+CONSTRAINT FK_Benutzer_Adresse
+FOREIGN KEY (adresse_id)
+REFERENCES Adresse(id);
 GO
 
 ALTER TABLE Reise
@@ -85,13 +71,6 @@ FOREIGN KEY (reisedatum_id)
 REFERENCES Reisedatum(id)
 GO
 
-ALTER TABLE Benutzer
-ADD
-CONSTRAINT FK_Benutzer_Adresse
-FOREIGN KEY (adresse_id)
-REFERENCES Adresse(id);
-GO
-
 ALTER TABLE ReiseBild
 ADD
 CONSTRAINT FK_ReiseBild_Reise
@@ -106,12 +85,6 @@ FOREIGN KEY (reise_id)
 REFERENCES Reise(id);
 GO
 
-ALTER TABLE Bild_Reise
-ADD
-CONSTRAINT FK_Bild_Reise_Bild
-FOREIGN KEY (bild_id)
-REFERENCES Bild(id);
-GO
 
 ALTER TABLE UnterkunftBild
 ADD
@@ -134,9 +107,4 @@ FOREIGN KEY (zahlungsart_id)
 REFERENCES Zahlungsart(id);
 GO
 
-ALTER TABLE BuchungStorniert
-ADD
-CONSTRAINT FK_BuchungStorniert_Buchung
-FOREIGN KEY (reisedurchfuehrung_id)
-REFERENCES Buchung(Reisedurchfuehrung_id)
-GO
+

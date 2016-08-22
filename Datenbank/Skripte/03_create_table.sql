@@ -25,15 +25,15 @@ CREATE TABLE Adresse (
 );
 
 CREATE TABLE Buchung (
-	reisedurchführung_id INT NOT NULL,
+	reisedurchfuehrung_id INT NOT NULL,
 	benutzer_id INT NOT NULL,
 	passnummer NVARCHAR(25) NOT NULL,
 	zahlung_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE BuchungStorniert(
-	reisedurchführung_id INT NOT NULL
+CREATE TABLE BuchungStorniert(
+	reisedurchfuehrung_id INT NOT NULL
 );
 
 CREATE TABLE Bewertung (

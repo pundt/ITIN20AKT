@@ -7,6 +7,12 @@ CONSTRAINT PK_Adresse
 PRIMARY KEY (id);
 GO
 
+ALTER TABLE Benutzer
+ADD
+CONSTRAINT PK_Benutzer
+PRIMARY KEY (id);
+GO
+
 ALTER TABLE Land
 ADD
 CONSTRAINT PK_Land
@@ -40,7 +46,7 @@ GO
 ALTER TABLE BuchungStorniert
 ADD
 CONSTRAINT PK_BuchungStorniert
-PRIMARY KEY (reisedurchführung_id);
+PRIMARY KEY (reisedurchfuehrung_id);
 GO
 
 ALTER TABLE Reisedurchfuehrung
@@ -49,11 +55,6 @@ CONSTRAINT PK_Reisedurchfuehrung
 PRIMARY KEY (id);
 GO
 
-ALTER TABLE Reisedatum
-ADD
-CONSTRAINT PK_Reisedatum
-PRIMARY KEY (id);
-GO
 
 ALTER TABLE Reise
 ADD
