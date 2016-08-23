@@ -9,7 +9,7 @@ namespace UI_Reiseboerse_Graf.Models
     {
         public FilterModel Filter { get; set; }
         public List<ReiseModel> Reisen{ get; set; }
-        public TextsucheModel TextSuche { get; set; }
+        public string TextSuche { get; set; }
         //IEnumerable<UI_Reiseboerse_Graf.Models.ReiseModel
     }
 }

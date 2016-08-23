@@ -42,8 +42,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             else
             {
-                /// die Liste aus der DB mit der Methode aus BL aufrufen und auf die Liste von ReiseModel 
-                /// mappen
+               
             }
             return View(model);
         }
@@ -177,50 +176,50 @@ namespace UI_Reiseboerse_Graf.Controllers
             return RedirectToAction("Index");
         }
 
+
         /// <summary>
         /// TextSuche nach Beschreibungstext der Reise
         /// </summary>
         /// <param name="model">Suchtext</param>
         /// <returns>Liste von Reisen bei Fehler oder ungültigen Suchtext Null</returns>
         [HttpPost]
-        public ActionResult Suchen(TextsucheModel model)
+        public ActionResult Suchen(string TextSuche)
         {
-            List<Reise> liste = null;
-            List<Reisedatum> reisedaten = null;
-            List<ReiseModel> viewliste = null;
-            if (string.IsNullOrEmpty(model.Suchtext))
+            List<Reise> liste = new List<Reise>();
+            List<Reisedatum> reisedaten = new List<Reisedatum>();
+            List<ReiseModel> viewliste = new List<ReiseModel>();
+            ReiseModel rm = new ReiseModel();
+            if (!string.IsNullOrEmpty(TextSuche))
             {
-                liste=ReiseVerwaltung.SucheReise(model.Suchtext);                
-            }
+                liste = ReiseVerwaltung.SucheReise(TextSuche);
+            }            
             foreach (var reise in liste)
             {
                 reisedaten = reise.AlleReisedaten.ToList();
-                viewliste.Add(new ReiseModel
-                {
-                    Anmeldefrist = reisedaten[0].Anmeldefrist,
-                    Beginndatum = reisedaten[0].Startdatum,
-                    Enddatum = reisedaten[0].Enddatum,
-                    Hotelkategorie = reise.Unterkunft.Kategorie,
-                    ID = reise.ID,
-                    Land = reise.Ort.Land.Bezeichnung,
-                    Ort = reise.Ort.Bezeichnung,
-                    Land_id = reise.Ort.Land.ID,
-                    Ort_id = reise.Ort.ID,
-                    Preis = reise.Preis_Erwachsen,
-                    Titel = reise.Titel,
-                    Unterkunft = reise.Unterkunft.Bezeichnung,
-                    Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung,
-                    Verpflegungs_id = reise.Unterkunft.Verpflegung.ID
-                });
+                rm.Anmeldefrist = reisedaten[0].Anmeldefrist;
+                rm.Beginndatum = reisedaten[0].Startdatum;
+                rm.Enddatum = reisedaten[0].Enddatum;
+                rm.Hotelkategorie = reise.Unterkunft.Kategorie;
+                rm.ID = reise.ID;
+                rm.Land = reise.Ort.Land.Bezeichnung;
+                rm.Ort = reise.Ort.Bezeichnung;
+                rm.Land_id = reise.Ort.Land.ID;
+                rm.Ort_id = reise.Ort.ID;
+                rm.Preis = reise.Preis_Erwachsen;
+                rm.Titel = reise.Titel;
+                rm.Unterkunft = reise.Unterkunft.Bezeichnung;
+                rm.Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung;
+                rm.Verpflegungs_id = reise.Unterkunft.Verpflegung.ID;
+                viewliste.Add(rm);
             }
             ReiseLadenModel viewmodel = new ReiseLadenModel()
             {
                 Reisen = viewliste,
                 Filter = FilterAnzeigeTest(),
-                TextSuche = model
+                TextSuche = TextSuche
             };
 
-            return RedirectToAction("Laden", "Reisen", viewmodel);
+            return View("Laden", viewmodel);
         }
 
         /// <summary>

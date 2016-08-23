@@ -14,10 +14,10 @@ namespace BL_Reiseboerse_Graf
         /// Lädt alle Reisen aus der Datenbank
         /// </summary>
         /// <returns>eine Liste von Reisen oder bei einem Fehler null</returns>
-        //public static List<Reise> LadeAlleReisen()
-        //{
-        //    return null;
-        //}
+        public static List<Reise> LadeAlleReisen()
+        {
+            return null;
+        }
 
         /// <summary>
         /// Lädt alle Reisen, die den Filterkriterien entsprechen
@@ -51,7 +51,7 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    liste = context.AlleReisen.Include("AlleReisedaten").Include("Unterkunft").Include("Ort").Include("Land").ToList();
+                    liste = context.AlleReisen.Include("AlleReisedaten").Include("Unterkunft.Verpflegung").Include("Ort.Land").ToList();
                     if (liste != null&&liste.Count>0)
                     {
                         liste = liste.Where(x => x.Beschreibung.Contains(suchtext)).ToList();
