@@ -21,6 +21,8 @@
             <div class="termin">Aktueller Termin: @Html.DisplayFor(model => model.Beginndatum) - @Html.DisplayFor(model => model.Enddatum)</div>
             @using (Html.BeginForm("Hinzufuegen", "Buchungen",FormMethod.Post,new { @class="zentriert"}))
             {
+                @Html.HiddenFor(x=>x.Preis_Erwachsene)
+                @Html.HiddenFor(x=>x.Preis_Kind)
                 <table class="table table-condensed">
                     <tr>
                         <th>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="reisebueroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="reisebueroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adresse">
           <Key>
             <PropertyRef Name="id" />
@@ -56,6 +56,9 @@
           <Property Name="reisedurchfuehrung_id" Type="int" Nullable="false" />
           <Property Name="benutzer_id" Type="int" Nullable="false" />
           <Property Name="passnummer" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="vorname" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="nachname" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="geburtsdatum" Type="datetime" Nullable="false" />
           <Property Name="erstelldatum" Type="datetime" />
         </EntityType>
         <EntityType Name="Buchung_Zahlung">
@@ -517,8 +520,7 @@
             <End Role="Zahlung" EntitySet="Zahlung" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="reisebueroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -581,6 +583,9 @@
           <NavigationProperty Name="Reisedurchfuehrung" Relationship="Self.FK_Buchung_Reisedurchfuehrung" FromRole="Buchung" ToRole="Reisedurchfuehrung" />
           <NavigationProperty Name="Buchung_Zahlung" Relationship="Self.FK_Buchung_Zahlung_Buchung" FromRole="Buchung" ToRole="Buchung_Zahlung" />
           <NavigationProperty Name="BuchungStorniert" Relationship="Self.FK_BuchungStorniert_Buchung" FromRole="Buchung" ToRole="BuchungStorniert" />
+          <Property Name="Vorname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Nachname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Geburtsdatum" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Buchung_Zahlung">
           <Key>
@@ -974,6 +979,9 @@
           <EntitySetMapping Name="AlleBuchungen">
             <EntityTypeMapping TypeName="reisebueroModel.Buchung">
               <MappingFragment StoreEntitySet="Buchung">
+                <ScalarProperty Name="Geburtsdatum" ColumnName="geburtsdatum" />
+                <ScalarProperty Name="Nachname" ColumnName="nachname" />
+                <ScalarProperty Name="Vorname" ColumnName="vorname" />
                 <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
                 <ScalarProperty Name="Passnummer" ColumnName="passnummer" />
                 <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />

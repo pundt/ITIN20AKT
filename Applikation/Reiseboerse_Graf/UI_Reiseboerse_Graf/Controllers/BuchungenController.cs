@@ -32,10 +32,16 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Fügt eine Buchung hinzu
         /// </summary>
         /// <returns>den View zum Eingeben der Daten</returns>
-        [HttpGet]
-        public ActionResult Hinzufuegen()
-        {
-            return View();
+        [HttpPost]
+        public ActionResult Hinzufuegen(BuchungAnzahlModel anzahl)
+        {            
+            List<BuchungenModel> BuchungsListe = new List<BuchungenModel>();
+            for (int i = 0; i < anzahl.Anzahl; i++)
+            {
+                BuchungenModel bm = new BuchungenModel();
+                BuchungsListe.Add(bm);
+            }
+            return View(BuchungsListe);
         }
 
         /// <summary>
@@ -44,20 +50,21 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns></returns>
         /// 
         [HttpPost]
-        public ActionResult Hinzufuegen(BuchungenModel neueBuchung)
+        public ActionResult Buchen(List<BuchungenModel> liste)
         {
-            bool angemeldet = false;
-            BuchungenModel bm = new BuchungenModel();
-            if (angemeldet)
-            {
-                return View(bm);
-            }
-            // falls nicht angemeldet weiterleitung zum login
-            else
+            
+            if (!this.User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Laden", "Login");
             }
-            
+            else
+            {
+               
+            }
+            return null;
+
+
+
         }
     }
 }

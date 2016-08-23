@@ -131,6 +131,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuchungAnzahlModel.cs" />
+    <Compile Include="Models\BuchungHinzufuegenModel.cs" />
     <Compile Include="Models\KategorieModel.cs" />
     <Compile Include="Models\KundenAnlegenModel.cs" />
     <Compile Include="Models\BuchungenModel.cs" />
@@ -246,11 +248,11 @@
     <Content Include="Views\Reisen\UnterkunftAnzeigen.cshtml" />
     <Content Include="Views\Benutzer\BenutzerAnlegen.cshtml" />
     <Content Include="Views\Reisen\Filter.cshtml" />
-    <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
     <Content Include="Views\Reisen\gesuchteReisen.cshtml" />
     <Content Include="Views\Reisen\_Filter.cshtml" />
     <Content Include="Views\Benutzer\_Login.cshtml" />
     <Content Include="Views\Benutzer\Aktualisieren.cshtml" />
+    <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
