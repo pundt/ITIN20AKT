@@ -36,13 +36,6 @@ namespace UI_Reiseboerse_Graf.Models
         public int HotelKategorie { get; set; }
 
         /// <summary>
-        /// Liste für KategorieModel für DropDownListe (z.B. "Busreise")
-        /// </summary>
-        public List<KategorieModel> Kategorie { get; set; }
-
-        public int Kategorie_ID { get; set; }
-
-        /// <summary>
         /// Liste für VerpflegungModel für DropDownListe (z.B. "Halbpension")
         /// </summary>
         public List<VerpflegungModel> Verpflegung { get; set; }

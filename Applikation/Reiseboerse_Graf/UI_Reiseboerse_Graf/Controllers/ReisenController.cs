@@ -76,9 +76,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                     model.Reisen = model.Reisen.Where(x => x.Ort_id == filterModel.Ort_ID).ToList();
 
 
-                if (filterModel.Kategorie_ID != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Kategorie_id == filterModel.Kategorie_ID).ToList();
-
                 if (filterModel.HotelKategorie != 0)
                     model.Reisen = model.Reisen.Where(x => x.Hotelkategorie == filterModel.HotelKategorie).ToList();
 
@@ -181,6 +178,19 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         /// <summary>
+        /// TextSuche nach Beschreibungstext der Reise
+        /// </summary>
+        /// <param name="model">Suchtext</param>
+        /// <returns>Liste von Reisen bei Fehler oder ungültigen Suchtext Null</returns>
+        [HttpGet]
+        public ActionResult Suchen(TextsucheModel model)
+        {
+            ///Methode aus BL --> Suchtext übergeben
+            ///und dann die Liste der rückgelieferten Reiseobjekte auf ViewModel Reise ummappen 
+            return null;
+        }
+
+        /// <summary>
         /// Befüllen mit Daten im Testsytem für Reise anzeigen 
         /// </summary>
         /// <returns></returns>
@@ -201,7 +211,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Titel = "Hamburg im Advent",
                         Ort = "Hamburg",
                         Ort_id = 2,
-                        Kategorie_id = 1,
                         Hotelkategorie = 4,
                         Land = "Deutschland",
                         Land_id = 2,
@@ -224,7 +233,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Titel = "Städtereise Wien",
                         Ort = "Wien",
                         Ort_id = 1,
-                        Kategorie_id = 2,
                         Hotelkategorie = 4,
                         Land = "Österreich",
                         Land_id = 1,
@@ -247,7 +255,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Titel = "Kultururlaub Antike",
                         Ort = "Rom",
                         Ort_id = 3,
-                        Kategorie_id = 3,
                         Hotelkategorie = 3,
                         Land = "Italien",
                         Land_id = 3,
@@ -301,34 +308,6 @@ namespace UI_Reiseboerse_Graf.Controllers
         private FilterModel FilterAnzeigeTest()
         {
             FilterModel model = new FilterModel();
-            #region Kategorie
-            model.Kategorie = new List<KategorieModel>();
-
-            model.Kategorie.Add(new KategorieModel()
-            {
-                Id = 0,
-                Bezeichnung = "Alle"
-            });
-
-            KategorieModel km1 = new KategorieModel()
-            {
-                Id = 1,
-                Bezeichnung = "Flugreise"
-            };
-            KategorieModel km2 = new KategorieModel()
-            {
-                Id = 2,
-                Bezeichnung = "Busreise"
-            };
-            KategorieModel km3 = new KategorieModel()
-            {
-                Id = 3,
-                Bezeichnung = "Rundreise"
-            };
-            model.Kategorie.Add(km1);
-            model.Kategorie.Add(km2);
-            model.Kategorie.Add(km3);
-            #endregion
 
             #region Land
             model.Land = new List<LandModel>();

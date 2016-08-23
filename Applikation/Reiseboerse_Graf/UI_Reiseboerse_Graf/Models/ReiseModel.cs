@@ -35,8 +35,6 @@ namespace UI_Reiseboerse_Graf.Models
         public int Land_id { get; set; }
         public string Land { get; set; }
 
-        public int Kategorie_id { get; set; }
-
         public int Hotelkategorie { get; set; }
 
         public int Verpflegungs_id { get; set; }

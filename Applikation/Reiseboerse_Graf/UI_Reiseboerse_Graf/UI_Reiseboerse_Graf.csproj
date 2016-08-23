@@ -143,6 +143,7 @@
     <Compile Include="Models\ReisedetailModel.cs" />
     <Compile Include="Models\ReiseLadenModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
+    <Compile Include="Models\TextsucheModel.cs" />
     <Compile Include="Models\UnterkunftdetailModel.cs" />
     <Compile Include="Models\VerpflegungModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
