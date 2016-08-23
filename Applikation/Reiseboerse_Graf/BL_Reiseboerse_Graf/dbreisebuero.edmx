@@ -1,0 +1,1262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="reisebueroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ort_id" Type="int" Nullable="false" />
+          <Property Name="adressdaten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Benutzer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="passwort" Type="varbinary" MaxLength="1000" Nullable="false" />
+          <Property Name="vorname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nachname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="geschlecht" Type="bit" Nullable="false" />
+          <Property Name="adresse_id" Type="int" Nullable="false" />
+          <Property Name="telefon" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="titel" Type="nvarchar" MaxLength="25" />
+          <Property Name="geburtsdatum" Type="datetime" Nullable="false" />
+          <Property Name="land_id" Type="int" Nullable="false" />
+          <Property Name="ist_Mitarbeiter" Type="bit" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Bewertung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wertung" Type="int" Nullable="false" />
+          <Property Name="reise_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Bild">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bilddaten" Type="varbinary(max)" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Buchung">
+          <Key>
+            <PropertyRef Name="reisedurchfuehrung_id" />
+          </Key>
+          <Property Name="reisedurchfuehrung_id" Type="int" Nullable="false" />
+          <Property Name="benutzer_id" Type="int" Nullable="false" />
+          <Property Name="passnummer" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Buchung_Zahlung">
+          <Key>
+            <PropertyRef Name="reisedurchfuehrung_id" />
+          </Key>
+          <Property Name="reisedurchfuehrung_id" Type="int" Nullable="false" />
+          <Property Name="zahlung_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BuchungStorniert">
+          <Key>
+            <PropertyRef Name="reisedurchfuehrung_id" />
+          </Key>
+          <Property Name="reisedurchfuehrung_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Land">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Ort">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="land_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reise">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="beschreibung" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="unterkunft_id" Type="int" Nullable="false" />
+          <Property Name="preis_erwachsener" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="preis_kind" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ort_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reise_Bild">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bild_id" Type="int" Nullable="false" />
+          <Property Name="reise_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reisedatum">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reise_id" Type="int" Nullable="false" />
+          <Property Name="startdatum" Type="datetime" Nullable="false" />
+          <Property Name="enddatum" Type="datetime" Nullable="false" />
+          <Property Name="anmeldefrist" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reisedurchfuehrung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reisedatum_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Unterkunft">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="beschreibung" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="kategorie" Type="int" Nullable="false" />
+          <Property Name="verpflegung_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Unterkunft_Bild">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bild_id" Type="int" Nullable="false" />
+          <Property Name="unterkunft_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Verpflegung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Zahlung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vorname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nachname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nummer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="zahlungsart_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Zahlungsart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Adresse_Ort">
+          <End Role="Ort" Type="Self.Ort" Multiplicity="1" />
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ort">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adresse">
+              <PropertyRef Name="ort_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Benutzer_Adresse">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="1" />
+          <End Role="Benutzer" Type="Self.Benutzer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Benutzer">
+              <PropertyRef Name="adresse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Benutzer_Land">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Benutzer" Type="Self.Benutzer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Benutzer">
+              <PropertyRef Name="land_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bewertung_Reise">
+          <End Role="Reise" Type="Self.Reise" Multiplicity="1" />
+          <End Role="Bewertung" Type="Self.Bewertung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reise">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Bewertung">
+              <PropertyRef Name="reise_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buchung_Benutzer">
+          <End Role="Benutzer" Type="Self.Benutzer" Multiplicity="1" />
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Benutzer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Buchung">
+              <PropertyRef Name="benutzer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buchung_Reisedurchfuehrung">
+          <End Role="Reisedurchfuehrung" Type="Self.Reisedurchfuehrung" Multiplicity="1" />
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Reisedurchfuehrung">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Buchung">
+              <PropertyRef Name="reisedurchfuehrung_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buchung_Zahlung_Buchung">
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="1" />
+          <End Role="Buchung_Zahlung" Type="Self.Buchung_Zahlung" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Buchung">
+              <PropertyRef Name="reisedurchfuehrung_id" />
+            </Principal>
+            <Dependent Role="Buchung_Zahlung">
+              <PropertyRef Name="reisedurchfuehrung_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buchung_Zahlung_Zahlung">
+          <End Role="Zahlung" Type="Self.Zahlung" Multiplicity="1" />
+          <End Role="Buchung_Zahlung" Type="Self.Buchung_Zahlung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zahlung">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Buchung_Zahlung">
+              <PropertyRef Name="zahlung_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuchungStorniert_Buchung">
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="1" />
+          <End Role="BuchungStorniert" Type="Self.BuchungStorniert" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Buchung">
+              <PropertyRef Name="reisedurchfuehrung_id" />
+            </Principal>
+            <Dependent Role="BuchungStorniert">
+              <PropertyRef Name="reisedurchfuehrung_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ort_Land">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Ort" Type="Self.Ort" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ort">
+              <PropertyRef Name="land_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reise_Bild_Bild">
+          <End Role="Bild" Type="Self.Bild" Multiplicity="1" />
+          <End Role="Reise_Bild" Type="Self.Reise_Bild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bild">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reise_Bild">
+              <PropertyRef Name="bild_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reise_Bild_Reise">
+          <End Role="Reise" Type="Self.Reise" Multiplicity="1" />
+          <End Role="Reise_Bild" Type="Self.Reise_Bild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reise">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reise_Bild">
+              <PropertyRef Name="reise_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reise_Ort">
+          <End Role="Ort" Type="Self.Ort" Multiplicity="1" />
+          <End Role="Reise" Type="Self.Reise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ort">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reise">
+              <PropertyRef Name="ort_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reise_Unterkunft">
+          <End Role="Unterkunft" Type="Self.Unterkunft" Multiplicity="1" />
+          <End Role="Reise" Type="Self.Reise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unterkunft">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reise">
+              <PropertyRef Name="unterkunft_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reisedatum_Reise">
+          <End Role="Reise" Type="Self.Reise" Multiplicity="1" />
+          <End Role="Reisedatum" Type="Self.Reisedatum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reise">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reisedatum">
+              <PropertyRef Name="reise_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reisedurchfuehrung_Reisedatum">
+          <End Role="Reisedatum" Type="Self.Reisedatum" Multiplicity="1" />
+          <End Role="Reisedurchfuehrung" Type="Self.Reisedurchfuehrung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reisedatum">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reisedurchfuehrung">
+              <PropertyRef Name="reisedatum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unterkunft_Bild_Bild">
+          <End Role="Bild" Type="Self.Bild" Multiplicity="1" />
+          <End Role="Unterkunft_Bild" Type="Self.Unterkunft_Bild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bild">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Unterkunft_Bild">
+              <PropertyRef Name="bild_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unterkunft_Bild_Unterkunft">
+          <End Role="Unterkunft" Type="Self.Unterkunft" Multiplicity="1" />
+          <End Role="Unterkunft_Bild" Type="Self.Unterkunft_Bild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unterkunft">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Unterkunft_Bild">
+              <PropertyRef Name="unterkunft_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unterkunft_Verpflegung">
+          <End Role="Verpflegung" Type="Self.Verpflegung" Multiplicity="1" />
+          <End Role="Unterkunft" Type="Self.Unterkunft" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Verpflegung">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Unterkunft">
+              <PropertyRef Name="verpflegung_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zahlung_Zahlungsart">
+          <End Role="Zahlungsart" Type="Self.Zahlungsart" Multiplicity="1" />
+          <End Role="Zahlung" Type="Self.Zahlung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zahlungsart">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Zahlung">
+              <PropertyRef Name="zahlungsart_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="reisebueroModelStoreContainer">
+          <EntitySet Name="Adresse" EntityType="Self.Adresse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Benutzer" EntityType="Self.Benutzer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bewertung" EntityType="Self.Bewertung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bild" EntityType="Self.Bild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buchung" EntityType="Self.Buchung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buchung_Zahlung" EntityType="Self.Buchung_Zahlung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuchungStorniert" EntityType="Self.BuchungStorniert" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Land" EntityType="Self.Land" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ort" EntityType="Self.Ort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reise" EntityType="Self.Reise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reise_Bild" EntityType="Self.Reise_Bild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reisedatum" EntityType="Self.Reisedatum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reisedurchfuehrung" EntityType="Self.Reisedurchfuehrung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unterkunft" EntityType="Self.Unterkunft" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unterkunft_Bild" EntityType="Self.Unterkunft_Bild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Verpflegung" EntityType="Self.Verpflegung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zahlung" EntityType="Self.Zahlung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zahlungsart" EntityType="Self.Zahlungsart" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Adresse_Ort" Association="Self.FK_Adresse_Ort">
+            <End Role="Ort" EntitySet="Ort" />
+            <End Role="Adresse" EntitySet="Adresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Benutzer_Adresse" Association="Self.FK_Benutzer_Adresse">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="Benutzer" EntitySet="Benutzer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Benutzer_Land" Association="Self.FK_Benutzer_Land">
+            <End Role="Land" EntitySet="Land" />
+            <End Role="Benutzer" EntitySet="Benutzer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bewertung_Reise" Association="Self.FK_Bewertung_Reise">
+            <End Role="Reise" EntitySet="Reise" />
+            <End Role="Bewertung" EntitySet="Bewertung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buchung_Benutzer" Association="Self.FK_Buchung_Benutzer">
+            <End Role="Benutzer" EntitySet="Benutzer" />
+            <End Role="Buchung" EntitySet="Buchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buchung_Reisedurchfuehrung" Association="Self.FK_Buchung_Reisedurchfuehrung">
+            <End Role="Reisedurchfuehrung" EntitySet="Reisedurchfuehrung" />
+            <End Role="Buchung" EntitySet="Buchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buchung_Zahlung_Buchung" Association="Self.FK_Buchung_Zahlung_Buchung">
+            <End Role="Buchung" EntitySet="Buchung" />
+            <End Role="Buchung_Zahlung" EntitySet="Buchung_Zahlung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buchung_Zahlung_Zahlung" Association="Self.FK_Buchung_Zahlung_Zahlung">
+            <End Role="Zahlung" EntitySet="Zahlung" />
+            <End Role="Buchung_Zahlung" EntitySet="Buchung_Zahlung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuchungStorniert_Buchung" Association="Self.FK_BuchungStorniert_Buchung">
+            <End Role="Buchung" EntitySet="Buchung" />
+            <End Role="BuchungStorniert" EntitySet="BuchungStorniert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ort_Land" Association="Self.FK_Ort_Land">
+            <End Role="Land" EntitySet="Land" />
+            <End Role="Ort" EntitySet="Ort" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reise_Bild_Bild" Association="Self.FK_Reise_Bild_Bild">
+            <End Role="Bild" EntitySet="Bild" />
+            <End Role="Reise_Bild" EntitySet="Reise_Bild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reise_Bild_Reise" Association="Self.FK_Reise_Bild_Reise">
+            <End Role="Reise" EntitySet="Reise" />
+            <End Role="Reise_Bild" EntitySet="Reise_Bild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reise_Ort" Association="Self.FK_Reise_Ort">
+            <End Role="Ort" EntitySet="Ort" />
+            <End Role="Reise" EntitySet="Reise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reise_Unterkunft" Association="Self.FK_Reise_Unterkunft">
+            <End Role="Unterkunft" EntitySet="Unterkunft" />
+            <End Role="Reise" EntitySet="Reise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reisedatum_Reise" Association="Self.FK_Reisedatum_Reise">
+            <End Role="Reise" EntitySet="Reise" />
+            <End Role="Reisedatum" EntitySet="Reisedatum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reisedurchfuehrung_Reisedatum" Association="Self.FK_Reisedurchfuehrung_Reisedatum">
+            <End Role="Reisedatum" EntitySet="Reisedatum" />
+            <End Role="Reisedurchfuehrung" EntitySet="Reisedurchfuehrung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unterkunft_Bild_Bild" Association="Self.FK_Unterkunft_Bild_Bild">
+            <End Role="Bild" EntitySet="Bild" />
+            <End Role="Unterkunft_Bild" EntitySet="Unterkunft_Bild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unterkunft_Bild_Unterkunft" Association="Self.FK_Unterkunft_Bild_Unterkunft">
+            <End Role="Unterkunft" EntitySet="Unterkunft" />
+            <End Role="Unterkunft_Bild" EntitySet="Unterkunft_Bild" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unterkunft_Verpflegung" Association="Self.FK_Unterkunft_Verpflegung">
+            <End Role="Verpflegung" EntitySet="Verpflegung" />
+            <End Role="Unterkunft" EntitySet="Unterkunft" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zahlung_Zahlungsart" Association="Self.FK_Zahlung_Zahlungsart">
+            <End Role="Zahlungsart" EntitySet="Zahlungsart" />
+            <End Role="Zahlung" EntitySet="Zahlung" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="reisebueroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adressdaten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Ort" Relationship="Self.FK_Adresse_Ort" FromRole="Adresse" ToRole="Ort" />
+          <NavigationProperty Name="AlleBenutzer" Relationship="Self.FK_Benutzer_Adresse" FromRole="Adresse" ToRole="Benutzer" />
+        </EntityType>
+        <EntityType Name="Benutzer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passwort" Type="Binary" MaxLength="1000" FixedLength="false" Nullable="false" />
+          <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nachname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Geschlecht" Type="Boolean" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Titel" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Geburtsdatum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ist_Mitarbeiter" Type="Boolean" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Adresse" Relationship="Self.FK_Benutzer_Adresse" FromRole="Benutzer" ToRole="Adresse" />
+          <NavigationProperty Name="Land" Relationship="Self.FK_Benutzer_Land" FromRole="Benutzer" ToRole="Land" />
+          <NavigationProperty Name="AlleBuchungen" Relationship="Self.FK_Buchung_Benutzer" FromRole="Benutzer" ToRole="Buchung" />
+        </EntityType>
+        <EntityType Name="Bewertung">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Wertung" Type="Int32" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Reise" Relationship="Self.FK_Bewertung_Reise" FromRole="Bewertung" ToRole="Reise" />
+        </EntityType>
+        <EntityType Name="Bild">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bilddaten" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlleReise_Bilder" Relationship="Self.FK_Reise_Bild_Bild" FromRole="Bild" ToRole="Reise_Bild" />
+          <NavigationProperty Name="AlleUnterkunft_Bilder" Relationship="Self.FK_Unterkunft_Bild_Bild" FromRole="Bild" ToRole="Unterkunft_Bild" />
+        </EntityType>
+        <EntityType Name="Buchung">
+          <Key>
+            <PropertyRef Name="Reisedurchfuehrung_ID" />
+          </Key>
+          <Property Name="Reisedurchfuehrung_ID" Type="Int32" Nullable="false" />
+          <Property Name="Passnummer" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Benutzer" Relationship="Self.FK_Buchung_Benutzer" FromRole="Buchung" ToRole="Benutzer" />
+          <NavigationProperty Name="Reisedurchfuehrung" Relationship="Self.FK_Buchung_Reisedurchfuehrung" FromRole="Buchung" ToRole="Reisedurchfuehrung" />
+          <NavigationProperty Name="Buchung_Zahlung" Relationship="Self.FK_Buchung_Zahlung_Buchung" FromRole="Buchung" ToRole="Buchung_Zahlung" />
+          <NavigationProperty Name="BuchungStorniert" Relationship="Self.FK_BuchungStorniert_Buchung" FromRole="Buchung" ToRole="BuchungStorniert" />
+        </EntityType>
+        <EntityType Name="Buchung_Zahlung">
+          <Key>
+            <PropertyRef Name="Reisedurchfuehrung_ID" />
+          </Key>
+          <Property Name="Reisedurchfuehrung_ID" Type="Int32" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Buchung" Relationship="Self.FK_Buchung_Zahlung_Buchung" FromRole="Buchung_Zahlung" ToRole="Buchung" />
+          <NavigationProperty Name="Zahlung" Relationship="Self.FK_Buchung_Zahlung_Zahlung" FromRole="Buchung_Zahlung" ToRole="Zahlung" />
+        </EntityType>
+        <EntityType Name="BuchungStorniert">
+          <Key>
+            <PropertyRef Name="Reisedurchfuehrung_ID" />
+          </Key>
+          <Property Name="Reisedurchfuehrung_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Buchung" Relationship="Self.FK_BuchungStorniert_Buchung" FromRole="BuchungStorniert" ToRole="Buchung" />
+        </EntityType>
+        <EntityType Name="Land">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlleBenutzer" Relationship="Self.FK_Benutzer_Land" FromRole="Land" ToRole="Benutzer" />
+          <NavigationProperty Name="AlleOrte" Relationship="Self.FK_Ort_Land" FromRole="Land" ToRole="Ort" />
+        </EntityType>
+        <EntityType Name="Ort">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlleAdressen" Relationship="Self.FK_Adresse_Ort" FromRole="Ort" ToRole="Adresse" />
+          <NavigationProperty Name="Land" Relationship="Self.FK_Ort_Land" FromRole="Ort" ToRole="Land" />
+          <NavigationProperty Name="AlleReisen" Relationship="Self.FK_Reise_Ort" FromRole="Ort" ToRole="Reise" />
+        </EntityType>
+        <EntityType Name="Reise">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Beschreibung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Preis_Erwachsen" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Preis_Kind" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlleBewertungen" Relationship="Self.FK_Bewertung_Reise" FromRole="Reise" ToRole="Bewertung" />
+          <NavigationProperty Name="Ort" Relationship="Self.FK_Reise_Ort" FromRole="Reise" ToRole="Ort" />
+          <NavigationProperty Name="AlleReise_Bilder" Relationship="Self.FK_Reise_Bild_Reise" FromRole="Reise" ToRole="Reise_Bild" />
+          <NavigationProperty Name="Unterkunft" Relationship="Self.FK_Reise_Unterkunft" FromRole="Reise" ToRole="Unterkunft" />
+          <NavigationProperty Name="AlleReisedaten" Relationship="Self.FK_Reisedatum_Reise" FromRole="Reise" ToRole="Reisedatum" />
+        </EntityType>
+        <EntityType Name="Reise_Bild">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Bild" Relationship="Self.FK_Reise_Bild_Bild" FromRole="Reise_Bild" ToRole="Bild" />
+          <NavigationProperty Name="Reise" Relationship="Self.FK_Reise_Bild_Reise" FromRole="Reise_Bild" ToRole="Reise" />
+        </EntityType>
+        <EntityType Name="Reisedatum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Startdatum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Enddatum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Anmeldefrist" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Reise" Relationship="Self.FK_Reisedatum_Reise" FromRole="Reisedatum" ToRole="Reise" />
+          <NavigationProperty Name="AlleReisedurchfuehrungen" Relationship="Self.FK_Reisedurchfuehrung_Reisedatum" FromRole="Reisedatum" ToRole="Reisedurchfuehrung" />
+        </EntityType>
+        <EntityType Name="Reisedurchfuehrung">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Buchung" Relationship="Self.FK_Buchung_Reisedurchfuehrung" FromRole="Reisedurchfuehrung" ToRole="Buchung" />
+          <NavigationProperty Name="Reisedatum" Relationship="Self.FK_Reisedurchfuehrung_Reisedatum" FromRole="Reisedurchfuehrung" ToRole="Reisedatum" />
+        </EntityType>
+        <EntityType Name="Unterkunft">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Beschreibung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kategorie" Type="Int32" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlleReisen" Relationship="Self.FK_Reise_Unterkunft" FromRole="Unterkunft" ToRole="Reise" />
+          <NavigationProperty Name="AlleUnterkunft_Bilder" Relationship="Self.FK_Unterkunft_Bild_Unterkunft" FromRole="Unterkunft" ToRole="Unterkunft_Bild" />
+          <NavigationProperty Name="Verpflegung" Relationship="Self.FK_Unterkunft_Verpflegung" FromRole="Unterkunft" ToRole="Verpflegung" />
+        </EntityType>
+        <EntityType Name="Unterkunft_Bild">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Bild" Relationship="Self.FK_Unterkunft_Bild_Bild" FromRole="Unterkunft_Bild" ToRole="Bild" />
+          <NavigationProperty Name="Unterkunft" Relationship="Self.FK_Unterkunft_Bild_Unterkunft" FromRole="Unterkunft_Bild" ToRole="Unterkunft" />
+        </EntityType>
+        <EntityType Name="Verpflegung">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlleUnterkuenfte" Relationship="Self.FK_Unterkunft_Verpflegung" FromRole="Verpflegung" ToRole="Unterkunft" />
+        </EntityType>
+        <EntityType Name="Zahlung">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nachname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlleBuchung_Zahlungen" Relationship="Self.FK_Buchung_Zahlung_Zahlung" FromRole="Zahlung" ToRole="Buchung_Zahlung" />
+          <NavigationProperty Name="Zahlungsart" Relationship="Self.FK_Zahlung_Zahlungsart" FromRole="Zahlung" ToRole="Zahlungsart" />
+        </EntityType>
+        <EntityType Name="Zahlungsart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AlleZahlungen" Relationship="Self.FK_Zahlung_Zahlungsart" FromRole="Zahlungsart" ToRole="Zahlung" />
+        </EntityType>
+        <Association Name="FK_Adresse_Ort">
+          <End Role="Ort" Type="Self.Ort" Multiplicity="1" />
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Benutzer_Adresse">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="1" />
+          <End Role="Benutzer" Type="Self.Benutzer" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Benutzer_Land">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Benutzer" Type="Self.Benutzer" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Buchung_Benutzer">
+          <End Role="Benutzer" Type="Self.Benutzer" Multiplicity="1" />
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Bewertung_Reise">
+          <End Role="Reise" Type="Self.Reise" Multiplicity="1" />
+          <End Role="Bewertung" Type="Self.Bewertung" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Reise_Bild_Bild">
+          <End Role="Bild" Type="Self.Bild" Multiplicity="1" />
+          <End Role="Reise_Bild" Type="Self.Reise_Bild" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Unterkunft_Bild_Bild">
+          <End Role="Bild" Type="Self.Bild" Multiplicity="1" />
+          <End Role="Unterkunft_Bild" Type="Self.Unterkunft_Bild" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Buchung_Reisedurchfuehrung">
+          <End Role="Reisedurchfuehrung" Type="Self.Reisedurchfuehrung" Multiplicity="1" />
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Reisedurchfuehrung">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buchung">
+              <PropertyRef Name="Reisedurchfuehrung_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buchung_Zahlung_Buchung">
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="1" />
+          <End Role="Buchung_Zahlung" Type="Self.Buchung_Zahlung" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Buchung">
+              <PropertyRef Name="Reisedurchfuehrung_ID" />
+            </Principal>
+            <Dependent Role="Buchung_Zahlung">
+              <PropertyRef Name="Reisedurchfuehrung_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuchungStorniert_Buchung">
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="1" />
+          <End Role="BuchungStorniert" Type="Self.BuchungStorniert" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Buchung">
+              <PropertyRef Name="Reisedurchfuehrung_ID" />
+            </Principal>
+            <Dependent Role="BuchungStorniert">
+              <PropertyRef Name="Reisedurchfuehrung_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buchung_Zahlung_Zahlung">
+          <End Role="Zahlung" Type="Self.Zahlung" Multiplicity="1" />
+          <End Role="Buchung_Zahlung" Type="Self.Buchung_Zahlung" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Ort_Land">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Ort" Type="Self.Ort" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Reise_Ort">
+          <End Role="Ort" Type="Self.Ort" Multiplicity="1" />
+          <End Role="Reise" Type="Self.Reise" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Reise_Bild_Reise">
+          <End Role="Reise" Type="Self.Reise" Multiplicity="1" />
+          <End Role="Reise_Bild" Type="Self.Reise_Bild" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Reise_Unterkunft">
+          <End Role="Unterkunft" Type="Self.Unterkunft" Multiplicity="1" />
+          <End Role="Reise" Type="Self.Reise" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Reisedatum_Reise">
+          <End Role="Reise" Type="Self.Reise" Multiplicity="1" />
+          <End Role="Reisedatum" Type="Self.Reisedatum" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Reisedurchfuehrung_Reisedatum">
+          <End Role="Reisedatum" Type="Self.Reisedatum" Multiplicity="1" />
+          <End Role="Reisedurchfuehrung" Type="Self.Reisedurchfuehrung" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Unterkunft_Bild_Unterkunft">
+          <End Role="Unterkunft" Type="Self.Unterkunft" Multiplicity="1" />
+          <End Role="Unterkunft_Bild" Type="Self.Unterkunft_Bild" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Unterkunft_Verpflegung">
+          <End Role="Verpflegung" Type="Self.Verpflegung" Multiplicity="1" />
+          <End Role="Unterkunft" Type="Self.Unterkunft" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Zahlung_Zahlungsart">
+          <End Role="Zahlungsart" Type="Self.Zahlungsart" Multiplicity="1" />
+          <End Role="Zahlung" Type="Self.Zahlung" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="reisebueroEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AlleAdressen" EntityType="Self.Adresse" />
+          <EntitySet Name="AlleBenutzer" EntityType="Self.Benutzer" />
+          <EntitySet Name="AlleBewertungen" EntityType="Self.Bewertung" />
+          <EntitySet Name="AlleBilder" EntityType="Self.Bild" />
+          <EntitySet Name="AlleBuchungen" EntityType="Self.Buchung" />
+          <EntitySet Name="AlleBuchung_Zahlungen" EntityType="Self.Buchung_Zahlung" />
+          <EntitySet Name="AlleBuchungenStorniert" EntityType="Self.BuchungStorniert" />
+          <EntitySet Name="AlleLaender" EntityType="Self.Land" />
+          <EntitySet Name="AlleOrte" EntityType="Self.Ort" />
+          <EntitySet Name="AlleReisen" EntityType="Self.Reise" />
+          <EntitySet Name="AlleReise_Bilder" EntityType="Self.Reise_Bild" />
+          <EntitySet Name="AlleReisedaten" EntityType="Self.Reisedatum" />
+          <EntitySet Name="AlleReisedurchfuehrungen" EntityType="Self.Reisedurchfuehrung" />
+          <EntitySet Name="AlleUnterkuenfte" EntityType="Self.Unterkunft" />
+          <EntitySet Name="AlleUnterkunft_Bilder" EntityType="Self.Unterkunft_Bild" />
+          <EntitySet Name="AlleVerpflegungen" EntityType="Self.Verpflegung" />
+          <EntitySet Name="AlleZahlungen" EntityType="Self.Zahlung" />
+          <EntitySet Name="AlleZahlungsarten" EntityType="Self.Zahlungsart" />
+          <AssociationSet Name="FK_Adresse_Ort" Association="Self.FK_Adresse_Ort">
+            <End Role="Ort" EntitySet="AlleOrte" />
+            <End Role="Adresse" EntitySet="AlleAdressen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Benutzer_Adresse" Association="Self.FK_Benutzer_Adresse">
+            <End Role="Adresse" EntitySet="AlleAdressen" />
+            <End Role="Benutzer" EntitySet="AlleBenutzer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Benutzer_Land" Association="Self.FK_Benutzer_Land">
+            <End Role="Land" EntitySet="AlleLaender" />
+            <End Role="Benutzer" EntitySet="AlleBenutzer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buchung_Benutzer" Association="Self.FK_Buchung_Benutzer">
+            <End Role="Benutzer" EntitySet="AlleBenutzer" />
+            <End Role="Buchung" EntitySet="AlleBuchungen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bewertung_Reise" Association="Self.FK_Bewertung_Reise">
+            <End Role="Reise" EntitySet="AlleReisen" />
+            <End Role="Bewertung" EntitySet="AlleBewertungen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reise_Bild_Bild" Association="Self.FK_Reise_Bild_Bild">
+            <End Role="Bild" EntitySet="AlleBilder" />
+            <End Role="Reise_Bild" EntitySet="AlleReise_Bilder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unterkunft_Bild_Bild" Association="Self.FK_Unterkunft_Bild_Bild">
+            <End Role="Bild" EntitySet="AlleBilder" />
+            <End Role="Unterkunft_Bild" EntitySet="AlleUnterkunft_Bilder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buchung_Reisedurchfuehrung" Association="Self.FK_Buchung_Reisedurchfuehrung">
+            <End Role="Reisedurchfuehrung" EntitySet="AlleReisedurchfuehrungen" />
+            <End Role="Buchung" EntitySet="AlleBuchungen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buchung_Zahlung_Buchung" Association="Self.FK_Buchung_Zahlung_Buchung">
+            <End Role="Buchung" EntitySet="AlleBuchungen" />
+            <End Role="Buchung_Zahlung" EntitySet="AlleBuchung_Zahlungen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuchungStorniert_Buchung" Association="Self.FK_BuchungStorniert_Buchung">
+            <End Role="Buchung" EntitySet="AlleBuchungen" />
+            <End Role="BuchungStorniert" EntitySet="AlleBuchungenStorniert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buchung_Zahlung_Zahlung" Association="Self.FK_Buchung_Zahlung_Zahlung">
+            <End Role="Zahlung" EntitySet="AlleZahlungen" />
+            <End Role="Buchung_Zahlung" EntitySet="AlleBuchung_Zahlungen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ort_Land" Association="Self.FK_Ort_Land">
+            <End Role="Land" EntitySet="AlleLaender" />
+            <End Role="Ort" EntitySet="AlleOrte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reise_Ort" Association="Self.FK_Reise_Ort">
+            <End Role="Ort" EntitySet="AlleOrte" />
+            <End Role="Reise" EntitySet="AlleReisen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reise_Bild_Reise" Association="Self.FK_Reise_Bild_Reise">
+            <End Role="Reise" EntitySet="AlleReisen" />
+            <End Role="Reise_Bild" EntitySet="AlleReise_Bilder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reise_Unterkunft" Association="Self.FK_Reise_Unterkunft">
+            <End Role="Unterkunft" EntitySet="AlleUnterkuenfte" />
+            <End Role="Reise" EntitySet="AlleReisen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reisedatum_Reise" Association="Self.FK_Reisedatum_Reise">
+            <End Role="Reise" EntitySet="AlleReisen" />
+            <End Role="Reisedatum" EntitySet="AlleReisedaten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reisedurchfuehrung_Reisedatum" Association="Self.FK_Reisedurchfuehrung_Reisedatum">
+            <End Role="Reisedatum" EntitySet="AlleReisedaten" />
+            <End Role="Reisedurchfuehrung" EntitySet="AlleReisedurchfuehrungen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unterkunft_Bild_Unterkunft" Association="Self.FK_Unterkunft_Bild_Unterkunft">
+            <End Role="Unterkunft" EntitySet="AlleUnterkuenfte" />
+            <End Role="Unterkunft_Bild" EntitySet="AlleUnterkunft_Bilder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unterkunft_Verpflegung" Association="Self.FK_Unterkunft_Verpflegung">
+            <End Role="Verpflegung" EntitySet="AlleVerpflegungen" />
+            <End Role="Unterkunft" EntitySet="AlleUnterkuenfte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zahlung_Zahlungsart" Association="Self.FK_Zahlung_Zahlungsart">
+            <End Role="Zahlungsart" EntitySet="AlleZahlungsarten" />
+            <End Role="Zahlung" EntitySet="AlleZahlungen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="reisebueroModelStoreContainer" CdmEntityContainer="reisebueroEntities">
+          <EntitySetMapping Name="AlleAdressen">
+            <EntityTypeMapping TypeName="reisebueroModel.Adresse">
+              <MappingFragment StoreEntitySet="Adresse">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Adressdaten" ColumnName="adressdaten" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleBenutzer">
+            <EntityTypeMapping TypeName="reisebueroModel.Benutzer">
+              <MappingFragment StoreEntitySet="Benutzer">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Email" ColumnName="email" />
+                <ScalarProperty Name="Passwort" ColumnName="passwort" />
+                <ScalarProperty Name="Vorname" ColumnName="vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="nachname" />
+                <ScalarProperty Name="Geschlecht" ColumnName="geschlecht" />
+                <ScalarProperty Name="Telefon" ColumnName="telefon" />
+                <ScalarProperty Name="Titel" ColumnName="titel" />
+                <ScalarProperty Name="Geburtsdatum" ColumnName="geburtsdatum" />
+                <ScalarProperty Name="Ist_Mitarbeiter" ColumnName="ist_Mitarbeiter" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleBewertungen">
+            <EntityTypeMapping TypeName="reisebueroModel.Bewertung">
+              <MappingFragment StoreEntitySet="Bewertung">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Wertung" ColumnName="wertung" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleBilder">
+            <EntityTypeMapping TypeName="reisebueroModel.Bild">
+              <MappingFragment StoreEntitySet="Bild">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Bilddaten" ColumnName="bilddaten" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleBuchungen">
+            <EntityTypeMapping TypeName="reisebueroModel.Buchung">
+              <MappingFragment StoreEntitySet="Buchung">
+                <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+                <ScalarProperty Name="Passnummer" ColumnName="passnummer" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleBuchung_Zahlungen">
+            <EntityTypeMapping TypeName="reisebueroModel.Buchung_Zahlung">
+              <MappingFragment StoreEntitySet="Buchung_Zahlung">
+                <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleBuchungenStorniert">
+            <EntityTypeMapping TypeName="reisebueroModel.BuchungStorniert">
+              <MappingFragment StoreEntitySet="BuchungStorniert">
+                <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleLaender">
+            <EntityTypeMapping TypeName="reisebueroModel.Land">
+              <MappingFragment StoreEntitySet="Land">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="bezeichnung" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleOrte">
+            <EntityTypeMapping TypeName="reisebueroModel.Ort">
+              <MappingFragment StoreEntitySet="Ort">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="bezeichnung" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleReisen">
+            <EntityTypeMapping TypeName="reisebueroModel.Reise">
+              <MappingFragment StoreEntitySet="Reise">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Titel" ColumnName="titel" />
+                <ScalarProperty Name="Beschreibung" ColumnName="beschreibung" />
+                <ScalarProperty Name="Preis_Erwachsen" ColumnName="preis_erwachsener" />
+                <ScalarProperty Name="Preis_Kind" ColumnName="preis_kind" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleReise_Bilder">
+            <EntityTypeMapping TypeName="reisebueroModel.Reise_Bild">
+              <MappingFragment StoreEntitySet="Reise_Bild">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleReisedaten">
+            <EntityTypeMapping TypeName="reisebueroModel.Reisedatum">
+              <MappingFragment StoreEntitySet="Reisedatum">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Startdatum" ColumnName="startdatum" />
+                <ScalarProperty Name="Enddatum" ColumnName="enddatum" />
+                <ScalarProperty Name="Anmeldefrist" ColumnName="anmeldefrist" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleReisedurchfuehrungen">
+            <EntityTypeMapping TypeName="reisebueroModel.Reisedurchfuehrung">
+              <MappingFragment StoreEntitySet="Reisedurchfuehrung">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleUnterkuenfte">
+            <EntityTypeMapping TypeName="reisebueroModel.Unterkunft">
+              <MappingFragment StoreEntitySet="Unterkunft">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="bezeichnung" />
+                <ScalarProperty Name="Beschreibung" ColumnName="beschreibung" />
+                <ScalarProperty Name="Kategorie" ColumnName="kategorie" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleUnterkunft_Bilder">
+            <EntityTypeMapping TypeName="reisebueroModel.Unterkunft_Bild">
+              <MappingFragment StoreEntitySet="Unterkunft_Bild">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleVerpflegungen">
+            <EntityTypeMapping TypeName="reisebueroModel.Verpflegung">
+              <MappingFragment StoreEntitySet="Verpflegung">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="bezeichnung" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleZahlungen">
+            <EntityTypeMapping TypeName="reisebueroModel.Zahlung">
+              <MappingFragment StoreEntitySet="Zahlung">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Vorname" ColumnName="vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="nachname" />
+                <ScalarProperty Name="Nummer" ColumnName="nummer" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlleZahlungsarten">
+            <EntityTypeMapping TypeName="reisebueroModel.Zahlungsart">
+              <MappingFragment StoreEntitySet="Zahlungsart">
+                <ScalarProperty Name="ID" ColumnName="id" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="bezeichnung" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Adresse_Ort" TypeName="reisebueroModel.FK_Adresse_Ort" StoreEntitySet="Adresse">
+            <EndProperty Name="Ort">
+              <ScalarProperty Name="ID" ColumnName="ort_id" />
+            </EndProperty>
+            <EndProperty Name="Adresse">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Benutzer_Adresse" TypeName="reisebueroModel.FK_Benutzer_Adresse" StoreEntitySet="Benutzer">
+            <EndProperty Name="Adresse">
+              <ScalarProperty Name="ID" ColumnName="adresse_id" />
+            </EndProperty>
+            <EndProperty Name="Benutzer">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Benutzer_Land" TypeName="reisebueroModel.FK_Benutzer_Land" StoreEntitySet="Benutzer">
+            <EndProperty Name="Land">
+              <ScalarProperty Name="ID" ColumnName="land_id" />
+            </EndProperty>
+            <EndProperty Name="Benutzer">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Buchung_Benutzer" TypeName="reisebueroModel.FK_Buchung_Benutzer" StoreEntitySet="Buchung">
+            <EndProperty Name="Benutzer">
+              <ScalarProperty Name="ID" ColumnName="benutzer_id" />
+            </EndProperty>
+            <EndProperty Name="Buchung">
+              <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Bewertung_Reise" TypeName="reisebueroModel.FK_Bewertung_Reise" StoreEntitySet="Bewertung">
+            <EndProperty Name="Reise">
+              <ScalarProperty Name="ID" ColumnName="reise_id" />
+            </EndProperty>
+            <EndProperty Name="Bewertung">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Reise_Bild_Bild" TypeName="reisebueroModel.FK_Reise_Bild_Bild" StoreEntitySet="Reise_Bild">
+            <EndProperty Name="Bild">
+              <ScalarProperty Name="ID" ColumnName="bild_id" />
+            </EndProperty>
+            <EndProperty Name="Reise_Bild">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Unterkunft_Bild_Bild" TypeName="reisebueroModel.FK_Unterkunft_Bild_Bild" StoreEntitySet="Unterkunft_Bild">
+            <EndProperty Name="Bild">
+              <ScalarProperty Name="ID" ColumnName="bild_id" />
+            </EndProperty>
+            <EndProperty Name="Unterkunft_Bild">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Buchung_Zahlung_Zahlung" TypeName="reisebueroModel.FK_Buchung_Zahlung_Zahlung" StoreEntitySet="Buchung_Zahlung">
+            <EndProperty Name="Zahlung">
+              <ScalarProperty Name="ID" ColumnName="zahlung_id" />
+            </EndProperty>
+            <EndProperty Name="Buchung_Zahlung">
+              <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Ort_Land" TypeName="reisebueroModel.FK_Ort_Land" StoreEntitySet="Ort">
+            <EndProperty Name="Land">
+              <ScalarProperty Name="ID" ColumnName="land_id" />
+            </EndProperty>
+            <EndProperty Name="Ort">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Reise_Ort" TypeName="reisebueroModel.FK_Reise_Ort" StoreEntitySet="Reise">
+            <EndProperty Name="Ort">
+              <ScalarProperty Name="ID" ColumnName="ort_id" />
+            </EndProperty>
+            <EndProperty Name="Reise">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Reise_Bild_Reise" TypeName="reisebueroModel.FK_Reise_Bild_Reise" StoreEntitySet="Reise_Bild">
+            <EndProperty Name="Reise">
+              <ScalarProperty Name="ID" ColumnName="reise_id" />
+            </EndProperty>
+            <EndProperty Name="Reise_Bild">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Reise_Unterkunft" TypeName="reisebueroModel.FK_Reise_Unterkunft" StoreEntitySet="Reise">
+            <EndProperty Name="Unterkunft">
+              <ScalarProperty Name="ID" ColumnName="unterkunft_id" />
+            </EndProperty>
+            <EndProperty Name="Reise">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Reisedatum_Reise" TypeName="reisebueroModel.FK_Reisedatum_Reise" StoreEntitySet="Reisedatum">
+            <EndProperty Name="Reise">
+              <ScalarProperty Name="ID" ColumnName="reise_id" />
+            </EndProperty>
+            <EndProperty Name="Reisedatum">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Reisedurchfuehrung_Reisedatum" TypeName="reisebueroModel.FK_Reisedurchfuehrung_Reisedatum" StoreEntitySet="Reisedurchfuehrung">
+            <EndProperty Name="Reisedatum">
+              <ScalarProperty Name="ID" ColumnName="reisedatum_id" />
+            </EndProperty>
+            <EndProperty Name="Reisedurchfuehrung">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Unterkunft_Bild_Unterkunft" TypeName="reisebueroModel.FK_Unterkunft_Bild_Unterkunft" StoreEntitySet="Unterkunft_Bild">
+            <EndProperty Name="Unterkunft">
+              <ScalarProperty Name="ID" ColumnName="unterkunft_id" />
+            </EndProperty>
+            <EndProperty Name="Unterkunft_Bild">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Unterkunft_Verpflegung" TypeName="reisebueroModel.FK_Unterkunft_Verpflegung" StoreEntitySet="Unterkunft">
+            <EndProperty Name="Verpflegung">
+              <ScalarProperty Name="ID" ColumnName="verpflegung_id" />
+            </EndProperty>
+            <EndProperty Name="Unterkunft">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Zahlung_Zahlungsart" TypeName="reisebueroModel.FK_Zahlung_Zahlungsart" StoreEntitySet="Zahlung">
+            <EndProperty Name="Zahlungsart">
+              <ScalarProperty Name="ID" ColumnName="zahlungsart_id" />
+            </EndProperty>
+            <EndProperty Name="Zahlung">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

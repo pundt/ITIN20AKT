@@ -38,10 +38,18 @@ GO
 
 ALTER TABLE Adresse
 ADD
-CONSTRAINT FK_Adresse_Land
+CONSTRAINT FK_Adresse_Ort
+FOREIGN KEY (ort_id)
+REFERENCES Ort(id);
+GO
+
+ALTER TABLE Ort
+ADD
+CONSTRAINT FK_Ort_Land
 FOREIGN KEY (land_id)
 REFERENCES Land(id);
 GO
+
 
 ALTER TABLE Benutzer
 ADD
@@ -62,6 +70,13 @@ ADD
 CONSTRAINT FK_Reise_Unterkunft
 FOREIGN KEY (unterkunft_id)
 REFERENCES Unterkunft(id);
+GO
+
+ALTER TABLE Reise
+ADD 
+CONSTRAINT FK_Reise_Ort
+FOREIGN KEY (ort_id)
+REFERENCES Ort(id);
 GO
 
 ALTER TABLE Reisedatum

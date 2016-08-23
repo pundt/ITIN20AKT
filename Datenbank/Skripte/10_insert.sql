@@ -13,15 +13,25 @@ INSERT INTO Land(bezeichnung) VALUES('Belgien');
 INSERT INTO Land(bezeichnung) VALUES('Schweden');
 GO
 
-INSERT INTO Adresse(land_id, adresse)
+
+INSERT INTO Ort(land_id,bezeichnung) VALUES(1,'Wien');
+INSERT INTO Ort(land_id,bezeichnung) VALUES(2,'Berlin');
+INSERT INTO Ort(land_id,bezeichnung) VALUES(3,'Genua');
+INSERT INTO Ort(land_id,bezeichnung) VALUES(4,'Bern');
+INSERT INTO Ort(land_id,bezeichnung) VALUES(5,'Nizza');
+INSERT INTO Ort(land_id,bezeichnung) VALUES(6,'Barcelona');
+GO
+
+
+INSERT INTO Adresse(ort_id, adressdaten)
 VALUES(1, '1010 Stephansplatz 1');
-INSERT INTO Adresse(land_id, adresse)
+INSERT INTO Adresse(ort_id, adressdaten)
 VALUES(2, '23456 Domplatz 22');
-INSERT INTO Adresse(land_id, adresse)
+INSERT INTO Adresse(ort_id, adressdaten)
 VALUES(3, '31312 Via Roma 3');
-INSERT INTO Adresse(land_id, adresse)
+INSERT INTO Adresse(ort_id, adressdaten)
 VALUES(4, '1452 Schweizergarten 4');
-INSERT INTO Adresse(land_id, adresse)
+INSERT INTO Adresse(ort_id, adressdaten)
 VALUES(5, '52541 Boulevard du Paris');
 GO
 
@@ -56,16 +66,16 @@ INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
 VALUES('Hotel Allin', 'Dieses Hotel bietet alles auﬂer Vollpension', 4, 3);
 GO
 
-INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind)
-VALUES('Wandern in den Bergen', 'Erleben Sie die schˆne Bergwelt in ÷sterreich', 4, 65.99, 32.99);
-INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind)
-VALUES('Wellnes pur', 'Genieﬂen Sie italienische Luft und Wellnes vom Feinsten', 1, 150.00, 75.00);
-INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind)
-VALUES('Fuﬂball pur', 'Fahren Sie zum EM-Finale nach Paris!', 2, 199.99, 99.99);
-INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind)
-VALUES('Urlaub der Creme de la Creme', 'Verbleiben Sie in einem unserer 4000 Zimmer', 3, 259.90, 129.90);
-INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind)
-VALUES('Pokern wie die Pros', 'Fahren Sie zur World Pokers Tour nach Las Vegas!', 5, 1200.00, 600.00);
+INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind,ort_id)
+VALUES('Wandern in den Bergen', 'Erleben Sie die schˆne Bergwelt in ÷sterreich', 4, 65.99, 32.99,1);
+INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind, ort_id)
+VALUES('Wellnes pur', 'Genieﬂen Sie italienische Luft und Wellnes vom Feinsten', 1, 150.00, 75.00,2);
+INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind, ort_id)
+VALUES('Fuﬂball pur', 'Fahren Sie zum EM-Finale nach Paris!', 2, 199.99, 99.99,3);
+INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind,ort_id)
+VALUES('Urlaub der Creme de la Creme', 'Verbleiben Sie in einem unserer 4000 Zimmer', 3, 259.90, 129.90,4);
+INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind,ort_id)
+VALUES('Pokern wie die Pros', 'Fahren Sie zur World Pokers Tour nach Las Vegas!', 5, 1200.00, 600.00,5);
 GO
 
 INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
