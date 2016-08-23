@@ -43,7 +43,7 @@ namespace UI_Reiseboerse_Graf.Models
         public string Nachname { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
-        [DisplayName("Telefonnummer")]
+        [DisplayName("Telefonnr")]
         public string Telefon { get; set; }
 
         [Required]
@@ -57,7 +57,7 @@ namespace UI_Reiseboerse_Graf.Models
         [DisplayName("Postleitzahl")]
         public string Plz { get; set; }
 
-        [DataType(DataType.MultilineText)]
+        
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DisplayName("Adresse")]
         public string Adresse { get; set; }
