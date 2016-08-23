@@ -182,12 +182,45 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="model">Suchtext</param>
         /// <returns>Liste von Reisen bei Fehler oder ungültigen Suchtext Null</returns>
-        [HttpGet]
+        [HttpPost]
         public ActionResult Suchen(TextsucheModel model)
         {
-            ///Methode aus BL --> Suchtext übergeben
-            ///und dann die Liste der rückgelieferten Reiseobjekte auf ViewModel Reise ummappen 
-            return null;
+            List<Reise> liste = null;
+            List<Reisedatum> reisedaten = null;
+            List<ReiseModel> viewliste = null;
+            if (string.IsNullOrEmpty(model.Suchtext))
+            {
+                liste=ReiseVerwaltung.SucheReise(model.Suchtext);                
+            }
+            foreach (var reise in liste)
+            {
+                reisedaten = reise.AlleReisedaten.ToList();
+                viewliste.Add(new ReiseModel
+                {
+                    Anmeldefrist = reisedaten[0].Anmeldefrist,
+                    Beginndatum = reisedaten[0].Startdatum,
+                    Enddatum = reisedaten[0].Enddatum,
+                    Hotelkategorie = reise.Unterkunft.Kategorie,
+                    ID = reise.ID,
+                    Land = reise.Ort.Land.Bezeichnung,
+                    Ort = reise.Ort.Bezeichnung,
+                    Land_id = reise.Ort.Land.ID,
+                    Ort_id = reise.Ort.ID,
+                    Preis = reise.Preis_Erwachsen,
+                    Titel = reise.Titel,
+                    Unterkunft = reise.Unterkunft.Bezeichnung,
+                    Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung,
+                    Verpflegungs_id = reise.Unterkunft.Verpflegung.ID
+                });
+            }
+            ReiseLadenModel viewmodel = new ReiseLadenModel()
+            {
+                Reisen = viewliste,
+                Filter = FilterAnzeigeTest(),
+                TextSuche = model
+            };
+
+            return RedirectToAction("Laden", "Reisen", viewmodel);
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,36 @@ namespace BL_Reiseboerse_Graf
             
 
             return 1;
+        }
+
+
+        public static List<Reise> SucheReise(string suchtext)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Suche Reise");
+            Debug.Indent();
+            List<Reise> liste = new List<Reise>();
+            using (var context=new reisebueroEntities())
+            {
+                try
+                {
+                    liste = context.AlleReisen.Include("AlleReisedaten").Include("Unterkunft").Include("Ort").Include("Land").ToList();
+                    if (liste != null&&liste.Count>0)
+                    {
+                        liste = liste.Where(x => x.Beschreibung.Contains(suchtext)).ToList();
+                    }
+                  
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Suchen der Reise");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return liste;
+
         }
 
         

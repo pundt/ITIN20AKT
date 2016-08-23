@@ -48,34 +48,88 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adresse.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Benutzer.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bewertung.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bild.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
     <Compile Include="BildVerwaltung.cs" />
+    <Compile Include="Buchung.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BuchungStorniert.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
     <Compile Include="BuchungsVerwaltung.cs" />
-    <Compile Include="dbtest.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbtest.Context.tt</DependentUpon>
+    <Compile Include="Buchung_Zahlung.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
-    <Compile Include="dbtest.cs">
+    <Compile Include="dbreisebuero.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbtest.tt</DependentUpon>
+      <DependentUpon>dbreisebuero.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="dbtest.Designer.cs">
+    <Compile Include="dbreisebuero.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbtest.edmx</DependentUpon>
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbreisebuero.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbreisebuero.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Land.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ort.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reise.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reisedatum.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reisedurchfuehrung.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
     <Compile Include="ReiseVerwaltung.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reise_Bild.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Unterkunft.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Unterkunft_Bild.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Verpflegung.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zahlung.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zahlungsart.cs">
+      <DependentUpon>dbreisebuero.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="dbtest.edmx">
+    <EntityDeploy Include="dbreisebuero.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbtest.Designer.cs</LastGenOutput>
+      <LastGenOutput>dbreisebuero.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="dbtest.edmx.diagram">
-      <DependentUpon>dbtest.edmx</DependentUpon>
+    <None Include="dbreisebuero.edmx.diagram">
+      <DependentUpon>dbreisebuero.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -83,15 +137,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dbtest.Context.tt">
+    <Content Include="dbreisebuero.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbtest.edmx</DependentUpon>
-      <LastGenOutput>dbtest.Context.cs</LastGenOutput>
+      <DependentUpon>dbreisebuero.edmx</DependentUpon>
+      <LastGenOutput>dbreisebuero.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="dbtest.tt">
+    <Content Include="dbreisebuero.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbtest.edmx</DependentUpon>
-      <LastGenOutput>dbtest.cs</LastGenOutput>
+      <DependentUpon>dbreisebuero.edmx</DependentUpon>
+      <LastGenOutput>dbreisebuero.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

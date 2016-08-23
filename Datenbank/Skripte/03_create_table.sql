@@ -19,10 +19,19 @@ CREATE TABLE Benutzer (
 
 CREATE TABLE Adresse (
 	id INT IDENTITY NOT NULL,
-	land_id INT NOT NULL,
-	adresse NVARCHAR(255) NOT NULL,
+	ort_id INT NOT NULL,
+	adressdaten NVARCHAR(255) NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
+
+
+CREATE TABLE Ort(
+	id INT IDENTITY NOT NULL,
+	bezeichnung NVARCHAR(50) NOT NULL,
+	land_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
 
 CREATE TABLE Buchung (
 	reisedurchfuehrung_id INT NOT NULL,
@@ -55,6 +64,7 @@ CREATE TABLE Reise (
 	unterkunft_id INT NOT NULL,
 	preis_erwachsener DECIMAL(6,2) NOT NULL,
 	preis_kind DECIMAL(6,2) NOT NULL,
+	ort_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 

@@ -9,9 +9,13 @@
     <!--FilternView muss hier eingebunden werden als partialView-->
     <div class="row">
         <div class="col-xs-4 col-lg-offset-8">
-            <span class="input-group btn">
-                @Html.TextBoxFor(x => x.TextSuche.Suchtext, new { @class = "form-control reise", @placeholder = "Suche nach..." })  <button class="btn anmeldung" type="button">Los!</button>
-            </span>
+            @using (Html.BeginForm("Suchen", "Reisen"))
+            {
+                <span class="input-group btn">
+                    @Html.TextBoxFor(x => x.TextSuche.Suchtext, new { @class = "form-control reise", @placeholder = "Suche nach..." })  <input class="btn anmeldung" type="submit" value="Los!" />
+                </span>
+            }
+            
         </div>
     </div>
 <div>
@@ -23,7 +27,7 @@
         @if (Model.Reisen == null || Model.Reisen.Count() <= 0)
             {
             <h4 class="suchergebnis">Keine Suchergebnisse vorhanden <br /> Verändern Sie Ihre Suchkriterien</h4>
-        }
+            }
         else
         {
             foreach (var item in Model.Reisen)
