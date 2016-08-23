@@ -80,64 +80,78 @@ INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(5, '2017-01-03', '2017-15-03', '2017-02-02');
 GO
 
-INSERT INTO UnterkunftBild (unterkunft_id, bilddaten)
-SELECT 1, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\1_hotel_test.jpg', Single_Blob) AS import;
 GO
 
-INSERT INTO UnterkunftBild(unterkunft_id, bilddaten)
-SELECT 2, BulkColumn
+INSERT INTO Bild(bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\2_hotel_test.jpg', Single_Blob) AS import;
 GO
 
-INSERT INTO UnterkunftBild (unterkunft_id, bilddaten)
-SELECT 3, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\3_hotel_test.jpg', Single_Blob) AS import;
 GO
 
-INSERT INTO UnterkunftBild (unterkunft_id, bilddaten)
-SELECT 4, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\4_hotel_test.jpg', Single_Blob) AS import;
 GO
 
-INSERT INTO UnterkunftBild (unterkunft_id, bilddaten)
-SELECT 5, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\5_hotel_test.jpg', Single_Blob) AS import;
 GO
 
-INSERT INTO ReiseBild (reise_id, bilddaten)
-SELECT 1, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\1_reise_test.jpg', Single_Blob) AS import;	
 GO
 
-INSERT INTO ReiseBild (reise_id, bilddaten)
-SELECT 2, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\2_reise_test.jpg', Single_Blob) AS import;
 GO
 
-INSERT INTO ReiseBild (reise_id, bilddaten)
-SELECT 3, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\3_reise_test.jpg', Single_Blob) AS import;
 GO
 
-INSERT INTO ReiseBild (reise_id, bilddaten)
-SELECT 4, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\4_reise_test.jpg', Single_Blob) AS import;
 GO
 
-INSERT INTO ReiseBild (reise_id, bilddaten)
-SELECT 5, BulkColumn
+INSERT INTO Bild (bilddaten)
+SELECT BulkColumn
 FROM Openrowset( 
 Bulk 'C:\ITIN20AKT\Datenbank\Skripte\testimages\5_reise_test.jpg', Single_Blob) AS import;
+GO
+
+INSERT INTO Reise_Bild (bild_id, reise_id) VALUES(1, 1);
+INSERT INTO Reise_Bild (bild_id, reise_id) VALUES(2, 2);
+INSERT INTO Reise_Bild (bild_id, reise_id) VALUES(3, 3);
+INSERT INTO Reise_Bild (bild_id, reise_id) VALUES(4, 4);
+INSERT INTO Reise_Bild (bild_id, reise_id) VALUES(5, 5);
+GO
+
+INSERT INTO Unterkunft_Bild (bild_id, unterkunft_id) VALUES(6,1);
+INSERT INTO Unterkunft_Bild (bild_id, unterkunft_id) VALUES(7,2);
+INSERT INTO Unterkunft_Bild (bild_id, unterkunft_id) VALUES(8,3);
+INSERT INTO Unterkunft_Bild (bild_id, unterkunft_id) VALUES(9,4);
+INSERT INTO Unterkunft_Bild (bild_id, unterkunft_id) VALUES(10,5);
 GO
 
 INSERT INTO Zahlungsart(bezeichnung) VALUES('Visa');
@@ -156,9 +170,14 @@ INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
 GO
 
-INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer,zahlung_id) VALUES(1, 1,'AB12345670',1);
-INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer,zahlung_id) VALUES(2, 2,'56484651GHD',2);
-INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer,zahlung_id) VALUES(3, 3,'KHGKFKU265456',3);
+INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer) VALUES(1, 1,'AB12345670');
+INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer) VALUES(2, 2,'56484651GHD');
+INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer) VALUES(3, 3,'KHGKFKU265456');
+GO
+
+INSERT INTO Buchung_Zahlung(reisedurchfuehrung_id, zahlung_id) VALUES(1,3);
+INSERT INTO Buchung_Zahlung(reisedurchfuehrung_id, zahlung_id) VALUES(2,2);
+INSERT INTO Buchung_Zahlung(reisedurchfuehrung_id, zahlung_id) VALUES(3,1);
 GO
 
 INSERT INTO Bewertung(wertung, reise_id) VALUES(5,1);

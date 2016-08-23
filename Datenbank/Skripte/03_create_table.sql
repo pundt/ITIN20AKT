@@ -28,6 +28,11 @@ CREATE TABLE Buchung (
 	reisedurchfuehrung_id INT NOT NULL,
 	benutzer_id INT NOT NULL,
 	passnummer NVARCHAR(25) NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Buchung_Zahlung(
+	reisedurchfuehrung_id INT NOT NULL,
 	zahlung_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
@@ -89,17 +94,23 @@ CREATE TABLE Land (
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE ReiseBild (
+CREATE TABLE Bild (
 	id INT IDENTITY NOT NULL,
 	bilddaten VARBINARY(MAX) NOT NULL,
-	reise_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE UnterkunftBild (
+CREATE TABLE Unterkunft_Bild (
 	id INT IDENTITY NOT NULL,
-	bilddaten VARBINARY(MAX) NOT NULL,
+	bild_id INT NOT NULL,
 	unterkunft_id INT NOT NULL,
+	erstelldatum DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Reise_Bild(
+	id INT IDENTITY NOT NULL,
+	bild_id INT NOT NULL,
+	reise_id INT NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 

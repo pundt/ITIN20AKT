@@ -8,11 +8,18 @@ FOREIGN KEY (benutzer_id)
 REFERENCES Benutzer(id);
 GO
 
-ALTER TABLE Buchung
+ALTER TABLE Buchung_Zahlung
 ADD
-CONSTRAINT FK_Buchung_Zahlung
+CONSTRAINT FK_Buchung_Zahlung_Zahlung
 FOREIGN KEY (zahlung_id)
 REFERENCES Zahlung(id);
+GO
+
+ALTER TABLE Buchung_Zahlung
+ADD
+CONSTRAINT FK_Buchung_Zahlung_Buchung
+FOREIGN KEY (reisedurchfuehrung_id)
+REFERENCES Buchung(reisedurchfuehrung_id);
 GO
 
 ALTER TABLE Buchung
@@ -71,11 +78,18 @@ FOREIGN KEY (reisedatum_id)
 REFERENCES Reisedatum(id)
 GO
 
-ALTER TABLE ReiseBild
+ALTER TABLE Reise_Bild
 ADD
-CONSTRAINT FK_ReiseBild_Reise
+CONSTRAINT FK_Reise_Bild_Reise
 FOREIGN KEY (reise_id)
 REFERENCES Reise(id);
+GO
+
+ALTER TABLE Reise_Bild
+ADD
+CONSTRAINT FK_Reise_Bild_Bild
+FOREIGN KEY (bild_id)
+REFERENCES Bild(id);
 GO
 
 ALTER TABLE Bewertung
@@ -85,12 +99,18 @@ FOREIGN KEY (reise_id)
 REFERENCES Reise(id);
 GO
 
-
-ALTER TABLE UnterkunftBild
+ALTER TABLE Unterkunft_Bild
 ADD
-CONSTRAINT FK_UnterkunftBild_Unterkunft
+CONSTRAINT FK_Unterkunft_Bild_Unterkunft
 FOREIGN KEY (unterkunft_id)
 REFERENCES Unterkunft(id);
+GO
+
+ALTER TABLE Unterkunft_Bild
+ADD
+CONSTRAINT FK_Unterkunft_Bild_Bild
+FOREIGN KEY (bild_id)
+REFERENCES Bild(id);
 GO
 
 ALTER TABLE Unterkunft

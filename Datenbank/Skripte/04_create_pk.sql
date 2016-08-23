@@ -19,15 +19,21 @@ CONSTRAINT PK_Land
 PRIMARY KEY (id);
 GO
 
-ALTER TABLE ReiseBild
+ALTER TABLE Reise_Bild
 ADD
-CONSTRAINT PK_ReiseBild
+CONSTRAINT PK_Reise_Bild
 PRIMARY KEY (id);
 GO
 
-ALTER TABLE UnterkunftBild
+ALTER TABLE Unterkunft_Bild
 ADD
-CONSTRAINT PK_UnterkunftBild
+CONSTRAINT PK_Unterkunft_Bild
+PRIMARY KEY(id);
+GO
+
+ALTER TABLE Bild
+ADD
+CONSTRAINT PK_Bild
 PRIMARY KEY(id);
 GO
 
@@ -40,6 +46,12 @@ GO
 ALTER TABLE Buchung
 ADD
 CONSTRAINT PK_Buchung
+PRIMARY KEY (reisedurchfuehrung_id);
+GO
+
+ALTER TABLE Buchung_Zahlung
+ADD
+CONSTRAINT PK_Buchung_Zahlung
 PRIMARY KEY (reisedurchfuehrung_id);
 GO
 
