@@ -12,7 +12,7 @@
             {
                 <span class="input-group btn">
                     @Html.TextBoxFor(x => x.TextSuche, new { @class = "form-control reise", @placeholder = "Suche nach..." })
-                   <input type="submit" class="btn anmeldung" value="Los!"/>
+                    <input type="submit" class="btn anmeldung" value="Los!" />
                 </span>
             }
 
@@ -60,7 +60,9 @@
                         <div class="col-md-1 col-xs-6 details">
                             <!--Wenn der Benutzer eingeloogt, dann wird hier der Merkenbutton eingezeigt-->
                             <!--Link zu den Details der entsprechenden Reise-->
+
                             @Html.ActionLink("Details", "Anzeigen", new { id = item.ID }, new { @class = "btn buttonind platziert" })
+
                         </div>
                     </div>
                     <br />
