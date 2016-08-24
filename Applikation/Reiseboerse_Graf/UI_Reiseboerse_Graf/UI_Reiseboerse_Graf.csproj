@@ -253,10 +253,10 @@
     <Content Include="Views\Benutzer\_Login.cshtml" />
     <Content Include="Views\Benutzer\Aktualisieren.cshtml" />
     <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
+    <Content Include="Views\Bild\BildUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Bild\" />
     <Folder Include="Views\Validierungs\" />
     <Folder Include="Views\Validierung\" />
   </ItemGroup>
