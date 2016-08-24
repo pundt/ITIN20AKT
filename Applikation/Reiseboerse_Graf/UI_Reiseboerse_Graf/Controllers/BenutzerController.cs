@@ -56,7 +56,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         [HttpPost]
-        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm)
+        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm, HttpPostedFileBase bild)
         {
             Debug.WriteLine("Benutzer - Benutzer Anlegen - POST".ToUpper());
             Debug.Indent();
@@ -312,7 +312,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                     },
                     Passwort = "123" + i + "user!",
                     PasswortWiederholung = "123" + i + "user!",
-                    Plz = "101" + i,
                     Telefon = "067612345" + i,
                     Titel = "",
                     Adresse = "Musterstrasse 1" + i,
