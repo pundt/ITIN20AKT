@@ -58,48 +58,116 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult BenutzerAnlegen(KundenAnlegenModel bm)
         {
+            Debug.WriteLine("Benutzer - Benutzer Anlegen - POST".ToUpper());
+            Debug.Indent();
 
-            //Benutzer neuerBenutzer = new Benutzer();
-            //neuerBenutzer.Id = bm.ID;
-            //neuerBenutzer.Vorname = bm.Vorname;
-            //neuerBenutzer.Nachname = bm.Nachname;
-            //neuerBenutzer.Passwort = bm.Passwort;
-            //neuerBenutzer.Geschlecht = bm.Geschlecht;
+            reisebueroEntities context = new reisebueroEntities();
 
-            if (Globals.IST_TESTSYSTEM)
+            List<LandModel> lmList = new List<LandModel>();
+            List<Land> laender = new List<Land>();
+            List<Benutzer> benutzerList = new List<Benutzer>();
+            Benutzer b = new Benutzer();
+            Land l = new Land();
+
+            using (context)
             {
-                if (ModelState.IsValid)
+                try
                 {
-                    Debug.WriteLine("Erfolgreich");
-                    return RedirectToAction("Laden", "Reisen");
+                    laender = BenutzerVerwaltung.AlleLaender();
+                    benutzerList = BenutzerVerwaltung.AlleBenutzer();
+
+                    if (ModelState.IsValid)
+                    {
+                        b.Adresse.Adressdaten = bm.Adresse;
+                        b.Email = bm.Email;
+                        b.Geschlecht = bm.Geschlecht;
+                        b.Passwort = Tools.PasswortZuByteArray(bm.Passwort);
+                        b.Telefon = bm.Telefon;
+                        b.Vorname = bm.Vorname;
+                        b.Nachname = bm.Nachname;
+                        b.Land.ID = bm.Land_ID;
+
+                        lmList = bm.Land;
+                        foreach (LandModel lm in lmList)
+                        {
+                            if (lm.land_ID == bm.Land_ID)
+                            {
+                                l.Bezeichnung = lm.landName;
+                                l.ID = lm.land_ID;
+                            }
+                        }
+
+                        b.Land = l;
+
+                        benutzerList.Add(b);
+
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        /// Wenn das Model nicht valide ist, wird eine neue Landliste generiert,
+                        /// da dieses bei erneutem Aufruf sonst verloren geht
+                        foreach (Land ld in laender)
+                        {
+                            lmList.Add(new LandModel() { landName = ld.Bezeichnung, land_ID = ld.ID });
+                        }
+
+                        bm.Land = lmList;
+
+                        return View(bm);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    return View(bm);
+                    Debug.WriteLine("Fehler beim Anlegen eines Benutzers!");
+                    Debug.WriteLine(ex.Message);
+                    Debug.Unindent();
+                    Debugger.Break();
                 }
             }
-            else
-            {
-                // benutzer in DB speichern
-            }        
+
+            Debug.Unindent();
+            return View();
         }
+
         [HttpGet]
         public ActionResult BenutzerAnlegen()
         {
-            KundenAnlegenModel modell = new KundenAnlegenModel()
-            {
-                Land = new List<LandModel>()
+            Debug.WriteLine("Benutzer - Benutzer Anlegen - GET".ToUpper());
+            Debug.Indent();
 
-            };
-            for (int i = 0; i < 3; i++)
+            reisebueroEntities context = new reisebueroEntities();
+
+            KundenModel model = new KundenModel();
+            model.GeburtsDatum = DateTime.Now;
+
+            using (context)
             {
-                modell.Land.Add(new LandModel()
+                try
                 {
-                    landName = "Land" + i,
-                    land_ID = i + 1
-                });
+                    List<Land> laender = BenutzerVerwaltung.AlleLaender();
+                    List<LandModel> lmListe = new List<LandModel>();
+
+                    /// Hier werden die Laender der lmList hinzugefügt um
+                    /// die Dropdown-Liste in der View zu füllen
+                    foreach (Land l in laender)
+                    {
+                        lmListe.Add(new LandModel() { landName = l.Bezeichnung, land_ID = l.ID });
+                    }
+
+                    model.Land = lmListe;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Holen der Daten!");
+                    Debug.WriteLine(ex.Message);
+                    Debug.Unindent();
+                    Debugger.Break();
+                }
             }
-            return View(modell);
+
+            Debug.Unindent();
+            return View(model);
         }
 
         [Authorize]
