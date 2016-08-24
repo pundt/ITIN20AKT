@@ -32,7 +32,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {
-            if (lm.Email == "maxmuster@gmx1.at" && lm.Passwort == "1231user!")
+            if (BenutzerVerwaltung.Anmelden(lm.Email, lm.Passwort))
             {
                 if (lm.AngemeldetBleiben)
                 {
