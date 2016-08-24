@@ -10,7 +10,7 @@ namespace UI_Reiseboerse_Graf.Models
         public int Anzahl_Erwachsene { get; set; }
         public int Anzahl_Kinder { get; set; }
         public decimal Preis_Erwachsene { get; set; }
-        public decimal Preis_Kinder { get; set; }
+        public decimal Preis_Kind { get; set; }
         private int anzahl;
 
         public int Anzahl

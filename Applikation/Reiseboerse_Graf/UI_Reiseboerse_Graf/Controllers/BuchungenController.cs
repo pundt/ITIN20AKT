@@ -29,19 +29,25 @@ namespace UI_Reiseboerse_Graf.Controllers
 
 
         /// <summary>
-        /// Fügt eine Buchung hinzu
+        /// Fügt alle notwendigen Eingabefelder für Buchungsdaten in eine View
         /// </summary>
-        /// <returns>den View zum Eingeben der Daten</returns>
+        /// <param name="anzahl">die ausgewählte Anzahl der Buchungen bei der View Anzeigen</param>
+        /// <returns>die View zum Eingeben der Daten</returns>
         [HttpPost]
         public ActionResult Hinzufuegen(BuchungAnzahlModel anzahl)
-        {            
-            List<BuchungenModel> BuchungsListe = new List<BuchungenModel>();
-            for (int i = 0; i < anzahl.Anzahl; i++)
+        {
+            BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
+            {
+                AnzahlModel = anzahl,
+                Buchungen = new List<BuchungenModel>()
+
+            };
+            for (int i = 0; i < model.AnzahlModel.Anzahl; i++)
             {
                 BuchungenModel bm = new BuchungenModel();
-                BuchungsListe.Add(bm);
+                model.Buchungen.Add(bm);
             }
-            return View(BuchungsListe);
+            return View(model);
         }
 
         /// <summary>
