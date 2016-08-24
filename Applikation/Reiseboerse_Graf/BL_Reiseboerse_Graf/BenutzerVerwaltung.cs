@@ -24,7 +24,7 @@ namespace BL_Reiseboerse_Graf
         /// Liefert alle Kunden aus der DB
         /// </summary>
         /// <returns>Liste aller Kunden</returns>
-        public static List<Benutzer> AlleKunden()
+        public static List<Benutzer> AlleBenutzer()
         {
             reisebueroEntities context = new reisebueroEntities();
 

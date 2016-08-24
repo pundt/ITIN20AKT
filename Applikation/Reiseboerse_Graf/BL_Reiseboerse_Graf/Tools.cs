@@ -23,12 +23,15 @@ namespace BL_Reiseboerse_Graf
 
             byte[] pw = hash.ComputeHash(Encoding.UTF8.GetBytes(passwort));
 
-            foreach (Benutzer b in context.AlleBenutzer)
+            using (context)
             {
-                if (b.Email == email && pw.SequenceEqual(b.Passwort))
+                foreach (Benutzer b in context.AlleBenutzer)
                 {
-                    return true;
-                }
+                    if (b.Email == email && pw.SequenceEqual(b.Passwort))
+                    {
+                        return true;
+                    }
+                } 
             }
 
             return false;
@@ -48,12 +51,15 @@ namespace BL_Reiseboerse_Graf
 
             byte[] pw = hash.ComputeHash(Encoding.UTF8.GetBytes(passwort));
 
-            foreach (Benutzer b in context.AlleBenutzer)
+            using (context)
             {
-                if (b.Passwort == pw)
+                foreach (Benutzer b in context.AlleBenutzer)
                 {
-                    return true;
-                }
+                    if (b.Passwort == pw)
+                    {
+                        return true;
+                    }
+                } 
             }
 
             return false;
@@ -68,18 +74,21 @@ namespace BL_Reiseboerse_Graf
         {
             reisebueroEntities context = new reisebueroEntities();
 
-            SHA256 hash = SHA256.Create();
+            SHA512 hash = SHA512.Create();
 
             byte[] pw = hash.ComputeHash(Encoding.UTF8.GetBytes(passwort));
 
-            foreach (Benutzer b in context.AlleBenutzer)
+            using (context)
             {
-                if (pw.SequenceEqual(b.Passwort))
+                foreach (Benutzer b in context.AlleBenutzer)
                 {
-                    return pw;
+                    if (pw.SequenceEqual(b.Passwort))
+                    {
+                        return pw;
+                    }
                 }
-            }
 
+            }
             return null;
         }
     }
