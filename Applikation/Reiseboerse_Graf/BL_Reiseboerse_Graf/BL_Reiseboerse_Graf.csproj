@@ -54,6 +54,7 @@
     <Compile Include="Benutzer.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
+    <Compile Include="BenutzerVerwaltung.cs" />
     <Compile Include="Bewertung.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
@@ -106,6 +107,7 @@
     <Compile Include="Reise_Bild.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tools.cs" />
     <Compile Include="Unterkunft.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
