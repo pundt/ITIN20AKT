@@ -180,9 +180,12 @@ INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
 GO
 
-INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer) VALUES(1, 1,'AB12345670');
-INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer) VALUES(2, 2,'56484651GHD');
-INSERT INTO Buchung(reisedurchfuehrung_id,benutzer_id,passnummer) VALUES(3, 3,'KHGKFKU265456');
+INSERT INTO Buchung(vorname, nachname, geburtsdatum, reisedurchfuehrung_id,benutzer_id,passnummer) 
+VALUES('Hubert', 'Meier', '1960-12-12',1, 1,'AB12345670');
+INSERT INTO Buchung(vorname, nachname, geburtsdatum,reisedurchfuehrung_id,benutzer_id,passnummer)
+VALUES('Karl', 'Huber', '1980-10-4',2, 2,'56484651GHD');
+INSERT INTO Buchung(vorname, nachname, geburtsdatum,reisedurchfuehrung_id,benutzer_id,passnummer) 
+VALUES('Maria', 'Huber','1950-04-12',3, 3,'KHGKFKU265456');
 GO
 
 INSERT INTO Buchung_Zahlung(reisedurchfuehrung_id, zahlung_id) VALUES(1,3);

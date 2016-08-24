@@ -23,7 +23,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             return View();
         }
-        [ChildActionOnly]
+        //[ChildActionOnly]
         [HttpGet]
         public ActionResult Login()
         {

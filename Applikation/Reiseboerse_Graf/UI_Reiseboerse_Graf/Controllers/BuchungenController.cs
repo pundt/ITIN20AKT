@@ -36,18 +36,20 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Hinzufuegen(BuchungAnzahlModel anzahl)
         {
-            BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
-            {
-                AnzahlModel = anzahl,
-                Buchungen = new List<BuchungenModel>()
+                BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
+                {
+                    AnzahlModel = anzahl,
+                    Buchungen = new List<BuchungenModel>()
 
-            };
-            for (int i = 0; i < model.AnzahlModel.Anzahl; i++)
-            {
-                BuchungenModel bm = new BuchungenModel();
-                model.Buchungen.Add(bm);
-            }
-            return View(model);
+                };
+                for (int i = 0; i < model.AnzahlModel.Anzahl; i++)
+                {
+                    BuchungenModel bm = new BuchungenModel();
+                    model.Buchungen.Add(bm);
+                }
+                return View(model);
+
+
         }
 
         /// <summary>
@@ -58,14 +60,14 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Buchen(List<BuchungenModel> liste)
         {
-            
+
             if (!this.User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Laden", "Login");
             }
             else
             {
-               
+
             }
             return null;
 

@@ -153,9 +153,6 @@
 }
 
 
-
-
-
 .logoschriftstartslider {
     font-family: 'Bradley Hand ITC';
     font-weight: bold;
@@ -282,3 +279,45 @@
         text-decoration: none;
         cursor: pointer;
     }
+
+.ausgegraut{
+    background-color:#514f4f;
+    color:#f8f1f1;
+    margin: 4%;
+    text-align: center;
+}
+
+.ausgegraut:hover{
+   cursor:not-allowed;
+}
+
+.mytooltip{
+    position:relative;
+}
+
+.mytooltip:hover .tooltiptext{
+    visibility:visible;
+    opacity:1;
+}
+
+.tooltiptext{
+    visibility:hidden;
+    min-width:50px;
+    background-color:#f89408;
+    color:#514f4f;
+    text-align:center;
+    padding:5px;
+    border-radius:6px;
+    position:absolute;
+    z-index:1;
+    bottom:8%;
+    right:120%;
+    margin-left:-120px;
+    opacity:0;
+    transition:opacity 1s;
+}
+
+.tooltiptext:hover{
+    visibility:visible;
+    opacity:1;
+}

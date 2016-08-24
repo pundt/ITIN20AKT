@@ -42,7 +42,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             else
             {
-               
+
             }
             return View(model);
         }
@@ -131,6 +131,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Unindent();
             return View(rm);
         }
+       
 
         /// <summary>
         /// erzeugt die Partialview zum Einbinden auf die jeweilige Reisedetailseite
@@ -192,7 +193,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             if (!string.IsNullOrEmpty(TextSuche))
             {
                 liste = ReiseVerwaltung.SucheReise(TextSuche);
-            }            
+            }
             foreach (var reise in liste)
             {
                 reisedaten = reise.AlleReisedaten.ToList();
