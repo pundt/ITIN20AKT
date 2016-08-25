@@ -67,7 +67,7 @@ namespace BL_Reiseboerse_Graf
         /// </summary>
         /// <param name="benutzer_id">ID des Benutzers</param>
         /// <returns>Liste von Buchungen oder Null bei Fehler</returns>
-        public static List<Buchung> LadeAlleBuchungenBenutzer(int benutzer_id)
+        public static List<Buchung> LadeAlleEinzelBuchungenBenutzer(int benutzer_id)
         {
             Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen Benutzer");
             Debug.Indent();
@@ -76,8 +76,8 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    buchungsListe = context.AlleBuchungen.
-                        Where(x => x.Benutzer.ID == benutzer_id).ToList();
+                    buchungsListe = context.AlleBuchungen.Include("Reisedurchfuehrung.Reisedatum.Reise")
+                                     .Where(x => x.Benutzer.ID == benutzer_id).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -89,6 +89,38 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return buchungsListe;
         }
+
+        /// <summary>
+        /// Lädt alle Buchung gebündelt pro Reise eines Benutzers
+        /// </summary>
+        /// <param name="benutzer_id">ID des Benutzers</param>
+        /// <returns>Liste von Buchungen oder Null bei Fehler</returns>
+        public static List<Buchung> LadeAlleReiseBuchungenBenutzer(int benutzer_id)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Lade alle ReiseBuchungen Benutzer");
+            Debug.Indent();
+            List<Buchung> buchungsListe = new List<Buchung>();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    buchungsListe = context.AlleBuchungen.Include("Reisedurchfuehrung.Reisedatum").Include("Reisedurchfuehrung.Reisedatum.Reise")
+                                     .Where(x => x.Benutzer.ID == benutzer_id).ToList();
+                    buchungsListe.GroupBy(x => x.Reisedurchfuehrung.Reisedatum.Startdatum).ToList();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden der Buchungen pro Reise eines Benutzers");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return buchungsListe;
+        }
+
+
+
 
         /// <summary>
         /// Ermittelt die aktuelle Reisedurchfuehrungs_ID zu einer Reise, die gebucht werden kann
