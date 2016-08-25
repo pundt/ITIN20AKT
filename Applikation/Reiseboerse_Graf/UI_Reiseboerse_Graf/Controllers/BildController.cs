@@ -26,11 +26,11 @@ namespace UI_Reiseboerse_Graf.Controllers
         [AllowAnonymous]
         public ActionResult Laden(int id)
         {
-            //string contentType = "image/jpeg";
-            //byte[] bilddaten=BildVerwaltung.LadeBild(id).Bilddaten;
+            string contentType = "image/jpeg";
+            byte[] bilddaten = BildVerwaltung.LadeBild(id).Bilddaten;
 
-            //return new FileContentResult(bilddaten, contentType);
-            return null;
+            return new FileContentResult(bilddaten, contentType);
+            
         }
     }
 }
