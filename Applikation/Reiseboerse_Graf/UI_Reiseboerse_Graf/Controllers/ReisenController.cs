@@ -112,6 +112,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="reise_ID">ID der anzuzeigenden Reise</param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Anzeigen(int id)
         {
             Debug.WriteLine("Reisedetails- Anzeigen - GET");

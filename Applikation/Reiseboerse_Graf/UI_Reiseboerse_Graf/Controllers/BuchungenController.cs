@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UI_Reiseboerse_Graf.Models;
+using BL_Reiseboerse_Graf;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -36,24 +38,31 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Hinzufuegen(BuchungAnzahlModel anzahl)
         {
-                BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
-                {
-                    AnzahlModel = anzahl,
-                    Buchungen = new List<BuchungenModel>()
+            Debug.WriteLine("BuchungenController - Hinzufuegen - POST");
+            Debug.Indent();
 
-                };
-                for (int i = 0; i < model.AnzahlModel.Anzahl; i++)
+            BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
+            {
+                AnzahlModel = anzahl,
+                Buchungen = new List<BuchungenModel>()
+
+            };
+            for (int i = 0; i < model.AnzahlModel.Anzahl; i++)
+            {
+                BuchungenModel bm = new BuchungenModel()
                 {
-                    BuchungenModel bm = new BuchungenModel();
-                    model.Buchungen.Add(bm);
-                }
-                return View(model);
+                    Reisedurchfuehrung_ID = BuchungsVerwaltung.Ermittle_aktID(anzahl.Reise_ID, anzahl.Beginndatum) + i
+                };
+                model.Buchungen.Add(bm);
+            }
+            Debug.Unindent();
+            return View(model);
 
 
         }
 
         /// <summary>
-        /// Fügt eine Buchung hinzu anhand des übergebenen Models
+        /// Fügt Buchungen hinzu anhand des übergebenen Models
         /// </summary>
         /// <returns></returns>
         /// 

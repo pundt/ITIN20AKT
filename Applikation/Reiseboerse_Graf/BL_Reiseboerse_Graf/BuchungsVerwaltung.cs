@@ -61,5 +61,64 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return buchungsListe;
         }
+
+        /// <summary>
+        /// Lädt alle Buchung eines Benutzers
+        /// </summary>
+        /// <param name="benutzer_id">ID des Benutzers</param>
+        /// <returns>Liste von Buchungen oder Null bei Fehler</returns>
+        public static List<Buchung> LadeAlleBuchungenBenutzer(int benutzer_id)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen Benutzer");
+            Debug.Indent();
+            List<Buchung> buchungsListe = new List<Buchung>();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    buchungsListe = context.AlleBuchungen.
+                        Where(x => x.Benutzer.ID == benutzer_id).ToList();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden der Buchungen eines Benutzers");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return buchungsListe;
+        }
+
+        /// <summary>
+        /// Ermittelt die aktuelle Reisedurchfuehrungs_ID zu einer Reise, die gebucht werden kann
+        /// </summary>
+        /// <param name="reise_id">ID der Reise</param>
+        /// <param name="startdatum">das Startdatum der aktuellen Reise</param>
+        /// <returns>die aktuelle ID</returns>
+        public static int Ermittle_aktID(int reise_id, DateTime startdatum)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Ermittle aktuelle Reisedurchfuehrung_ID");
+            Debug.Indent();
+            int aktId = 0;
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    aktId = (from r in context.AlleReisedurchfuehrungen
+                             where r.Reisedatum.Reise.ID == reise_id && r.Buchung == null &&
+                             r.Reisedatum.Startdatum==startdatum
+                             select r.ID).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden der Buchungen eines Benutzers");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return aktId;
+        }
     }
 }
