@@ -25,7 +25,10 @@
         <EntityTypeShape EntityType="reisebueroModel.Zahlungsart" Width="1.5" PointX="12.75" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="reisebueroModel.FK_Adresse_Ort" ManuallyRouted="false" />
         <AssociationConnector Association="reisebueroModel.FK_Benutzer_Adresse" ManuallyRouted="false" />
-        <AssociationConnector Association="reisebueroModel.FK_Benutzer_Land" ManuallyRouted="false" />
+        <AssociationConnector Association="reisebueroModel.FK_Benutzer_Land" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="9.6776432291666659" />
+          <ConnectorPoint PointX="7.5" PointY="9.6776432291666659" />
+        </AssociationConnector>
         <AssociationConnector Association="reisebueroModel.FK_Buchung_Benutzer" ManuallyRouted="false" />
         <AssociationConnector Association="reisebueroModel.FK_Bewertung_Reise" ManuallyRouted="false" />
         <AssociationConnector Association="reisebueroModel.FK_Reise_Bild_Bild" ManuallyRouted="false" />
