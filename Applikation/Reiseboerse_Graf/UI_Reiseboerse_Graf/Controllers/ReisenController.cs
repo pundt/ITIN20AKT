@@ -132,7 +132,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Unindent();
             return View(rm);
         }
-       
 
         /// <summary>
         /// erzeugt die Partialview zum Einbinden auf die jeweilige Reisedetailseite
