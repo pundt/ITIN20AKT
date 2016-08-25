@@ -14,12 +14,14 @@ namespace UI_Reiseboerse_Graf.Models
         public string Nachname { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [RegularExpression("^[A-Z0-9{5,10}]$",ErrorMessage ="Geben Sie eine gültige Reisepassnummer ein")]
+        [Display(Name ="Reisepassnummer")]
         public string ReisePassNummer { get; set; }
         [Required]
         [DisplayFormat(DataFormatString ="{0:dd.MM.yyyy}")]
         public DateTime Geburtsdatum { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public int Zahlungsart_id { get; set; }
+        public int Reisedurchfuehrung_ID { get; set; }
 
 
 

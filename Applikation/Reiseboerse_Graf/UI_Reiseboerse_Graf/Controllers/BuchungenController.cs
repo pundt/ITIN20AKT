@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UI_Reiseboerse_Graf.Models;
+using BL_Reiseboerse_Graf;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -48,7 +49,10 @@ namespace UI_Reiseboerse_Graf.Controllers
             };
             for (int i = 0; i < model.AnzahlModel.Anzahl; i++)
             {
-                BuchungenModel bm = new BuchungenModel();
+                BuchungenModel bm = new BuchungenModel()
+                {
+                    Reisedurchfuehrung_ID = BuchungsVerwaltung.Ermittle_aktID(anzahl.Reise_ID, anzahl.Beginndatum) + i
+                };
                 model.Buchungen.Add(bm);
             }
             Debug.Unindent();
