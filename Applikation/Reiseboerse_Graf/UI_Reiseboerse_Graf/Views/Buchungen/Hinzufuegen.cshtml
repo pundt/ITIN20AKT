@@ -10,59 +10,6 @@
 
     @using (Html.BeginForm("Hinzufuegen", "Buchungen", FormMethod.Post))
     {
-        for (int i = 0; i < Model.BuchungenKind.Count; i++)
-        {
-            <div class="row reise">
-                <div class="row">
-                    <div class="col-xs-6 col-xs-offset-3">
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <th><h4>Daten des @(i + 1)<text>.</text> Erwachsenen</h4></th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td>
-                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Vorname);
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Vorname)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Nachname)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Nachname)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].ReisePassNummer)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].ReisePassNummer)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Geburtsdatum)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Geburtsdatum)
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-2 col-xs-offset-10">
-                        € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Kind)
-                    </div>
-                </div>
-            </div>
-        }
 
         for (int i = 0; i < Model.BuchungenErwachsen.Count; i++)
         {
@@ -72,7 +19,7 @@
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th><h4>Daten des @(i + 1)<text>.</text> Kindes</h4></th>
+                                    <th><h4>Daten des @(i + 1)<text>.</text> Erwachsenen</h4></th>
                                 </tr>
                             </thead>
                             <tr>
@@ -117,11 +64,65 @@
                 </div>
             </div>
         }
+        
+        for (int i = 0; i < Model.BuchungenKind.Count; i++)
+        {
+            <div class="row reise">
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th><h4>Daten des @(i + 1)<text>.</text> Kindes</h4></th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Vorname);
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Vorname)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Nachname)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Nachname)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].ReisePassNummer)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].ReisePassNummer)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Geburtsdatum)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Geburtsdatum)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-10">
+                        € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Kind)
+                    </div>
+                </div>
+            </div>
+        }
         <div class="logoschrift">
             € @((Model.AnzahlModel.Anzahl_Erwachsene * Model.AnzahlModel.Preis_Erwachsene) + Model.AnzahlModel.Anzahl_Kinder * Model.AnzahlModel.Preis_Kind)
         </div>
-            <div>
-                <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
-            </div>
+        <div>
+            <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
+        </div>
     }
 </div>
