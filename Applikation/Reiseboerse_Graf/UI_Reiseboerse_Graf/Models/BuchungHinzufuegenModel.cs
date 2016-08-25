@@ -7,7 +7,8 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class BuchungHinzufuegenModel
     {
-        public List<BuchungenModel> Buchungen { get; set; }
+        public List<BuchungenModel> BuchungenErwachsen { get; set; }
+        public List<BuchungenModel> BuchungenKind { get; set; }
         public BuchungAnzahlModel AnzahlModel { get; set; }
     }
 }

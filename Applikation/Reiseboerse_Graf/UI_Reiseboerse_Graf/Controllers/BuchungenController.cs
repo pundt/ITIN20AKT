@@ -35,29 +35,10 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="anzahl">die ausgewählte Anzahl der Buchungen bei der View Anzeigen</param>
         /// <returns>die View zum Eingeben der Daten</returns>
-        [HttpPost]
-        public ActionResult Hinzufuegen(BuchungAnzahlModel anzahl)
+        [HttpGet]
+        public ActionResult Hinzufuegen(BuchungHinzufuegenModel model)
         {
-            Debug.WriteLine("BuchungenController - Hinzufuegen - POST");
-            Debug.Indent();
-
-            BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
-            {
-                AnzahlModel = anzahl,
-                Buchungen = new List<BuchungenModel>()
-
-            };
-            for (int i = 0; i < model.AnzahlModel.Anzahl; i++)
-            {
-                BuchungenModel bm = new BuchungenModel()
-                {
-                    Reisedurchfuehrung_ID = BuchungsVerwaltung.Ermittle_aktID(anzahl.Reise_ID, anzahl.Beginndatum) + i
-                };
-                model.Buchungen.Add(bm);
-            }
-            Debug.Unindent();
             return View(model);
-
 
         }
 
@@ -67,12 +48,11 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns></returns>
         /// 
         [HttpPost]
-        public ActionResult Buchen(List<BuchungenModel> liste)
+        public ActionResult Hinzufuegen(List<BuchungenModel> liste)
         {
-
-            if (!this.User.Identity.IsAuthenticated)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Laden", "Login");
+
             }
             else
             {
@@ -82,6 +62,44 @@ namespace UI_Reiseboerse_Graf.Controllers
 
 
 
+        }
+
+        public ActionResult Buchen(BuchungAnzahlModel anzahlmodel)
+        {
+            Debug.WriteLine("Buchungen - Hinzufuegen - POST");
+            Debug.Indent();
+
+            BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
+            {
+                AnzahlModel = anzahlmodel,
+                BuchungenErwachsen = new List<BuchungenModel>(),
+                BuchungenKind = new List<BuchungenModel>()
+
+            };
+            int aktReisedurchfuehrung_ID = BuchungsVerwaltung.Ermittle_aktID(anzahlmodel.Reise_ID, anzahlmodel.Beginndatum);
+            for (int i = 0; i < model.AnzahlModel.Anzahl_Erwachsene; i++)
+            {
+                aktReisedurchfuehrung_ID = aktReisedurchfuehrung_ID + i;
+                BuchungenModel bm = new BuchungenModel()
+                {
+                    Reisedurchfuehrung_ID = aktReisedurchfuehrung_ID
+                };
+
+                model.BuchungenErwachsen.Add(bm);
+
+            }
+            for (int i = 0; i < model.AnzahlModel.Anzahl_Kinder; i++)
+            {
+                aktReisedurchfuehrung_ID = aktReisedurchfuehrung_ID + i;
+                BuchungenModel bm = new BuchungenModel()
+                {
+                    Reisedurchfuehrung_ID = aktReisedurchfuehrung_ID
+                };
+
+                model.BuchungenKind.Add(bm);
+            }
+            Debug.Unindent();
+            return View("Hinzufuegen", model);
         }
     }
 }

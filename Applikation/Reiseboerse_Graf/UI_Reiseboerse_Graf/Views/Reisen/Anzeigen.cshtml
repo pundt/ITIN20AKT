@@ -19,7 +19,7 @@
         </div>
         <div class="col-xs-4">
             <div class="termin">Aktueller Termin: @Html.DisplayFor(model => model.Beginndatum) - @Html.DisplayFor(model => model.Enddatum)</div>
-            @using (Html.BeginForm("Hinzufuegen", "Buchungen", FormMethod.Post, new { @class = "zentriert" }))
+            @using (Html.BeginForm("Buchen", "Buchungen", FormMethod.Post, new { @class = "zentriert" }))
             {
                 @Html.HiddenFor(x => x.Preis_Erwachsene)
                 @Html.HiddenFor(x => x.Preis_Kind)

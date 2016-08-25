@@ -8,9 +8,9 @@
 <h2 class="logoschrift">Buchen - 1.Schritt</h2>
 <div class="container">
 
-    @using (Html.BeginForm("Buchen", "Buchungen"))
+    @using (Html.BeginForm("Hinzufuegen", "Buchungen", FormMethod.Post))
     {
-        for (int i = 0; i < Model.AnzahlModel.Anzahl_Erwachsene; i++)
+        for (int i = 0; i < Model.BuchungenKind.Count; i++)
         {
             <div class="row reise">
                 <div class="row">
@@ -23,48 +23,48 @@
                             </thead>
                             <tr>
                                 <td>
-                                    @Html.LabelFor(modelItem => Model.Buchungen[i].Vorname)
+                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Vorname);
                                 </td>
                                 <td>
-                                    @Html.TextBoxFor(modelItem => Model.Buchungen[i].Vorname)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.LabelFor(modelItem => Model.Buchungen[i].Nachname)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(modelItem => Model.Buchungen[i].Nachname)
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Vorname)
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    @Html.LabelFor(modelItem => Model.Buchungen[i].ReisePassNummer)
+                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Nachname)
                                 </td>
                                 <td>
-                                    @Html.TextBoxFor(modelItem => Model.Buchungen[i].ReisePassNummer)
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Nachname)
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    @Html.LabelFor(modelItem => Model.Buchungen[i].Geburtsdatum)
+                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].ReisePassNummer)
                                 </td>
                                 <td>
-                                    @Html.TextBoxFor(modelItem => Model.Buchungen[i].Geburtsdatum)
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].ReisePassNummer)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => Model.BuchungenKind[i].Geburtsdatum)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenKind[i].Geburtsdatum)
                                 </td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-3 col-xs-offset-8">
-                        € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Erwachsene)
+                    <div class="col-xs-2 col-xs-offset-10">
+                        € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Kind)
                     </div>
                 </div>
             </div>
         }
 
-        for (int i = 0; i < Model.AnzahlModel.Anzahl_Kinder; i++)
+        for (int i = 0; i < Model.BuchungenErwachsen.Count; i++)
         {
             <div class="row reise">
                 <div class="row">
@@ -77,47 +77,51 @@
                             </thead>
                             <tr>
                                 <td>
-                                    @Html.LabelFor(modelItem => Model.Buchungen[i].Vorname)
+                                    @Html.LabelFor(modelItem => Model.BuchungenErwachsen[i].Vorname)
                                 </td>
                                 <td>
-                                    @Html.TextBoxFor(modelItem => Model.Buchungen[i].Vorname)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.LabelFor(modelItem => Model.Buchungen[i].Nachname)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(modelItem => Model.Buchungen[i].Nachname)
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenErwachsen[i].Vorname)
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    @Html.LabelFor(modelItem => Model.Buchungen[i].ReisePassNummer)
+                                    @Html.LabelFor(modelItem => Model.BuchungenErwachsen[i].Nachname)
                                 </td>
                                 <td>
-                                    @Html.TextBoxFor(modelItem => Model.Buchungen[i].ReisePassNummer)
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenErwachsen[i].Nachname)
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    @Html.LabelFor(modelItem => Model.Buchungen[i].Geburtsdatum)
+                                    @Html.LabelFor(modelItem => Model.BuchungenErwachsen[i].ReisePassNummer)
                                 </td>
                                 <td>
-                                    @Html.TextBoxFor(modelItem => Model.Buchungen[i].Geburtsdatum)
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenErwachsen[i].ReisePassNummer)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => Model.BuchungenErwachsen[i].Geburtsdatum)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => Model.BuchungenErwachsen[i].Geburtsdatum)
                                 </td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-3 col-xs-offset-8">
-                        € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Kind)
+                    <div class="col-xs-2 col-xs-offset-10">
+                        € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Erwachsene)
                     </div>
                 </div>
             </div>
         }
+        <div class="logoschrift">
+            € @((Model.AnzahlModel.Anzahl_Erwachsene * Model.AnzahlModel.Preis_Erwachsene) + Model.AnzahlModel.Anzahl_Kinder * Model.AnzahlModel.Preis_Kind)
+        </div>
+            <div>
+                <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
+            </div>
     }
 </div>
-
-
