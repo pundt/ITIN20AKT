@@ -87,6 +87,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbreisebuero.edmx</DependentUpon>
     </Compile>
+    <Compile Include="LaenderVerwaltung.cs" />
     <Compile Include="Land.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
