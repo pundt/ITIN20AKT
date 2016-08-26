@@ -176,7 +176,6 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Benutzer - Aktualisieren - GET".ToUpper());
             Debug.Indent();
-
             KundenModel model = new KundenModel();
 
             using (var context = new reisebueroEntities())
@@ -219,7 +218,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Debug.WriteLine(ex.Message);
                     Debug.Unindent();
                     Debugger.Break();
-                }
+                }                
             }
 
             return View(model);

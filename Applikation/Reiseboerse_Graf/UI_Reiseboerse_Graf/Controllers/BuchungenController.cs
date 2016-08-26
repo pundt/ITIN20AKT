@@ -22,10 +22,28 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="reise_id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult LadeAlleBuchungen(int reise_id)
         {
-
             return View();
+        }
+
+        [ChildActionOnly]
+        [HttpGet]
+        public ActionResult LadeAlleBuchungenBenutzer(int id)
+        {
+            List<Buchung> BL_Liste=BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
+            List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
+            foreach (var aktbuchung in BL_Liste)
+            {
+                UI_Liste.Add(new BuchungAnzeigenModel()
+                {
+                    Startdatum = aktbuchung.Reisedurchfuehrung.Reisedatum.Startdatum,
+                    Enddatum = aktbuchung.Reisedurchfuehrung.Reisedatum.Enddatum,
+                    Reisetitel = aktbuchung.Reisedurchfuehrung.Reisedatum.Reise.Titel
+                });
+            }
+            return PartialView(UI_Liste);
         }
 
 
