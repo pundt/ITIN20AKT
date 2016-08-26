@@ -256,6 +256,7 @@
     <Content Include="Views\Benutzer\Aktualisieren.cshtml" />
     <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
     <Content Include="Views\Bild\BildUpload.cshtml" />
+    <Content Include="Views\Reisen\ReiseHinzufuegen.cshtml" />
     <Content Include="Views\Buchungen\LadeAlleBuchungenBenutzer.cshtml" />
   </ItemGroup>
   <ItemGroup>
