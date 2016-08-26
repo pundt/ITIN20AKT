@@ -32,10 +32,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Land_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Land_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Land_id, "", new { @class = "text-danger" })
+            @Html.Label("Land", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">               
                 @Html.DropDownListFor(model => model.Land_id,new SelectList(Model.Reiseland, "land_ID", "landName"))
             </div>
         </div>
@@ -49,10 +47,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ort_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Ort", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ort_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ort_id, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Ort_id, new SelectList(Model.ReiseOrt, "Id","Bezeichnung"))
+              
             </div>
         </div>
 
@@ -81,10 +79,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Unterkunft_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Unterkunft_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Unterkunft_id, "", new { @class = "text-danger" })
+            @Html.Label("Unterkunft",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">            
+                @Html.DropDownListFor(model => model.Unterkunft, new SelectList(Model.Unterkunft, "ID", "Bezeichnung"))
             </div>
         </div>
 
@@ -93,6 +90,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Verpflegung_id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Verpflegung_id, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"))
             </div>
         </div>
 
