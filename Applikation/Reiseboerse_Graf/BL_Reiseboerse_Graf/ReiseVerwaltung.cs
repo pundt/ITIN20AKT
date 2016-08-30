@@ -16,7 +16,26 @@ namespace BL_Reiseboerse_Graf
         /// <returns>eine Liste von Reisen oder bei einem Fehler null</returns>
         public static List<Reise> LadeAlleReisen()
         {
-            return null;
+            Debug.WriteLine("ReiseVerwaltung - ladeAlleReisen");
+            Debug.Indent();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {  
+                    List<Reise> reisen = context.AlleReisen
+                        .Include("AlleReisedaten")
+                        .ToList();
+                    return reisen;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden aller Reisen");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                    return null;
+                }
+                
+            }
         }
 
         /// <summary>
@@ -41,7 +60,11 @@ namespace BL_Reiseboerse_Graf
             return 1;
         }
 
-
+        /// <summary>
+        /// Sucht nach einer Spezifischen Reise mittels eines Suchtexts
+        /// </summary>
+        /// <param name="suchtext">String Variable beinhalted den gesuchten Begriff</param>
+        /// <returns> Liste vom typ Reise</returns>
         public static List<Reise> SucheReise(string suchtext)
         {
             Debug.WriteLine("ReiseVerwaltung - Suche Reise");
