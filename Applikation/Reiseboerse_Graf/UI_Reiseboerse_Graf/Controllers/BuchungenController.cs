@@ -66,7 +66,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns></returns>
         /// 
         [HttpPost]
-        public ActionResult Hinzufuegen(List<BuchungenModel> liste)
+        public ActionResult Hinzufuegen(BuchungGesamtModel model)
         {
             if (ModelState.IsValid)
             {

@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Models\BuchungAnzahlModel.cs" />
     <Compile Include="Models\BuchungAnzeigenModel.cs" />
+    <Compile Include="Models\BuchungGesamtModel.cs" />
     <Compile Include="Models\BuchungHinzufuegenModel.cs" />
     <Compile Include="Models\KategorieModel.cs" />
     <Compile Include="Models\KundenAnlegenModel.cs" />
