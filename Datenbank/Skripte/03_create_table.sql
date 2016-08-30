@@ -37,6 +37,9 @@ CREATE TABLE Buchung (
 	reisedurchfuehrung_id INT NOT NULL,
 	benutzer_id INT NOT NULL,
 	passnummer NVARCHAR(25) NOT NULL,
+	vorname NVARCHAR(25) NOT NULL,
+	nachname NVARCHAR(25) NOT NULL,
+	geburtsdatum DATETIME NOT NULL,
 	erstelldatum DATETIME DEFAULT GETDATE()
 );
 

@@ -40,6 +40,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,7 @@
     <Compile Include="Benutzer.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
+    <Compile Include="BenutzerVerwaltung.cs" />
     <Compile Include="Bewertung.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
@@ -86,6 +88,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbreisebuero.edmx</DependentUpon>
     </Compile>
+    <Compile Include="LaenderVerwaltung.cs" />
     <Compile Include="Land.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
@@ -106,6 +109,7 @@
     <Compile Include="Reise_Bild.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tools.cs" />
     <Compile Include="Unterkunft.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>

@@ -131,6 +131,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuchungAnzahlModel.cs" />
+    <Compile Include="Models\BuchungAnzeigenModel.cs" />
+    <Compile Include="Models\BuchungGesamtModel.cs" />
+    <Compile Include="Models\BuchungHinzufuegenModel.cs" />
     <Compile Include="Models\KategorieModel.cs" />
     <Compile Include="Models\KundenAnlegenModel.cs" />
     <Compile Include="Models\BuchungenModel.cs" />
@@ -140,6 +144,7 @@
     <Compile Include="Models\LandModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OrtModel.cs" />
+    <Compile Include="Models\ReiseAnlegenModel.cs" />
     <Compile Include="Models\ReisedetailModel.cs" />
     <Compile Include="Models\ReiseLadenModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
@@ -246,15 +251,17 @@
     <Content Include="Views\Reisen\UnterkunftAnzeigen.cshtml" />
     <Content Include="Views\Benutzer\BenutzerAnlegen.cshtml" />
     <Content Include="Views\Reisen\Filter.cshtml" />
-    <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
     <Content Include="Views\Reisen\gesuchteReisen.cshtml" />
     <Content Include="Views\Reisen\_Filter.cshtml" />
     <Content Include="Views\Benutzer\_Login.cshtml" />
     <Content Include="Views\Benutzer\Aktualisieren.cshtml" />
+    <Content Include="Views\Buchungen\Hinzufuegen.cshtml" />
+    <Content Include="Views\Bild\BildUpload.cshtml" />
+    <Content Include="Views\Reisen\ReiseHinzufuegen.cshtml" />
+    <Content Include="Views\Buchungen\LadeAlleBuchungenBenutzer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Bild\" />
     <Folder Include="Views\Validierungs\" />
     <Folder Include="Views\Validierung\" />
   </ItemGroup>

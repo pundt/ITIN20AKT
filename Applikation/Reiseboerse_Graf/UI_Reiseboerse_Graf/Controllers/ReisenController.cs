@@ -42,15 +42,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             else
             {
-                try
-                {
 
-                }
-                catch (Exception ex )
-                {
-                    Debug.WriteLine("Fehler beim Laden aller Reisen");
-                    Debug.WriteLine(ex.Message);
-                }
             }
             return View(model);
         }
@@ -120,6 +112,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="reise_ID">ID der anzuzeigenden Reise</param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Anzeigen(int id)
         {
             Debug.WriteLine("Reisedetails- Anzeigen - GET");
@@ -162,13 +155,67 @@ namespace UI_Reiseboerse_Graf.Controllers
             };
             return PartialView(um);
         }
+        [HttpGet]
+        public ActionResult ReiseHinzufuegen()
+        {
+            List<Land> alleLaender = BL_Reiseboerse_Graf.BenutzerVerwaltung.AlleLaender();
+            ReiseAnlegenModel UI_Reise = new ReiseAnlegenModel();
+            UI_Reise.Reiseland = new List<LandModel>();
+
+            foreach (Land aktLand in alleLaender)
+            {
+                UI_Reise.Reiseland.Add(new LandModel()
+                {
+                    landName = aktLand.Bezeichnung,
+                    land_ID = aktLand.ID
+                });
+            }
+
+            List<Ort> alleOrte = BL_Reiseboerse_Graf.LaenderVerwaltung.AlleOrte();
+            UI_Reise.ReiseOrt = new List<OrtModel>();
+            foreach (Ort aktOrt in alleOrte)
+            {
+                UI_Reise.ReiseOrt.Add(new OrtModel()
+                {
+                    Bezeichnung = aktOrt.Bezeichnung,
+                    Id = aktOrt.ID
+
+                });
+            }
+            List<Unterkunft> alleUnterkuenfte = BL_Reiseboerse_Graf.LaenderVerwaltung.AlleUnterkuenfte();
+            UI_Reise.Unterkunft = new List<UnterkunftdetailModel>();           
+            foreach (Unterkunft aktUnterkunft in alleUnterkuenfte)
+            {
+                UI_Reise.Unterkunft.Add(new UnterkunftdetailModel()
+                {
+                    ID = aktUnterkunft.ID,
+                    Beschreibung = aktUnterkunft.Beschreibung,
+                    Bezeichnung = aktUnterkunft.Bezeichnung,
+                    Kategorie = aktUnterkunft.Kategorie,
+                    Verpflegung_ID = aktUnterkunft.Verpflegung.ID                                
+                });
+      
+            }
+            List<Verpflegung> alleVerpflegung = BL_Reiseboerse_Graf.LaenderVerwaltung.alleVerpflegung();
+            UI_Reise.Verpflegung = new List<VerpflegungModel>();
+            foreach (Verpflegung aktVerpflegung in alleVerpflegung)
+            {
+                UI_Reise.Verpflegung.Add(new VerpflegungModel()
+                {
+                    Bezeichnung = aktVerpflegung.Bezeichnung,
+                    Id= aktVerpflegung.ID
+                });
+            }      
+
+            return View(UI_Reise);
+        }
 
         /// <summary>
         /// Fügt eine neue Reise hinzu
         /// </summary>
         /// <param name="neueReise">Model mit den entsprechenden Daten</param>
         /// <returns></returns>
-        public ActionResult Hinzufuegen(ReiseModel neueReise)
+        public ActionResult Hinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file)
         {
             return RedirectToAction("Index");
         }
@@ -200,7 +247,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             if (!string.IsNullOrEmpty(TextSuche))
             {
                 liste = ReiseVerwaltung.SucheReise(TextSuche);
-            }            
+            }
             foreach (var reise in liste)
             {
                 reisedaten = reise.AlleReisedaten.ToList();

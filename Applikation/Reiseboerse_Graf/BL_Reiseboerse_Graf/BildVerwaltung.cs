@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BL_Reiseboerse_Graf
 {
@@ -63,6 +64,41 @@ namespace BL_Reiseboerse_Graf
             }
             Debug.Unindent();
             return id_bilder;
+        }
+        /// <summary>
+        /// Bildfile wird übergeben, Bilddaten werden ausgelesen und in Tabelle gespeichert
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns>wenn speichern erfolgreich "true"</returns>
+        public static bool BildSpeichern(HttpPostedFileBase file)
+        {
+
+            Debug.Write("BildVerwaltung - BildSpeichern");
+            Debug.Indent();
+
+            Bild neuesBild = new Bild();            
+            
+            bool erfolgreich = false;
+            reisebueroEntities context = new reisebueroEntities();
+            
+            if (file != null && file.ContentLength>0)
+            {
+                using (var reader = new System.IO.BinaryReader(file.InputStream))
+                {
+                    neuesBild.Bilddaten = reader.ReadBytes(file.ContentLength);
+                    erfolgreich = true;                    
+                    Debug.Write("Bilddaten lesen erfolgreich");
+                }
+            }
+            else
+            {
+                Debug.Write("kein Bild mittgeschickt");
+            }     
+        
+            context.AlleBilder.Add(neuesBild);
+            context.SaveChanges();
+
+            return erfolgreich;
         }
     }
 }

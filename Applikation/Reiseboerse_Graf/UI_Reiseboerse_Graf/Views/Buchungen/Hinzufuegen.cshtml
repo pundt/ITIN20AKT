@@ -1,33 +1,118 @@
-﻿@model UI_Reiseboerse_Graf.Models.BuchungenModel
+﻿@model UI_Reiseboerse_Graf.Models.BuchungHinzufuegenModel
 
 @{
     ViewBag.Title = "Hinzufuegen";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Hinzufuegen</h2>
+<h2 class="logoschrift">Buchen - 1.Schritt</h2>
+<div class="container">
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>BuchungenModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+    @using (Html.BeginForm("Hinzufuegen", "Buchungen", FormMethod.Post))
+    {
+        <h3>Daten der Erwachsenen</h3>
+        foreach (var buchung in Model.BuchungenErwachsen)
+        {
+            <div class="row reise">
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => buchung.Vorname)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => buchung.Vorname)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => buchung.Nachname)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => buchung.Nachname)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => buchung.ReisePassNummer)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => buchung.ReisePassNummer)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => buchung.Geburtsdatum)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => buchung.Geburtsdatum)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-10">
+                        € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Erwachsene)
+                    </div>
+                </div>
             </div>
+        }
+        <h3>Daten der Kinder</h3>
+        foreach(var buchung in Model.BuchungenKind)
+        {
+            <div class="row reise">
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => buchung.Vorname);
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => buchung.Vorname)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => buchung.Nachname)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => buchung.Nachname)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => buchung.ReisePassNummer)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => buchung.ReisePassNummer)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(modelItem => buchung.Geburtsdatum)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(modelItem => buchung.Geburtsdatum)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-10">
+                        € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Kind)
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="logoschrift">
+            € @((Model.AnzahlModel.Anzahl_Erwachsene * Model.AnzahlModel.Preis_Erwachsene) + Model.AnzahlModel.Anzahl_Kinder * Model.AnzahlModel.Preis_Kind)
         </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        <div>
+            <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
+        </div>
+    }
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

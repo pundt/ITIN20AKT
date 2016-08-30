@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Anlegen_ProfilBild";
+}
+
+<h2>Anlegen_ProfilBild</h2>
+
+@using (Html.BeginForm("Anlegen_ProfilBild", "Person", FormMethod.Post, new { enctype = "multipart/form-data" } ))
+{
+    <table>
+        <tr>
+            <td>Vorname</td>
+            <td><input type="text" name="vorname" /></td>
+        </tr>
+        <tr>
+            <td>Nachname</td>
+            <td><input type="text" name="nachname" /></td>
+        </tr>
+        <tr>
+            <td>Geburts-Datum</td>
+            <td><input type="datetime" name="gebDat" /></td>
+        </tr>
+        <tr>
+            <td>Profil-Bild</td>
+            <td><input type="file" name="profilBild" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Speichern" /></td>
+        </tr>
+    </table>
+
+
+
+}

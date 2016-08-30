@@ -1,0 +1,40 @@
+﻿@model List<UI_Reiseboerse_Graf.Models.BuchungAnzeigenModel>
+
+<div>
+    <h4>BuchungAnzeigenModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @foreach (var model in Model)
+        {
+            <dt>
+                @Html.DisplayNameFor(x => model.Reisetitel)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(x => model.Reisetitel)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(x => model.Startdatum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(x => model.Startdatum)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(x => model.Enddatum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(x => model.Enddatum)
+            </dd>
+
+
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

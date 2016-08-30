@@ -31,9 +31,10 @@ namespace UI_Reiseboerse_Graf.Controllers
         public ActionResult Laden(int id)
         {
             string contentType = "image/jpeg";
-            byte[] bilddaten=BildVerwaltung.LadeBild(id).Bilddaten;
+            byte[] bilddaten = BildVerwaltung.LadeBild(id).Bilddaten;
 
             return new FileContentResult(bilddaten, contentType);
+            
         }
     }
 }
