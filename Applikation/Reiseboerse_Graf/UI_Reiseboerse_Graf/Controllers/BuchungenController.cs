@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         // GET: Buchungen
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -22,8 +24,27 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns></returns>
         public ActionResult LadeAlleBuchungen(int reise_id)
         {
+            Debug.WriteLine(" - LadeAlleBuchungen - Get");
+            Debug.Indent();
+            BuchungenModel bm = new BuchungenModel();
+            if (Globals.IST_TESTSYSTEM)
+            {
+                try
+                {
+                    Debug.WriteLine("Testsystem");
+                    
 
-            return View();
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden der Buchungen");
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+            
+
+            return View(bm);
         }
 
 

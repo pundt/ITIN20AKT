@@ -42,7 +42,15 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             else
             {
-               
+                try
+                {
+
+                }
+                catch (Exception ex )
+                {
+                    Debug.WriteLine("Fehler beim Laden aller Reisen");
+                    Debug.WriteLine(ex.Message);
+                }
             }
             return View(model);
         }
