@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using UI_Reiseboerse_Graf.Models;
 using BL_Reiseboerse_Graf;
+using System.Collections.Specialized;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -32,7 +33,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult LadeAlleBuchungenBenutzer(int id)
         {
-            List<Buchung> BL_Liste=BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
+            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
             List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
             foreach (var aktbuchung in BL_Liste)
             {
@@ -61,27 +62,112 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         /// <summary>
-        /// Fügt Buchungen hinzu anhand des übergebenen Models
+        /// Fügt Buchungen anhand der Formulardaten (Request) hinzu
         /// </summary>
-        /// <returns></returns>
-        /// 
+        /// <returns>Kontrollansicht der Daten</returns>
         [HttpPost]
-        public ActionResult Hinzufuegen(BuchungGesamtModel model)
+        public ActionResult Hinzufuegen()
         {
-            if (ModelState.IsValid)
+            NameValueCollection col = new NameValueCollection();
+            col = Request.Form;
+            BuchungGesamtModel model = new BuchungGesamtModel();
+
+            List<BuchungenModel> buchungenErw = new List<BuchungenModel>();
+            List<BuchungenModel> buchungenKind = new List<BuchungenModel>();
+
+            int anzahlErw = int.Parse(col["AnzahlModel.Anzahl_Erwachsene"]);
+            int anzahlKind = int.Parse(col["AnzahlModel.Anzahl_Kinder"]);
+
+            decimal preisErw = decimal.Parse(col["AnzahlModel.Preis_Erwachsene"]);
+            decimal preisKind = decimal.Parse(col["AnzahlModel.Preis_Kind"]);
+
+            model.Gesamtpreis = (anzahlErw * preisErw) + (anzahlKind * preisKind);
+
+            for (int i = 0; i < anzahlErw; i++)
             {
-
+                buchungenErw.Add(new BuchungenModel()
+                {
+                    Vorname = col[string.Format("BuchungenErwachsen[{0}].Vorname", i)],
+                    Nachname = col[string.Format("BuchungenErwachsen[{0}].Nachname", i)],
+                    Geburtsdatum = Convert.ToDateTime(col[string.Format("BuchungenErwachsen[{0}].Geburtsdatum", i)]),
+                    ReisePassNummer = col[string.Format("BuchungenErwachsen[{0}].ReisePassNummer", i)],
+                    Reisedurchfuehrung_ID = int.Parse(col[string.Format("BuchungenErwachsen[{0}].Reisedurchfuehrung_ID", i)])
+                });
             }
-            else
+            for (int i = 0; i < anzahlKind; i++)
             {
-
+                buchungenKind.Add(new BuchungenModel()
+                {
+                    Vorname = col[string.Format("BuchungenKind[{0}].Vorname", i)],
+                    Nachname = col[string.Format("BuchungenKind[{0}].Nachname", i)],
+                    Geburtsdatum = Convert.ToDateTime(col[string.Format("BuchungenKind[{0}].Geburtsdatum", i)]),
+                    ReisePassNummer = col[string.Format("BuchungenKind[{0}].ReisePassNummer", i)],
+                    Reisedurchfuehrung_ID = int.Parse(col[string.Format("BuchungenKind[{0}].Reisedurchfuehrung_ID", i)])
+                });
             }
-            return null;
+            model.BuchungErwachsen = buchungenErw;
+            model.BuchungKind = buchungenKind;
 
+            Session["BuchungsDaten"] = model;
 
-
+            return View("ZeigeGesamt", model);
         }
 
+        /// <summary>
+        /// Speichert die Reisedurchführung_IDs und gibt die View zur Eingabe der Zahlungsdaten zurück
+        /// </summary>
+        /// <param name="model">beinhaltet alle BuchungenModel</param>
+        /// <returns>View zur Eingabe der Zahlungsdaten</returns>
+        [HttpGet]
+        public ActionResult Zahlung(List<int> idListe)
+        {
+            Debug.WriteLine("Buchungen - Zahlung - GET");
+
+            BuchungGesamtModel model = (BuchungGesamtModel)Session["BuchungsDaten"];
+
+            ZahlungModel zahlung = new ZahlungModel();
+            zahlung.Reisedurchfuehrung_IDs = new List<int>();
+            //List<int> idListe = TempData["ids"] as List<int>;
+            foreach (var id in idListe)
+            {
+                zahlung.Reisedurchfuehrung_IDs.Add(id);
+            }
+            return View(zahlung);
+        }
+
+        /// <summary>
+        /// Nimmt das übergebene ZahlungModel entgegen und übergibt es an die BL
+        /// </summary>
+        /// <param name="model">das ZahlungModel</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Zahlung(ZahlungModel model)
+        {
+            Debug.WriteLine("Buchung - Zahlung - POST");
+
+            if (ModelState.IsValid)
+            {
+                Zahlung zahlung = new Zahlung()
+                {
+                    Vorname = model.Vorname,
+                    Nachname = model.Nachname,
+                    Nummer = model.Nummer
+                };
+                zahlung.Zahlungsart.ID = model.Zahlungsart_ID;
+
+                int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung);
+                ZahlungsVerwaltung.ZuordnungZahlungBuchung(model.Reisedurchfuehrung_IDs, neueID);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Erstellt für jede Person in AnzahlModel Eingabefelder für die Daten, die für die Buchung erforderlich sind
+        /// </summary>
+        /// <param name="anzahlmodel">Die Anzahl der gewünschten Buchungen und zusätzl. Daten</param>
+        /// <returns>View zum Eingeben der Daten</returns>
+        [HttpPost]
         public ActionResult Buchen(BuchungAnzahlModel anzahlmodel)
         {
             Debug.WriteLine("Buchungen - Hinzufuegen - POST");
@@ -97,7 +183,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             int aktReisedurchfuehrung_ID = BuchungsVerwaltung.Ermittle_aktID(anzahlmodel.Reise_ID, anzahlmodel.Beginndatum);
             for (int i = 0; i < model.AnzahlModel.Anzahl_Erwachsene; i++)
             {
-                aktReisedurchfuehrung_ID = aktReisedurchfuehrung_ID + i;
+                aktReisedurchfuehrung_ID = aktReisedurchfuehrung_ID + 1;
                 BuchungenModel bm = new BuchungenModel()
                 {
                     Reisedurchfuehrung_ID = aktReisedurchfuehrung_ID
@@ -108,7 +194,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             for (int i = 0; i < model.AnzahlModel.Anzahl_Kinder; i++)
             {
-                aktReisedurchfuehrung_ID = aktReisedurchfuehrung_ID + i;
+                aktReisedurchfuehrung_ID = aktReisedurchfuehrung_ID + 1;
                 BuchungenModel bm = new BuchungenModel()
                 {
                     Reisedurchfuehrung_ID = aktReisedurchfuehrung_ID

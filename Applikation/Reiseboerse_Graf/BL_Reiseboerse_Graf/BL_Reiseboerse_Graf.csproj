@@ -125,6 +125,7 @@
     <Compile Include="Zahlungsart.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
+    <Compile Include="ZahlungsVerwaltung.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

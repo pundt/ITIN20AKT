@@ -8,6 +8,7 @@ namespace UI_Reiseboerse_Graf.Models
     public class BuchungAnzahlModel
     {
         public int Reise_ID { get; set; }
+        public string Reisetitel { get; set; }
         public DateTime Beginndatum { get; set; }
         public int Anzahl_Erwachsene { get; set; }
         public int Anzahl_Kinder { get; set; }

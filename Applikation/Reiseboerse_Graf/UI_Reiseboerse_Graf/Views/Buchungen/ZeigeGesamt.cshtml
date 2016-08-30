@@ -1,0 +1,96 @@
+﻿@model UI_Reiseboerse_Graf.Models.BuchungGesamtModel
+
+@{
+    ViewBag.Title = "ZeigeGesamt";
+}
+
+<h2>ZeigeGesamt</h2>
+
+<div>
+    <h4>BuchungGesamtModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Gesamtpreis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gesamtpreis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reisetitel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reisetitel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Startdatum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Startdatum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enddatum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enddatum)
+        </dd>
+
+    </dl>
+    @{
+        List<int> ids = new List<int>();
+    }
+    @foreach (var buchung in Model.BuchungErwachsen)
+    {
+        <table>
+            <tr>
+                <td>
+                    @buchung.Vorname
+                </td>
+                <td>
+                    @buchung.Nachname
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @buchung.Geburtsdatum
+                </td>
+                <td>
+                    @buchung.ReisePassNummer
+                </td>
+            </tr>
+            @{ids.Add(buchung.Reisedurchfuehrung_ID);}
+        </table>
+                }
+    @foreach (var buchung in Model.BuchungKind)
+    {
+        <table>
+            <tr>
+                <td>
+                    @buchung.Vorname
+                </td>
+                <td>
+                    @buchung.Nachname
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @buchung.Geburtsdatum
+                </td>
+                <td>
+                    @buchung.ReisePassNummer
+                </td>
+            </tr>
+            @{ids.Add(buchung.Reisedurchfuehrung_ID);}
+        </table>
+                }
+    @Html.Hidden("idListe") 
+    @Html.ActionLink("Zur Zahlung", "Zahlung")
+</div>
+

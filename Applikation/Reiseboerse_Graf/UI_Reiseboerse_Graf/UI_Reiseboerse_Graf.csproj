@@ -151,6 +151,8 @@
     <Compile Include="Models\TextsucheModel.cs" />
     <Compile Include="Models\UnterkunftdetailModel.cs" />
     <Compile Include="Models\VerpflegungModel.cs" />
+    <Compile Include="Models\ZahlungModel.cs" />
+    <Compile Include="Models\ZahlungsartModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +261,8 @@
     <Content Include="Views\Bild\BildUpload.cshtml" />
     <Content Include="Views\Reisen\ReiseHinzufuegen.cshtml" />
     <Content Include="Views\Buchungen\LadeAlleBuchungenBenutzer.cshtml" />
+    <Content Include="Views\Buchungen\ZeigeGesamt.cshtml" />
+    <Content Include="Views\Buchungen\Zahlung.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
