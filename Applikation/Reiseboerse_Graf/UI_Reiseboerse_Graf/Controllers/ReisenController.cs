@@ -215,8 +215,16 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="neueReise">Model mit den entsprechenden Daten</param>
         /// <returns></returns>
-        public ActionResult Hinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file)
+        [HttpPost]
+        public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file)
         {
+            if (ModelState.IsValid)
+            {
+                if (neueReise.NeuerOrt!=null)
+                {
+
+                }
+            }
             return RedirectToAction("Index");
         }
 

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "ReiseHinzufuegen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>ReiseHinzufuegen</h2>
@@ -40,7 +41,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.NeuesLand, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10 NichtZeigen" id="Land">
                 @Html.EditorFor(model => model.NeuesLand, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NeuesLand, "", new { @class = "text-danger" })
             </div>
@@ -50,17 +51,20 @@
             @Html.Label("Ort", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Ort_id, new SelectList(Model.ReiseOrt, "Id", "Bezeichnung"))
-
+                <input type="button" id="b" value="Neuen Ort hinzufuegen" />
             </div>
+                <div>
+                    <div class="col-md-10 NichtZeigen" id="Ort">
+                        @Html.EditorFor(model => model.NeuerOrt, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NeuerOrt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+           
         </div>
+        @*<div class="form-group">
+             @Html.LabelFor(model => model.NeuerOrt, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NeuerOrt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NeuerOrt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NeuerOrt, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.Label("Preis Erw", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -147,22 +151,17 @@
             </div>
         </div>
     </div>
-}
 
-@*<div class="form-group">
-            @Html.LabelFor(model => model.Anmeldefrist, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Anmeldefrist, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Anmeldefrist, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-    </div>*@
+}
+
 
 
 
@@ -196,10 +195,15 @@
             });
             $("#datetimepicker8").on("dp.change", function (e) {
                 $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
-
-
+            });
+        })
+        $(document).ready(function () {
+            $("#b").click(function () {
+                $("#Ort").removeClass("NichtZeigen");
             });
 
-        })
+
+
+        });
     </script>
-    }
+}

@@ -102,5 +102,41 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return alleVerpflegung;
         }
+
+        public static int SpeicherNeuenOrt(string neuerort, int land_id)
+        {
+            int index = -1;
+           
+            Debug.WriteLine("LaenderVerwaltung - SpeicherNeuenOrt");
+            Debug.Indent();
+
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+                    Land neuesLand = context.AlleLaender.Where(x => x.ID == land_id).FirstOrDefault();
+                    Ort neuerOrt = new Ort();
+                    neuerOrt.Bezeichnung = neuerort;
+                    neuerOrt.Land = neuesLand;
+                    context.AlleOrte.Add(neuerOrt);
+                   index = context.SaveChanges();
+                   
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim SpeichernNeuenOrt");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                    Debug.Unindent();
+
+                   
+                }
+            }
+
+
+
+            return index;
+            
+        }
     }
 }
