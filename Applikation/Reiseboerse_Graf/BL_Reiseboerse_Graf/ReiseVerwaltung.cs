@@ -46,22 +46,43 @@ namespace BL_Reiseboerse_Graf
         /// <param name="stadt_id">ID der ausgewählten Stadt aus der Dropdownbox</param>
         /// <param name="kategorien_id">Alle IDs der ausgewählten Kategorien (Checkboxen)</param>
         /// <returns>eine Liste von Reisen</returns>
-        //public static List<Reise> LadeReisenGefiltert(int kontinent_id, int land_id, int stadt_id, List<int> kategorien_id)
-        //{
-
-        //    return null;
-        //}
-
-        ///liefert die aktuellen Restplätze der Reise mit der entsprechenden ID aus der DB zurück
-        public static int Restplätze(int reise_id)
+        public static List<Reise> LadeReisenGefiltert(int kontinent_id, int land_id, int stadt_id, List<int> kategorien_id)
         {
-            
 
-            return 1;
+            return null;
         }
 
         /// <summary>
-        /// Sucht nach einer Spezifischen Reise mittels eines Suchtexts
+        /// Ermittelt die Restplätze einer Reise aus der DB
+        /// </summary>
+        /// <returns>die Anzahl der Restplätze oder -1 wenn ein Fehler auftritt</returns>      
+        public static int Restplätze(int reise_id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Restplätze");
+            Debug.Indent();
+            int restplätze=-1;
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    List<Reisedurchfuehrung> liste=context.AlleReisedurchfuehrungen.Where(x => x.Buchung == null).ToList();
+                    restplätze = liste.Count;
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Ermitteln der Restplätze");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return restplätze;
+        }
+
+        /// <summary>
+        /// Sucht nach einer spezifischen Reise mittels eines Suchtexts
         /// </summary>
         /// <param name="suchtext">String Variable beinhalted den gesuchten Begriff</param>
         /// <returns> Liste vom typ Reise</returns>
