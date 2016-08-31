@@ -1,40 +1,38 @@
 ﻿@model List<UI_Reiseboerse_Graf.Models.BuchungAnzeigenModel>
 
 <div>
-    <h4>BuchungAnzeigenModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        @foreach (var model in Model)
-        {
-            <dt>
-                @Html.DisplayNameFor(x => model.Reisetitel)
-            </dt>
+        <table>
+            <tr>
+                <td>@Html.DisplayNameFor(x=>x[0].Reisetitel)</td>
+                <td>@Html.DisplayNameFor(x => x[0].Startdatum)</td>
+                <td>@Html.DisplayNameFor(x => x[0].Enddatum)</td>
+                <td>@Html.DisplayNameFor(x => x[0].Bewertung)</td>
+            </tr>
+            @foreach (var model in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => model.Reisetitel)</td>
+                    <td>@Html.DisplayFor(x => model.Startdatum)</td>
+                    <td>@Html.DisplayFor(x => model.Enddatum)</td>
+                    @if (DateTime.Now > model.Enddatum && model.Bewertung == null)
+                    {
+                        <td><button>Bewerten Sie jetzt</button></td>
+                    }
+                    else
+                    {
+                        for (int i = 0; i < model.Bewertung; i++)
+                        {
+                            <!--hier kommt dann ein Symbol für die Bewertung rein-->
+                            <text>Stern</text>
+                        }
+                    }
 
-            <dd>
-                @Html.DisplayFor(x => model.Reisetitel)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(x => model.Startdatum)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(x => model.Startdatum)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(x => model.Enddatum)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(x => model.Enddatum)
-            </dd>
+                </tr>
 
 
-        }
-    </dl>
+
+
+            }
+        </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
