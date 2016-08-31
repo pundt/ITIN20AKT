@@ -108,8 +108,45 @@ namespace UI_Reiseboerse_Graf.Controllers
             model.BuchungErwachsen = buchungenErw;
             model.BuchungKind = buchungenKind;
 
-            Session["BuchungsDaten"] = model;
+            if (ModelState.IsValid)
+            {
+                bool gespeichert = false;
 
+                foreach (var item in model.BuchungErwachsen)
+                {
+                    Buchung neueBuchung = new Buchung()
+                    {
+                        Vorname = item.Vorname,
+                        Nachname = item.Nachname,
+                        Geburtsdatum = item.Geburtsdatum,
+                        Passnummer = item.ReisePassNummer,
+                        Reisedurchfuehrung_ID = item.Reisedurchfuehrung_ID
+                    };
+                    neueBuchung.Benutzer.Email = User.Identity.Name;
+                    gespeichert = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung);
+                    if (!gespeichert)
+                    {
+                        Debug.WriteLine("Fehler!");
+                    }
+                }
+                foreach (var item in model.BuchungKind)
+                {
+                    Buchung neueBuchung = new Buchung()
+                    {
+                        Vorname = item.Vorname,
+                        Nachname = item.Nachname,
+                        Geburtsdatum = item.Geburtsdatum,
+                        Passnummer = item.ReisePassNummer,
+                        Reisedurchfuehrung_ID = item.Reisedurchfuehrung_ID
+                    };
+                    neueBuchung.Benutzer.Email = User.Identity.Name;
+                    gespeichert = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung);
+                    if (!gespeichert)
+                    {
+                        Debug.WriteLine("Fehler!");
+                    }
+                } 
+            }
             return View("ZeigeGesamt", model);
         }
 
@@ -119,19 +156,27 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <param name="model">beinhaltet alle BuchungenModel</param>
         /// <returns>View zur Eingabe der Zahlungsdaten</returns>
         [HttpGet]
-        public ActionResult Zahlung(List<int> idListe)
+        public ActionResult Zahlung()
         {
             Debug.WriteLine("Buchungen - Zahlung - GET");
 
-            BuchungGesamtModel model = (BuchungGesamtModel)Session["BuchungsDaten"];
+            BuchungGesamtModel model = Session["BuchungsDaten"] as BuchungGesamtModel;
 
-            ZahlungModel zahlung = new ZahlungModel();
-            zahlung.Reisedurchfuehrung_IDs = new List<int>();
-            //List<int> idListe = TempData["ids"] as List<int>;
-            foreach (var id in idListe)
+            if (model==null)
             {
-                zahlung.Reisedurchfuehrung_IDs.Add(id);
+                return RedirectToAction("Hinzufuegen");
             }
+            else
+            {
+                ZahlungModel zahlung = new ZahlungModel();
+                zahlung.Reisedurchfuehrung_IDs = new List<int>();
+                //List<int> idListe = TempData["ids"] as List<int>;
+                foreach (var m in model)
+                {
+                    zahlung.Reisedurchfuehrung_IDs.Add(id);
+                }
+            }
+            
             return View(zahlung);
         }
 

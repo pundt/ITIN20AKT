@@ -152,5 +152,66 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return aktId;
         }
+
+        public static bool NeueBuchungSpeichern(Buchung buchung)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Neue Buchung Speichern");
+            Debug.Indent();
+
+            bool erfolgreich = false;
+
+            try
+            {
+                using (var context = new reisebueroEntities())
+                {
+                    context.AlleBuchungen.Add(buchung);
+                    context.SaveChanges();
+                    erfolgreich = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler beim Speichern einer Buchung!");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return erfolgreich;
+        }
+
+        /// <summary>
+        /// Überprüft ob eine Buchung inkl. Zahlung abgeschlossen wurde
+        /// </summary>
+        public static bool BuchungPruefen(int reisedurchfuehrungID)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Buchung Prüfen");
+            Debug.Indent();
+
+            bool wurdeStorniert = false;
+
+            try
+            {
+                using (var context = new reisebueroEntities())
+                {
+                    Buchung gesuchteBuchung = context.AlleBuchungen.Where(x => x.Reisedurchfuehrung_ID == reisedurchfuehrungID && x.Buchung_Zahlung != null).FirstOrDefault();
+
+                    if (gesuchteBuchung == null)
+                    {
+                        context.AlleBuchungenStorniert.Add(new BuchungStorniert() { Reisedurchfuehrung_ID = gesuchteBuchung.Reisedurchfuehrung_ID });
+                        wurdeStorniert = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler beim Prüfen einer Buchung!");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return wurdeStorniert;
+        }
     }
 }
