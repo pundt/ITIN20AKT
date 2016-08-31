@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,26 +15,91 @@ namespace BL_Reiseboerse_Graf
         /// <returns>Liste aller Orte</returns>
         public static List<Ort> AlleOrte()
         {
-            reisebueroEntities context = new reisebueroEntities();
+            Debug.WriteLine("LaenderVerwaltung - Lade alle Orte");
+            Debug.Indent();
+            List<Ort> alleOrte = new List<Ort>();
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+                    alleOrte = context.AlleOrte.ToList();
 
-            List<Ort> alleOrte = context.AlleOrte.ToList();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden aller Orte aus der DB");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
 
+                }
+
+            }
+            Debug.Unindent();
             return alleOrte;
+
+
         }
+        /// <summary>
+        /// Liefert alle Unterkuenfte aus der DB
+        /// </summary>
+        /// <returns>Liste aller Unterkuenfte</returns>
         public static List<Unterkunft> AlleUnterkuenfte()
         {
-            reisebueroEntities context = new reisebueroEntities();
+            Debug.WriteLine("Laenderverwaltung - Lade alle Unterkuenfte");
+            Debug.Indent();
+            List<Unterkunft> alleUnterkuenfte = new List<Unterkunft>();
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+                    alleUnterkuenfte = context.AlleUnterkuenfte.ToList();
 
-            List<Unterkunft> alleUnterkuenfte = context.AlleUnterkuenfte.ToList();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden aller Unterkuenfte");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
 
+
+                }
+
+
+            }
+            Debug.Unindent();
             return alleUnterkuenfte;
+
+
+
         }
+        /// <summary>
+        /// Liefert alle Verpflegegungen aus der DB
+        /// </summary>
+        /// <returns> Liste aller Verpflegungen</returns>
         public static List<Verpflegung> alleVerpflegung()
         {
-            reisebueroEntities context = new reisebueroEntities();
+            Debug.WriteLine("LaenderVerwaltung - Lade alle Verpflegungen");
+            Debug.Indent();
+            List<Verpflegung> alleVerpflegung = new List<Verpflegung>();
 
-            List < Verpflegung > alleVerpflegung = context.AlleVerpflegungen.ToList();
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
 
+                    alleVerpflegung = context.AlleVerpflegungen.ToList();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden aller Verpflegungen");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+
+                   
+                }
+
+            }
+            Debug.Unindent();
             return alleVerpflegung;
         }
     }
