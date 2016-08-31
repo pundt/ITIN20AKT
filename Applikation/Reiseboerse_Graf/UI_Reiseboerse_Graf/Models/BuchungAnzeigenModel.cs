@@ -10,5 +10,6 @@ namespace UI_Reiseboerse_Graf.Models
         public string Reisetitel { get; set; }
         public DateTime Startdatum { get; set; }
         public DateTime Enddatum { get; set; }
+        public int? Bewertung { get; set; }
     }
 }

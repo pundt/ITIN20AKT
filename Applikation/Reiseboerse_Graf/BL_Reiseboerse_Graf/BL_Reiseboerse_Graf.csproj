@@ -59,6 +59,7 @@
     <Compile Include="Bewertung.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>
+    <Compile Include="BewertungVerwaltung.cs" />
     <Compile Include="Bild.cs">
       <DependentUpon>dbreisebuero.tt</DependentUpon>
     </Compile>

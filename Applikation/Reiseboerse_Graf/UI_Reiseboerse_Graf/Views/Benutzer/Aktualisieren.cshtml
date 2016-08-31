@@ -20,6 +20,7 @@
             <div class="col-xs-5">
                 <input type="file" name="bild" formenctype="multipart/form-data" class="btn" accept="image/jpeg, image/png, image/gif" />
             </div>
+            <div>Benutzername: @Model.Email</div>
         </div>
         <div class="col-xs-10 reise">
             <div class="col-xs-5">
@@ -132,7 +133,7 @@
             </div>
         </div>
         <div class="col-xs-10 reise">
-            @Html.Action("LadeAlleBuchungenBenutzer","Buchungen",new {id=Model.ID})")
+            @Html.Action("LadeAlleBuchungenBenutzer","Buchungen",new {id=Model.ID})
         </div>
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

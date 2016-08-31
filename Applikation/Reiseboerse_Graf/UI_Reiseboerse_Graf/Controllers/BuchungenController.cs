@@ -29,11 +29,18 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Lädt alle Reisen die der Benutzer bereits gebucht hat, die dann anschließend bewertet werden können
+        /// </summary>
+        /// <param name="id">ID des Benutzers</param>
+        /// <returns>eine PartialView die in das Benutzer Aktualisieren View gerendert wird</returns>
         [ChildActionOnly]
         [HttpGet]
         public ActionResult LadeAlleBuchungenBenutzer(int id)
         {
-            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
+            Debug.WriteLine("Buchungen - LadeAlleBuchungenBenutzer - GET");
+            Debug.Indent();
+            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleReiseBuchungenBenutzer(id);
             List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
             foreach (var aktbuchung in BL_Liste)
             {
@@ -44,6 +51,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Reisetitel = aktbuchung.Reisedurchfuehrung.Reisedatum.Reise.Titel
                 });
             }
+            Debug.Unindent();
             return PartialView(UI_Liste);
         }
 

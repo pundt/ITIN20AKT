@@ -63,7 +63,7 @@ namespace BL_Reiseboerse_Graf
         }
 
         /// <summary>
-        /// Lädt alle Buchung eines Benutzers
+        /// Lädt alle Buchungen eines Benutzers
         /// </summary>
         /// <param name="benutzer_id">ID des Benutzers</param>
         /// <returns>Liste von Buchungen oder Null bei Fehler</returns>
