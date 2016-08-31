@@ -45,11 +45,11 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen");
             Debug.Indent();
             List<Buchung> buchungsListe = new List<Buchung>();
-            using (var context=new reisebueroEntities())
+            using (var context = new reisebueroEntities())
             {
                 try
                 {
-                    buchungsListe=context.AlleBuchungen.Where(x => x.BuchungStorniert == null).ToList();
+                    buchungsListe = context.AlleBuchungen.Where(x => x.BuchungStorniert == null).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -139,7 +139,7 @@ namespace BL_Reiseboerse_Graf
                 {
                     aktId = (from r in context.AlleReisedurchfuehrungen
                              where r.Reisedatum.Reise.ID == reise_id && r.Buchung == null &&
-                             r.Reisedatum.Startdatum==startdatum
+                             r.Reisedatum.Startdatum == startdatum
                              select r.ID).FirstOrDefault();
                 }
                 catch (Exception ex)
@@ -153,47 +153,56 @@ namespace BL_Reiseboerse_Graf
             return aktId;
         }
 
-        public static bool NeueBuchungSpeichern(Buchung buchung)
+        /// <summary>
+        /// Neue Buchung in der Datenbank speichern
+        /// </summary>
+        /// <param name="buchung">Die zu speichernde Buchung</param>
+        /// <returns>true wenn erfolgreich ansonsten false</returns>
+        public static bool NeueBuchungSpeichern(Buchung buchung, string email)
         {
             Debug.WriteLine("Buchungsverwaltung - Neue Buchung Speichern");
             Debug.Indent();
 
             bool erfolgreich = false;
-
-            try
+            using (var context = new reisebueroEntities())
             {
-                using (var context = new reisebueroEntities())
+                try
                 {
+                    Benutzer benutzer = context.AlleBenutzer.Include("Adresse.Ort").Where(x => x.Email == email).FirstOrDefault();
+                    buchung.Benutzer = benutzer;
                     context.AlleBuchungen.Add(buchung);
                     context.SaveChanges();
                     erfolgreich = true;
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Fehler beim Speichern einer Buchung!");
-                Debug.WriteLine(ex.Message);
-                Debugger.Break();
-            }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Speichern einer Buchung!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
 
-            Debug.Unindent();
-            return erfolgreich;
+
+                Debug.Unindent();
+                return erfolgreich;
+            }
         }
 
         /// <summary>
-        /// Überprüft ob eine Buchung inkl. Zahlung abgeschlossen wurde
+        /// Überprüft ob eine Buchung inkl. Zahlung abgeschlossen wurde und storniert diese falss unabgeschlossen
         /// </summary>
+        /// <param name="reisedurchfuehrungID">die ID der Buchung (reisedurchfuehrung ID)</param>
+        /// <returns>true wenn erfolgreich ansonsten false</returns>
         public static bool BuchungPruefen(int reisedurchfuehrungID)
         {
             Debug.WriteLine("Buchungsverwaltung - Buchung Prüfen");
             Debug.Indent();
 
             bool wurdeStorniert = false;
-
-            try
+            using (var context = new reisebueroEntities())
             {
-                using (var context = new reisebueroEntities())
+                try
                 {
+
                     Buchung gesuchteBuchung = context.AlleBuchungen.Where(x => x.Reisedurchfuehrung_ID == reisedurchfuehrungID && x.Buchung_Zahlung != null).FirstOrDefault();
 
                     if (gesuchteBuchung == null)
@@ -202,16 +211,16 @@ namespace BL_Reiseboerse_Graf
                         wurdeStorniert = true;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Fehler beim Prüfen einer Buchung!");
-                Debug.WriteLine(ex.Message);
-                Debugger.Break();
-            }
 
-            Debug.Unindent();
-            return wurdeStorniert;
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Prüfen einer Buchung!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+                Debug.Unindent();
+                return wurdeStorniert;
+            }
         }
     }
-}
