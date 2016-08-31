@@ -52,7 +52,7 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    alleUnterkuenfte = context.AlleUnterkuenfte.ToList();
+                    alleUnterkuenfte = context.AlleUnterkuenfte.Include("Verpflegung").ToList();
 
                 }
                 catch (Exception ex)
