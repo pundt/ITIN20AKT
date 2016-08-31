@@ -81,9 +81,13 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Hinzufuegen()
         {
+            Debug.WriteLine("Buchungen - Hinzufuegen - POST");
+            Debug.Indent();
             NameValueCollection col = new NameValueCollection();
-            col = Request.Form;
             BuchungGesamtModel model = new BuchungGesamtModel();
+            try
+            {
+            col = Request.Form;
 
             List<BuchungenModel> buchungenErw = new List<BuchungenModel>();
             List<BuchungenModel> buchungenKind = new List<BuchungenModel>();
@@ -120,6 +124,16 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             model.BuchungErwachsen = buchungenErw;
             model.BuchungKind = buchungenKind;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler beim Auslesen der Formulardaten");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+                Debug.Unindent();
+               
+            }
 
             if (ModelState.IsValid)
             {
@@ -168,30 +182,31 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="model">beinhaltet alle BuchungenModel</param>
         /// <returns>View zur Eingabe der Zahlungsdaten</returns>
-        [HttpGet]
-        public ActionResult Zahlung()
-        {
-            Debug.WriteLine("Buchungen - Zahlung - GET");
+        //[HttpGet]
+        //public ActionResult Zahlung()
+        //{
+        //    Debug.WriteLine("Buchungen - Zahlung - GET");
+        //    Debug.Indent();
 
-            BuchungGesamtModel model = Session["BuchungsDaten"] as BuchungGesamtModel;
+        //    BuchungGesamtModel model = Session["BuchungsDaten"] as BuchungGesamtModel;
 
-            if (model==null)
-            {
-                return RedirectToAction("Hinzufuegen");
-            }
-            else
-            {
-                ZahlungModel zahlung = new ZahlungModel();
-                zahlung.Reisedurchfuehrung_IDs = new List<int>();
-                //List<int> idListe = TempData["ids"] as List<int>;
-                foreach (var m in model)
-                {
-                    zahlung.Reisedurchfuehrung_IDs.Add(id);
-                }
-            }
-            
-            return View(zahlung);
-        }
+        //    if (model==null)
+        //    {
+        //        return RedirectToAction("Hinzufuegen");
+        //    }
+        //    else
+        //    {
+        //        ZahlungModel zahlung = new ZahlungModel();
+        //        zahlung.Reisedurchfuehrung_IDs = new List<int>();
+        //        //List<int> idListe = TempData["ids"] as List<int>;
+        //        foreach (var m in model)
+        //        {
+        //            zahlung.Reisedurchfuehrung_IDs.Add(id);
+        //        }
+        //    }
+        //    Debug.Unindent();
+        //    return View(zahlung);
+        //}
 
         /// <summary>
         /// Nimmt das übergebene ZahlungModel entgegen und übergibt es an die BL
@@ -202,6 +217,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         public ActionResult Zahlung(ZahlungModel model)
         {
             Debug.WriteLine("Buchung - Zahlung - POST");
+            Debug.Indent();
 
             if (ModelState.IsValid)
             {
@@ -216,7 +232,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung);
                 ZahlungsVerwaltung.ZuordnungZahlungBuchung(model.Reisedurchfuehrung_IDs, neueID);
             }
-
+            Debug.Unindent();
             return null;
         }
 
