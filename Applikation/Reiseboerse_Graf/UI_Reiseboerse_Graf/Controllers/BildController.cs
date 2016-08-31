@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BL_Reiseboerse_Graf;
+using System.Diagnostics;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -14,11 +15,16 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="id">ID der Reise</param>
         /// <returns>ein zufälliges Bild dieser Reise</returns>
+        [HttpGet]
         public ActionResult BildzuReise(int id)
         {
+            Debug.WriteLine("Bild - Bild zu Reise - GET ");
+            Debug.Indent();
             List<int> IDListe=BildVerwaltung.LadeBildID(id);
             Random rnd = new Random();
             int aktid = rnd.Next(1, IDListe.Count + 1);
+            
+            Debug.Unindent();
             return Laden(aktid);
         }
 
@@ -30,9 +36,12 @@ namespace UI_Reiseboerse_Graf.Controllers
         [AllowAnonymous]
         public ActionResult Laden(int id)
         {
+            Debug.WriteLine("Bild - Bild laden anhand ID - GET");
+            Debug.Indent();
             string contentType = "image/jpeg";
             byte[] bilddaten = BildVerwaltung.LadeBild(id).Bilddaten;
 
+            Debug.Unindent();
             return new FileContentResult(bilddaten, contentType);
             
         }

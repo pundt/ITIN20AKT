@@ -26,13 +26,18 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult LadeAlleBuchungen(int reise_id)
         {
+            Debug.WriteLine("Buchungen - Lade Alle Buchungen - GET");
+            Debug.Indent();
+            Debug.Unindent();
             return View();
         }
-
+        
         [ChildActionOnly]
         [HttpGet]
         public ActionResult LadeAlleBuchungenBenutzer(int id)
         {
+            Debug.WriteLine("Buchungen - LadeAlleBuchungenBenutzer - GET");
+            Debug.Indent();
             List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
             List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
             foreach (var aktbuchung in BL_Liste)
@@ -44,6 +49,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Reisetitel = aktbuchung.Reisedurchfuehrung.Reisedatum.Reise.Titel
                 });
             }
+            Debug.Unindent();
             return PartialView(UI_Liste);
         }
 
@@ -57,8 +63,10 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult Hinzufuegen(BuchungHinzufuegenModel model)
         {
+            Debug.WriteLine("Buchungen - Hinzufuegen - GET");
+            Debug.Indent();
+            Debug.Unindent();
             return View(model);
-
         }
 
         /// <summary>
