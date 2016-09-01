@@ -24,6 +24,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             if (Globals.IST_TESTSYSTEM)
             {
+                #region test
                 try
                 {
                     Debug.WriteLine("Testsystem");
@@ -38,11 +39,85 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Debug.WriteLine("Fehler beim Laden aller Reisen");
                     Debug.WriteLine(ex.Message);
                 }
-
+                #endregion test
             }
             else
             {
+                #region db
+                List<Reise> BL_ReiseListe = ReiseVerwaltung.LadeAlleReisen();
+                List<List<ReisedatumModel>> reisedaten = new List<List<ReisedatumModel>>();
+                model.Reisen = new List<ReiseModel>();
+                foreach (var reise in BL_ReiseListe)
+                {
+                    ReiseModel reiseModel = new ReiseModel()
+                    {
+                        ID = reise.ID,
+                        Titel = reise.Titel,
+                        Hotelkategorie = reise.Unterkunft.Kategorie,
+                        Land = reise.Ort.Land.Bezeichnung,
+                        Land_id = reise.Ort.Land.ID,
+                        Ort = reise.Ort.Bezeichnung,
+                        Ort_id = reise.Ort.ID,
+                        Unterkunft = reise.Unterkunft.Bezeichnung,
+                        Preis = reise.Preis_Erwachsener,
+                        Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung,
+                        Verpflegungs_id = reise.Unterkunft.Verpflegung.ID
+                    };
+                    reiseModel.Reisedaten = new List<ReisedatumModel>();
+                    foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(reiseModel.ID))
+                    {
+                        reiseModel.Reisedaten.Add(new ReisedatumModel()
+                        {
+                            Anmeldefrist = datum.Anmeldefrist,
+                            Beginndatum = datum.Startdatum,
+                            Enddatum = datum.Enddatum,
+                            Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
+                        });
+                    }
 
+                    model.Reisen.Add(reiseModel);
+
+                    
+                    
+
+                }
+
+                List<LandModel> laender = new List<LandModel>();
+                foreach (var land in BenutzerVerwaltung.AlleLaender())
+                {
+                    laender.Add(new LandModel
+                    {
+                        landName = land.Bezeichnung,
+                        land_ID = land.ID
+                    });
+                }
+                List<OrtModel> orte = new List<OrtModel>();
+                foreach (var ort in LaenderVerwaltung.AlleOrte())
+                {
+                    orte.Add(new OrtModel
+                    {
+                        Bezeichnung = ort.Bezeichnung,
+                        Id = ort.ID
+                    });
+                }
+                List<VerpflegungModel> verpflegungen = new List<VerpflegungModel>();
+                foreach (var verpflegung in LaenderVerwaltung.alleVerpflegung())
+                {
+                    verpflegungen.Add(new VerpflegungModel
+                    {
+                        Bezeichnung = verpflegung.Bezeichnung,
+                        Id = verpflegung.ID
+                    });
+                }
+                model.Filter = new FilterModel()
+                {
+                    Startdatum = DateTime.Now,
+                    Enddatum = DateTime.Now.AddYears(1),
+                    Land = laender,
+                    Ort = orte,
+                    Verpflegung = verpflegungen
+                };
+                #endregion db
             }
             return View(model);
         }
@@ -87,12 +162,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                 if (filterModel.Verpflegungs_ID != 0)
                     model.Reisen = model.Reisen.Where(x => x.Verpflegungs_id == filterModel.Verpflegungs_ID).ToList();
 
-                if (filterModel.Startdatum != null)
-                    model.Reisen = model.Reisen.Where(x => x.Beginndatum >= filterModel.Startdatum).ToList();
-
-                if (filterModel.Enddatum != null)
-                    model.Reisen = model.Reisen.Where(x => x.Enddatum <= filterModel.Enddatum).ToList();
-
                 //model.Reisen = model.Reisen.ToList();
 
                 //}
@@ -103,6 +172,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             else
             {
+                return null;
                 // Datenbankverbindung List auslesen
             }
         }
@@ -259,16 +329,13 @@ namespace UI_Reiseboerse_Graf.Controllers
             foreach (var reise in liste)
             {
                 reisedaten = reise.AlleReisedaten.ToList();
-                rm.Anmeldefrist = reisedaten[0].Anmeldefrist;
-                rm.Beginndatum = reisedaten[0].Startdatum;
-                rm.Enddatum = reisedaten[0].Enddatum;
                 rm.Hotelkategorie = reise.Unterkunft.Kategorie;
                 rm.ID = reise.ID;
                 rm.Land = reise.Ort.Land.Bezeichnung;
                 rm.Ort = reise.Ort.Bezeichnung;
                 rm.Land_id = reise.Ort.Land.ID;
                 rm.Ort_id = reise.Ort.ID;
-                rm.Preis = reise.Preis_Erwachsen;
+                rm.Preis = reise.Preis_Erwachsener;
                 rm.Titel = reise.Titel;
                 rm.Unterkunft = reise.Unterkunft.Bezeichnung;
                 rm.Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung;
@@ -299,9 +366,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                     ReiseModel reise = new ReiseModel()
                     {
                         ID = i,
-                        Anmeldefrist = new DateTime(2016, 08, 30),
-                        Beginndatum = new DateTime(2016, 12, 15),
-                        Enddatum = new DateTime(2016, 12, 20),
                         Preis = 599,
                         Titel = "Hamburg im Advent",
                         Ort = "Hamburg",
@@ -311,8 +375,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Land_id = 2,
                         Unterkunft = "Hafentower Hotel",
                         Verpflegung = "Halbpension",
-                        Verpflegungs_id = 2,
-                        Restplätze = i % 5
+                        Verpflegungs_id = 2
                     };
                     liste.Add(reise);
                 }
@@ -321,9 +384,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                     ReiseModel reise = new ReiseModel()
                     {
                         ID = i,
-                        Anmeldefrist = new DateTime(2016, 10, 30),
-                        Beginndatum = new DateTime(2016, 11, 10),
-                        Enddatum = new DateTime(2016, 11, 15),
                         Preis = 399,
                         Titel = "Städtereise Wien",
                         Ort = "Wien",
@@ -333,8 +393,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Land_id = 1,
                         Unterkunft = "Schlosshotel Burckhardt",
                         Verpflegung = "Vollpension",
-                        Verpflegungs_id = 2,
-                        Restplätze = i % 5
+                        Verpflegungs_id = 2
                     };
 
                     liste.Add(reise);
@@ -343,9 +402,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                     ReiseModel reise = new ReiseModel()
                     {
                         ID = i,
-                        Anmeldefrist = new DateTime(2016, 07, 10),
-                        Beginndatum = new DateTime(2016, 08, 20),
-                        Enddatum = new DateTime(2016, 09, 01),
                         Preis = 895,
                         Titel = "Kultururlaub Antike",
                         Ort = "Rom",
@@ -355,8 +411,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Land_id = 3,
                         Unterkunft = "Pension Dolce Vita ",
                         Verpflegung = "Halbpension",
-                        Verpflegungs_id = 1,
-                        Restplätze = 10
+                        Verpflegungs_id = 1
                     };
                     liste.Add(reise);
                 }
@@ -377,9 +432,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                 ReisedetailModel reise = new ReisedetailModel()
                 {
                     ID = i,
-                    Anmeldefrist = new DateTime(2016, 08, 30),
-                    Beginndatum = new DateTime(2016, 10, 01),
-                    Enddatum = new DateTime(2016, 10, 30),
                     Preis = 599 + i * 3,
                     Titel = "TestReise",
                     Ort = "Irgendwohin",
@@ -388,8 +440,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Preis_Kind = i * 133,
                     Unterkunft = "Hotel XYZ",
                     Unterkunft_ID = i,
-                    Verpflegung = "Verpflegung nach Wunsch",
-                    Restplätze = 5
+                    Verpflegung = "Verpflegung nach Wunsch"
                 };
                 liste.Add(reise);
             }

@@ -20,9 +20,9 @@ namespace BL_Reiseboerse_Graf
             List<Zahlungsart> liste = null;
             try
             {
-                using (var context=new reisebueroEntities())
+                using (var context = new reisebueroEntities())
                 {
-                    liste=context.AlleZahlungsarten.ToList();
+                    liste = context.AlleZahlungsarten.ToList();
                     Debug.WriteLine("{0} Zahlungsarten geladen", liste.Count);
                 }
             }
@@ -47,7 +47,7 @@ namespace BL_Reiseboerse_Graf
             Debug.Indent();
 
             int neueID = 0;
-            
+
             try
             {
                 using (var context = new reisebueroEntities())
@@ -80,7 +80,7 @@ namespace BL_Reiseboerse_Graf
 
             try
             {
-                using (var context = new reisebueroEntities())
+                //using (var context = new reisebueroEntities())
                 //{
                 //    foreach (var id in reisedurchfuehrungIDs)
                 //    {
@@ -88,12 +88,11 @@ namespace BL_Reiseboerse_Graf
                 //        {
                 //            Reisedurchfuehrung_ID = id
                 //        };
-                        bz.Zahlung.ID = zahlungID;
-                        context.AlleBuchung_Zahlungen.Add(bz);
-                    }
-                    context.SaveChanges();
-                    Debug.Unindent();
-                }
+                //    bz.Zahlung.ID = zahlungID;
+                //    context.AlleBuchung_Zahlungen.Add(bz);
+                //}
+                //context.SaveChanges();
+                //Debug.Unindent();
             }
             catch (Exception ex)
             {

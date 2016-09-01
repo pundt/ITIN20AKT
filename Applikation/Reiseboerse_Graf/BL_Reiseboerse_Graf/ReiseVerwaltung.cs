@@ -18,25 +18,54 @@ namespace BL_Reiseboerse_Graf
         {
             Debug.WriteLine("ReiseVerwaltung - ladeAlleReisen");
             Debug.Indent();
+            List<Reise> reisen = new List<Reise>();
             using (var context = new reisebueroEntities())
             {
                 try
                 {  
-                    List<Reise> reisen = context.AlleReisen
-                        .Include("AlleReisedaten")
+                    reisen = context.AlleReisen.Include("AlleReisedaten")
+                        .Include("Unterkunft.Verpflegung").Include("Ort.Land")
                         .ToList();
-                    return reisen;
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Fehler beim Laden aller Reisen");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
-                    return null;
-                }
-                
+                }     
             }
+            Debug.Unindent();
+            return reisen;
         }
+
+        /// <summary>
+        /// Lädt zu einer Reise alle Zeitpunkte dieser Reise (also alle Reisedaten)
+        /// </summary>
+        /// <param name="reise_id">die ID der Reise</param>
+        /// <returns>eine Liste von Reisedaten oder NULL bei Fehler</returns>
+        public static List<Reisedatum> LadeReiseZeitpunkte(int reise_id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - LadeReiseZeitpunkte");
+            Debug.Indent();
+            List<Reisedatum> liste = new List<Reisedatum>();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    liste=context.AlleReisedaten.Where(x => x.Reise.ID == reise_id).ToList();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden aller Reisedaten einer Reise");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return liste;
+        }
+
 
         /// <summary>
         /// Lädt alle Reisen, die den Filterkriterien entsprechen
@@ -53,10 +82,10 @@ namespace BL_Reiseboerse_Graf
         }
 
         /// <summary>
-        /// Ermittelt die Restplätze einer Reise aus der DB
+        /// Ermittelt die Restplätze einer Reise zu einem speziellen Datum aus der DB
         /// </summary>
         /// <returns>die Anzahl der Restplätze oder -1 wenn ein Fehler auftritt</returns>      
-        public static int Restplätze(int reise_id)
+        public static int Restplätze(int reisedatum_id)
         {
             Debug.WriteLine("ReiseVerwaltung - Restplätze");
             Debug.Indent();
@@ -65,8 +94,11 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    List<Reisedurchfuehrung> liste=context.AlleReisedurchfuehrungen.Where(x => x.Buchung == null).ToList();
-                    restplätze = liste.Count;
+                    List<Reisedurchfuehrung> reisedurchfuehrungen = context.AlleReisedurchfuehrungen.Where(x => x.Reisedatum.ID == reisedatum_id).ToList();
+                    List<Buchung> buchungen = context.AlleBuchungen.Where(x => x.Reisedatum.ID == reisedatum_id&&x.BuchungStorniert==null).ToList();
+                    int anzahlReisen = reisedurchfuehrungen.Count;
+                    int anzahlBuchungen = buchungen.Count;
+                    restplätze = anzahlReisen - anzahlBuchungen;
 
                 }
                 catch (Exception ex)

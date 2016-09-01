@@ -7,6 +7,6 @@ namespace UI_Reiseboerse_Graf.Controllers
 {
     public class Globals
     {
-        public const bool IST_TESTSYSTEM = true;
+        public const bool IST_TESTSYSTEM = false;
     }
 }

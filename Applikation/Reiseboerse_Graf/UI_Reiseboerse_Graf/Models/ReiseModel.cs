@@ -14,16 +14,8 @@ namespace UI_Reiseboerse_Graf.Models
         public int ID { get; set; }
         
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
-        public string Titel { get; set; }
+        public string Titel { get; set; }      
        
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [DisplayFormat(DataFormatString ="{0:dd.MM.yy}")]
-        public DateTime Beginndatum { get; set; }
-
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yy}")]
-        public DateTime Enddatum { get; set; }
-
         [Required(ErrorMessage = "Pflichtfeld", AllowEmptyStrings = false)]
         public string Verpflegung { get; set; }
 
@@ -45,12 +37,9 @@ namespace UI_Reiseboerse_Graf.Models
         [Required(ErrorMessage = "Pflichtfeld")]
         public decimal Preis { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld")]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yy}")]
-        public DateTime Anmeldefrist { get; set; }
+        public int Reisedatum_ID { get; set; }
 
-        [Required(ErrorMessage = "Pflichtfeld")]
-        public int Restplätze { get; set; }
+        public List<ReisedatumModel> Reisedaten { get; set; }
 
     }
 }
