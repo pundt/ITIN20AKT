@@ -41,15 +41,56 @@ namespace BL_Reiseboerse_Graf
         /// <summary>
         /// Lädt alle Reisen, die den Filterkriterien entsprechen
         /// </summary>
-        /// <param name="kontinent_id">ID des ausgewählten Kontinents aus der Dropdownbox</param>
         /// <param name="land_id">ID des ausgewählten Landes aus der Dropdownbox</param>
-        /// <param name="stadt_id">ID der ausgewählten Stadt aus der Dropdownbox</param>
-        /// <param name="kategorien_id">Alle IDs der ausgewählten Kategorien (Checkboxen)</param>
+        /// <param name="ort_id">ID des ausgewählten Ortes aus der Dropdownbox</param>
+        /// <param name="kategorie_id">Alle IDs der ausgewählten Kategorien (Checkboxen)</param>
+        /// <param name="startdatum">Das gewählte Startdatum</param>
+        /// <param name="enddatum">Das gewählte Enddatum</param>
         /// <returns>eine Liste von Reisen</returns>
-        public static List<Reise> LadeReisenGefiltert(int kontinent_id, int land_id, int stadt_id, List<int> kategorien_id)
+        public static List<Reise> LadeReisenGefiltert(int land_id, int ort_id, int kategorie_id, DateTime startdatum, DateTime enddatum)
         {
+            Debug.WriteLine("Reiseverwaltung - Lade Reisen gefiltert");
+            Debug.Indent();
 
-            return null;
+            List<Reise> reisenGefiltert = new List<Reise>();
+
+            using (var context = new reisebueroEntities())
+            {
+                reisenGefiltert = LadeAlleReisen();
+
+                try
+                {
+                    if (land_id != 0)
+                    {
+                        reisenGefiltert = reisenGefiltert.Where(x => x.Ort.Land.ID == land_id).ToList();
+                    }
+                    if (ort_id != 0)
+                    {
+                        reisenGefiltert = reisenGefiltert.Where(x => x.Ort.ID == ort_id).ToList();
+                    }
+                    if (kategorie_id != 0)
+                    {
+                        reisenGefiltert = reisenGefiltert.Where(x => x.Unterkunft.Kategorie >= kategorie_id).ToList();
+                    }
+                    if (startdatum >= DateTime.Now)
+                    {   
+                        reisenGefiltert = reisenGefiltert.Where(x => x.AlleReisedaten.Any(y => y.Startdatum >= startdatum)).ToList();
+                    }
+                    if (enddatum > startdatum)
+                    {
+                        reisenGefiltert = reisenGefiltert.Where(x => x.AlleReisedaten.Any(y => y.Enddatum > startdatum)).ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Filtern der Reise!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return reisenGefiltert;
         }
 
         /// <summary>
