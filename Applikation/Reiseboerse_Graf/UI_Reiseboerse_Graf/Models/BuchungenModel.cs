@@ -21,7 +21,7 @@ namespace UI_Reiseboerse_Graf.Models
         public DateTime Geburtsdatum { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public int Zahlungsart_id { get; set; }
-        public int Reisedurchfuehrung_ID { get; set; }
+        public int Reisedatum_ID { get; set; }
 
 
 

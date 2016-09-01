@@ -15,7 +15,7 @@ namespace BL_Reiseboerse_Graf
     public partial class Unterkunft_Bild
     {
         public int ID { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual Bild Bild { get; set; }
         public virtual Unterkunft Unterkunft { get; set; }

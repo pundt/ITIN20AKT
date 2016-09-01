@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="reisebueroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="reisebueroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adresse">
           <Key>
             <PropertyRef Name="id" />
@@ -12,7 +12,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ort_id" Type="int" Nullable="false" />
           <Property Name="adressdaten" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Benutzer">
           <Key>
@@ -30,7 +30,7 @@
           <Property Name="geburtsdatum" Type="datetime" Nullable="false" />
           <Property Name="land_id" Type="int" Nullable="false" />
           <Property Name="ist_Mitarbeiter" Type="bit" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Bewertung">
           <Key>
@@ -39,7 +39,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="wertung" Type="int" Nullable="false" />
           <Property Name="reise_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Bild">
           <Key>
@@ -47,33 +47,35 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bilddaten" Type="varbinary(max)" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Buchung">
           <Key>
-            <PropertyRef Name="reisedurchfuehrung_id" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="reisedurchfuehrung_id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="benutzer_id" Type="int" Nullable="false" />
+          <Property Name="reisedatum_id" Type="int" Nullable="false" />
           <Property Name="passnummer" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="vorname" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="nachname" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="geburtsdatum" Type="datetime" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Buchung_Zahlung">
           <Key>
-            <PropertyRef Name="reisedurchfuehrung_id" />
+            <PropertyRef Name="buchung_id" />
           </Key>
-          <Property Name="reisedurchfuehrung_id" Type="int" Nullable="false" />
+          <Property Name="buchung_id" Type="int" Nullable="false" />
           <Property Name="zahlung_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="BuchungStorniert">
           <Key>
-            <PropertyRef Name="reisedurchfuehrung_id" />
+            <PropertyRef Name="buchung_id" />
           </Key>
-          <Property Name="reisedurchfuehrung_id" Type="int" Nullable="false" />
+          <Property Name="buchung_id" Type="int" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Land">
           <Key>
@@ -81,7 +83,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Ort">
           <Key>
@@ -90,7 +92,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="land_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Reise">
           <Key>
@@ -103,7 +105,7 @@
           <Property Name="preis_erwachsener" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="preis_kind" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="ort_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Reise_Bild">
           <Key>
@@ -112,7 +114,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bild_id" Type="int" Nullable="false" />
           <Property Name="reise_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Reisedatum">
           <Key>
@@ -123,7 +125,7 @@
           <Property Name="startdatum" Type="datetime" Nullable="false" />
           <Property Name="enddatum" Type="datetime" Nullable="false" />
           <Property Name="anmeldefrist" Type="datetime" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Reisedurchfuehrung">
           <Key>
@@ -131,7 +133,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reisedatum_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Unterkunft">
           <Key>
@@ -142,7 +144,7 @@
           <Property Name="beschreibung" Type="nvarchar(max)" Nullable="false" />
           <Property Name="kategorie" Type="int" Nullable="false" />
           <Property Name="verpflegung_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Unterkunft_Bild">
           <Key>
@@ -151,7 +153,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bild_id" Type="int" Nullable="false" />
           <Property Name="unterkunft_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Verpflegung">
           <Key>
@@ -159,7 +161,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Zahlung">
           <Key>
@@ -170,7 +172,7 @@
           <Property Name="nachname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="nummer" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="zahlungsart_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Zahlungsart">
           <Key>
@@ -178,7 +180,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Adresse_Ort">
           <End Role="Ort" Type="Self.Ort" Multiplicity="1" />
@@ -240,15 +242,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Buchung_Reisedurchfuehrung">
-          <End Role="Reisedurchfuehrung" Type="Self.Reisedurchfuehrung" Multiplicity="1" />
-          <End Role="Buchung" Type="Self.Buchung" Multiplicity="0..1" />
+        <Association Name="FK_Buchung_Reisedatum">
+          <End Role="Reisedatum" Type="Self.Reisedatum" Multiplicity="1" />
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Reisedurchfuehrung">
+            <Principal Role="Reisedatum">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Buchung">
-              <PropertyRef Name="reisedurchfuehrung_id" />
+              <PropertyRef Name="reisedatum_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -257,10 +259,10 @@
           <End Role="Buchung_Zahlung" Type="Self.Buchung_Zahlung" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Buchung">
-              <PropertyRef Name="reisedurchfuehrung_id" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Buchung_Zahlung">
-              <PropertyRef Name="reisedurchfuehrung_id" />
+              <PropertyRef Name="buchung_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -281,10 +283,10 @@
           <End Role="BuchungStorniert" Type="Self.BuchungStorniert" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Buchung">
-              <PropertyRef Name="reisedurchfuehrung_id" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="BuchungStorniert">
-              <PropertyRef Name="reisedurchfuehrung_id" />
+              <PropertyRef Name="buchung_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -459,8 +461,8 @@
             <End Role="Benutzer" EntitySet="Benutzer" />
             <End Role="Buchung" EntitySet="Buchung" />
           </AssociationSet>
-          <AssociationSet Name="FK_Buchung_Reisedurchfuehrung" Association="Self.FK_Buchung_Reisedurchfuehrung">
-            <End Role="Reisedurchfuehrung" EntitySet="Reisedurchfuehrung" />
+          <AssociationSet Name="FK_Buchung_Reisedatum" Association="Self.FK_Buchung_Reisedatum">
+            <End Role="Reisedatum" EntitySet="Reisedatum" />
             <End Role="Buchung" EntitySet="Buchung" />
           </AssociationSet>
           <AssociationSet Name="FK_Buchung_Zahlung_Buchung" Association="Self.FK_Buchung_Zahlung_Buchung">
@@ -520,7 +522,8 @@
             <End Role="Zahlung" EntitySet="Zahlung" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="reisebueroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -530,7 +533,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Adressdaten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Ort" Relationship="Self.FK_Adresse_Ort" FromRole="Adresse" ToRole="Ort" />
           <NavigationProperty Name="AlleBenutzer" Relationship="Self.FK_Benutzer_Adresse" FromRole="Adresse" ToRole="Benutzer" />
         </EntityType>
@@ -548,7 +551,7 @@
           <Property Name="Titel" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Geburtsdatum" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Ist_Mitarbeiter" Type="Boolean" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Adresse" Relationship="Self.FK_Benutzer_Adresse" FromRole="Benutzer" ToRole="Adresse" />
           <NavigationProperty Name="Land" Relationship="Self.FK_Benutzer_Land" FromRole="Benutzer" ToRole="Land" />
           <NavigationProperty Name="AlleBuchungen" Relationship="Self.FK_Buchung_Benutzer" FromRole="Benutzer" ToRole="Buchung" />
@@ -559,7 +562,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Wertung" Type="Int32" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Reise" Relationship="Self.FK_Bewertung_Reise" FromRole="Bewertung" ToRole="Reise" />
         </EntityType>
         <EntityType Name="Bild">
@@ -568,39 +571,40 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bilddaten" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AlleReise_Bilder" Relationship="Self.FK_Reise_Bild_Bild" FromRole="Bild" ToRole="Reise_Bild" />
           <NavigationProperty Name="AlleUnterkunft_Bilder" Relationship="Self.FK_Unterkunft_Bild_Bild" FromRole="Bild" ToRole="Unterkunft_Bild" />
         </EntityType>
         <EntityType Name="Buchung">
           <Key>
-            <PropertyRef Name="Reisedurchfuehrung_ID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Reisedurchfuehrung_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Passnummer" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="Vorname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nachname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Geburtsdatum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Benutzer" Relationship="Self.FK_Buchung_Benutzer" FromRole="Buchung" ToRole="Benutzer" />
-          <NavigationProperty Name="Reisedurchfuehrung" Relationship="Self.FK_Buchung_Reisedurchfuehrung" FromRole="Buchung" ToRole="Reisedurchfuehrung" />
+          <NavigationProperty Name="Reisedatum" Relationship="Self.FK_Buchung_Reisedatum" FromRole="Buchung" ToRole="Reisedatum" />
           <NavigationProperty Name="Buchung_Zahlung" Relationship="Self.FK_Buchung_Zahlung_Buchung" FromRole="Buchung" ToRole="Buchung_Zahlung" />
           <NavigationProperty Name="BuchungStorniert" Relationship="Self.FK_BuchungStorniert_Buchung" FromRole="Buchung" ToRole="BuchungStorniert" />
-          <Property Name="Vorname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="Nachname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="Geburtsdatum" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Buchung_Zahlung">
           <Key>
-            <PropertyRef Name="Reisedurchfuehrung_ID" />
+            <PropertyRef Name="Buchung_ID" />
           </Key>
-          <Property Name="Reisedurchfuehrung_ID" Type="Int32" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="Buchung_ID" Type="Int32" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Buchung" Relationship="Self.FK_Buchung_Zahlung_Buchung" FromRole="Buchung_Zahlung" ToRole="Buchung" />
           <NavigationProperty Name="Zahlung" Relationship="Self.FK_Buchung_Zahlung_Zahlung" FromRole="Buchung_Zahlung" ToRole="Zahlung" />
         </EntityType>
         <EntityType Name="BuchungStorniert">
           <Key>
-            <PropertyRef Name="Reisedurchfuehrung_ID" />
+            <PropertyRef Name="Buchung_ID" />
           </Key>
-          <Property Name="Reisedurchfuehrung_ID" Type="Int32" Nullable="false" />
+          <Property Name="Buchung_ID" Type="Int32" Nullable="false" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Buchung" Relationship="Self.FK_BuchungStorniert_Buchung" FromRole="BuchungStorniert" ToRole="Buchung" />
         </EntityType>
         <EntityType Name="Land">
@@ -609,8 +613,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AlleBenutzer" Relationship="reisebueroModel.FK_Benutzer_Land" FromRole="Land" ToRole="Benutzer" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AlleBenutzer" Relationship="Self.FK_Benutzer_Land" FromRole="Land" ToRole="Benutzer" />
           <NavigationProperty Name="AlleOrte" Relationship="Self.FK_Ort_Land" FromRole="Land" ToRole="Ort" />
         </EntityType>
         <EntityType Name="Ort">
@@ -619,7 +623,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AlleAdressen" Relationship="Self.FK_Adresse_Ort" FromRole="Ort" ToRole="Adresse" />
           <NavigationProperty Name="Land" Relationship="Self.FK_Ort_Land" FromRole="Ort" ToRole="Land" />
           <NavigationProperty Name="AlleReisen" Relationship="Self.FK_Reise_Ort" FromRole="Ort" ToRole="Reise" />
@@ -631,9 +635,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Beschreibung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Preis_Erwachsen" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Preis_Erwachsener" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="Preis_Kind" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AlleBewertungen" Relationship="Self.FK_Bewertung_Reise" FromRole="Reise" ToRole="Bewertung" />
           <NavigationProperty Name="Ort" Relationship="Self.FK_Reise_Ort" FromRole="Reise" ToRole="Ort" />
           <NavigationProperty Name="AlleReise_Bilder" Relationship="Self.FK_Reise_Bild_Reise" FromRole="Reise" ToRole="Reise_Bild" />
@@ -645,7 +649,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Bild" Relationship="Self.FK_Reise_Bild_Bild" FromRole="Reise_Bild" ToRole="Bild" />
           <NavigationProperty Name="Reise" Relationship="Self.FK_Reise_Bild_Reise" FromRole="Reise_Bild" ToRole="Reise" />
         </EntityType>
@@ -657,7 +661,8 @@
           <Property Name="Startdatum" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Enddatum" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Anmeldefrist" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AlleBuchungen" Relationship="Self.FK_Buchung_Reisedatum" FromRole="Reisedatum" ToRole="Buchung" />
           <NavigationProperty Name="Reise" Relationship="Self.FK_Reisedatum_Reise" FromRole="Reisedatum" ToRole="Reise" />
           <NavigationProperty Name="AlleReisedurchfuehrungen" Relationship="Self.FK_Reisedurchfuehrung_Reisedatum" FromRole="Reisedatum" ToRole="Reisedurchfuehrung" />
         </EntityType>
@@ -666,8 +671,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Buchung" Relationship="Self.FK_Buchung_Reisedurchfuehrung" FromRole="Reisedurchfuehrung" ToRole="Buchung" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Reisedatum" Relationship="Self.FK_Reisedurchfuehrung_Reisedatum" FromRole="Reisedurchfuehrung" ToRole="Reisedatum" />
         </EntityType>
         <EntityType Name="Unterkunft">
@@ -678,7 +682,7 @@
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Beschreibung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Kategorie" Type="Int32" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AlleReisen" Relationship="Self.FK_Reise_Unterkunft" FromRole="Unterkunft" ToRole="Reise" />
           <NavigationProperty Name="AlleUnterkunft_Bilder" Relationship="Self.FK_Unterkunft_Bild_Unterkunft" FromRole="Unterkunft" ToRole="Unterkunft_Bild" />
           <NavigationProperty Name="Verpflegung" Relationship="Self.FK_Unterkunft_Verpflegung" FromRole="Unterkunft" ToRole="Verpflegung" />
@@ -688,7 +692,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Bild" Relationship="Self.FK_Unterkunft_Bild_Bild" FromRole="Unterkunft_Bild" ToRole="Bild" />
           <NavigationProperty Name="Unterkunft" Relationship="Self.FK_Unterkunft_Bild_Unterkunft" FromRole="Unterkunft_Bild" ToRole="Unterkunft" />
         </EntityType>
@@ -698,7 +702,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AlleUnterkuenfte" Relationship="Self.FK_Unterkunft_Verpflegung" FromRole="Verpflegung" ToRole="Unterkunft" />
         </EntityType>
         <EntityType Name="Zahlung">
@@ -709,7 +713,7 @@
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nachname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AlleBuchung_Zahlungen" Relationship="Self.FK_Buchung_Zahlung_Zahlung" FromRole="Zahlung" ToRole="Buchung_Zahlung" />
           <NavigationProperty Name="Zahlungsart" Relationship="Self.FK_Zahlung_Zahlungsart" FromRole="Zahlung" ToRole="Zahlungsart" />
         </EntityType>
@@ -719,7 +723,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AlleZahlungen" Relationship="Self.FK_Zahlung_Zahlungsart" FromRole="Zahlungsart" ToRole="Zahlung" />
         </EntityType>
         <Association Name="FK_Adresse_Ort">
@@ -750,27 +754,19 @@
           <End Role="Bild" Type="Self.Bild" Multiplicity="1" />
           <End Role="Unterkunft_Bild" Type="Self.Unterkunft_Bild" Multiplicity="*" />
         </Association>
-        <Association Name="FK_Buchung_Reisedurchfuehrung">
-          <End Role="Reisedurchfuehrung" Type="Self.Reisedurchfuehrung" Multiplicity="1" />
-          <End Role="Buchung" Type="Self.Buchung" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Reisedurchfuehrung">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Buchung">
-              <PropertyRef Name="Reisedurchfuehrung_ID" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="FK_Buchung_Reisedatum">
+          <End Role="Reisedatum" Type="Self.Reisedatum" Multiplicity="1" />
+          <End Role="Buchung" Type="Self.Buchung" Multiplicity="*" />
         </Association>
         <Association Name="FK_Buchung_Zahlung_Buchung">
           <End Role="Buchung" Type="Self.Buchung" Multiplicity="1" />
           <End Role="Buchung_Zahlung" Type="Self.Buchung_Zahlung" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Buchung">
-              <PropertyRef Name="Reisedurchfuehrung_ID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Buchung_Zahlung">
-              <PropertyRef Name="Reisedurchfuehrung_ID" />
+              <PropertyRef Name="Buchung_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -779,10 +775,10 @@
           <End Role="BuchungStorniert" Type="Self.BuchungStorniert" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Buchung">
-              <PropertyRef Name="Reisedurchfuehrung_ID" />
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="BuchungStorniert">
-              <PropertyRef Name="Reisedurchfuehrung_ID" />
+              <PropertyRef Name="Buchung_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -873,8 +869,8 @@
             <End Role="Bild" EntitySet="AlleBilder" />
             <End Role="Unterkunft_Bild" EntitySet="AlleUnterkunft_Bilder" />
           </AssociationSet>
-          <AssociationSet Name="FK_Buchung_Reisedurchfuehrung" Association="Self.FK_Buchung_Reisedurchfuehrung">
-            <End Role="Reisedurchfuehrung" EntitySet="AlleReisedurchfuehrungen" />
+          <AssociationSet Name="FK_Buchung_Reisedatum" Association="Self.FK_Buchung_Reisedatum">
+            <End Role="Reisedatum" EntitySet="AlleReisedaten" />
             <End Role="Buchung" EntitySet="AlleBuchungen" />
           </AssociationSet>
           <AssociationSet Name="FK_Buchung_Zahlung_Buchung" Association="Self.FK_Buchung_Zahlung_Buchung">
@@ -979,11 +975,11 @@
           <EntitySetMapping Name="AlleBuchungen">
             <EntityTypeMapping TypeName="reisebueroModel.Buchung">
               <MappingFragment StoreEntitySet="Buchung">
-                <ScalarProperty Name="Geburtsdatum" ColumnName="geburtsdatum" />
-                <ScalarProperty Name="Nachname" ColumnName="nachname" />
-                <ScalarProperty Name="Vorname" ColumnName="vorname" />
-                <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+                <ScalarProperty Name="ID" ColumnName="id" />
                 <ScalarProperty Name="Passnummer" ColumnName="passnummer" />
+                <ScalarProperty Name="Vorname" ColumnName="vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="nachname" />
+                <ScalarProperty Name="Geburtsdatum" ColumnName="geburtsdatum" />
                 <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -991,7 +987,7 @@
           <EntitySetMapping Name="AlleBuchung_Zahlungen">
             <EntityTypeMapping TypeName="reisebueroModel.Buchung_Zahlung">
               <MappingFragment StoreEntitySet="Buchung_Zahlung">
-                <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+                <ScalarProperty Name="Buchung_ID" ColumnName="buchung_id" />
                 <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -999,7 +995,8 @@
           <EntitySetMapping Name="AlleBuchungenStorniert">
             <EntityTypeMapping TypeName="reisebueroModel.BuchungStorniert">
               <MappingFragment StoreEntitySet="BuchungStorniert">
-                <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+                <ScalarProperty Name="Buchung_ID" ColumnName="buchung_id" />
+                <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1027,7 +1024,7 @@
                 <ScalarProperty Name="ID" ColumnName="id" />
                 <ScalarProperty Name="Titel" ColumnName="titel" />
                 <ScalarProperty Name="Beschreibung" ColumnName="beschreibung" />
-                <ScalarProperty Name="Preis_Erwachsen" ColumnName="preis_erwachsener" />
+                <ScalarProperty Name="Preis_Erwachsener" ColumnName="preis_erwachsener" />
                 <ScalarProperty Name="Preis_Kind" ColumnName="preis_kind" />
                 <ScalarProperty Name="ErstelltAm" ColumnName="erstelldatum" />
               </MappingFragment>
@@ -1137,7 +1134,7 @@
               <ScalarProperty Name="ID" ColumnName="benutzer_id" />
             </EndProperty>
             <EndProperty Name="Buchung">
-              <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+              <ScalarProperty Name="ID" ColumnName="id" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="FK_Bewertung_Reise" TypeName="reisebueroModel.FK_Bewertung_Reise" StoreEntitySet="Bewertung">
@@ -1164,12 +1161,20 @@
               <ScalarProperty Name="ID" ColumnName="id" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Buchung_Reisedatum" TypeName="reisebueroModel.FK_Buchung_Reisedatum" StoreEntitySet="Buchung">
+            <EndProperty Name="Reisedatum">
+              <ScalarProperty Name="ID" ColumnName="reisedatum_id" />
+            </EndProperty>
+            <EndProperty Name="Buchung">
+              <ScalarProperty Name="ID" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="FK_Buchung_Zahlung_Zahlung" TypeName="reisebueroModel.FK_Buchung_Zahlung_Zahlung" StoreEntitySet="Buchung_Zahlung">
             <EndProperty Name="Zahlung">
               <ScalarProperty Name="ID" ColumnName="zahlung_id" />
             </EndProperty>
             <EndProperty Name="Buchung_Zahlung">
-              <ScalarProperty Name="Reisedurchfuehrung_ID" ColumnName="reisedurchfuehrung_id" />
+              <ScalarProperty Name="Buchung_ID" ColumnName="buchung_id" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="FK_Ort_Land" TypeName="reisebueroModel.FK_Ort_Land" StoreEntitySet="Ort">
@@ -1261,7 +1266,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

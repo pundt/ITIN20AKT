@@ -129,7 +129,9 @@
     <Compile Include="ZahlungsVerwaltung.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="dbreisebuero.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>dbreisebuero.Designer.cs</LastGenOutput>

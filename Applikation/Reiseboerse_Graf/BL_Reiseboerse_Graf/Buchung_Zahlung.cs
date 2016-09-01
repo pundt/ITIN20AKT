@@ -14,8 +14,8 @@ namespace BL_Reiseboerse_Graf
     
     public partial class Buchung_Zahlung
     {
-        public int Reisedurchfuehrung_ID { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public int Buchung_ID { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual Buchung Buchung { get; set; }
         public virtual Zahlung Zahlung { get; set; }

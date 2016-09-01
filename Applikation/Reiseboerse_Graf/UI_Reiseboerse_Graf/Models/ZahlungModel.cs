@@ -12,6 +12,6 @@ namespace UI_Reiseboerse_Graf.Models
         public string Nummer { get; set; }
         public int Zahlungsart_ID { get; set; }
         public List<ZahlungsartModel> Zahlungsarten { get; set; }
-        public List<int> Reisedurchfuehrung_IDs { get; set; }
+        public int Reisedatum_ID { get; set; }
     }
 }

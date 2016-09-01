@@ -10,12 +10,12 @@ namespace BL_Reiseboerse_Graf
     public class BuchungsVerwaltung
     {
         /// <summary>
-        /// Lädt alle Buchungen zu einer bestimmten Reise aus der Datenbank
+        /// Lädt alle Buchungen zu einer bestimmten Reise an einem bestimmten Datum aus der Datenbank
         /// </summary>
         /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
-        public static List<Buchung> LadeAlleBuchungen(int reise_id)
+        public static List<Buchung> LadeAlleBuchungen(int reisedatum_id)
         {
-            Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen Reise");
+            Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen Reisedatum");
             Debug.Indent();
             List<Buchung> buchungsListe = new List<Buchung>();
             using (var context = new reisebueroEntities())
@@ -23,11 +23,11 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                     buchungsListe = context.AlleBuchungen.
-                        Where(x => x.Reisedurchfuehrung.Reisedatum.Reise.ID == reise_id).ToList();
+                        Where(x => x.Reisedatum.ID == reisedatum_id).ToList();
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Fehler beim Laden der Buchungen einer Reise");
+                    Debug.WriteLine("Fehler beim Laden der Buchungen eines Reisedatums");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
                 }
@@ -37,23 +37,23 @@ namespace BL_Reiseboerse_Graf
         }
 
         /// <summary>
-        /// Lädt alle Buchungen die nicht storniert wurden aus der Datenbank
+        /// Lädt alle Buchungen die storniert wurden aus der Datenbank
         /// </summary>
         /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
-        public static List<Buchung> LadeAlleAktivenBuchungen()
+        public static List<Buchung> LadeAlleStorniertenBuchungen()
         {
-            Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen");
+            Debug.WriteLine("Buchungsverwaltung - Lade alle stornierten Buchungen");
             Debug.Indent();
             List<Buchung> buchungsListe = new List<Buchung>();
             using (var context = new reisebueroEntities())
             {
                 try
                 {
-                    buchungsListe = context.AlleBuchungen.Where(x => x.BuchungStorniert == null).ToList();
+                    buchungsListe = context.AlleBuchungen.Where(x => x.BuchungStorniert != null).ToList();
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Fehler beim Laden der Buchungen");
+                    Debug.WriteLine("Fehler beim Laden der stornierten Buchungen");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
                 }
@@ -76,7 +76,7 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    buchungsListe = context.AlleBuchungen.Include("Reisedurchfuehrung.Reisedatum.Reise")
+                    buchungsListe = context.AlleBuchungen.Include("Reisedatum.Reise")
                                      .Where(x => x.Benutzer.ID == benutzer_id).ToList();
                 }
                 catch (Exception ex)
@@ -104,9 +104,9 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    buchungsListe = context.AlleBuchungen.Include("Reisedurchfuehrung.Reisedatum").Include("Reisedurchfuehrung.Reisedatum.Reise")
+                    buchungsListe = context.AlleBuchungen.Include("Reisedatum.Reise")
                                      .Where(x => x.Benutzer.ID == benutzer_id).ToList();
-                    buchungsListe.GroupBy(x => x.Reisedurchfuehrung.Reisedatum.Startdatum).ToList();
+                    buchungsListe.GroupBy(x => x.Reisedatum).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -118,40 +118,8 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return buchungsListe;
         }
-
-
-
-
-        /// <summary>
-        /// Ermittelt die aktuelle Reisedurchfuehrungs_ID zu einer Reise, die gebucht werden kann
-        /// </summary>
-        /// <param name="reise_id">ID der Reise</param>
-        /// <param name="startdatum">das Startdatum der aktuellen Reise</param>
-        /// <returns>die aktuelle ID</returns>
-        public static int Ermittle_aktID(int reise_id, DateTime startdatum)
-        {
-            Debug.WriteLine("Buchungsverwaltung - Ermittle aktuelle Reisedurchfuehrung_ID");
-            Debug.Indent();
-            int aktId = 0;
-            using (var context = new reisebueroEntities())
-            {
-                try
-                {
-                    aktId = (from r in context.AlleReisedurchfuehrungen
-                             where r.Reisedatum.Reise.ID == reise_id && r.Buchung == null &&
-                             r.Reisedatum.Startdatum == startdatum
-                             select r.ID).FirstOrDefault();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Fehler beim Laden der Buchungen eines Benutzers");
-                    Debug.WriteLine(ex.Message);
-                    Debugger.Break();
-                }
-            }
-            Debug.Unindent();
-            return aktId;
-        }
+        
+       
 
         /// <summary>
         /// Neue Buchung in der Datenbank speichern
@@ -192,7 +160,7 @@ namespace BL_Reiseboerse_Graf
         /// </summary>
         /// <param name="reisedurchfuehrungID">die ID der Buchung (reisedurchfuehrung ID)</param>
         /// <returns>true wenn erfolgreich ansonsten false</returns>
-        public static bool BuchungPruefen(int reisedurchfuehrungID)
+        public static bool BuchungPruefen(int id)
         {
             Debug.WriteLine("Buchungsverwaltung - Buchung Prüfen");
             Debug.Indent();
@@ -203,11 +171,11 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
 
-                    Buchung gesuchteBuchung = context.AlleBuchungen.Where(x => x.Reisedurchfuehrung_ID == reisedurchfuehrungID && x.Buchung_Zahlung != null).FirstOrDefault();
+                    Buchung gesuchteBuchung = context.AlleBuchungen.Where(x => x.ID == id && x.Buchung_Zahlung != null).FirstOrDefault();
 
                     if (gesuchteBuchung == null)
                     {
-                        context.AlleBuchungenStorniert.Add(new BuchungStorniert() { Reisedurchfuehrung_ID = gesuchteBuchung.Reisedurchfuehrung_ID });
+                        context.AlleBuchungenStorniert.Add(new BuchungStorniert() { Buchung_ID = id });
                         wurdeStorniert = true;
                     }
                 }

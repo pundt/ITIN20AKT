@@ -23,7 +23,7 @@ namespace BL_Reiseboerse_Graf
         public string Vorname { get; set; }
         public string Nachname { get; set; }
         public string Nummer { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual ICollection<Buchung_Zahlung> AlleBuchung_Zahlungen { get; set; }
         public virtual Zahlungsart Zahlungsart { get; set; }

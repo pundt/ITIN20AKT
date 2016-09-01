@@ -24,7 +24,7 @@ namespace BL_Reiseboerse_Graf
         public string Bezeichnung { get; set; }
         public string Beschreibung { get; set; }
         public int Kategorie { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual ICollection<Reise> AlleReisen { get; set; }
         public virtual ICollection<Unterkunft_Bild> AlleUnterkunft_Bilder { get; set; }

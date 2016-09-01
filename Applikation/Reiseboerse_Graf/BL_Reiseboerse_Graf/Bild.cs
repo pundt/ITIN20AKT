@@ -22,7 +22,7 @@ namespace BL_Reiseboerse_Graf
     
         public int ID { get; set; }
         public byte[] Bilddaten { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual ICollection<Reise_Bild> AlleReise_Bilder { get; set; }
         public virtual ICollection<Unterkunft_Bild> AlleUnterkunft_Bilder { get; set; }

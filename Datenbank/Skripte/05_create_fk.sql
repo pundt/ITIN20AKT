@@ -18,22 +18,22 @@ GO
 ALTER TABLE Buchung_Zahlung
 ADD
 CONSTRAINT FK_Buchung_Zahlung_Buchung
-FOREIGN KEY (reisedurchfuehrung_id)
-REFERENCES Buchung(reisedurchfuehrung_id);
+FOREIGN KEY (buchung_id)
+REFERENCES Buchung(id);
 GO
 
 ALTER TABLE Buchung
 ADD
-CONSTRAINT FK_Buchung_Reisedurchfuehrung
-FOREIGN KEY (reisedurchfuehrung_id)
-REFERENCES Reisedurchfuehrung(id);
+CONSTRAINT FK_Buchung_Reisedatum
+FOREIGN KEY (reisedatum_id)
+REFERENCES Reisedatum(id);
 GO
 
 ALTER TABLE BuchungStorniert
 ADD
 CONSTRAINT FK_BuchungStorniert_Buchung
-FOREIGN KEY (reisedurchfuehrung_id)
-REFERENCES Buchung(reisedurchfuehrung_id)
+FOREIGN KEY (buchung_id)
+REFERENCES Buchung(id)
 GO
 
 ALTER TABLE Adresse

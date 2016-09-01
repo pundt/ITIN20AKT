@@ -24,9 +24,9 @@ namespace BL_Reiseboerse_Graf
         public int ID { get; set; }
         public string Titel { get; set; }
         public string Beschreibung { get; set; }
-        public decimal Preis_Erwachsen { get; set; }
+        public decimal Preis_Erwachsener { get; set; }
         public decimal Preis_Kind { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual ICollection<Bewertung> AlleBewertungen { get; set; }
         public virtual Ort Ort { get; set; }

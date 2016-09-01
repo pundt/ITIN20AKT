@@ -22,7 +22,7 @@ namespace BL_Reiseboerse_Graf
     
         public int ID { get; set; }
         public string Bezeichnung { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual ICollection<Adresse> AlleAdressen { get; set; }
         public virtual Land Land { get; set; }

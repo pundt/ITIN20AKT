@@ -73,7 +73,7 @@ namespace BL_Reiseboerse_Graf
             return neueID;
         }
 
-        public static void ZuordnungZahlungBuchung(List<int> reisedurchfuehrungIDs, int zahlungID)
+        public static void ZuordnungZahlungBuchung(int buchungsdatum, int zahlungID)
         {
             Debug.WriteLine("Zahlungsverwaltung - Zuordnung Zahlung_Buchung");
             Debug.Indent();
@@ -81,13 +81,13 @@ namespace BL_Reiseboerse_Graf
             try
             {
                 using (var context = new reisebueroEntities())
-                {
-                    foreach (var id in reisedurchfuehrungIDs)
-                    {
-                        Buchung_Zahlung bz = new Buchung_Zahlung()
-                        {
-                            Reisedurchfuehrung_ID = id
-                        };
+                //{
+                //    foreach (var id in reisedurchfuehrungIDs)
+                //    {
+                //        Buchung_Zahlung bz = new Buchung_Zahlung()
+                //        {
+                //            Reisedurchfuehrung_ID = id
+                //        };
                         bz.Zahlung.ID = zahlungID;
                         context.AlleBuchung_Zahlungen.Add(bz);
                     }

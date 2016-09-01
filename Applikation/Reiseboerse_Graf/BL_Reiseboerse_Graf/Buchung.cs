@@ -14,15 +14,15 @@ namespace BL_Reiseboerse_Graf
     
     public partial class Buchung
     {
-        public int Reisedurchfuehrung_ID { get; set; }
+        public int ID { get; set; }
         public string Passnummer { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
         public System.DateTime Geburtsdatum { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual Benutzer Benutzer { get; set; }
-        public virtual Reisedurchfuehrung Reisedurchfuehrung { get; set; }
+        public virtual Reisedatum Reisedatum { get; set; }
         public virtual Buchung_Zahlung Buchung_Zahlung { get; set; }
         public virtual BuchungStorniert BuchungStorniert { get; set; }
     }

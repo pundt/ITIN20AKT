@@ -16,7 +16,7 @@ namespace BL_Reiseboerse_Graf
     {
         public int ID { get; set; }
         public int Wertung { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual Reise Reise { get; set; }
     }

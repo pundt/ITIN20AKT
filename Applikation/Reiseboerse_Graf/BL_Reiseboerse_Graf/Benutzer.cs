@@ -29,7 +29,7 @@ namespace BL_Reiseboerse_Graf
         public string Titel { get; set; }
         public System.DateTime Geburtsdatum { get; set; }
         public bool Ist_Mitarbeiter { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
         public virtual Adresse Adresse { get; set; }
         public virtual Land Land { get; set; }

@@ -180,21 +180,24 @@ INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
 GO
 
-INSERT INTO Buchung(vorname, nachname, geburtsdatum, reisedurchfuehrung_id,benutzer_id,passnummer) 
+INSERT INTO Buchung(vorname, nachname, geburtsdatum, reisedatum_id,benutzer_id,passnummer) 
 VALUES('Hubert', 'Meier', '1960-12-12',1, 1,'AB12345670');
-INSERT INTO Buchung(vorname, nachname, geburtsdatum,reisedurchfuehrung_id,benutzer_id,passnummer)
+INSERT INTO Buchung(vorname, nachname, geburtsdatum,reisedatum_id,benutzer_id,passnummer)
 VALUES('Karl', 'Huber', '1980-10-4',2, 2,'56484651GHD');
-INSERT INTO Buchung(vorname, nachname, geburtsdatum,reisedurchfuehrung_id,benutzer_id,passnummer) 
+INSERT INTO Buchung(vorname, nachname, geburtsdatum,reisedatum_id,benutzer_id,passnummer) 
 VALUES('Maria', 'Huber','1950-04-12',3, 3,'KHGKFKU265456');
 GO
 
-INSERT INTO Buchung_Zahlung(reisedurchfuehrung_id, zahlung_id) VALUES(1,3);
-INSERT INTO Buchung_Zahlung(reisedurchfuehrung_id, zahlung_id) VALUES(2,2);
-INSERT INTO Buchung_Zahlung(reisedurchfuehrung_id, zahlung_id) VALUES(3,1);
+INSERT INTO Buchung_Zahlung(buchung_id, zahlung_id) VALUES(1,3);
+INSERT INTO Buchung_Zahlung(buchung_id, zahlung_id) VALUES(2,2);
+INSERT INTO Buchung_Zahlung(buchung_id, zahlung_id) VALUES(3,1);
 GO
 
 INSERT INTO Bewertung(wertung, reise_id) VALUES(5,1);
 INSERT INTO Bewertung(wertung, reise_id) VALUES(3,2);
 INSERT INTO Bewertung(wertung, reise_id) VALUES(4,3);
+GO
+
+INSERT INTO BuchungStorniert(buchung_id) VALUES(1);
 GO
 

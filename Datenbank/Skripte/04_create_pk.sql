@@ -52,19 +52,19 @@ GO
 ALTER TABLE Buchung
 ADD
 CONSTRAINT PK_Buchung
-PRIMARY KEY (reisedurchfuehrung_id);
+PRIMARY KEY (id);
 GO
 
 ALTER TABLE Buchung_Zahlung
 ADD
 CONSTRAINT PK_Buchung_Zahlung
-PRIMARY KEY (reisedurchfuehrung_id);
+PRIMARY KEY (buchung_id);
 GO
 
 ALTER TABLE BuchungStorniert
 ADD
 CONSTRAINT PK_BuchungStorniert
-PRIMARY KEY (reisedurchfuehrung_id);
+PRIMARY KEY (buchung_id);
 GO
 
 ALTER TABLE Reisedurchfuehrung

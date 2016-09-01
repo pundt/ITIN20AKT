@@ -16,6 +16,7 @@ namespace BL_Reiseboerse_Graf
     {
         public Reisedatum()
         {
+            this.AlleBuchungen = new HashSet<Buchung>();
             this.AlleReisedurchfuehrungen = new HashSet<Reisedurchfuehrung>();
         }
     
@@ -23,8 +24,9 @@ namespace BL_Reiseboerse_Graf
         public System.DateTime Startdatum { get; set; }
         public System.DateTime Enddatum { get; set; }
         public System.DateTime Anmeldefrist { get; set; }
-        public Nullable<System.DateTime> ErstelltAm { get; set; }
+        public System.DateTime ErstelltAm { get; set; }
     
+        public virtual ICollection<Buchung> AlleBuchungen { get; set; }
         public virtual Reise Reise { get; set; }
         public virtual ICollection<Reisedurchfuehrung> AlleReisedurchfuehrungen { get; set; }
     }
