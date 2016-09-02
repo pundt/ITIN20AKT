@@ -217,7 +217,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 try
                 {
                     Debug.WriteLine("Daten aus der Datenbank");
-                    Reise BL_Reise = ReiseVerwaltung.SucheReisezuDatum(reisedatum_ID);
+                    Reise BL_Reise = ReiseVerwaltung.SucheReiseZuDatum(reisedatum_ID);
                     Reisedatum BL_Datum = ReiseVerwaltung.SucheReisedatum(reisedatum_ID);
                     model.Reisedatum = new ReisedatumModel()
                     {

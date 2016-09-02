@@ -145,6 +145,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OrtModel.cs" />
     <Compile Include="Models\ReiseAnlegenModel.cs" />
+    <Compile Include="Models\ReiseAnzeigenModel.cs" />
     <Compile Include="Models\ReisedatumModel.cs" />
     <Compile Include="Models\ReisedetailModel.cs" />
     <Compile Include="Models\ReiseLadenModel.cs" />
