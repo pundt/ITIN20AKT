@@ -16,7 +16,7 @@ namespace BL_Reiseboerse_Graf
         /// <returns>eine Liste von Reisen oder bei einem Fehler null</returns>
         public static List<Reise> LadeAlleReisen()
         {
-            Debug.WriteLine("ReiseVerwaltung - ladeAlleReisen");
+            Debug.WriteLine("ReiseVerwaltung - LadeAlleReisen");
             Debug.Indent();
             List<Reise> reisen = new List<Reise>();
             using (var context = new reisebueroEntities())

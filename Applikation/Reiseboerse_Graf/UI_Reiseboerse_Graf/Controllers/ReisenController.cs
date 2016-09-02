@@ -195,29 +195,64 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         /// <summary>
-        /// Zeigt alle Details der Reise (Beschreibung, Hotelbeschreibung)
+        /// Zeigt alle Details der Reise (Beschreibung, Hotelbeschreibung, Reisedatum)
         /// </summary>
-        /// <param name="reise_ID">ID der anzuzeigenden Reise</param>
-        /// <returns></returns>
+        /// <param name="reisedatum_ID">Id des Reisedatums (Reise zu entsprechendem Zeitpunkt)</param>
+        /// <returns>ein ReiseAnzeigenModel oder NULL bei Fehler</returns>
         [HttpGet]
-        public ActionResult Anzeigen(int id)
+        public ActionResult Anzeigen(int reisedatum_ID)
         {
             Debug.WriteLine("Reisedetails- Anzeigen - GET");
             Debug.Indent();
-            ReisedetailModel rm = new ReisedetailModel();
+            ReiseAnzeigenModel model = new ReiseAnzeigenModel();
             if (Globals.IST_TESTSYSTEM)
             {
-                Debug.Indent();
+                #region Testsystem
                 List<ReisedetailModel> liste = ReiseDetailListeTest();
-                //die entsprechende Reise aus der Liste finden (anhand der ID)
-                rm = liste.Find(x => x.ID == id);
+                model.Reisedetail = liste.Find(x => x.ID == reisedatum_ID);
+                #endregion Testsystem
             }
             else
             {
-                //ReiseDetails aus DB auslesen
+                try
+                {
+                    Debug.WriteLine("Daten aus der Datenbank");
+                    Reise BL_Reise = ReiseVerwaltung.SucheReisezuDatum(reisedatum_ID);
+                    Reisedatum BL_Datum = ReiseVerwaltung.SucheReisedatum(reisedatum_ID);
+                    model.Reisedatum = new ReisedatumModel()
+                    {
+                        Anmeldefrist=BL_Datum.Anmeldefrist,
+                        Beginndatum=BL_Datum.Startdatum,
+                        Enddatum=BL_Datum.Enddatum,
+                        Restplätze=ReiseVerwaltung.Restplätze(reisedatum_ID),
+                        ID=reisedatum_ID
+                    };
+                    model.Reisedetail = new ReisedetailModel()
+                    {
+                        ID = BL_Reise.ID,
+                        Beschreibung = BL_Reise.Beschreibung,
+                        Hotelkategorie = BL_Reise.Unterkunft.Kategorie,
+                        Verpflegung = BL_Reise.Unterkunft.Verpflegung.Bezeichnung,
+                        Land = BL_Reise.Ort.Land.Bezeichnung,
+                        Ort = BL_Reise.Ort.Bezeichnung,
+                        Unterkunft = BL_Reise.Unterkunft.Bezeichnung,
+                        Preis_Erwachsene = BL_Reise.Preis_Erwachsener,
+                        Preis_Kind = BL_Reise.Preis_Kind,
+                        Reisedatum_ID = reisedatum_ID,
+                        Titel = BL_Reise.Titel,
+                        Unterkunft_ID = BL_Reise.Unterkunft.ID
+                    };
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Anzeigen der Reise");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
             }
             Debug.Unindent();
-            return View(rm);
+            return View(model);
         }
 
         /// <summary>
