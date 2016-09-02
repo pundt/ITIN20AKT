@@ -207,24 +207,42 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// erzeugt die Partialview zum Einbinden auf die jeweilige Reisedetailseite
         /// </summary>
         /// <param name="id">ID der Unterkunft</param>
-        /// <returns></returns>
+        /// <returns>Teilansicht mit dem Unterkunft-Model</returns>
         [ChildActionOnly]
         public ActionResult UnterkunftAnzeigen(int id)
         {
-            UnterkunftdetailModel um = new UnterkunftdetailModel()
+            Debug.WriteLine("Reisen - UnterkunftAnzeigen - ChildActionOnly - Get");
+            Debug.Indent();
+
+            Unterkunft unterkunft = new Unterkunft();
+            unterkunft = ReiseVerwaltung.LadeUnterkunftZuReise(id);
+
+            UnterkunftdetailModel model = new UnterkunftdetailModel();
+
+            VerpflegungModel vm = new VerpflegungModel();
+
+            try
             {
-                ID = id,
-                Bezeichnung = "Hotel XYZ",
-                Beschreibung = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                Kategorie = 3,
-                Verpflegung = new VerpflegungModel()
-                {
-                    Id = 3,
-                    Bezeichnung = "Halbpension"
-                }
-            };
-            return PartialView(um);
+                vm.Id = unterkunft.Verpflegung.ID;
+                vm.Bezeichnung = unterkunft.Verpflegung.Bezeichnung;
+
+                model.Beschreibung = unterkunft.Beschreibung;
+                model.Bezeichnung = unterkunft.Bezeichnung;
+                model.ID = unterkunft.ID;
+                model.Kategorie = unterkunft.Kategorie;
+                model.Verpflegung = vm;
+                model.Verpflegung_ID = vm.Id;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler bei Unterkunft Anzeigen!");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+            Debug.Unindent();
+            return PartialView(model);
         }
+
         [HttpGet]
         public ActionResult ReiseHinzufuegen()
         {
