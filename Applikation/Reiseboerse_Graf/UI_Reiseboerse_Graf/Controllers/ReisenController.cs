@@ -21,6 +21,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.WriteLine("ReisenController - Laden - Get");
             Debug.Indent();
             ReiseLadenModel model = new ReiseLadenModel();
+            model.Filter = FilterBefuellen();
 
             if (Globals.IST_TESTSYSTEM)
             {
@@ -29,7 +30,6 @@ namespace UI_Reiseboerse_Graf.Controllers
                 {
                     Debug.WriteLine("Testsystem");
                     model.Reisen = ReiseAnzeigeListeTest();
-                    model.Filter = FilterAnzeigeTest();
 
                     Debug.WriteLine($"{model.Reisen.Count()} Reisen geladen");
                 }
@@ -44,81 +44,51 @@ namespace UI_Reiseboerse_Graf.Controllers
             else
             {
                 #region db
-                List<Reise> BL_ReiseListe = ReiseVerwaltung.LadeAlleReisen();
-                List<List<ReisedatumModel>> reisedaten = new List<List<ReisedatumModel>>();
-                model.Reisen = new List<ReiseModel>();
-                foreach (var reise in BL_ReiseListe)
+                try
                 {
-                    ReiseModel reiseModel = new ReiseModel()
+                    Debug.WriteLine("Daten aus Datenbank");
+                    List<Reise> BL_ReiseListe = ReiseVerwaltung.LadeAlleReisen();
+                    model.Reisen = new List<ReiseModel>();
+                    foreach (var reise in BL_ReiseListe)
                     {
-                        ID = reise.ID,
-                        Titel = reise.Titel,
-                        Hotelkategorie = reise.Unterkunft.Kategorie,
-                        Land = reise.Ort.Land.Bezeichnung,
-                        Land_id = reise.Ort.Land.ID,
-                        Ort = reise.Ort.Bezeichnung,
-                        Ort_id = reise.Ort.ID,
-                        Unterkunft = reise.Unterkunft.Bezeichnung,
-                        Preis = reise.Preis_Erwachsener,
-                        Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung,
-                        Verpflegungs_id = reise.Unterkunft.Verpflegung.ID
-                    };
-                    reiseModel.Reisedaten = new List<ReisedatumModel>();
-                    foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(reiseModel.ID))
-                    {
-                        reiseModel.Reisedaten.Add(new ReisedatumModel()
+                        ReiseModel reiseModel = new ReiseModel()
                         {
-                            Anmeldefrist = datum.Anmeldefrist,
-                            Beginndatum = datum.Startdatum,
-                            Enddatum = datum.Enddatum,
-                            Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
-                        });
+                            ID = reise.ID,
+                            Titel = reise.Titel,
+                            Hotelkategorie = reise.Unterkunft.Kategorie,
+                            Land = reise.Ort.Land.Bezeichnung,
+                            Land_id = reise.Ort.Land.ID,
+                            Ort = reise.Ort.Bezeichnung,
+                            Ort_id = reise.Ort.ID,
+                            Unterkunft = reise.Unterkunft.Bezeichnung,
+                            Preis = reise.Preis_Erwachsener,
+                            Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung,
+                            Verpflegungs_id = reise.Unterkunft.Verpflegung.ID
+                        };
+                        reiseModel.Reisedaten = new List<ReisedatumModel>();
+                        foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(reiseModel.ID))
+                        {
+                            reiseModel.Reisedaten.Add(new ReisedatumModel()
+                            {
+                                Anmeldefrist = datum.Anmeldefrist,
+                                Beginndatum = datum.Startdatum,
+                                Enddatum = datum.Enddatum,
+                                Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
+                            });
+                        }
+                        model.Reisen.Add(reiseModel);
                     }
-
-                    model.Reisen.Add(reiseModel);
-
-                    
-                    
-
                 }
 
-                List<LandModel> laender = new List<LandModel>();
-                foreach (var land in BenutzerVerwaltung.AlleLaender())
+                catch (Exception ex)
                 {
-                    laender.Add(new LandModel
-                    {
-                        landName = land.Bezeichnung,
-                        land_ID = land.ID
-                    });
-                }
-                List<OrtModel> orte = new List<OrtModel>();
-                foreach (var ort in LaenderVerwaltung.AlleOrte())
-                {
-                    orte.Add(new OrtModel
-                    {
-                        Bezeichnung = ort.Bezeichnung,
-                        Id = ort.ID
-                    });
-                }
-                List<VerpflegungModel> verpflegungen = new List<VerpflegungModel>();
-                foreach (var verpflegung in LaenderVerwaltung.alleVerpflegung())
-                {
-                    verpflegungen.Add(new VerpflegungModel
-                    {
-                        Bezeichnung = verpflegung.Bezeichnung,
-                        Id = verpflegung.ID
-                    });
-                }
-                model.Filter = new FilterModel()
-                {
-                    Startdatum = DateTime.Now,
-                    Enddatum = DateTime.Now.AddYears(1),
-                    Land = laender,
-                    Ort = orte,
-                    Verpflegung = verpflegungen
-                };
+                    Debug.WriteLine("Fehler beim Laden aller Reisen");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }                          
                 #endregion db
             }
+            Debug.Unindent();
             return View(model);
         }
 
@@ -132,9 +102,13 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             ReiseLadenModel model = new ReiseLadenModel();
             model.Filter = FilterAnzeigeTest(filterModel);
-
+            model.Reisen = new List<ReiseModel>();
+            Debug.WriteLine("Reisen - Laden - POST");
+            Debug.Indent();
             if (Globals.IST_TESTSYSTEM)
             {
+                #region Testsystem
+                Debug.WriteLine("Testsystem");
                 // holt sich die FakeReisen von ReiseAnzeigeListeTest
                 model.Reisen = ReiseAnzeigeListeTest();
 
@@ -169,11 +143,54 @@ namespace UI_Reiseboerse_Graf.Controllers
                 ///Wenn ich zur Action Laden gehe bekomm ich alle Reisen, aber zur View Laden
                 /// mit gefilterten Reisen als Model landet in einer Endlosschleife ...
                 return View(model);
+                #endregion Testsystem
             }
             else
             {
-                return null;
-                // Datenbankverbindung List auslesen
+                #region DB
+                Debug.WriteLine("Daten aus Datenbank");
+                try
+                {
+                    List<Reise> BL_FilterListe = new List<Reise>();
+                    BL_FilterListe = ReiseVerwaltung.LadeReisenGefiltert(filterModel.Land_id, filterModel.Ort_ID, filterModel.HotelKategorie, filterModel.Verpflegungs_ID, filterModel.PreisMin, filterModel.PreisMax, filterModel.Startdatum, filterModel.Enddatum);
+                    foreach (var reise in BL_FilterListe)
+                    {
+                        ReiseModel reiseModel = new ReiseModel()
+                        {
+                            ID = reise.ID,
+                            Titel = reise.Titel,
+                            Hotelkategorie = reise.Unterkunft.Kategorie,
+                            Land = reise.Ort.Land.Bezeichnung,
+                            Land_id = reise.Ort.Land.ID,
+                            Ort = reise.Ort.Bezeichnung,
+                            Ort_id = reise.Ort.ID,
+                            Unterkunft = reise.Unterkunft.Bezeichnung,
+                            Preis = reise.Preis_Erwachsener,
+                            Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung,
+                            Verpflegungs_id = reise.Unterkunft.Verpflegung.ID
+                        };
+                        reiseModel.Reisedaten = new List<ReisedatumModel>();
+                        foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(reiseModel.ID))
+                        {
+                            reiseModel.Reisedaten.Add(new ReisedatumModel()
+                            {
+                                Anmeldefrist = datum.Anmeldefrist,
+                                Beginndatum = datum.Startdatum,
+                                Enddatum = datum.Enddatum,
+                                Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
+                            });
+                        }
+                        model.Reisen.Add(reiseModel);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Filtern der Reisen");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+                return View(model);
+                #endregion DB
             }
         }
 
@@ -345,7 +362,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             ReiseLadenModel viewmodel = new ReiseLadenModel()
             {
                 Reisen = viewliste,
-                Filter = FilterAnzeigeTest(),
+                Filter = FilterBefuellen(),
                 TextSuche = TextSuche
             };
 
@@ -448,106 +465,159 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         /// <summary>
-        /// Befüllen des FilterModels mit Testdaten
+        /// Befüllen des FilterModels mit Testdaten oder Daten aus der DB je nach Globals.ISTTESTSYSTEM
         /// </summary>
-        /// <returns></returns>
-        private FilterModel FilterAnzeigeTest()
+        /// <returns>das Filtermodel</returns>
+        private FilterModel FilterBefuellen()
         {
             FilterModel model = new FilterModel();
-
-            #region Land
-            model.Land = new List<LandModel>();
-
-            model.Land.Add(new LandModel()
-            {
-                land_ID = 0,
-                landName = "Alle"
-            });
-
-            LandModel lm1 = new LandModel()
-            {
-                land_ID = 1,
-                landName = "Österreich"
-            };
-            LandModel lm2 = new LandModel()
-            {
-                land_ID = 2,
-                landName = "Deutschland"
-            };
-            LandModel lm3 = new LandModel()
-            {
-                land_ID = 3,
-                landName = "Italien"
-            };
-            model.Land.Add(lm1);
-            model.Land.Add(lm2);
-            model.Land.Add(lm3);
-            #endregion
-
-            #region Ort
-            model.Ort = new List<OrtModel>();
-
-            model.Ort.Add(new OrtModel()
-            {
-                Id = 0,
-                Bezeichnung = "Alle"
-            });
-
-            OrtModel om1 = new OrtModel()
-            {
-                Id = 1,
-                Bezeichnung = "Wien"
-            };
-            OrtModel om2 = new OrtModel()
-            {
-                Id = 2,
-                Bezeichnung = "Hamburg"
-            };
-            OrtModel om3 = new OrtModel()
-            {
-                Id = 3,
-                Bezeichnung = "Rom"
-            };
-
-            model.Ort.Add(om1);
-            model.Ort.Add(om2);
-            model.Ort.Add(om3);
-            #endregion
-
-            #region Verpflegung
-            model.Verpflegung = new List<VerpflegungModel>();
-
-            model.Verpflegung.Add(new VerpflegungModel()
-            {
-                Id = 0,
-                Bezeichnung = "Alle"
-            });
-
-            VerpflegungModel vm1 = new VerpflegungModel()
-            {
-                Id = 1,
-                Bezeichnung = "Halbpension"
-            };
-            VerpflegungModel vm2 = new VerpflegungModel()
-            {
-                Id = 2,
-                Bezeichnung = "Vollpension"
-            };
-            VerpflegungModel vm3 = new VerpflegungModel()
-            {
-                Id = 3,
-                Bezeichnung = "All Inclusive"
-            };
-
-            model.Verpflegung.Add(vm1);
-            model.Verpflegung.Add(vm2);
-            model.Verpflegung.Add(vm3);
-
-            #endregion
-
             model.Startdatum = DateTime.Now;
             model.Enddatum = DateTime.Now.AddYears(1);
+            if (Globals.IST_TESTSYSTEM)
+            {
+                #region Testsystem
+                #region Land
+                model.Land = new List<LandModel>();
 
+                model.Land.Add(new LandModel()
+                {
+                    land_ID = 0,
+                    landName = "Alle"
+                });
+
+                LandModel lm1 = new LandModel()
+                {
+                    land_ID = 1,
+                    landName = "Österreich"
+                };
+                LandModel lm2 = new LandModel()
+                {
+                    land_ID = 2,
+                    landName = "Deutschland"
+                };
+                LandModel lm3 = new LandModel()
+                {
+                    land_ID = 3,
+                    landName = "Italien"
+                };
+                model.Land.Add(lm1);
+                model.Land.Add(lm2);
+                model.Land.Add(lm3);
+                #endregion
+                #region Ort
+                model.Ort = new List<OrtModel>();
+
+                model.Ort.Add(new OrtModel()
+                {
+                    Id = 0,
+                    Bezeichnung = "Alle"
+                });
+
+                OrtModel om1 = new OrtModel()
+                {
+                    Id = 1,
+                    Bezeichnung = "Wien"
+                };
+                OrtModel om2 = new OrtModel()
+                {
+                    Id = 2,
+                    Bezeichnung = "Hamburg"
+                };
+                OrtModel om3 = new OrtModel()
+                {
+                    Id = 3,
+                    Bezeichnung = "Rom"
+                };
+
+                model.Ort.Add(om1);
+                model.Ort.Add(om2);
+                model.Ort.Add(om3);
+                #endregion
+                #region Verpflegung
+                model.Verpflegung = new List<VerpflegungModel>();
+
+                model.Verpflegung.Add(new VerpflegungModel()
+                {
+                    Id = 0,
+                    Bezeichnung = "Alle"
+                });
+
+                VerpflegungModel vm1 = new VerpflegungModel()
+                {
+                    Id = 1,
+                    Bezeichnung = "Halbpension"
+                };
+                VerpflegungModel vm2 = new VerpflegungModel()
+                {
+                    Id = 2,
+                    Bezeichnung = "Vollpension"
+                };
+                VerpflegungModel vm3 = new VerpflegungModel()
+                {
+                    Id = 3,
+                    Bezeichnung = "All Inclusive"
+                };
+
+                model.Verpflegung.Add(vm1);
+                model.Verpflegung.Add(vm2);
+                model.Verpflegung.Add(vm3);
+
+                #endregion
+                #endregion Testsystem
+            }
+            else
+            {
+                #region DB
+                #region Filter Land
+                model.Land = new List<LandModel>();
+                model.Land.Add(new LandModel
+                {
+                    landName = "Alle Länder",
+                    land_ID = 0
+                });
+                foreach (var land in BenutzerVerwaltung.AlleLaender())
+                {
+                    model.Land.Add(new LandModel
+                    {
+                        landName = land.Bezeichnung,
+                        land_ID = land.ID
+                    });
+                }
+                #endregion Filter Land
+                #region Filter Ort
+                model.Ort = new List<OrtModel>();
+                model.Ort.Add(new OrtModel
+                {
+                    Bezeichnung = "Alle Orte",
+                    Id = 0
+                });
+                foreach (var ort in LaenderVerwaltung.AlleOrte())
+                {
+                    model.Ort.Add(new OrtModel
+                    {
+                        Bezeichnung = ort.Bezeichnung,
+                        Id = ort.ID
+                    });
+                }
+                #endregion Filter Ort
+                #region Filter Verpflegungen
+                model.Verpflegung = new List<VerpflegungModel>();
+                model.Verpflegung.Add(new VerpflegungModel()
+                {
+                    Bezeichnung = "Alle Verpflegungen",
+                    Id = 0
+                });
+                foreach (var verpflegung in LaenderVerwaltung.alleVerpflegung())
+                {
+                    model.Verpflegung.Add(new VerpflegungModel
+                    {
+                        Bezeichnung = verpflegung.Bezeichnung,
+                        Id = verpflegung.ID
+                    });
+                }
+                #endregion Filter Verpflegungen
+                #endregion DB
+            }
             return model;
         }
 
@@ -558,7 +628,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns>Ein FilterModel mit Werten für DropDown</returns>
         private FilterModel FilterAnzeigeTest(FilterModel filtermodel)
         {
-            FilterModel model = FilterAnzeigeTest();
+            FilterModel model = FilterBefuellen();
             model.Startdatum = filtermodel.Startdatum;
             model.Enddatum = filtermodel.Enddatum;
             model.PreisMax = filtermodel.PreisMax;
