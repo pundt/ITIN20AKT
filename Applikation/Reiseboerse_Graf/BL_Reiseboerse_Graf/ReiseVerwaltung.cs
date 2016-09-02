@@ -16,7 +16,7 @@ namespace BL_Reiseboerse_Graf
         /// <returns>eine Liste von Reisen oder bei einem Fehler null</returns>
         public static List<Reise> LadeAlleReisen()
         {
-            Debug.WriteLine("ReiseVerwaltung - ladeAlleReisen");
+            Debug.WriteLine("ReiseVerwaltung - LadeAlleReisen");
             Debug.Indent();
             List<Reise> reisen = new List<Reise>();
             using (var context = new reisebueroEntities())
@@ -76,7 +76,7 @@ namespace BL_Reiseboerse_Graf
         /// <param name="startdatum">Das gewählte Startdatum</param>
         /// <param name="enddatum">Das gewählte Enddatum</param>
         /// <returns>eine Liste von Reisen</returns>
-        public static List<Reise> LadeReisenGefiltert(int land_id, int ort_id, int kategorie_id, DateTime startdatum, DateTime enddatum)
+        public static List<Reise> LadeReisenGefiltert(int land_id, int ort_id, int kategorie_id, int verpflegung_id, int preis_min, int preis_max, DateTime startdatum, DateTime enddatum)
         {
             Debug.WriteLine("Reiseverwaltung - Lade Reisen gefiltert");
             Debug.Indent();
@@ -101,6 +101,18 @@ namespace BL_Reiseboerse_Graf
                     {
                         reisenGefiltert = reisenGefiltert.Where(x => x.Unterkunft.Kategorie >= kategorie_id).ToList();
                     }
+                    if (verpflegung_id!=0)
+                    {
+                        reisenGefiltert = reisenGefiltert.Where(x => x.Unterkunft.Verpflegung.ID == verpflegung_id).ToList();
+                    }
+                    if (preis_min!=0)
+                    {
+                        reisenGefiltert = reisenGefiltert.Where(x => x.Preis_Erwachsener>=preis_min).ToList();
+                    }
+                    if (preis_max != 0)
+                    {
+                        reisenGefiltert = reisenGefiltert.Where(x => x.Preis_Erwachsener <= preis_max).ToList();
+                    }
                     if (startdatum >= DateTime.Now)
                     {   
                         reisenGefiltert = reisenGefiltert.Where(x => x.AlleReisedaten.Any(y => y.Startdatum >= startdatum)).ToList();
@@ -108,6 +120,7 @@ namespace BL_Reiseboerse_Graf
                     if (enddatum > startdatum)
                     {
                         reisenGefiltert = reisenGefiltert.Where(x => x.AlleReisedaten.Any(y => y.Enddatum > startdatum)).ToList();
+                        reisenGefiltert = reisenGefiltert.Where(x => x.AlleReisedaten.Any(y => y.Enddatum <= enddatum)).ToList();
                     }
                 }
                 catch (Exception ex)
