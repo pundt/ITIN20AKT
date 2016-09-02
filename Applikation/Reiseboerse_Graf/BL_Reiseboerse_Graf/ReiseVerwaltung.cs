@@ -225,5 +225,70 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return unterkunft;
         }
+
+        /// <summary>
+        /// Sucht eine Reise anhand einer Reisedatum_ID und liefert diese zurück
+        /// </summary>
+        /// <param name="reisedatum_id">Die ID des Reisedatum</param>
+        /// <returns>die gesuchte Reise</returns>
+        public static Reise SucheReiseZuDatum(int reisedatum_id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Suche Reise Zu Datum");
+            Debug.Indent();
+
+            Reise gesuchteReise = new Reise();
+            Reisedatum suchDatum = new Reisedatum();
+            List<Reise> alleReisen = new List<Reise>();
+            alleReisen = LadeAlleReisen();
+
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    suchDatum = SucheReisedatum(reisedatum_id);
+                    int reiseId = suchDatum.Reise.ID;
+                    gesuchteReise = alleReisen.Where(x => x.ID == reiseId).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Suchen der Reise zu einem Datum!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return gesuchteReise;
+        }
+
+        /// <summary>
+        /// Sucht ein Reisedatum anhand der Reisedatum_ID und liefert dieses zurück
+        /// </summary>
+        /// <param name="reisedatum_id">die ID des gesuchten Reisedatums</param>
+        /// <returns>das gesuchte Reisedatum</returns>
+        public static Reisedatum SucheReisedatum(int reisedatum_id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Suche Reisedatum");
+            Debug.Indent();
+
+            Reisedatum gesuchtesReisedatum = new Reisedatum();
+
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    gesuchtesReisedatum = context.AlleReisedaten.Where(x => x.ID == reisedatum_id).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Suchen des Reisedatums!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return gesuchtesReisedatum;
+        }
     }
 }
