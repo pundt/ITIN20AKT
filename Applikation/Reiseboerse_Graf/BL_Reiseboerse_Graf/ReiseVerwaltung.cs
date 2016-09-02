@@ -201,12 +201,42 @@ namespace BL_Reiseboerse_Graf
 
         }
 
-        
+        /// <summary>
+        /// Sucht anhand einer Reise_ID die dazugehörige Unterkunft
+        /// </summary>
+        /// <param name="reise_id">die ID der Reise</param>
+        /// <returns>die zur Reise dazugehörende Unterkunft</returns>
+        public static Unterkunft LadeUnterkunftZuReise(int reise_id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Lade Unterkunft zu Reise");
+            Debug.Indent();
 
+            Unterkunft unterkunft = new Unterkunft();
+            List<Reise> alleReisen = new List<Reise>();
+            alleReisen = LadeAlleReisen();
 
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    foreach (var reise in alleReisen)
+                    {
+                        if (reise.ID == reise_id)
+                        {
+                            unterkunft = reise.Unterkunft;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden der Unterkunft!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
 
-
-
-
+            Debug.Unindent();
+            return unterkunft;
+        }
     }
 }
