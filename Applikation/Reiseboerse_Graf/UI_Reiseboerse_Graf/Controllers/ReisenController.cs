@@ -73,7 +73,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                                 Anmeldefrist = datum.Anmeldefrist,
                                 Beginndatum = datum.Startdatum,
                                 Enddatum = datum.Enddatum,
-                                Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
+                                Restplätze = ReiseVerwaltung.Restplätze(datum.ID),
+                                ID=datum.ID
                             });
                         }
                         model.Reisen.Add(reiseModel);
@@ -197,10 +198,10 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <summary>
         /// Zeigt alle Details der Reise (Beschreibung, Hotelbeschreibung, Reisedatum)
         /// </summary>
-        /// <param name="reisedatum_ID">Id des Reisedatums (Reise zu entsprechendem Zeitpunkt)</param>
+        /// <param name="id">Id des Reisedatums (Reise zu entsprechendem Zeitpunkt)</param>
         /// <returns>ein ReiseAnzeigenModel oder NULL bei Fehler</returns>
         [HttpGet]
-        public ActionResult Anzeigen(int reisedatum_ID)
+        public ActionResult Anzeigen(int id)
         {
             Debug.WriteLine("Reisedetails- Anzeigen - GET");
             Debug.Indent();
@@ -209,7 +210,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 #region Testsystem
                 List<ReisedetailModel> liste = ReiseDetailListeTest();
-                model.Reisedetail = liste.Find(x => x.ID == reisedatum_ID);
+                model.Reisedetail = liste.Find(x => x.ID == id);
                 #endregion Testsystem
             }
             else
@@ -217,15 +218,15 @@ namespace UI_Reiseboerse_Graf.Controllers
                 try
                 {
                     Debug.WriteLine("Daten aus der Datenbank");
-                    Reise BL_Reise = ReiseVerwaltung.SucheReiseZuDatum(reisedatum_ID);
-                    Reisedatum BL_Datum = ReiseVerwaltung.SucheReisedatum(reisedatum_ID);
+                    Reise BL_Reise = ReiseVerwaltung.SucheReiseZuDatum(id);
+                    Reisedatum BL_Datum = ReiseVerwaltung.SucheReisedatum(id);
                     model.Reisedatum = new ReisedatumModel()
                     {
                         Anmeldefrist=BL_Datum.Anmeldefrist,
                         Beginndatum=BL_Datum.Startdatum,
                         Enddatum=BL_Datum.Enddatum,
-                        Restplätze=ReiseVerwaltung.Restplätze(reisedatum_ID),
-                        ID=reisedatum_ID
+                        Restplätze=ReiseVerwaltung.Restplätze(id),
+                        ID=id
                     };
                     model.Reisedetail = new ReisedetailModel()
                     {
@@ -238,7 +239,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Unterkunft = BL_Reise.Unterkunft.Bezeichnung,
                         Preis_Erwachsene = BL_Reise.Preis_Erwachsener,
                         Preis_Kind = BL_Reise.Preis_Kind,
-                        Reisedatum_ID = reisedatum_ID,
+                        Reisedatum_ID = id,
                         Titel = BL_Reise.Titel,
                         Unterkunft_ID = BL_Reise.Unterkunft.ID
                     };

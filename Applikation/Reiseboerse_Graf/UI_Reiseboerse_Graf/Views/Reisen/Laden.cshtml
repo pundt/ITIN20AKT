@@ -33,7 +33,7 @@
                 foreach (var item in Model.Reisen)
                 {
                     <div class="row reise">
-                        <div class="col-md-2 col-xs-6">
+                        <div class="col-md-3 col-xs-6">
                             <img src="~/Bild/BildzuReise/@item.ID" class="img-responsive" />
                             <div class="carousel-caption bildschrift">
                                 <text>ab € </text>@Html.DisplayFor(modelItem => item.Preis)
@@ -47,16 +47,18 @@
                                 <li><img src="~/Content/bilder/FontAwesome_f0f5(0)_32.png" /> @Html.DisplayFor(modelItem => item.Verpflegung)</li>
                             </ul>
                         </div>
-                        <div class="col-md-4 col-xs-6 details">
-                            @Html.DropDownListFor(modelItem => item.Reisedatum_ID,new SelectList(item.Reisedaten,"ID","DatumsAnzeige"))
+                        <div class="col-md-5 col-xs-6 details">
+                            <table class="scrollbar table-condensed">
+                                @foreach (var datum in item.Reisedaten)
+                                {
+                                    <tr>
+                                        <td>@datum.DatumsAnzeige</td>
+                                        <td>@Html.ActionLink("Details", "Anzeigen", new { id = datum.ID }, new { @class = "btn buttonind" })</td>
+                                    </tr>                                    
+                                }
+                            </table>
                         </div>
-                        <div class="col-md-1 col-xs-6 details">
-                            <!--Wenn der Benutzer eingeloogt, dann wird hier der Merkenbutton eingezeigt-->
-                            <!--Link zu den Details der entsprechenden Reise-->
 
-                            @Html.ActionLink("Details", "Anzeigen", new { id = item.ID }, new { @class = "btn buttonind platziert" })
-
-                        </div>
                     </div>
                     <br />
                 }

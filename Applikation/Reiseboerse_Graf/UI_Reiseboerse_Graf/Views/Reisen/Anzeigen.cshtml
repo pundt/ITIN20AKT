@@ -1,4 +1,4 @@
-﻿@model UI_Reiseboerse_Graf.Models.ReisedetailModel
+﻿@model UI_Reiseboerse_Graf.Models.ReiseAnzeigenModel
 
 @{
     ViewBag.Title = "Anzeigen";
@@ -12,42 +12,41 @@
             <img src="~/Content/bilder/slidertestimg/2_reise_test.jpg" class="img-responsive img-rounded" />
         </div>
         <div class="col-xs-4">
-            <h4 class="Schriftartblau">@Html.DisplayFor(model => model.Titel), @Html.DisplayFor(model => model.Ort)</h4>
-            @Html.DisplayFor(model => model.Beschreibung)
+            <h4 class="Schriftartblau">@Html.DisplayFor(model => model.Reisedetail.Titel), @Html.DisplayFor(model => model.Reisedetail.Ort)</h4>
+            @Html.DisplayFor(model => model.Reisedetail.Beschreibung)
             <br />
 
         </div>
         <div class="col-xs-4">
-            <div class="termin">Aktueller Termin: @Html.DisplayFor(model => model.Beginndatum) - @Html.DisplayFor(model => model.Enddatum)</div>
+            <div class="termin">Buchen Sie bis: @Html.DisplayFor(model=>model.Reisedatum.Anmeldefrist)</div>
             @using (Html.BeginForm("Buchen", "Buchungen", FormMethod.Post, new { @class = "zentriert" }))
             {
-                @Html.HiddenFor(x => x.Preis_Erwachsene)
+                @*@Html.HiddenFor(x => x.Preis_Erwachsene)
                 @Html.HiddenFor(x => x.Preis_Kind)
                 @Html.HiddenFor(x=>x.ID)
-                @Html.HiddenFor(x=>x.Beginndatum)
-                @Html.HiddenFor(x=>x.Titel)
+                @Html.HiddenFor(x=>x.Titel)*@
                 <table class="table table-condensed">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(x => x.Preis_Erwachsene) <br />ab 14 Jahre
+                            @Html.DisplayNameFor(model => model.Reisedetail.Preis_Erwachsene) <br />ab 14 Jahre
                         </th>
                         <td>
-                            € @Html.DisplayFor(x => x.Preis_Erwachsene)
+                            € @Html.DisplayFor(model => model.Reisedetail.Preis_Erwachsene)
                         </td>
                         <td>
-                            <input type="number" min="0" max="@Model.Restplätze" name="Anzahl_Erwachsene" />
+                            <input type="number" min="0" max="@Model.Reisedatum.Restplätze" id="Plätze" name="Anzahl_Erwachsene" />
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(x => x.Preis_Kind)<br />bis 13 Jahre
+                            @Html.DisplayNameFor(model => model.Reisedetail.Preis_Kind)<br />bis 13 Jahre
                         </th>
                         <td>
-                            € @Html.DisplayFor(x => x.Preis_Kind)
+                            € @Html.DisplayFor(model => model.Reisedetail.Preis_Kind)
                         </td>
                         <td>
                             <!--Es müsste hier noch die max-Zahl auf Restplätze minus die Anzahl der Plätze Erwachsene-->
-                            <input type="number" min="0" max="@Model.Restplätze" name="Anzahl_Kinder" />
+                            <input type="number" min="0" max="@Model.Reisedatum.Restplätze" id="PlätzeKind" name="Anzahl_Kinder" onclick="berechne()"/>
                         </td>
                     </tr>
                     <tr>
@@ -71,9 +70,17 @@
     </div>
     <br />
     <div class="row">
-        @Html.Action("UnterkunftAnzeigen", new { id = Model.Unterkunft_ID })
+        @Html.Action("UnterkunftAnzeigen", new { id = Model.Reisedetail.Unterkunft_ID })
     </div>
 </div>
 @*<p>
         @Html.ActionLink("Zurück zur Reiseliste", "Laden")
     </p>*@
+@section Scripts{
+    <script>
+        $(function berechne() {
+            var plätze = document.getElementById("Plätze").value;
+            document.getElementById("PlätzeKind").value = plätze.max - plätze;
+        });
+    </script>
+    }

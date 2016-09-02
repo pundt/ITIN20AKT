@@ -258,7 +258,7 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    suchDatum = SucheReisedatum(reisedatum_id);
+                    suchDatum = context.AlleReisedaten.Where(x => x.ID == reisedatum_id).FirstOrDefault();
                     int reiseId = suchDatum.Reise.ID;
                     gesuchteReise = alleReisen.Where(x => x.ID == reiseId).FirstOrDefault();
                 }
