@@ -1,7 +1,7 @@
 USE reisebuero;
 GO
 
-INSERT INTO Land(bezeichnung) VALUES('÷sterreich');
+INSERT INTO Land(bezeichnung) VALUES('ôsterreich');
 INSERT INTO Land(bezeichnung) VALUES('Deutschland');
 INSERT INTO Land(bezeichnung) VALUES('Italien');
 INSERT INTO Land(bezeichnung) VALUES('Schweiz');
@@ -48,30 +48,30 @@ VALUES('stefan@itfox.at', HASHBYTES('SHA2_512', '123user!'), 'Stefan', 'Groig', 
 GO
 
 INSERT INTO Verpflegung(bezeichnung) VALUES('Ohne Verpflegung');
-INSERT INTO Verpflegung(bezeichnung) VALUES('Fr¸hst¸ck');
+INSERT INTO Verpflegung(bezeichnung) VALUES('FrÅhstÅck');
 INSERT INTO Verpflegung(bezeichnung) VALUES('Halbpension');
 INSERT INTO Verpflegung(bezeichnung) VALUES('Vollpension');
 INSERT INTO Verpflegung(bezeichnung) VALUES('All Inclusive');
 GO
 
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Hotel Arosa', 'Dieses Hotel bietet auﬂergewˆhnlichen Komfort', 4, 4);
+VALUES('Hotel Arosa', 'Dieses Hotel bietet au·ergewîhnlichen Komfort', 4, 4);
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
 VALUES('Hotel de Croissant', 'Dieses Hotel schmeckt nach Croissants', 3, 2);
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Pension Pomp', 'Luxus in seiner schˆnsten Form', 5, 5);
+VALUES('Pension Pomp', 'Luxus in seiner schînsten Form', 5, 5);
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Almh¸tte zum Sepp', 'Gute urige K¸che und Jausen', 2, 1);
+VALUES('AlmhÅtte zum Sepp', 'Gute urige KÅche und Jausen', 2, 1);
 INSERT INTO Unterkunft(bezeichnung, beschreibung, kategorie, verpflegung_id)
-VALUES('Hotel Allin', 'Dieses Hotel bietet alles auﬂer Vollpension', 4, 3);
+VALUES('Hotel Allin', 'Dieses Hotel bietet alles au·er Vollpension', 4, 3);
 GO
 
 INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind,ort_id)
-VALUES('Wandern in den Bergen', 'Erleben Sie die schˆne Bergwelt in ÷sterreich', 4, 65.99, 32.99,1);
+VALUES('Wandern in den Bergen', 'Erleben Sie die schîne Bergwelt in ôsterreich', 4, 65.99, 32.99,1);
 INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind, ort_id)
-VALUES('Wellnes pur', 'Genieﬂen Sie italienische Luft und Wellnes vom Feinsten', 1, 150.00, 75.00,2);
+VALUES('Wellnes pur', 'Genie·en Sie italienische Luft und Wellnes vom Feinsten', 1, 150.00, 75.00,2);
 INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind, ort_id)
-VALUES('Fuﬂball pur', 'Fahren Sie zum EM-Finale nach Paris!', 2, 199.99, 99.99,3);
+VALUES('Fu·ball pur', 'Fahren Sie zum EM-Finale nach Paris!', 2, 199.99, 99.99,3);
 INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind,ort_id)
 VALUES('Urlaub der Creme de la Creme', 'Verbleiben Sie in einem unserer 4000 Zimmer', 3, 259.90, 129.90,4);
 INSERT INTO Reise(titel, beschreibung, unterkunft_id, preis_erwachsener, preis_kind,ort_id)
@@ -165,7 +165,7 @@ INSERT INTO Unterkunft_Bild (bild_id, unterkunft_id) VALUES(10,5);
 GO
 
 INSERT INTO Zahlungsart(bezeichnung) VALUES('Visa');
-INSERT INTO Zahlungsart(bezeichnung) VALUES('‹berweisung');
+INSERT INTO Zahlungsart(bezeichnung) VALUES('öberweisung');
 INSERT INTO Zahlungsart(bezeichnung) VALUES('MasterCard');
 GO
 
