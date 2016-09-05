@@ -6,7 +6,7 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
-    public class BuchungenModel
+    public abstract class BuchungenModel
     {
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public string Vorname { get; set; }
@@ -15,10 +15,7 @@ namespace UI_Reiseboerse_Graf.Models
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         //[RegularExpression("^[A-Z0-9{5,10}]$",ErrorMessage ="Geben Sie eine gültige Reisepassnummer ein")]
         [Display(Name ="Reisepassnummer")]
-        public string ReisePassNummer { get; set; }
-        [Required]
-        [DisplayFormat(DataFormatString ="{0:dd.MM.yyyy}")]
-        public DateTime Geburtsdatum { get; set; }
+        public string ReisePassNummer { get; set; }       
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public int Zahlungsart_id { get; set; }
         public int Reisedatum_ID { get; set; }

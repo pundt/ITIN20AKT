@@ -89,8 +89,8 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 col = Request.Form;
 
-                List<BuchungenModel> buchungenErw = new List<BuchungenModel>();
-                List<BuchungenModel> buchungenKind = new List<BuchungenModel>();
+                List<BuchungErwachsenModel> buchungenErw = new List<BuchungErwachsenModel>();
+                List<BuchungKindModel> buchungenKind = new List<BuchungKindModel>();
 
                 int anzahlErw = int.Parse(col["AnzahlModel.Anzahl_Erwachsene"]);
                 int anzahlKind = int.Parse(col["AnzahlModel.Anzahl_Kinder"]);
@@ -102,7 +102,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                 for (int i = 0; i < anzahlErw; i++)
                 {
-                    buchungenErw.Add(new BuchungenModel()
+                    buchungenErw.Add(new BuchungErwachsenModel()
                     {
                         Vorname = col[string.Format("BuchungenErwachsen[{0}].Vorname", i)],
                         Nachname = col[string.Format("BuchungenErwachsen[{0}].Nachname", i)],
@@ -113,7 +113,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 for (int i = 0; i < anzahlKind; i++)
                 {
-                    buchungenKind.Add(new BuchungenModel()
+                    buchungenKind.Add(new BuchungKindModel()
                     {
                         Vorname = col[string.Format("BuchungenKind[{0}].Vorname", i)],
                         Nachname = col[string.Format("BuchungenKind[{0}].Nachname", i)],
@@ -231,8 +231,8 @@ namespace UI_Reiseboerse_Graf.Controllers
             BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
             {
                 AnzahlModel = anzahlmodel,
-                BuchungenErwachsen = new List<BuchungenModel>(),
-                BuchungenKind = new List<BuchungenModel>()
+                BuchungenErwachsen = new List<BuchungErwachsenModel>(),
+                BuchungenKind = new List<BuchungKindModel>()
 
             };
             //for (int i = 0; i < model.AnzahlModel.Anzahl_Erwachsene; i++)

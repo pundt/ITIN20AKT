@@ -131,10 +131,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AlterErwachsenValidierung.cs" />
+    <Compile Include="Models\AlterKindValidierung.cs" />
     <Compile Include="Models\BuchungAnzahlModel.cs" />
     <Compile Include="Models\BuchungAnzeigenModel.cs" />
+    <Compile Include="Models\BuchungErwachsenModel.cs" />
     <Compile Include="Models\BuchungGesamtModel.cs" />
     <Compile Include="Models\BuchungHinzufuegenModel.cs" />
+    <Compile Include="Models\BuchungKindModel.cs" />
     <Compile Include="Models\KategorieModel.cs" />
     <Compile Include="Models\KundenAnlegenModel.cs" />
     <Compile Include="Models\BuchungenModel.cs" />
