@@ -70,7 +70,7 @@ namespace BL_Reiseboerse_Graf
         /// </summary>
         /// <param name="file"></param>
         /// <returns>wenn speichern erfolgreich "true"</returns>
-        public static bool BildSpeichern(HttpPostedFileBase file)
+        public static int BildSpeichern(HttpPostedFileBase file)
         {
 
             Debug.Write("BildVerwaltung - BildSpeichern");
@@ -96,9 +96,9 @@ namespace BL_Reiseboerse_Graf
             }     
         
             context.AlleBilder.Add(neuesBild);
-            context.SaveChanges();
+            int index = context.SaveChanges();
 
-            return erfolgreich;
+            return index;
         }
     }
 }
