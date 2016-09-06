@@ -12,7 +12,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ort_id" Type="int" Nullable="false" />
           <Property Name="adressdaten" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Benutzer">
           <Key>
@@ -30,7 +30,7 @@
           <Property Name="geburtsdatum" Type="datetime" Nullable="false" />
           <Property Name="land_id" Type="int" Nullable="false" />
           <Property Name="ist_Mitarbeiter" Type="bit" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Bewertung">
           <Key>
@@ -47,7 +47,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bilddaten" Type="varbinary(max)" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Buchung">
           <Key>
@@ -60,7 +60,7 @@
           <Property Name="vorname" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="nachname" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="geburtsdatum" Type="datetime" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Buchung_Zahlung">
           <Key>
@@ -68,14 +68,14 @@
           </Key>
           <Property Name="buchung_id" Type="int" Nullable="false" />
           <Property Name="zahlung_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="BuchungStorniert">
           <Key>
             <PropertyRef Name="buchung_id" />
           </Key>
           <Property Name="buchung_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Land">
           <Key>
@@ -92,7 +92,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="land_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Reise">
           <Key>
@@ -105,7 +105,7 @@
           <Property Name="preis_erwachsener" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="preis_kind" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="ort_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Reise_Bild">
           <Key>
@@ -114,7 +114,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bild_id" Type="int" Nullable="false" />
           <Property Name="reise_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Reisedatum">
           <Key>
@@ -125,7 +125,7 @@
           <Property Name="startdatum" Type="datetime" Nullable="false" />
           <Property Name="enddatum" Type="datetime" Nullable="false" />
           <Property Name="anmeldefrist" Type="datetime" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Reisedurchfuehrung">
           <Key>
@@ -133,7 +133,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reisedatum_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Unterkunft">
           <Key>
@@ -144,7 +144,7 @@
           <Property Name="beschreibung" Type="nvarchar(max)" Nullable="false" />
           <Property Name="kategorie" Type="int" Nullable="false" />
           <Property Name="verpflegung_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Unterkunft_Bild">
           <Key>
@@ -153,7 +153,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bild_id" Type="int" Nullable="false" />
           <Property Name="unterkunft_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Verpflegung">
           <Key>
@@ -161,7 +161,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Zahlung">
           <Key>
@@ -172,7 +172,7 @@
           <Property Name="nachname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="nummer" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="zahlungsart_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Zahlungsart">
           <Key>
@@ -180,7 +180,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <Association Name="FK_Adresse_Ort">
           <End Role="Ort" Type="Self.Ort" Multiplicity="1" />
@@ -533,7 +533,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Adressdaten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Ort" Relationship="Self.FK_Adresse_Ort" FromRole="Adresse" ToRole="Ort" />
           <NavigationProperty Name="AlleBenutzer" Relationship="Self.FK_Benutzer_Adresse" FromRole="Adresse" ToRole="Benutzer" />
         </EntityType>
@@ -551,7 +551,7 @@
           <Property Name="Titel" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Geburtsdatum" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Ist_Mitarbeiter" Type="Boolean" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Adresse" Relationship="Self.FK_Benutzer_Adresse" FromRole="Benutzer" ToRole="Adresse" />
           <NavigationProperty Name="Land" Relationship="Self.FK_Benutzer_Land" FromRole="Benutzer" ToRole="Land" />
           <NavigationProperty Name="AlleBuchungen" Relationship="Self.FK_Buchung_Benutzer" FromRole="Benutzer" ToRole="Buchung" />
@@ -571,7 +571,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bilddaten" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleReise_Bilder" Relationship="Self.FK_Reise_Bild_Bild" FromRole="Bild" ToRole="Reise_Bild" />
           <NavigationProperty Name="AlleUnterkunft_Bilder" Relationship="Self.FK_Unterkunft_Bild_Bild" FromRole="Bild" ToRole="Unterkunft_Bild" />
         </EntityType>
@@ -584,7 +584,7 @@
           <Property Name="Vorname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nachname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Geburtsdatum" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Benutzer" Relationship="Self.FK_Buchung_Benutzer" FromRole="Buchung" ToRole="Benutzer" />
           <NavigationProperty Name="Reisedatum" Relationship="Self.FK_Buchung_Reisedatum" FromRole="Buchung" ToRole="Reisedatum" />
           <NavigationProperty Name="Buchung_Zahlung" Relationship="Self.FK_Buchung_Zahlung_Buchung" FromRole="Buchung" ToRole="Buchung_Zahlung" />
@@ -595,7 +595,7 @@
             <PropertyRef Name="Buchung_ID" />
           </Key>
           <Property Name="Buchung_ID" Type="Int32" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Buchung" Relationship="Self.FK_Buchung_Zahlung_Buchung" FromRole="Buchung_Zahlung" ToRole="Buchung" />
           <NavigationProperty Name="Zahlung" Relationship="Self.FK_Buchung_Zahlung_Zahlung" FromRole="Buchung_Zahlung" ToRole="Zahlung" />
         </EntityType>
@@ -604,7 +604,7 @@
             <PropertyRef Name="Buchung_ID" />
           </Key>
           <Property Name="Buchung_ID" Type="Int32" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Buchung" Relationship="Self.FK_BuchungStorniert_Buchung" FromRole="BuchungStorniert" ToRole="Buchung" />
         </EntityType>
         <EntityType Name="Land">
@@ -623,7 +623,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleAdressen" Relationship="Self.FK_Adresse_Ort" FromRole="Ort" ToRole="Adresse" />
           <NavigationProperty Name="Land" Relationship="Self.FK_Ort_Land" FromRole="Ort" ToRole="Land" />
           <NavigationProperty Name="AlleReisen" Relationship="Self.FK_Reise_Ort" FromRole="Ort" ToRole="Reise" />
@@ -637,7 +637,7 @@
           <Property Name="Beschreibung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Preis_Erwachsener" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="Preis_Kind" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleBewertungen" Relationship="Self.FK_Bewertung_Reise" FromRole="Reise" ToRole="Bewertung" />
           <NavigationProperty Name="Ort" Relationship="Self.FK_Reise_Ort" FromRole="Reise" ToRole="Ort" />
           <NavigationProperty Name="AlleReise_Bilder" Relationship="Self.FK_Reise_Bild_Reise" FromRole="Reise" ToRole="Reise_Bild" />
@@ -649,7 +649,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Bild" Relationship="Self.FK_Reise_Bild_Bild" FromRole="Reise_Bild" ToRole="Bild" />
           <NavigationProperty Name="Reise" Relationship="Self.FK_Reise_Bild_Reise" FromRole="Reise_Bild" ToRole="Reise" />
         </EntityType>
@@ -661,7 +661,7 @@
           <Property Name="Startdatum" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Enddatum" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Anmeldefrist" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleBuchungen" Relationship="Self.FK_Buchung_Reisedatum" FromRole="Reisedatum" ToRole="Buchung" />
           <NavigationProperty Name="Reise" Relationship="Self.FK_Reisedatum_Reise" FromRole="Reisedatum" ToRole="Reise" />
           <NavigationProperty Name="AlleReisedurchfuehrungen" Relationship="Self.FK_Reisedurchfuehrung_Reisedatum" FromRole="Reisedatum" ToRole="Reisedurchfuehrung" />
@@ -671,7 +671,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Reisedatum" Relationship="Self.FK_Reisedurchfuehrung_Reisedatum" FromRole="Reisedurchfuehrung" ToRole="Reisedatum" />
         </EntityType>
         <EntityType Name="Unterkunft">
@@ -682,7 +682,7 @@
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Beschreibung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Kategorie" Type="Int32" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleReisen" Relationship="Self.FK_Reise_Unterkunft" FromRole="Unterkunft" ToRole="Reise" />
           <NavigationProperty Name="AlleUnterkunft_Bilder" Relationship="Self.FK_Unterkunft_Bild_Unterkunft" FromRole="Unterkunft" ToRole="Unterkunft_Bild" />
           <NavigationProperty Name="Verpflegung" Relationship="Self.FK_Unterkunft_Verpflegung" FromRole="Unterkunft" ToRole="Verpflegung" />
@@ -692,7 +692,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Bild" Relationship="Self.FK_Unterkunft_Bild_Bild" FromRole="Unterkunft_Bild" ToRole="Bild" />
           <NavigationProperty Name="Unterkunft" Relationship="Self.FK_Unterkunft_Bild_Unterkunft" FromRole="Unterkunft_Bild" ToRole="Unterkunft" />
         </EntityType>
@@ -702,7 +702,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleUnterkuenfte" Relationship="Self.FK_Unterkunft_Verpflegung" FromRole="Verpflegung" ToRole="Unterkunft" />
         </EntityType>
         <EntityType Name="Zahlung">
@@ -713,7 +713,7 @@
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nachname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nummer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleBuchung_Zahlungen" Relationship="Self.FK_Buchung_Zahlung_Zahlung" FromRole="Zahlung" ToRole="Buchung_Zahlung" />
           <NavigationProperty Name="Zahlungsart" Relationship="Self.FK_Zahlung_Zahlungsart" FromRole="Zahlung" ToRole="Zahlungsart" />
         </EntityType>
@@ -723,7 +723,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleZahlungen" Relationship="Self.FK_Zahlung_Zahlungsart" FromRole="Zahlungsart" ToRole="Zahlung" />
         </EntityType>
         <Association Name="FK_Adresse_Ort">

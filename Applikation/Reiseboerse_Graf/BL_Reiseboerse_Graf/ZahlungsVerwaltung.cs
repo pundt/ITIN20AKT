@@ -41,65 +41,67 @@ namespace BL_Reiseboerse_Graf
         /// </summary>
         /// <param name="neueZahlung">die zu speichernde Zahlung</param>
         /// <returns>die gefundene ID oder 0 wenn Zahlung NULL ist</returns>
-        public static int NeueZahlungSpeichern(Zahlung neueZahlung)
+        public static int NeueZahlungSpeichern(Zahlung neueZahlung, int zahlungsart_id)
         {
             Debug.WriteLine("ZahlungsVerwaltung - Neue Zahlung Speichern");
             Debug.Indent();
 
-            int neueID = 0;
+            int neueID = -1;
 
-            try
+            using (var context = new reisebueroEntities())
             {
-                using (var context = new reisebueroEntities())
+                try
                 {
+                    Zahlungsart art=context.AlleZahlungsarten.Where(x => x.ID == zahlungsart_id).FirstOrDefault();
+                    neueZahlung.Zahlungsart = art;
                     context.AlleZahlungen.Add(neueZahlung);
                     context.SaveChanges();
-
-                    Zahlung gefunden = context.AlleZahlungen.Where(x => x.Nachname == neueZahlung.Nachname && x.Vorname == neueZahlung.Vorname && x.Nummer == neueZahlung.Nummer).FirstOrDefault();
-
-                    if (gefunden != null)
-                    {
-                        neueID = gefunden.ID;
-                    }
+                    neueID = neueZahlung.ID;
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Fehler beim Speichern der Zahlung!");
-                Debug.WriteLine(ex.Message);
-                Debugger.Break();
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Speichern der Zahlung!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
             }
             Debug.Unindent();
             return neueID;
         }
 
-        public static void ZuordnungZahlungBuchung(int buchungsdatum, int zahlungID)
+        public static void ZuordnungZahlungBuchung(List<int> buchungIDs, int zahlungID)
         {
             Debug.WriteLine("Zahlungsverwaltung - Zuordnung Zahlung_Buchung");
             Debug.Indent();
 
-            try
+            using (var context = new reisebueroEntities())
             {
-                //using (var context = new reisebueroEntities())
-                //{
-                //    foreach (var id in reisedurchfuehrungIDs)
-                //    {
-                //        Buchung_Zahlung bz = new Buchung_Zahlung()
-                //        {
-                //            Reisedurchfuehrung_ID = id
-                //        };
-                //        bz.Zahlung.ID = zahlungID;
-                //        context.AlleBuchung_Zahlungen.Add(bz);
-                //    }
-                //    context.SaveChanges();
-                //    Debug.Unindent();
-                //}
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Fehler beim Zuordnen der Zahlung_Buchung");
-                Debug.WriteLine(ex.Message);
-                Debugger.Break();
+                using (var dbContextTransaction = context.Database.Connection.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (var id in buchungIDs)
+                        {
+                            Buchung_Zahlung bz = new Buchung_Zahlung()
+                            {
+                                Buchung_ID = id
+                            };
+                            bz.Zahlung.ID = zahlungID;
+                            context.AlleBuchung_Zahlungen.Add(bz);
+                        }
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        dbContextTransaction.Rollback();
+                        Debug.WriteLine("Fehler beim Zuordnen der Zahlung_Buchung");
+                        Debug.WriteLine(ex.Message);
+                        Debugger.Break();
+                    }
+                    Debug.Unindent();
+                }
             }
         }
     }

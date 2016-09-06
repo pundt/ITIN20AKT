@@ -7,7 +7,7 @@
 <h2>Zahlung</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Zahlung","Buchungen",FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     

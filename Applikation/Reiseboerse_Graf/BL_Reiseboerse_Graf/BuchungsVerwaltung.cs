@@ -131,7 +131,7 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("Buchungsverwaltung - Neue Buchung Speichern");
             Debug.Indent();
 
-            int gespeichert = -1;
+            int neueID = -1;
             using (var context = new reisebueroEntities())
             {
                 try
@@ -141,7 +141,8 @@ namespace BL_Reiseboerse_Graf
                     buchung.Benutzer = benutzer;
                     buchung.Reisedatum = datum;
                     context.AlleBuchungen.Add(buchung);
-                    gespeichert=context.SaveChanges();
+                    context.SaveChanges();
+                    neueID = buchung.ID;
                 }
                 catch (Exception ex)
                 {
@@ -149,10 +150,8 @@ namespace BL_Reiseboerse_Graf
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
                 }
-
-
                 Debug.Unindent();
-                return gespeichert;
+                return neueID;
             }
         }
 
