@@ -84,6 +84,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Indent();
             NameValueCollection col = new NameValueCollection();
             BuchungGesamtModel model = new BuchungGesamtModel();
+            model.BuchungIDs = new List<int>();
             int reisedatum_ID = 0;
             try
             {
@@ -110,7 +111,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Nachname = col[string.Format("BuchungenErwachsen[{0}].Nachname", i)],
                         Geburtsdatum = Convert.ToDateTime(col[string.Format("BuchungenErwachsen[{0}].Geburtsdatum", i)]),
                         ReisePassNummer = col[string.Format("BuchungenErwachsen[{0}].ReisePassNummer", i)],
-                        Reisedatum_ID=reisedatum_ID
+                        Reisedatum_ID = reisedatum_ID
                     });
                 }
                 for (int i = 0; i < anzahlKind; i++)
@@ -126,6 +127,11 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 model.BuchungErwachsen = buchungenErw;
                 model.BuchungKind = buchungenKind;
+                Reise reise = ReiseVerwaltung.SucheReiseZuDatum(reisedatum_ID);
+                model.Reisetitel = reise.Titel;
+                Reisedatum datum = ReiseVerwaltung.SucheReisedatum(reisedatum_ID);
+                model.Startdatum = datum.Startdatum;
+                model.Enddatum = datum.Enddatum;
 
             }
             catch (Exception ex)
@@ -150,8 +156,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                         ErstelltAm = DateTime.Now
                     };
 
-                    int gespeichert = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung, reisedatum_ID, User.Identity.Name);
-                    if (gespeichert==-1)
+                    int neueID = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung, reisedatum_ID, User.Identity.Name);
+
+                    model.BuchungIDs.Add(neueID);
+                    if (neueID == -1)
                     {
                         Debug.WriteLine("Fehler!");
                     }
@@ -165,12 +173,14 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Geburtsdatum = item.Geburtsdatum,
                         Passnummer = item.ReisePassNummer
                     };
-                    int gespeichert = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung,reisedatum_ID,User.Identity.Name);
-                    if (gespeichert==-1)
+                    int neueID = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung, reisedatum_ID, User.Identity.Name);
+                    model.BuchungIDs.Add(neueID);
+                    if (neueID == -1)
                     {
                         Debug.WriteLine("Fehler!");
                     }
                 }
+                Session["Buchungen"] = model.BuchungIDs as List<int>;
             }
             return View("ZeigeGesamt", model);
         }
@@ -181,11 +191,19 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <param name="model">beinhaltet alle BuchungenModel</param>
         /// <returns>View zur Eingabe der Zahlungsdaten</returns>
         [HttpGet]
-        public ActionResult Zahlung(BuchungGesamtModel model)
+        public ActionResult Zahlung()
         {
             Debug.WriteLine("Buchungen - Zahlung - GET");
             ZahlungModel zahlung = new ZahlungModel();
-            zahlung.Reisedatum_ID = model.BuchungErwachsen[0].Reisedatum_ID;
+            zahlung.Zahlungsarten = new List<ZahlungsartModel>();
+            foreach (var zahlungsart in ZahlungsVerwaltung.LadeAlleZahlungsArten())
+            {
+                zahlung.Zahlungsarten.Add(new ZahlungsartModel()
+                {
+                    Bezeichnung = zahlungsart.Bezeichnung,
+                    ID = zahlungsart.ID
+                });
+            }
             return View(zahlung);
         }
 
@@ -208,10 +226,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Nachname = model.Nachname,
                     Nummer = model.Nummer
                 };
-                zahlung.Zahlungsart.ID = model.Zahlungsart_ID;
 
-                int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung);
-                ZahlungsVerwaltung.ZuordnungZahlungBuchung(model.Reisedatum_ID, neueID);
+                int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
+                List<int> BuchungIDs = Session["Buchungen"] as List<int>;
+                ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
             }
             Debug.Unindent();
             return null;
@@ -240,14 +258,14 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                 BuchungAnzahlModel anzahl = new BuchungAnzahlModel();
                 anzahl.Preis_Erwachsene = decimal.Parse(preisE);
-                anzahl.Preis_Kind= decimal.Parse(preisK);
+                anzahl.Preis_Kind = decimal.Parse(preisK);
                 anzahl.Reisetitel = col["Reisedetail.Titel"];
-                anzahl.Anzahl_Erwachsene= int.Parse(col["Anzahl_Erwachsene"]);
-                anzahl.Anzahl_Kinder= int.Parse(col["Anzahl_Kinder"]);
-                anzahl.Reisedatum_ID= int.Parse(col["Reisedatum.ID"]);
+                anzahl.Anzahl_Erwachsene = int.Parse(col["Anzahl_Erwachsene"]);
+                anzahl.Anzahl_Kinder = int.Parse(col["Anzahl_Kinder"]);
+                anzahl.Reisedatum_ID = int.Parse(col["Reisedatum.ID"]);
                 model.AnzahlModel = anzahl;
                 model.BuchungenErwachsen = new List<BuchungErwachsenModel>();
-                model.BuchungenKind = new List<BuchungKindModel>();          
+                model.BuchungenKind = new List<BuchungKindModel>();
                 for (int i = 0; i < anzahl.Anzahl_Erwachsene; i++)
                 {
                     model.BuchungenErwachsen.Add(new BuchungErwachsenModel());

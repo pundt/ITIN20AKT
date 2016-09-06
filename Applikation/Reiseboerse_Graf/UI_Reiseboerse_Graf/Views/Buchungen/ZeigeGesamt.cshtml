@@ -43,9 +43,6 @@
         </dd>
 
     </dl>
-    @{
-        List<int> ids = new List<int>();
-    }
     @foreach (var buchung in Model.BuchungErwachsen)
     {
         <table>
@@ -65,9 +62,8 @@
                     @buchung.ReisePassNummer
                 </td>
             </tr>
-            @{ids.Add(buchung.Reisedurchfuehrung_ID);}
         </table>
-                }
+    }
     @foreach (var buchung in Model.BuchungKind)
     {
         <table>
@@ -87,10 +83,8 @@
                     @buchung.ReisePassNummer
                 </td>
             </tr>
-            @{ids.Add(buchung.Reisedurchfuehrung_ID);}
         </table>
-                }
-    @Html.Hidden("idListe") 
+    }
     @Html.ActionLink("Zur Zahlung", "Zahlung")
 </div>
 
