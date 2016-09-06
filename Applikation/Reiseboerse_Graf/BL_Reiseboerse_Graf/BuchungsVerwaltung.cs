@@ -126,21 +126,22 @@ namespace BL_Reiseboerse_Graf
         /// </summary>
         /// <param name="buchung">Die zu speichernde Buchung</param>
         /// <returns>true wenn erfolgreich ansonsten false</returns>
-        public static bool NeueBuchungSpeichern(Buchung buchung, string email)
+        public static int NeueBuchungSpeichern(Buchung buchung, int reisedatum_ID, string email)
         {
             Debug.WriteLine("Buchungsverwaltung - Neue Buchung Speichern");
             Debug.Indent();
 
-            bool erfolgreich = false;
+            int gespeichert = -1;
             using (var context = new reisebueroEntities())
             {
                 try
                 {
                     Benutzer benutzer = context.AlleBenutzer.Include("Adresse.Ort").Where(x => x.Email == email).FirstOrDefault();
+                    Reisedatum datum = context.AlleReisedaten.Where(x => x.ID == reisedatum_ID).FirstOrDefault();
                     buchung.Benutzer = benutzer;
+                    buchung.Reisedatum = datum;
                     context.AlleBuchungen.Add(buchung);
-                    context.SaveChanges();
-                    erfolgreich = true;
+                    gespeichert=context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -151,7 +152,7 @@ namespace BL_Reiseboerse_Graf
 
 
                 Debug.Unindent();
-                return erfolgreich;
+                return gespeichert;
             }
         }
 

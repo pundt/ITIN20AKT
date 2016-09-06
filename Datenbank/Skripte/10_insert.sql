@@ -175,8 +175,24 @@ INSERT INTO Zahlung(vorname, nachname, nummer, zahlungsart_id) VALUES('Steffi', 
 GO
 
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(1);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(1);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(1);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(1);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(1);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(2);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(2);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(2);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(2);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(2);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(3);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(4);
 GO
 

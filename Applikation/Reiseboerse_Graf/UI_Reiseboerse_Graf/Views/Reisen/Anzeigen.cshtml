@@ -21,10 +21,10 @@
             <div class="termin">Buchen Sie bis: @Html.DisplayFor(model=>model.Reisedatum.Anmeldefrist)</div>
             @using (Html.BeginForm("Buchen", "Buchungen", FormMethod.Post, new { @class = "zentriert" }))
             {
-                @*@Html.HiddenFor(x => x.Preis_Erwachsene)
-                @Html.HiddenFor(x => x.Preis_Kind)
-                @Html.HiddenFor(x=>x.ID)
-                @Html.HiddenFor(x=>x.Titel)*@
+                @Html.HiddenFor(x => x.Reisedetail.Preis_Erwachsene)
+                @Html.HiddenFor(x => x.Reisedetail.Preis_Kind)
+                @Html.HiddenFor(x=>x.Reisedetail.Titel)
+                @Html.HiddenFor(x=>x.Reisedatum.ID)
                 <table class="table table-condensed">
                     <tr>
                         <th>
@@ -34,7 +34,7 @@
                             € @Html.DisplayFor(model => model.Reisedetail.Preis_Erwachsene)
                         </td>
                         <td>
-                            <input type="number" min="0" max="@Model.Reisedatum.Restplätze" id="Plätze" name="Anzahl_Erwachsene" />
+                            <input type="number" min="0" max="@Model.Reisedatum.Restplätze" value="0" name="Anzahl_Erwachsene" />
                         </td>
                     </tr>
                     <tr>
@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <!--Es müsste hier noch die max-Zahl auf Restplätze minus die Anzahl der Plätze Erwachsene-->
-                            <input type="number" min="0" max="@Model.Reisedatum.Restplätze" id="PlätzeKind" name="Anzahl_Kinder" onclick="berechne()"/>
+                            <input type="number" min="0" max="@Model.Reisedatum.Restplätze" value="0"   name="Anzahl_Kinder"/>
                         </td>
                     </tr>
                     <tr>
@@ -76,11 +76,11 @@
 @*<p>
         @Html.ActionLink("Zurück zur Reiseliste", "Laden")
     </p>*@
-@section Scripts{
+@*@section Scripts{
     <script>
-        $(function berechne() {
+        function berechne() {
             var plätze = document.getElementById("Plätze").value;
             document.getElementById("PlätzeKind").value = plätze.max - plätze;
-        });
+        };
     </script>
-    }
+    }*@
