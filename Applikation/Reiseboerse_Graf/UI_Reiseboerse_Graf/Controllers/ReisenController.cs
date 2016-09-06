@@ -74,7 +74,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                                 Beginndatum = datum.Startdatum,
                                 Enddatum = datum.Enddatum,
                                 Restplätze = ReiseVerwaltung.Restplätze(datum.ID),
-                                ID=datum.ID
+                                ID = datum.ID
                             });
                         }
                         model.Reisen.Add(reiseModel);
@@ -86,7 +86,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Debug.WriteLine("Fehler beim Laden aller Reisen");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
-                }                          
+                }
                 #endregion db
             }
             Debug.Unindent();
@@ -222,11 +222,11 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Reisedatum BL_Datum = ReiseVerwaltung.SucheReisedatum(id);
                     model.Reisedatum = new ReisedatumModel()
                     {
-                        Anmeldefrist=BL_Datum.Anmeldefrist,
-                        Beginndatum=BL_Datum.Startdatum,
-                        Enddatum=BL_Datum.Enddatum,
-                        Restplätze=ReiseVerwaltung.Restplätze(id),
-                        ID=id
+                        Anmeldefrist = BL_Datum.Anmeldefrist,
+                        Beginndatum = BL_Datum.Startdatum,
+                        Enddatum = BL_Datum.Enddatum,
+                        Restplätze = ReiseVerwaltung.Restplätze(id),
+                        ID = id
                     };
                     model.Reisedetail = new ReisedetailModel()
                     {
@@ -324,7 +324,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 });
             }
             List<Unterkunft> alleUnterkuenfte = BL_Reiseboerse_Graf.LaenderVerwaltung.AlleUnterkuenfte();
-            UI_Reise.Unterkunft = new List<UnterkunftdetailModel>();           
+            UI_Reise.Unterkunft = new List<UnterkunftdetailModel>();
             foreach (Unterkunft aktUnterkunft in alleUnterkuenfte)
             {
                 UI_Reise.Unterkunft.Add(new UnterkunftdetailModel()
@@ -333,9 +333,9 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Beschreibung = aktUnterkunft.Beschreibung,
                     Bezeichnung = aktUnterkunft.Bezeichnung,
                     Kategorie = aktUnterkunft.Kategorie,
-                    Verpflegung_ID = aktUnterkunft.Verpflegung.ID                                
+                    Verpflegung_ID = aktUnterkunft.Verpflegung.ID
                 });
-      
+
             }
             List<Verpflegung> alleVerpflegung = BL_Reiseboerse_Graf.LaenderVerwaltung.alleVerpflegung();
             UI_Reise.Verpflegung = new List<VerpflegungModel>();
@@ -344,9 +344,9 @@ namespace UI_Reiseboerse_Graf.Controllers
                 UI_Reise.Verpflegung.Add(new VerpflegungModel()
                 {
                     Bezeichnung = aktVerpflegung.Bezeichnung,
-                    Id= aktVerpflegung.ID
+                    Id = aktVerpflegung.ID
                 });
-            }      
+            }
 
             return View(UI_Reise);
         }
@@ -359,11 +359,45 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file)
         {
+            int index = 0;
             if (ModelState.IsValid)
             {
-                if (neueReise.NeuerOrt!=null)
+                if (file != null && file.ContentLength > 0)
                 {
-
+                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file);
+                    if (index > 0)
+                    {
+                        Debug.WriteLine("Bildspeicher erfolgreich");
+                        index = 0;
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("kein Bild vorhanden");
+                }
+                if (neueReise.NeuerOrt != null)
+                {
+                    index = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuenOrt(neueReise.NeuerOrt, neueReise.Land_id);
+                    if (index > 0)
+                    {
+                        Debug.WriteLine("Ortspeichern erfolgreich");
+                    }
+                }
+                if (neueReise.NeuesLand != null)
+                {
+                    index = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand));
+                    if (index > 0)
+                    {
+                        Debug.WriteLine("landspeichern erfolgreich");
+                    }
+                }
+                if (neueReise.NeueUnterkunftBeschreibung != null && neueReise.NeueUnterkunftBezeichnung != null && neueReise.NeueUnterkunftKategorie != 0)
+                {
+                    index = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeichereNeueUnterkunft(neueReise.NeueUnterkunftBeschreibung, neueReise.NeueUnterkunftBezeichnung, neueReise.NeueUnterkunftKategorie));
+                    if (index > 0)
+                    {
+                        Debug.WriteLine("Unterkunftspeichern erfolgreich");
+                    }
                 }
             }
             return RedirectToAction("Index");
