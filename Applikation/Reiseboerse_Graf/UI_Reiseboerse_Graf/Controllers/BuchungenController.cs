@@ -70,7 +70,6 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - Hinzufuegen - GET");
             Debug.Indent();
-            Debug.Unindent();
             return View(model);
         }
 
@@ -85,13 +84,16 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Indent();
             NameValueCollection col = new NameValueCollection();
             BuchungGesamtModel model = new BuchungGesamtModel();
+            int reisedatum_ID = 0;
             try
             {
+                //holt sich die Daten aus dem Payload des Formulars
                 col = Request.Form;
 
                 List<BuchungErwachsenModel> buchungenErw = new List<BuchungErwachsenModel>();
                 List<BuchungKindModel> buchungenKind = new List<BuchungKindModel>();
 
+                reisedatum_ID = int.Parse(col["AnzahlModel.Reisedatum_ID"]);
                 int anzahlErw = int.Parse(col["AnzahlModel.Anzahl_Erwachsene"]);
                 int anzahlKind = int.Parse(col["AnzahlModel.Anzahl_Kinder"]);
 
@@ -108,7 +110,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Nachname = col[string.Format("BuchungenErwachsen[{0}].Nachname", i)],
                         Geburtsdatum = Convert.ToDateTime(col[string.Format("BuchungenErwachsen[{0}].Geburtsdatum", i)]),
                         ReisePassNummer = col[string.Format("BuchungenErwachsen[{0}].ReisePassNummer", i)],
-                        Reisedatum_ID = int.Parse(col[string.Format("BuchungenErwachsen[{0}].Reisedatum_ID", i)])
+                        Reisedatum_ID=reisedatum_ID
                     });
                 }
                 for (int i = 0; i < anzahlKind; i++)
@@ -119,7 +121,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Nachname = col[string.Format("BuchungenKind[{0}].Nachname", i)],
                         Geburtsdatum = Convert.ToDateTime(col[string.Format("BuchungenKind[{0}].Geburtsdatum", i)]),
                         ReisePassNummer = col[string.Format("BuchungenKind[{0}].ReisePassNummer", i)],
-                        Reisedatum_ID = int.Parse(col[string.Format("BuchungenKind[{0}].Reisedatum_ID", i)])
+                        Reisedatum_ID = reisedatum_ID
                     });
                 }
                 model.BuchungErwachsen = buchungenErw;
@@ -137,8 +139,6 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             if (ModelState.IsValid)
             {
-                bool gespeichert = false;
-
                 foreach (var item in model.BuchungErwachsen)
                 {
                     Buchung neueBuchung = new Buchung()
@@ -150,8 +150,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                         ErstelltAm = DateTime.Now
                     };
 
-                    gespeichert = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung, User.Identity.Name);
-                    if (!gespeichert)
+                    int gespeichert = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung, reisedatum_ID, User.Identity.Name);
+                    if (gespeichert==-1)
                     {
                         Debug.WriteLine("Fehler!");
                     }
@@ -165,8 +165,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Geburtsdatum = item.Geburtsdatum,
                         Passnummer = item.ReisePassNummer
                     };
-                    gespeichert = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung, User.Identity.Name);
-                    if (!gespeichert)
+                    int gespeichert = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung,reisedatum_ID,User.Identity.Name);
+                    if (gespeichert==-1)
                     {
                         Debug.WriteLine("Fehler!");
                     }
@@ -223,39 +223,47 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <param name="anzahlmodel">Die Anzahl der gewünschten Buchungen und zusätzl. Daten</param>
         /// <returns>View zum Eingeben der Daten</returns>
         [HttpPost]
-        public ActionResult Buchen(BuchungAnzahlModel anzahlmodel)
+        public ActionResult Buchen()
         {
             Debug.WriteLine("Buchungen - Hinzufuegen - POST");
             Debug.Indent();
-
-            BuchungHinzufuegenModel model = new BuchungHinzufuegenModel()
+            BuchungHinzufuegenModel model = new BuchungHinzufuegenModel();
+            NameValueCollection col = new NameValueCollection();
+            try
             {
-                AnzahlModel = anzahlmodel,
-                BuchungenErwachsen = new List<BuchungErwachsenModel>(),
-                BuchungenKind = new List<BuchungKindModel>()
+                col = Request.Form;
 
-            };
-            //for (int i = 0; i < model.AnzahlModel.Anzahl_Erwachsene; i++)
-            //{
-            //    aktReisedurchfuehrung_ID = aktReisedurchfuehrung_ID + 1;
-            //    BuchungenModel bm = new BuchungenModel()
-            //    {
-            //        Reisedurchfuehrung_ID = aktReisedurchfuehrung_ID
-            //    };
+                string preisE = col["Reisedetail.Preis_Erwachsene"];
+                string preisK = col["Reisedetail.Preis_Kind"];
+                //preisE = preisE.Replace(',', '.');
+                //preisK = preisK.Replace(',', '.');             
 
-            //    model.BuchungenErwachsen.Add(bm);
+                BuchungAnzahlModel anzahl = new BuchungAnzahlModel();
+                anzahl.Preis_Erwachsene = decimal.Parse(preisE);
+                anzahl.Preis_Kind= decimal.Parse(preisK);
+                anzahl.Reisetitel = col["Reisedetail.Titel"];
+                anzahl.Anzahl_Erwachsene= int.Parse(col["Anzahl_Erwachsene"]);
+                anzahl.Anzahl_Kinder= int.Parse(col["Anzahl_Kinder"]);
+                anzahl.Reisedatum_ID= int.Parse(col["Reisedatum.ID"]);
+                model.AnzahlModel = anzahl;
+                model.BuchungenErwachsen = new List<BuchungErwachsenModel>();
+                model.BuchungenKind = new List<BuchungKindModel>();          
+                for (int i = 0; i < anzahl.Anzahl_Erwachsene; i++)
+                {
+                    model.BuchungenErwachsen.Add(new BuchungErwachsenModel());
+                }
+                for (int i = 0; i < anzahl.Anzahl_Kinder; i++)
+                {
+                    model.BuchungenKind.Add(new BuchungKindModel());
+                }
 
-            //}
-            //for (int i = 0; i < model.AnzahlModel.Anzahl_Kinder; i++)
-            //{
-            //    aktReisedurchfuehrung_ID = aktReisedurchfuehrung_ID + 1;
-            //    BuchungenModel bm = new BuchungenModel()
-            //    {
-            //        Reisedurchfuehrung_ID = aktReisedurchfuehrung_ID
-            //    };
-
-            //    model.BuchungenKind.Add(bm);
-            //}
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler bei Buchung - Buchen - POST (Auslesen der Formulardaten)");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
             Debug.Unindent();
             return View("Hinzufuegen", model);
         }

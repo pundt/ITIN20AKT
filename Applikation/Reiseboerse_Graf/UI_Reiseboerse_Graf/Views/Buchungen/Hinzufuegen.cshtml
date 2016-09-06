@@ -10,15 +10,15 @@
 
     @using (Html.BeginForm("Hinzufuegen", "Buchungen", FormMethod.Post))
     {
-        @Html.HiddenFor(x=>x.AnzahlModel.Anzahl_Erwachsene)
-        @Html.HiddenFor(x=>x.AnzahlModel.Anzahl_Kinder)
-        @Html.HiddenFor(x=>x.AnzahlModel.Preis_Erwachsene)
-        @Html.HiddenFor(x=>x.AnzahlModel.Preis_Kind)
+        @Html.HiddenFor(x => x.AnzahlModel.Anzahl_Erwachsene)
+        @Html.HiddenFor(x=>x.AnzahlModel.Reisedatum_ID)
+        @Html.HiddenFor(x => x.AnzahlModel.Anzahl_Kinder)
+        @Html.HiddenFor(x => x.AnzahlModel.Preis_Erwachsene)
+        @Html.HiddenFor(x => x.AnzahlModel.Preis_Kind)
 
         <h3>Daten der Erwachsenen</h3>
         for (int i = 0; i < Model.AnzahlModel.Anzahl_Erwachsene; i++)
         {
-            @Html.HiddenFor(x=>x.BuchungenErwachsen[i].Reisedurchfuehrung_ID)
             <div class="row reise">
                 <div class="row">
                     <div class="col-xs-6 col-xs-offset-3">
@@ -66,9 +66,8 @@
             </div>
         }
         <h3>Daten der Kinder</h3>
-        for(int i = 0; i < Model.AnzahlModel.Anzahl_Kinder; i++)
+        for (int i = 0; i < Model.AnzahlModel.Anzahl_Kinder; i++)
         {
-            @Html.HiddenFor(x=>x.BuchungenKind[i].Reisedurchfuehrung_ID)
             <div class="row reise">
                 <div class="row">
                     <div class="col-xs-6 col-xs-offset-3">
