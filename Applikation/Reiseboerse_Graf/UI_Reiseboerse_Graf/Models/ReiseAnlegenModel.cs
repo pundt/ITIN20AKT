@@ -39,7 +39,7 @@ namespace UI_Reiseboerse_Graf.Models
 
         public string NeueUnterkunftBezeichnung { get; set; }
 
-        public string NeueUnterkunftKategorie { get; set; }
+        public int NeueUnterkunftKategorie { get; set; }
 
         public int Verpflegung_id { get; set; }
 

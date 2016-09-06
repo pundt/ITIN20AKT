@@ -360,10 +360,27 @@ namespace UI_Reiseboerse_Graf.Controllers
         public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
-            {
+            {            
                 if (neueReise.NeuerOrt!=null)
                 {
-
+                    if(BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuenOrt(neueReise.NeuerOrt, neueReise.Land_id)>0)                    
+                    {
+                        Debug.WriteLine("Ortspeichern erfolgreich");                      
+                    }
+                }
+                if (neueReise.NeuesLand!=null)
+                {
+                    if(BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand)>0)                   
+                    {
+                        Debug.WriteLine("landspeichern erfolgreich");                        
+                    }
+                }
+                if (neueReise.NeueUnterkunftBeschreibung!=null && neueReise.NeueUnterkunftBezeichnung!=null && neueReise.NeueUnterkunftKategorie!=0)
+                {
+                   if(BL_Reiseboerse_Graf.LaenderVerwaltung.SpeichereNeueUnterkunft(neueReise.NeueUnterkunftBeschreibung, neueReise.NeueUnterkunftBezeichnung, neueReise.NeueUnterkunftKategorie) > 0)
+                    {
+                        Debug.WriteLine("Unterkunftspeichern erfolgreich");
+                    }
                 }
             }
             return RedirectToAction("Index");

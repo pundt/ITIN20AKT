@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                </div>            
+                </div>
                 <div class="form-group">
                     @Html.Label("Preis Erw", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-              
+
                 <div class="form-group">
                     @Html.Label("Ort", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -88,76 +88,108 @@
                     <div class="col-md-10">
                         @Html.DropDownListFor(model => model.Unterkunft, new SelectList(Model.Unterkunft, "ID", "Bezeichnung"))
                         <input type="button" id="c" value="Neue Unterkunft hinzufuegen" />
-                    </div>
-                    <div>
-                        <div class="col-md-10 NichtZeigen" id="NeueUnterkunft">
-                            @Html.Label("Beschreibung", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.EditorFor(model => model.NeueUnterkunftBeschreibung, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.Label("Bezeichnung", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.EditorFor(model => model.NeueUnterkunftBezeichnung, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.Label("Kategorie", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.EditorFor(model => model.NeueUnterkunftKategorie, new { htmlAttributes = new { @class = "form-control" } })                           
+
+                        <div>
+                            <div class="col-md-10 NichtZeigen" id="NeueUnterkunft">
+                                <div class="row">
+                                    @Html.Label("Beschreibung", htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.NeueUnterkunftBeschreibung, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                @Html.Label("Bezeichnung", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                <div class="row">
+                                </div>
+                                @Html.EditorFor(model => model.NeueUnterkunftBezeichnung, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.Label("Kategorie", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                <div class="acidjs-rating-stars">
+                                    <form>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input type="radio" name="group-2" id="group-2-0" value="@Model.NeueUnterkunftKategorie=5" />
+                                                </td>
+                                                <td>
+                                                    <label for="group-2-0"></label>
+                                                </td>
+                                            </tr>
+                                            <input type="radio" name="group-2" id="group-2-1" value="@Model.NeueUnterkunftKategorie=4" />
+                                            <label for="group-2-1"></label>
+                                            <input type="radio" name="group-2" id="group-2-2" value="@Model.NeueUnterkunftKategorie=3" />
+                                            <label for="group-2-2"></label>
+                                            <input type="radio" name="group-2" id="group-2-3" value="@Model.NeueUnterkunftKategorie=2" />
+                                            <label for="group-2-3"></label>
+                                            <input type="radio" name="group-2" id="group-2-4" value="@Model.NeueUnterkunftKategorie=1" />
+                                            <label for="group-2-4"></label>
+                                        </table>
+                                    </form>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.Label("Verpflegung", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                        <div class="form-group">
+                            @Html.Label("Verpflegung", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
 
-                        @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"))
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.StartDatum, htmlAttributes: new { @class = "control-label col-md-2" })
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class='input-group date' id='datetimepicker6'>
-                            <input type='text' class="form-control" name="Startdatum" value="@Model.StartDatum" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                                @Html.DropDownListFor(model => model.Verpflegung, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"))
+                            </div>
                         </div>
-                    </div>
-                </div>
 
+                        <div class="form-group">
+                            <div>
+                                @Html.LabelFor(model => model.StartDatum, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </div>
 
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.EndDatum, htmlAttributes: new { @class = "control-label col-md-2" })
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class='input-group date' id='datetimepicker7'>
-                            <input type='text' class="form-control" name="Startdatum" value="@Model.EndDatum" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                            <div class="col-md-2">
+                                <div class='input-group date' id='datetimepicker6'>
+                                    <input type='text' class="form-control" name="Startdatum" value="@Model.StartDatum" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.Anmeldefrist, htmlAttributes: new { @class = "control-label col-md-2" })
-                    </div>
 
-                    <div class="col-md-2">
-                        <div class='input-group date' id='datetimepicker8'>
-                            <input type='text' class="form-control" name="Startdatum" value="@Model.Anmeldefrist" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                        <div class="form-group">
+                            <div>
+                                @Html.LabelFor(model => model.EndDatum, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class='input-group date' id='datetimepicker7'>
+                                    <input type='text' class="form-control" name="Startdatum" value="@Model.EndDatum" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <div class="form-group">
+                            <div>
+                                @Html.LabelFor(model => model.Anmeldefrist, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class='input-group date' id='datetimepicker8'>
+                                    <input type='text' class="form-control" name="Startdatum" value="@Model.Anmeldefrist" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -168,53 +200,53 @@
 
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker6').datetimepicker({
-                format: "DD.MM.YYYY"
-            });
-            $('#datetimepicker7').datetimepicker({
-                format: "DD.MM.YYYY",
-                useCurrent: false //Important! See issue #1075
-            });
-            $('#datetimepicker8').datetimepicker({
-                format: "DD.MM.YYYY"
-            });
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker6').datetimepicker({
+                        format: "DD.MM.YYYY"
+                    });
+                    $('#datetimepicker7').datetimepicker({
+                        format: "DD.MM.YYYY",
+                        useCurrent: false //Important! See issue #1075
+                    });
+                    $('#datetimepicker8').datetimepicker({
+                        format: "DD.MM.YYYY"
+                    });
 
 
-            $("#datetimepicker6").on("dp.change", function (e) {
-                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                $('#datetimepicker8').data("DateTimePicker").maxDate(e.date);
-            });
-            $("#datetimepicker7").on("dp.change", function (e) {
-                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-            });
-            $("#datetimepicker8").on("dp.change", function (e) {
-                $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
-            });
-        })
-        $(document).ready(function () {
-            $("#b").click(function () {
-                $("#Ort").removeClass("NichtZeigen");
-            });
-        });
+                    $("#datetimepicker6").on("dp.change", function (e) {
+                        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                        $('#datetimepicker8').data("DateTimePicker").maxDate(e.date);
+                    });
+                    $("#datetimepicker7").on("dp.change", function (e) {
+                        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                    });
+                    $("#datetimepicker8").on("dp.change", function (e) {
+                        $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
+                    });
+                })
+                $(document).ready(function () {
+                    $("#b").click(function () {
+                        $("#Ort").removeClass("NichtZeigen");
+                    });
+                });
 
-        $(document).ready(function () {
-            $("#a").click(function () {
-                $("#Land").removeClass("NichtZeigen");
-            });
-        });
-        $(document).ready(function () {
-            $("#c").click(function () {
-                $("#NeueUnterkunft").removeClass("NichtZeigen");
-            });
-        });
-    </script>
-}
+                $(document).ready(function () {
+                    $("#a").click(function () {
+                        $("#Land").removeClass("NichtZeigen");
+                    });
+                });
+                $(document).ready(function () {
+                    $("#c").click(function () {
+                        $("#NeueUnterkunft").removeClass("NichtZeigen");
+                    });
+                });
+            </script>
+        }
