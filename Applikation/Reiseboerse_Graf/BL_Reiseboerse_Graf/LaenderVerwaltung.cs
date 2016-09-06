@@ -95,7 +95,7 @@ namespace BL_Reiseboerse_Graf
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
 
-                   
+
                 }
 
             }
@@ -106,7 +106,7 @@ namespace BL_Reiseboerse_Graf
         public static int SpeicherNeuenOrt(string neuerort, int land_id)
         {
             int index = -1;
-           
+
             Debug.WriteLine("LaenderVerwaltung - SpeicherNeuenOrt");
             Debug.Indent();
 
@@ -119,8 +119,8 @@ namespace BL_Reiseboerse_Graf
                     neuerOrt.Bezeichnung = neuerort;
                     neuerOrt.Land = neuesLand;
                     context.AlleOrte.Add(neuerOrt);
-                   index = context.SaveChanges();
-                   
+                    index = context.SaveChanges();
+
                 }
                 catch (Exception ex)
                 {
@@ -128,15 +128,71 @@ namespace BL_Reiseboerse_Graf
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
                     Debug.Unindent();
-
-                   
                 }
             }
-
-
-
             return index;
-            
+
+        }
+        public static int SpeicherNeuesLand(string neuesLand)
+        {
+            int index = -1;
+
+            Debug.WriteLine("Länderverwaltung - SpeicherNeuesLand");
+            Debug.Indent();
+
+            if (neuesLand != null)
+            {
+                Land land = new Land();
+                land.Bezeichnung = neuesLand;
+                using (reisebueroEntities context = new reisebueroEntities())
+                {
+                    try
+                    {
+                        context.AlleLaender.Add(land);
+                        index = context.SaveChanges();
+                        Debug.WriteLine("Speichern erfolgreich");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("Fehler beim SpeicherNeuesLand");
+                        Debug.WriteLine(ex.Message);
+                        Debugger.Break();
+                        Debug.Unindent();
+                    }                    
+                }
+            }
+            return index;
+        }
+        public static int SpeichereNeueUnterkunft(string beschreibung, string bezeichnung, int kategorie)
+        {
+            int index = -1;
+            Debug.WriteLine("Länderverwaltung - SpeichereNeueUnterkunft");
+            Debug.Indent();
+
+            if (bezeichnung != null && beschreibung != null && kategorie !=0)
+            {
+                Unterkunft unterkunft = new Unterkunft();
+                unterkunft.Beschreibung = beschreibung;
+                unterkunft.Bezeichnung = bezeichnung; ;
+                unterkunft.Kategorie = kategorie;
+                using (reisebueroEntities context = new reisebueroEntities())
+                {
+                    try
+                    {
+                        context.AlleUnterkuenfte.Add(unterkunft);
+                        index = context.SaveChanges();
+                        Debug.WriteLine("Speichern erfolgreich");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("Fehler beim SpeicherNeueUnterkunft");
+                        Debug.WriteLine(ex.Message);
+                        Debugger.Break();
+                        Debug.Unindent();
+                    }
+                }
+            }
+            return index;
         }
     }
 }
