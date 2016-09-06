@@ -65,6 +65,38 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return id_bilder;
         }
+
+        /// <summary>
+        /// Sucht die passende Bild ID zu der Unterkunft
+        /// </summary>
+        /// <param name="id">ID der Unterkunft</param>
+        /// <returns></returns>
+        public static List<int> LadeUnterkunftBildID(int id)
+        {
+            Debug.WriteLine("BildVerwaltung - LadeUnterkunftBildID");
+            Debug.Indent();
+            List<int> id_bilder = new List<int>();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    List<Unterkunft_Bild> unterkunftbilder = context.AlleUnterkunft_Bilder.Where(x => x.Unterkunft.ID == id).ToList();
+                    foreach (var unterkunftbild in unterkunftbilder)
+                    {
+                        id_bilder.Add(unterkunftbild.Bild.ID);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden der Bild ID einer Unterkunft");
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+            Debug.Unindent();
+            return id_bilder;
+        }
+
+
         /// <summary>
         /// Bildfile wird übergeben, Bilddaten werden ausgelesen und in Tabelle gespeichert
         /// </summary>

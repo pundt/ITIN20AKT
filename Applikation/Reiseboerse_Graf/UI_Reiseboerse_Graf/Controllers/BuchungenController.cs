@@ -152,8 +152,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Vorname = item.Vorname,
                         Nachname = item.Nachname,
                         Geburtsdatum = item.Geburtsdatum,
-                        Passnummer = item.ReisePassNummer,
-                        ErstelltAm = DateTime.Now
+                        Passnummer = item.ReisePassNummer
                     };
 
                     int neueID = BuchungsVerwaltung.NeueBuchungSpeichern(neueBuchung, reisedatum_ID, User.Identity.Name);
@@ -252,9 +251,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 col = Request.Form;
 
                 string preisE = col["Reisedetail.Preis_Erwachsene"];
-                string preisK = col["Reisedetail.Preis_Kind"];
-                //preisE = preisE.Replace(',', '.');
-                //preisK = preisK.Replace(',', '.');             
+                string preisK = col["Reisedetail.Preis_Kind"];           
 
                 BuchungAnzahlModel anzahl = new BuchungAnzahlModel();
                 anzahl.Preis_Erwachsene = decimal.Parse(preisE);
