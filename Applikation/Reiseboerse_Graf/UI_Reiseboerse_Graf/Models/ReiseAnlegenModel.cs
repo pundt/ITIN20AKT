@@ -35,7 +35,11 @@ namespace UI_Reiseboerse_Graf.Models
 
         public int Unterkunft_id { get; set; }
 
-        public UnterkunftdetailModel NeueUnterkunft { get; set; }
+        public string NeueUnterkunftBeschreibung { get; set; }
+
+        public string NeueUnterkunftBezeichnung { get; set; }
+
+        public string NeueUnterkunftKategorie { get; set; }
 
         public int Verpflegung_id { get; set; }
 
