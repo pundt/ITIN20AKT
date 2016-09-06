@@ -161,6 +161,7 @@ namespace BL_Reiseboerse_Graf
                     }                    
                 }
             }
+
             return index;
         }
         public static int SpeichereNeueUnterkunft(string beschreibung, string bezeichnung, int kategorie)
