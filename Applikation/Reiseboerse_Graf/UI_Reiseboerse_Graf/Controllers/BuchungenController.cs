@@ -180,7 +180,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
                 }
                 Session["Buchungen"] = model.BuchungIDs as List<int>;
-                BuchungBestätigen(MailTextErzeugen(model));
+                //BuchungBestätigen(MailTextErzeugen(model));
             }
             return View("ZeigeGesamt", model);
         }

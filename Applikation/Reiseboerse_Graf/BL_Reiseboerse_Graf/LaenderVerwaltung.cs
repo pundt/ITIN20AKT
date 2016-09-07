@@ -164,23 +164,19 @@ namespace BL_Reiseboerse_Graf
 
             return index;
         }
-        public static int SpeichereNeueUnterkunft(string beschreibung, string bezeichnung, int kategorie)
+        public static int SpeichereNeueUnterkunft(Unterkunft neueUnterkunft)
         {
             int index = -1;
             Debug.WriteLine("Länderverwaltung - SpeichereNeueUnterkunft");
             Debug.Indent();
 
-            if (bezeichnung != null && beschreibung != null && kategorie !=0)
-            {
-                Unterkunft unterkunft = new Unterkunft();
-                unterkunft.Beschreibung = beschreibung;
-                unterkunft.Bezeichnung = bezeichnung; ;
-                unterkunft.Kategorie = kategorie;
+            if (neueUnterkunft != null)
+            {            
                 using (reisebueroEntities context = new reisebueroEntities())
                 {
                     try
                     {
-                        context.AlleUnterkuenfte.Add(unterkunft);
+                        context.AlleUnterkuenfte.Add(neueUnterkunft);
                         index = context.SaveChanges();
                         Debug.WriteLine("Speichern erfolgreich");
                     }

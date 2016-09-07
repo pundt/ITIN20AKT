@@ -303,5 +303,30 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return gesuchtesReisedatum;
         }
+
+        public static Verpflegung SucheVerpflegung(int id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Suche Verpflegung");
+            Debug.Indent();
+
+            Verpflegung gesuchteVerpflegung = new Verpflegung();
+
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    gesuchteVerpflegung = context.AlleVerpflegungen.Where(x => x.ID == id).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Suchen der Verpflegung!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return gesuchteVerpflegung;
+        }
     }
 }
