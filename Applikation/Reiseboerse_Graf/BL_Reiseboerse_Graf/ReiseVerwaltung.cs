@@ -240,6 +240,35 @@ namespace BL_Reiseboerse_Graf
         }
 
         /// <summary>
+        /// Sucht zu einer ID das Verpflegungsobjekt
+        /// </summary>
+        /// <param name="verpflegung_id">die ID der Verpflegung</param>
+        /// <returns>eine Verpflegung</returns>
+        public static Verpflegung SucheVerpflegung(int verpflegung_id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - SucheVerpflegung");
+            Debug.Indent();
+
+            Verpflegung gesuchteVerpflegung = new Verpflegung();
+
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    gesuchteVerpflegung = context.AlleVerpflegungen.Where(x => x.ID == verpflegung_id).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden der Verpflegung!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return gesuchteVerpflegung;
+        }
+
+        /// <summary>
         /// Sucht eine Reise anhand einer Reisedatum_ID und liefert diese zurück
         /// </summary>
         /// <param name="reisedatum_id">Die ID des Reisedatum</param>

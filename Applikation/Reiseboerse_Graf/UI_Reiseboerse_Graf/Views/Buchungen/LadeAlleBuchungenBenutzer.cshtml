@@ -1,34 +1,59 @@
 ﻿@model List<UI_Reiseboerse_Graf.Models.BuchungAnzeigenModel>
 
 <div>
-        <table>
-            <tr>
-                <td>@Html.DisplayNameFor(x=>x[0].Reisetitel)</td>
-                <td>@Html.DisplayNameFor(x => x[0].Startdatum)</td>
-                <td>@Html.DisplayNameFor(x => x[0].Enddatum)</td>
-                <td>@Html.DisplayNameFor(x => x[0].Bewertung)</td>
-            </tr>
-            @foreach (var model in Model)
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(x => x[0].Reisetitel)</td>
+            <td>@Html.DisplayNameFor(x => x[0].Startdatum)</td>
+            <td>@Html.DisplayNameFor(x => x[0].Enddatum)</td>
+            <td>@Html.DisplayNameFor(x => x[0].Bewertung)</td>
+        </tr>
+        @foreach (var model in Model)
             {
-                <tr>
-                    <td>@Html.DisplayFor(x => model.Reisetitel)</td>
-                    <td>@Html.DisplayFor(x => model.Startdatum)</td>
-                    <td>@Html.DisplayFor(x => model.Enddatum)</td>
-                    <td>
-                        @if (DateTime.Now > model.Enddatum && model.Bewertung == null)
-                        {
-                            @Html.ActionLink("Bewerten Sie jetzt", "Bewerten", "Reisen")
-                        }
-                        else
-                        {
-                            for (int i = 0; i < model.Bewertung; i++)
+            <tr>
+                <td>@Html.DisplayFor(x => model.Reisetitel)</td>
+                <td>@Html.DisplayFor(x => model.Startdatum)</td>
+                <td>@Html.DisplayFor(x => model.Enddatum)</td>
+                <td>
+                    @if (DateTime.Now > model.Enddatum && model.Bewertung == null)
+                    {
+                        <button id="button" class="anmeldung">Bewerten</button>
+                        <div id="bewerten" class="NichtZeigen">
+                            @using (Html.BeginForm("Bewerten", "Reisen"))
                             {
-                            <!--hier kommt dann ein Symbol für die Bewertung rein-->
+                                @Html.HiddenFor(modelItem=>model.ReiseID)
+                                @Html.LabelFor(modelItem => model.Bewertung)
+                                <div class="acidjs-rating-stars">
+                                    <input type="radio" name="Bewertung" id="group-2-0" value="5" /><label for="group-2-0"></label>
+                                    <input type="radio" name="Bewertung" id="group-2-1" value="4" /><label for="group-2-1"></label>
+                                    <input type="radio" name="Bewertung" id="group-2-2" value="3" /><label for="group-2-2"></label>
+                                    <input type="radio" name="Bewertung" id="group-2-3" value="2" /><label for="group-2-3"></label>
+                                    <input type="radio" name="Bewertung" id="group-2-4" value="1" /><label for="group-2-4"></label>
+                                </div>
+                                <input type="submit" value="Jetzt bewerten" />
                             }
+                        </div>
+                    }
+                    else
+                    {
+                        for (int i = 0; i < model.Bewertung; i++)
+                        {
+                            <img src = "~/Content/bilder/Entypo_2605(0)_32.png" />
                         }
-                    </td>
-                </tr>
-            }
-        </table>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
 </div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#button").click(function () {
+                $("#bewerten").removeClass("NichtZeigen");
+            });
+        });
+    </script>
+}
 

@@ -297,12 +297,12 @@ namespace UI_Reiseboerse_Graf.Controllers
             return PartialView(model);
         }
 
-        [HttpGet]
-        public ActionResult Bewerten(int id)
+        [HttpPost]
+        public EmptyResult Bewerten(int bewertung, int reiseID)
         {
-            Debug.WriteLine("Reise - Bewerten - GET");
-            //unfertig da bewerten noch View braucht und ein Model
-            return View();
+            Debug.WriteLine("Reise - Bewerten - POST");
+            ReiseVerwaltung.BewertungSpeichern(reiseID, bewertung);
+            return new EmptyResult();
         }
 
         [HttpGet]

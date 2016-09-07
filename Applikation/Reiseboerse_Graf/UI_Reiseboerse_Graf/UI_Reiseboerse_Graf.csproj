@@ -164,6 +164,7 @@
   <ItemGroup>
     <Content Include="Content\bilder\arrows.png" />
     <Content Include="Content\bilder\bullets.png" />
+    <Content Include="Content\bilder\Entypo_2605%280%29_32.png" />
     <Content Include="Content\bilder\FontAwesome_f015%280%29_24.png" />
     <Content Include="Content\bilder\FontAwesome_f015%280%29_32.png" />
     <Content Include="Content\bilder\FontAwesome_f015_24.png" />

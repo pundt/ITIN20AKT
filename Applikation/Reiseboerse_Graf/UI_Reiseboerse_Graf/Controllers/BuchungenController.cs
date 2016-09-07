@@ -49,6 +49,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 UI_Liste.Add(new BuchungAnzeigenModel()
                 {
+                    ReiseID=aktbuchung.Reisedatum.Reise.ID,
                     Startdatum = aktbuchung.Reisedatum.Startdatum,
                     Enddatum = aktbuchung.Reisedatum.Enddatum,
                     Reisetitel = aktbuchung.Reisedatum.Reise.Titel
