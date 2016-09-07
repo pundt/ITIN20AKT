@@ -14,24 +14,20 @@
                     <td>@Html.DisplayFor(x => model.Reisetitel)</td>
                     <td>@Html.DisplayFor(x => model.Startdatum)</td>
                     <td>@Html.DisplayFor(x => model.Enddatum)</td>
-                    @if (DateTime.Now > model.Enddatum && model.Bewertung == null)
-                    {
-                        <td><button>Bewerten Sie jetzt</button></td>
-                    }
-                    else
-                    {
-                        for (int i = 0; i < model.Bewertung; i++)
+                    <td>
+                        @if (DateTime.Now > model.Enddatum && model.Bewertung == null)
                         {
-                            <!--hier kommt dann ein Symbol für die Bewertung rein-->
-                            <text>Stern</text>
+                            @Html.ActionLink("Bewerten Sie jetzt", "Bewerten", "Reisen")
                         }
-                    }
-
+                        else
+                        {
+                            for (int i = 0; i < model.Bewertung; i++)
+                            {
+                            <!--hier kommt dann ein Symbol für die Bewertung rein-->
+                            }
+                        }
+                    </td>
                 </tr>
-
-
-
-
             }
         </table>
 </div>

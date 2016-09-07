@@ -19,6 +19,12 @@ namespace UI_Reiseboerse_Graf.Models
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public int Zahlungsart_id { get; set; }
         public int Reisedatum_ID { get; set; }
+        [Display(Name="Vollständiger Name")]
+        public string Name
+        {
+            get { return string.Format("{0} {1}",Vorname,Nachname); }
+        }
+
 
 
 

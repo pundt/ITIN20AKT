@@ -4,95 +4,85 @@
     ViewBag.Title = "ZeigeGesamt";
 }
 
-<h2>Ihre Buchungen - Übersicht</h2>
+<h2 class="logoschrift">Buchen - 2.Schritt</h2>
 <hr />
 <div class="container">
-    <div class="col-xs-6 row reise">
-        <table>
-            <tr>
-                <th colspan="2" class="Schriftartblau">
-                    Ihre gebuchte Reise
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.Reisetitel)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Reisetitel)
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    von @Html.DisplayFor(model => model.Startdatum) bis @Html.DisplayFor(model => model.Enddatum)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Preis:
-                </td>
-                <td>@Html.DisplayFor(model => model.Gesamtpreis)</td>
-            </tr>
-        </table>
+    <div class="row reise">
+        <div class="col-xs-6 col-xs-offset-1">
+            <div class="row Schriftartblau marginbuchen">
+                @Html.DisplayFor(model => model.Reisetitel) von @Html.DisplayFor(model => model.Startdatum) bis @Html.DisplayFor(model => model.Enddatum)
+            </div>
+            <div class="row Schriftartblau">
+                <div class="col-xs-2 col-xs-push-1 marginbuchen"></div>
+                Gesamtpreis: € @Html.DisplayFor(model => model.Gesamtpreis)
+            </div>
+        </div>        
+        <div class="col-xs-3 col-xs-push-2">
+            <img src="~/Bild/Laden/@Model.ReiseID" class="img-thumbnail img-responsive" />
+        </div>
     </div>
-    <div class="col-xs-6">
-        <div class="row reise">
-            <h4 class="Schriftartblau">
+    <div class="row">
+            <h4 class="Schriftartblau" style="align-content:center">
                 Daten der Reisenden
             </h4>
-            @if (Model.BuchungErwachsen.Count>0)
-            {
-                <h5>Erwachsene Reisende</h5>
-            }
-            @foreach (var buchung in Model.BuchungErwachsen)
-            {
-                <table class="table table-condensed">
-                    <tr>
-                        <td>
-                            @buchung.Vorname
-                        </td>
-                        <td>
-                            @buchung.Nachname
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @buchung.Geburtsdatum
-                        </td>
-                        <td>
-                            @buchung.ReisePassNummer
-                        </td>
-                    </tr>
-                </table>
-            }
-
+            <div class="row reise">
+                <div class="col-xs-5">
+                    @foreach (var buchung in Model.BuchungErwachsen)
+                    {
+                        <table class="table table-condensed table-responsive">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => buchung.Vorname)</th>
+                                <td>
+                                    @Html.DisplayFor(model => buchung.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => buchung.Geburtsdatum)</th>
+                                <td>
+                                    @Html.DisplayFor(model => buchung.Geburtsdatum)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => buchung.ReisePassNummer)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => buchung.ReisePassNummer)
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5">
+                    @foreach (var buchung in Model.BuchungKind)
+                    {
+                        <table class="table table-condensed table-responsive">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => buchung.Name)</th>
+                                <td>
+                                    @Html.DisplayFor(model => buchung.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => buchung.Geburtsdatum)</th>
+                                <td>
+                                    @Html.DisplayFor(model => buchung.Geburtsdatum)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => buchung.ReisePassNummer)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => buchung.ReisePassNummer)
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </div>
         </div>
-        <div class="row reise">
-            @foreach (var buchung in Model.BuchungKind)
-            {
-                <table class="table table-condensed">
-                    <tr>
-                        <td>
-                            @buchung.Vorname
-                        </td>
-                        <td>
-                            @buchung.Nachname
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @buchung.Geburtsdatum
-                        </td>
-                        <td>
-                            @buchung.ReisePassNummer
-                        </td>
-                    </tr>
-                </table>
-            }
-        </div>
-    </div>  
-    
-   
-    @Html.ActionLink("Zur Zahlung", "Zahlung", new { @class="btn anmeldung"})
+    </div>
+    <div class="col-xs-3 col-xs-offset-9"></div>
+    @Html.ActionLink("Zur Zahlung", "Zahlung", null,new { @class = "btn anmeldung" })
 </div>
-

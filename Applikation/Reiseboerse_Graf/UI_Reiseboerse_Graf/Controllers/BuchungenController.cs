@@ -129,6 +129,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 model.BuchungKind = buchungenKind;
                 Reise reise = ReiseVerwaltung.SucheReiseZuDatum(reisedatum_ID);
                 model.Reisetitel = reise.Titel;
+                model.ReiseID = reise.ID;
                 Reisedatum datum = ReiseVerwaltung.SucheReisedatum(reisedatum_ID);
                 model.Startdatum = datum.Startdatum;
                 model.Enddatum = datum.Enddatum;
@@ -180,7 +181,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
                 }
                 Session["Buchungen"] = model.BuchungIDs as List<int>;
-                //BuchungBestätigen(MailTextErzeugen(model));
+                Session["Mailtext"]=MailTextErzeugen(model) as string;
             }
             return View("ZeigeGesamt", model);
         }
@@ -232,7 +233,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                 ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
 
                 //Aufruf Buchungsbestätigung für den Kunden
-                bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name);
+                string text = Session["Mailtext"] as string;
+                bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
 
                 //Könnte man noch einbauen:
                 // Wenn gesendet false ergibt, Nachfrage ob Email korrekt war etc...

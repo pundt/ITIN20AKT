@@ -8,6 +8,7 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class BuchungGesamtModel
     {
+        public int ReiseID { get; set; }
         public List<BuchungErwachsenModel> BuchungErwachsen { get; set; }
         public List<BuchungKindModel> BuchungKind { get; set; }
         public decimal Gesamtpreis { get; set; }
