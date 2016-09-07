@@ -139,11 +139,9 @@
     <Compile Include="Models\BuchungGesamtModel.cs" />
     <Compile Include="Models\BuchungHinzufuegenModel.cs" />
     <Compile Include="Models\BuchungKindModel.cs" />
-    <Compile Include="Models\KategorieModel.cs" />
     <Compile Include="Models\KundenAnlegenModel.cs" />
     <Compile Include="Models\BuchungenModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
-    <Compile Include="Models\KontinentModel.cs" />
     <Compile Include="Models\KundenModel.cs" />
     <Compile Include="Models\LandModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
