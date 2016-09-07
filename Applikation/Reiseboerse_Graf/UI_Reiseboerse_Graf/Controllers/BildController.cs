@@ -21,9 +21,9 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.WriteLine("Bild - Bild zu Reise - GET ");
             Debug.Indent();
             List<int> IDListe=BildVerwaltung.LadeBildID(id);
-            Random rnd = new Random();
-            int aktid = rnd.Next(1, IDListe.Count + 1);
-            
+            //Random rnd = new Random();
+            //int aktid = rnd.Next(1, IDListe.Count + 1);
+            int aktid = IDListe[0];
             Debug.Unindent();
             return Laden(aktid);
         }
@@ -39,9 +39,9 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.WriteLine("Bild - Bild zu Unterkunft - GET ");
             Debug.Indent();
             List<int> IDListe = BildVerwaltung.LadeUnterkunftBildID(id);
-            Random rnd = new Random();
-            int aktid = rnd.Next(1, IDListe.Count + 1);
-
+            //Random rnd = new Random();
+            //int aktid = rnd.Next(1, IDListe.Count + 1);
+            int aktid = IDListe[0];
             Debug.Unindent();
             return Laden(aktid);
         }

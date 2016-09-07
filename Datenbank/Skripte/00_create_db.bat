@@ -3,7 +3,7 @@ echo off
 set logfile=create_db.log
 set username=sa
 set passwd=123user!
-set servername=PC1\SQLEXPRESS
+set servername=127.0.0.1
 set database=reisebuero
 
 set automode=0
