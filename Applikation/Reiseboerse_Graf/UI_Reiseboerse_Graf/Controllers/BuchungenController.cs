@@ -180,6 +180,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
                 }
                 Session["Buchungen"] = model.BuchungIDs as List<int>;
+                BuchungBestätigen(MailTextErzeugen(model));
             }
             return View("ZeigeGesamt", model);
         }
@@ -251,7 +252,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 col = Request.Form;
 
                 string preisE = col["Reisedetail.Preis_Erwachsene"];
-                string preisK = col["Reisedetail.Preis_Kind"];           
+                string preisK = col["Reisedetail.Preis_Kind"];
 
                 BuchungAnzahlModel anzahl = new BuchungAnzahlModel();
                 anzahl.Preis_Erwachsene = decimal.Parse(preisE);
@@ -281,6 +282,40 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             Debug.Unindent();
             return View("Hinzufuegen", model);
+        }
+
+        private string MailTextErzeugen(BuchungGesamtModel model)
+        {
+            string text = @"<!DOCTYPE html><html lang = en xmlns = http://www.w3.org/1999/xhtml>
+                            <head><meta charset = utf-8/><title></title></head><body><style>
+                            .logoschrift {
+                                font - family: 'Bradley Hand ITC';
+                                font - weight: bold;
+                                color: #005ead;
+                                font - size: 1.6em;
+                                text - align: right;
+                                margin - top: 4 %;
+                            }
+                            </style>";
+            text += @"<h3 class='logoschrift'>Reisebüro Graf</h3><h4 class='logoschrift'>Vielen Dank für Ihre Buchung</h4>
+                <article><section>";
+            text = string.Format("{0} Ihre gebuchte Reise: {1} von {2} bis {3} <br/> Gesamtpreis: € {4}", text, model.Reisetitel, model.Startdatum.ToShortDateString(), model.Enddatum.ToShortDateString(), model.Gesamtpreis);
+
+            text += "<h4>Hier nochmal die Übersicht über Ihre Daten</h4><div><ul>";
+            foreach (var buchung in model.BuchungErwachsen)
+            {
+                DateTime geburtsdatum = buchung.Geburtsdatum;
+                int alter = DateTime.Now.Year - geburtsdatum.Year;
+                if (geburtsdatum.Month > DateTime.Now.Month)
+                {
+                    alter = alter + 1;
+                }
+                string name = string.Format("{0} {1}", buchung.Vorname, buchung.Nachname);
+                text += string.Format("<li>{0} Alter: {1}</li>", name, alter);
+            }
+            text += @"</ul></div>";
+            text += @"<p class='logoschrift'>Wir wünschen Ihnen viel Freude in Ihrem Urlaub und hoffen, dass Sie auch das nächste mal bei uns buchen</p></body></html>";
+            return text;
         }
     }
 }

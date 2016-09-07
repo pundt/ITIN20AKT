@@ -19,6 +19,9 @@
    margin-top:15px;
 }
 
+.bild{
+    padding-top:8%;
+}
 .hoteldetailbild {
     padding: 6px;
 }
@@ -72,10 +75,10 @@
     padding-top: 2%;
 }
 
-.bild {
+/*.bild {
     padding: 0;
     float: left;
-}
+}*/
 
 .Kommentar {
     font-size: 15px;
@@ -97,7 +100,9 @@
 }
 
 .bildschrift {
-    font-size: 1.2em !important;
+    font-size: 1.3em !important;
+    font-weight:bold;
+    font-family:'Bradley Hand ITC';
 }
 
 .platziert {
