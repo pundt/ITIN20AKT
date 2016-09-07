@@ -103,30 +103,33 @@ namespace BL_Reiseboerse_Graf
         /// <param name="file"></param>
         /// <returns>wenn speichern erfolgreich "true"</returns>
         public static int BildSpeichern(HttpPostedFileBase file)
-        {
+        {            
 
             Debug.Write("BildVerwaltung - BildSpeichern");
             Debug.Indent();
 
-            Bild neuesBild = new Bild();            
-            
-            bool erfolgreich = false;
+            Bild neuesBild = new Bild();
+
+
             reisebueroEntities context = new reisebueroEntities();
-            
-            if (file != null && file.ContentLength>0)
+
+            if (file != null && file.ContentLength > 0)
             {
-                using (var reader = new System.IO.BinaryReader(file.InputStream))
+                if (file.ContentLength < 2000 && file.ContentType == "jpeg" || file.ContentType == "png" || file.ContentType == "jpg" || file.ContentType == "gif")
                 {
-                    neuesBild.Bilddaten = reader.ReadBytes(file.ContentLength);
-                    erfolgreich = true;                    
-                    Debug.Write("Bilddaten lesen erfolgreich");
+                    using (var reader = new System.IO.BinaryReader(file.InputStream))
+                    {
+                        neuesBild.Bilddaten = reader.ReadBytes(file.ContentLength);
+
+                        Debug.Write("Bilddaten lesen erfolgreich");
+                    }
+                }
+                else
+                {
+                    Debug.Write("kein Bild mittgeschickt");
                 }
             }
-            else
-            {
-                Debug.Write("kein Bild mittgeschickt");
-            }     
-        
+
             context.AlleBilder.Add(neuesBild);
             int index = context.SaveChanges();
 

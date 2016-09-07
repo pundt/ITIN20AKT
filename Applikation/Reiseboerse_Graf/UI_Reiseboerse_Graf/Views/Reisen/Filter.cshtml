@@ -38,14 +38,7 @@
                     </div>
                 </div>
             </div>
-            <br />
-            <div class="row">
-                <div class="col-md-12">
-                    @Html.LabelFor(model => model.Kategorie)
-                    @Html.DropDownListFor(model => model.Kategorie, new SelectList(Model.Kategorie, "Id", "Bezeichnung"), new { @class = "form-control" })
-                </div>
-            </div>
-            <br />
+   
             <div class="row">
                 <div class="col-md-12">
                     @Html.Label("Preis")

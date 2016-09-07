@@ -357,7 +357,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <param name="neueReise">Model mit den entsprechenden Daten</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file)
+        public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
             int index = 0;
             if (ModelState.IsValid)
@@ -365,6 +365,24 @@ namespace UI_Reiseboerse_Graf.Controllers
                 if (file != null && file.ContentLength > 0)
                 {
                     index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file);
+                    if (index > 0)
+                    {
+                        Debug.WriteLine("Bildspeicher erfolgreich");
+                        index = 0;
+                    }
+                }
+                if (file2 != null && file2.ContentLength > 0)
+                {
+                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (index > 0)
+                    {
+                        Debug.WriteLine("Bildspeicher erfolgreich");
+                        index = 0;
+                    }
+                }
+                if (file3 != null && file2.ContentLength > 0)
+                {
+                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
                     if (index > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
