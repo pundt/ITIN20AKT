@@ -66,6 +66,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                             Verpflegungs_id = reise.Unterkunft.Verpflegung.ID
                         };
                         reiseModel.Reisedaten = new List<ReisedatumModel>();
+                        reiseModel.Bewertung = ReiseVerwaltung.LadeBewertungReise(reiseModel.ID);
                         foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(reiseModel.ID))
                         {
                             reiseModel.Reisedaten.Add(new ReisedatumModel()
@@ -294,6 +295,14 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             Debug.Unindent();
             return PartialView(model);
+        }
+
+        [HttpGet]
+        public ActionResult Bewerten(int id)
+        {
+            Debug.WriteLine("Reise - Bewerten - GET");
+            //unfertig da bewerten noch View braucht und ein Model
+            return View();
         }
 
         [HttpGet]

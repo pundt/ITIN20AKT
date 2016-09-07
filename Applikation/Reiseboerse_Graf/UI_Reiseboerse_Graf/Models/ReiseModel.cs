@@ -41,5 +41,7 @@ namespace UI_Reiseboerse_Graf.Models
 
         public List<ReisedatumModel> Reisedaten { get; set; }
 
+        public int Bewertung { get; set; }
+
     }
 }
