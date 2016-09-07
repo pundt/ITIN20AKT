@@ -229,6 +229,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                 int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
                 List<int> BuchungIDs = Session["Buchungen"] as List<int>;
                 ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
+
+                //Aufruf Buchungsbestätigung für den Kunden
+                bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name);
+
+                //Könnte man noch einbauen:
+                // Wenn gesendet false ergibt, Nachfrage ob Email korrekt war etc...
             }
             Debug.Unindent();
             return null;
