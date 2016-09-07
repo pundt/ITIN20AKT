@@ -15,8 +15,9 @@ namespace BL_Reiseboerse_Graf
         /// Buchung wird per Email bestätigt, gibt true zurück, wenn die Email versendet worden ist
         /// </summary>
         /// <param name="eMail">die Email-Adresse des buchenden Kunden</param>
+        /// <param name="text">der Text in der Mail</param>
         /// <returns>true oder false</returns>
-        public static bool BuchungBestaetigen(string eMail)
+        public static bool BuchungBestaetigen(string eMail, string text)
         {
             Debug.WriteLine("EmailVerwaltung - Buchung bestätigen");
             Debug.Indent();
@@ -30,6 +31,7 @@ namespace BL_Reiseboerse_Graf
 
                 msg.From = firmenAdresse;
                 msg.IsBodyHtml = true;
+                msg.Body = text;
                 msg.Subject = "Buchungsbestätigung für " + eMail;
                 msg.To.Add(new MailAddress(eMail));
 

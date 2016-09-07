@@ -6,6 +6,7 @@
 }
 
 <h2 class="logoschrift">Buchen - 1.Schritt</h2>
+<hr />
 <div class="container">
 
     @using (Html.BeginForm("Hinzufuegen", "Buchungen", FormMethod.Post))
@@ -15,14 +16,14 @@
         @Html.HiddenFor(x => x.AnzahlModel.Anzahl_Kinder)
         @Html.HiddenFor(x => x.AnzahlModel.Preis_Erwachsene)
         @Html.HiddenFor(x => x.AnzahlModel.Preis_Kind)
-        <div class="col-xs-6">
-            @if (Model.AnzahlModel.Anzahl_Erwachsene > 0)
-            {
+        <div class="row">
+            <div class="col-xs-6">
+                @if (Model.AnzahlModel.Anzahl_Erwachsene > 0)
+                {
                 <h3 class="Schriftartblau">Daten der Erwachsenen</h3>
-
-            }
-            @for (int i = 0; i < Model.AnzahlModel.Anzahl_Erwachsene; i++)
-            {
+                }
+                @for (int i = 0; i < Model.AnzahlModel.Anzahl_Erwachsene; i++)
+                {
                 <div class="row reise">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-3">
@@ -63,22 +64,21 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 col-xs-offset-10 Schriftartblau">
+                        <div class="col-xs-3 col-xs-offset-9 Schriftartblau">
                             € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Erwachsene)
                         </div>
                     </div>
                 </div>
-            }
+                }
 
-        </div>
-        <div class="col-xs-6">
-            @if (Model.AnzahlModel.Anzahl_Kinder > 0)
-            {
+            </div>
+            <div class="col-xs-6">
+                @if (Model.AnzahlModel.Anzahl_Kinder > 0)
+                {
                 <h3 class="Schriftartblau">Daten der Kinder</h3>
-
-            }
-            @for (int i = 0; i < Model.AnzahlModel.Anzahl_Kinder; i++)
-            {
+                }
+                @for (int i = 0; i < Model.AnzahlModel.Anzahl_Kinder; i++)
+                {
                 <div class="row reise">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-3">
@@ -119,19 +119,22 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 col-xs-offset-10 Schriftartblau">
+                        <div class="col-xs-3 col-xs-offset-9 Schriftartblau">
                             € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Kind)
                         </div>
                     </div>
                 </div>
-            }
+                }
+            </div>
+        </div>
+
+        <div class="row">           
+            <div class="col-xs-3 col-xs-push-9">
+                <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
+            </div>
+            <div class="col-xs-5 col-xs-push-3 Schriftartblau">
+                Gesamtpreis: € @((Model.AnzahlModel.Anzahl_Erwachsene * Model.AnzahlModel.Preis_Erwachsene) + Model.AnzahlModel.Anzahl_Kinder * Model.AnzahlModel.Preis_Kind)
+            </div>            
         </div>
     }
-    <div class="logoschrift">
-        € @((Model.AnzahlModel.Anzahl_Erwachsene * Model.AnzahlModel.Preis_Erwachsene) + Model.AnzahlModel.Anzahl_Kinder * Model.AnzahlModel.Preis_Kind)
     </div>
-    <div>
-        <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
-    </div>
-    }
-</div>
