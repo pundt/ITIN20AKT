@@ -66,7 +66,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                             Verpflegungs_id = reise.Unterkunft.Verpflegung.ID
                         };
                         reiseModel.Reisedaten = new List<ReisedatumModel>();
-                        reiseModel.Bewertung = ReiseVerwaltung.LadeBewertungReise(reiseModel.ID);
+                        reiseModel.Bewertung = BewertungVerwaltung.LadeBewertungReise(reiseModel.ID);
                         foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(reiseModel.ID))
                         {
                             reiseModel.Reisedaten.Add(new ReisedatumModel()
@@ -301,7 +301,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         public EmptyResult Bewerten(int bewertung, int reiseID)
         {
             Debug.WriteLine("Reise - Bewerten - POST");
-            ReiseVerwaltung.BewertungSpeichern(reiseID, bewertung);
+            BewertungVerwaltung.BewertungSpeichern(reiseID, bewertung);
             return new EmptyResult();
         }
 
