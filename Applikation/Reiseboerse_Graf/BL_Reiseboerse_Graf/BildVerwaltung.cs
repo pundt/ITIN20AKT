@@ -11,6 +11,36 @@ namespace BL_Reiseboerse_Graf
     public class BildVerwaltung
     {
         /// <summary>
+        /// Lade alle IDs aller Bilder
+        /// </summary>
+        /// <returns>Liste von int</returns>
+        public static List<int> LadeAlleBildIDs()
+        {
+            Debug.WriteLine("BildVerwaltung - LadeAlleBildIDs");
+            Debug.Indent();
+            List<int> liste = new List<int>();
+            using (var context=new reisebueroEntities())
+            {
+                try
+                {
+                    foreach (var bild in context.AlleBilder)
+                    {
+                        liste.Add(bild.ID);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden aller Bild IDs");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return liste;
+        }
+        
+        
+        /// <summary>
         /// Liest aus der Datebank ein Bild aus
         /// </summary>
         /// <param name="id">Id des Bildes</param>

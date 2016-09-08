@@ -52,7 +52,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Lädt ein Bild anhand einer Spezifischen Id
         /// </summary>
         /// <param name="id">Id einer datei</param>
-        /// <returns>FileContendResult mit Bild und Datentyp</returns>
+        /// <returns>FileContentResult mit Bild und Datentyp</returns>
         [AllowAnonymous]
         public ActionResult Laden(int id)
         {

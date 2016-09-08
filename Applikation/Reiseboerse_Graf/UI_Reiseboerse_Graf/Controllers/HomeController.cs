@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BL_Reiseboerse_Graf;
+using System.Diagnostics;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -10,7 +12,12 @@ namespace UI_Reiseboerse_Graf.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            Debug.WriteLine("Home - Index - GET");
+            Debug.Indent();
+            List<int> liste = new List<int>();
+            liste=BildVerwaltung.LadeAlleBildIDs();
+            Debug.Unindent();
+            return View(liste);
         }
 
         

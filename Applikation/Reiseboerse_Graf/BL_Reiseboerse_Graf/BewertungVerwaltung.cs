@@ -64,7 +64,11 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                     List<Bewertung> liste = context.AlleBewertungen.Where(x => x.Reise.ID == reise_id).ToList();
-                    bewertung = (int)liste.Average(x => x.Wertung);
+                    if (liste.Count >= 1)
+                    {
+                        double avg = liste.Average(x => x.Wertung);
+                        bewertung = (int)avg;
+                    }
                 }
                 catch (Exception ex)
                 {
