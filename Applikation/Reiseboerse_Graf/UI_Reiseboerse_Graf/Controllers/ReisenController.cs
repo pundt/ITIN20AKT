@@ -82,7 +82,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                                 reiseModel.Reisedaten.Add(reisedatum);
                             }
                         }
-                        model.Reisen.Add(reiseModel);
+                        if (reiseModel.Reisedaten.Count >= 1)
+                        {
+                            model.Reisen.Add(reiseModel);
+                        }
                     }
                 }
 
