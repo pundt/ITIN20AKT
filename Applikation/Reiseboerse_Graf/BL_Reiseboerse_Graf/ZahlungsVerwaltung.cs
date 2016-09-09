@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace BL_Reiseboerse_Graf
 {
@@ -76,7 +77,7 @@ namespace BL_Reiseboerse_Graf
 
             using (var context = new reisebueroEntities())
             {
-                using (var dbContextTransaction = context.Database.Connection.BeginTransaction())
+                using (var transaction = new TransactionScope())
                 {
                     try
                     {
@@ -90,12 +91,11 @@ namespace BL_Reiseboerse_Graf
                             context.AlleBuchung_Zahlungen.Add(bz);
                         }
                         context.SaveChanges();
-                        dbContextTransaction.Commit();
+                        transaction.Complete();
 
                     }
                     catch (Exception ex)
                     {
-                        dbContextTransaction.Rollback();
                         Debug.WriteLine("Fehler beim Zuordnen der Zahlung_Buchung");
                         Debug.WriteLine(ex.Message);
                         Debugger.Break();
