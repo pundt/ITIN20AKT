@@ -127,14 +127,14 @@
                 }
             </div>
         </div>
-
+        <hr />
         <div class="row">           
-            <div class="col-xs-3 col-xs-push-9">
-                <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
-            </div>
-            <div class="col-xs-5 col-xs-push-3 Schriftartblau">
+            <div class="col-xs-3 col-xs-offset-5 Schriftartblau">
                 Gesamtpreis: € @((Model.AnzahlModel.Anzahl_Erwachsene * Model.AnzahlModel.Preis_Erwachsene) + Model.AnzahlModel.Anzahl_Kinder * Model.AnzahlModel.Preis_Kind)
             </div>            
+            <div class="col-xs-3 col-xs-offset-1">
+                <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
+            </div>
         </div>
     }
     </div>

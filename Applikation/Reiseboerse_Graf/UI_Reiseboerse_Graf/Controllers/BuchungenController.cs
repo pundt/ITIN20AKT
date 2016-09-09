@@ -188,9 +188,9 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
         /// <summary>
-        /// Speichert die Reisedurchführung_IDs und gibt die View zur Eingabe der Zahlungsdaten zurück
+        /// Erstellt ein neues ZahlungsModel zur Eingabe der Zahlungsdaten
+        /// müsste im Produktivbetrieb eigentlich SSL verschlüsselt sein (https)
         /// </summary>
-        /// <param name="model">beinhaltet alle BuchungenModel</param>
         /// <returns>View zur Eingabe der Zahlungsdaten</returns>
         [HttpGet]
         public ActionResult Zahlung()
@@ -213,7 +213,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Nimmt das übergebene ZahlungModel entgegen und übergibt es an die BL
         /// </summary>
         /// <param name="model">das ZahlungModel</param>
-        /// <returns></returns>
+        /// <returns>falls ModelState.IsValid falsch zurück liefert, gibt es die View zurück</returns>
         [HttpPost]
         public ActionResult Zahlung(ZahlungModel model)
         {
@@ -239,6 +239,25 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                 //Könnte man noch einbauen:
                 // Wenn gesendet false ergibt, Nachfrage ob Email korrekt war etc...
+            }
+            else
+            {
+                ZahlungModel zahlung = new ZahlungModel()
+                {
+                    Vorname = model.Vorname,
+                    Nachname = model.Nachname,
+                    Nummer = model.Nummer
+                };
+                zahlung.Zahlungsarten = new List<ZahlungsartModel>();
+                foreach (var zahlungsart in ZahlungsVerwaltung.LadeAlleZahlungsArten())
+                {
+                    zahlung.Zahlungsarten.Add(new ZahlungsartModel()
+                    {
+                        Bezeichnung = zahlungsart.Bezeichnung,
+                        ID = zahlungsart.ID
+                    });
+                }
+                return View(zahlung);                
             }
             Debug.Unindent();
             return null;
