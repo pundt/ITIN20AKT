@@ -57,7 +57,7 @@
                                         @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Geburtsdatum)
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Geburtsdatum)
+                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Geburtsdatum, "{0:dd.MM.yyyy}")
                                     </td>
                                 </tr>
                             </table>
@@ -112,7 +112,7 @@
                                         @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum)
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum)
+                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum, "{0:dd.MM.yyyy}")
                                     </td>
                                 </tr>
                             </table>
