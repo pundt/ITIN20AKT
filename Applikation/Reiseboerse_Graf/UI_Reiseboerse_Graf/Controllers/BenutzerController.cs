@@ -33,7 +33,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         public ActionResult Login(LoginModel lm)
         {
             if (BenutzerVerwaltung.Anmelden(lm.Email, lm.Passwort))
-            {
+            {                
                 if (lm.AngemeldetBleiben)
                 {
                     FormsAuthentication.SetAuthCookie(lm.Email, true);
@@ -41,6 +41,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                 else
                 {
                     FormsAuthentication.SetAuthCookie(lm.Email, false);
+                }
+                if (!Request.UrlReferrer.AbsoluteUri.Contains("Reisen/Laden"))
+                {
+                    return Redirect(Request.UrlReferrer.AbsoluteUri);
                 }
             }
 
