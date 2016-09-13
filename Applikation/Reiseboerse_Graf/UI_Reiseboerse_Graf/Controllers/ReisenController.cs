@@ -376,7 +376,8 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4, HttpPostedFileBase file5, HttpPostedFileBase file6, HttpPostedFileBase file7, HttpPostedFileBase file8, HttpPostedFileBase file9, HttpPostedFileBase file10)
         {
-
+            int[] Reisebild_id = new int[5] ;
+            int[] Unterkunftbild_id = new int[5];
             Debug.Indent();
             Debug.WriteLine("Reise - ReiseHinzufügen - Post");
 
@@ -392,7 +393,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     if (index > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[0]= index;
                     }
                 }
 
