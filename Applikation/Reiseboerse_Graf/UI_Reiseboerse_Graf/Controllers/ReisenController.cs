@@ -380,113 +380,126 @@ namespace UI_Reiseboerse_Graf.Controllers
             int[] Unterkunftbild_id = new int[5];
             Debug.Indent();
             Debug.WriteLine("Reise - ReiseHinzufügen - Post");
-
-
-            int index = 0;
+            int index;
+            int e = 0;
+            int i = 0;
+            int bild_id = 0;
             if (ModelState.IsValid)
             {
 
 
                 if (file1 != null && file1.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        Reisebild_id[0]= index;
+                        Reisebild_id[i]= bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
 
                 if (file2 != null && file2.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
-                if (file3 != null && file2.ContentLength > 0)
+                if (file3 != null && file3.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
-                if (file4 != null && file2.ContentLength > 0)
+                if (file4 != null && file4.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
-                if (file5 != null && file2.ContentLength > 0)
+                if (file5 != null && file5.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
-                if (file6 != null && file2.ContentLength > 0)
+                if (file6 != null && file6.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file7 != null && file2.ContentLength > 0)
+                if (file7 != null && file7.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file8 != null && file2.ContentLength > 0)
+                if (file8 != null && file8.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file8 != null && file2.ContentLength > 0)
+                if (file8 != null && file9.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file9 != null && file2.ContentLength > 0)
+                if (file9 != null && file10.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file10 != null && file2.ContentLength > 0)
-                {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
-                    {
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
-                    }
-                }
+          
                 else
                 {
                     Debug.WriteLine("kein Bild vorhanden");

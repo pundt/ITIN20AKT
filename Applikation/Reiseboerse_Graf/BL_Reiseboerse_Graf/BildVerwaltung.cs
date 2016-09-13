@@ -138,8 +138,7 @@ namespace BL_Reiseboerse_Graf
             Debug.Write("BildVerwaltung - BildSpeichern");
             Debug.Indent();
 
-            Bild neuesBild = new Bild();
-
+            Bild neuesBild = new Bild();        
 
             reisebueroEntities context = new reisebueroEntities();
 
@@ -162,6 +161,7 @@ namespace BL_Reiseboerse_Graf
             context.AlleBilder.Add(neuesBild);
             context.SaveChanges();
             int bild_id = neuesBild.ID;
+
             return bild_id;
         }
     }
