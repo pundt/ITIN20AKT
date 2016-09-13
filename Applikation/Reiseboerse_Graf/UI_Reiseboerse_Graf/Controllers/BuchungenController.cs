@@ -18,7 +18,32 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Lädt alle Buchungen aus der Datenbank zu eines bestimmten BuchungsDatum.
+        /// </summary>
+        /// <param name="reisedatum_id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult LadeAlleBuchungenDatum(int reisedatum_id)
+        {
+            Debug.WriteLine("Buchungen - Lade Alle Buchungen Datum - GET");
+            Debug.Indent();
+            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleBuchungen(reisedatum_id);
+            List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
+            foreach (Buchung buchung in BL_Liste)
+            {
+                UI_Liste.Add(new BuchungAnzeigenModel()
+                {
+                    ReiseID = buchung.Reisedatum.Reise.ID,
+                    Startdatum = buchung.Reisedatum.Startdatum,
+                    Enddatum = buchung.Reisedatum.Enddatum,
+                    Reisetitel = buchung.Reisedatum.Reise.Titel,
+                    Reisedatum_ID = buchung.Reisedatum.ID
+                });
+            }
+            Debug.Unindent();
+            return View();
+        }
         /// <summary>
         /// Lädt alle Buchungen aus der Datenbank zu einer bestimmten Reise
         /// </summary>
@@ -26,7 +51,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns></returns>
         //[Authorize(Roles = "Mitarbeiter")]
         [HttpGet]
-        public ActionResult LadeAlleBuchungen(int reise_id)
+        public ActionResult LadeAlleBuchungenReise(int reise_id)
         {
             Debug.WriteLine("Buchungen - Lade Alle Buchungen - GET");
             Debug.Indent();
