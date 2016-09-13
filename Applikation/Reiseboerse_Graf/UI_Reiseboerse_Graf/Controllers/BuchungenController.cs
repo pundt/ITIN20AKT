@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using UI_Reiseboerse_Graf.Models;
 using BL_Reiseboerse_Graf;
 using System.Collections.Specialized;
+using System.Text.RegularExpressions;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -220,27 +221,34 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.WriteLine("Buchung - Zahlung - POST");
             Debug.Indent();
 
+            bool erfolgreich = false;
+
             if (ModelState.IsValid)
             {
-                Zahlung zahlung = new Zahlung()
+                if (!Regex.IsMatch(model.Nummer, "^[A-Z]{2}$"))
                 {
-                    Vorname = model.Vorname,
-                    Nachname = model.Nachname,
-                    Nummer = model.Nummer
-                };
-
-                int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
-                List<int> BuchungIDs = Session["Buchungen"] as List<int>;
-                ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
-
-                //Aufruf Buchungsbestätigung für den Kunden
-                string text = Session["Mailtext"] as string;
-                bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                    if (ZahlungsVerwaltung.PruefeLuhn(model.Nummer))
+                    {
+                        erfolgreich = ZahlungSpeichern(model);
+                        //Aufruf Buchungsbestätigung für den Kunden
+                        string text = Session["Mailtext"] as string;
+                        bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                    }
+                }
+                else
+                {
+                    erfolgreich = ZahlungSpeichern(model);
+                    //Aufruf Buchungsbestätigung für den Kunden
+                    string text = Session["Mailtext"] as string;
+                    bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                }
+                
 
                 //Könnte man noch einbauen:
                 // Wenn gesendet false ergibt, Nachfrage ob Email korrekt war etc...
+
             }
-            else
+            if (!erfolgreich)
             {
                 ZahlungModel zahlung = new ZahlungModel()
                 {
@@ -260,7 +268,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return View(zahlung);                
             }
             Debug.Unindent();
-            return null;
+            return View(); //Bestätgungs-View
         }
 
         /// <summary>
@@ -344,6 +352,42 @@ namespace UI_Reiseboerse_Graf.Controllers
             text += @"</ul></div>";
             text += @"<p class='logoschrift'>Wir wünschen Ihnen viel Freude in Ihrem Urlaub und hoffen, dass Sie auch das nächste mal bei uns buchen</p></body></html>";
             return text;
+        }
+
+        private bool ZahlungSpeichern(ZahlungModel model)
+        {
+            Debug.WriteLine("Buchungen - Zahlung Speichern");
+            Debug.Indent();
+
+            bool erfolgreich = false;
+
+            try
+            {
+                Zahlung zahlung = new Zahlung()
+                {
+                    Vorname = model.Vorname,
+                    Nachname = model.Nachname,
+                    Nummer = model.Nummer
+                };
+
+                int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
+                List<int> BuchungIDs = Session["Buchungen"] as List<int>;
+                int zeilen = ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
+
+                if (zeilen == BuchungIDs.Count)
+                {
+                    erfolgreich = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler beim Speichern der Zahlung");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return erfolgreich;
         }
     }
 }
