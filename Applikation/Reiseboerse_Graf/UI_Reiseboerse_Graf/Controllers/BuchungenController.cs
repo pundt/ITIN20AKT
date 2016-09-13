@@ -268,7 +268,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return View(zahlung);                
             }
             Debug.Unindent();
-            return View(); //Bestätgungs-View
+            return View("Bestaetigung");
         }
 
         /// <summary>

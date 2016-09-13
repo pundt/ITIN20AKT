@@ -268,6 +268,7 @@
     <Content Include="Views\Buchungen\LadeAlleBuchungenBenutzer.cshtml" />
     <Content Include="Views\Buchungen\ZeigeGesamt.cshtml" />
     <Content Include="Views\Buchungen\Zahlung.cshtml" />
+    <Content Include="Views\Buchungen\Bestaetigung.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

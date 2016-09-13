@@ -19,10 +19,10 @@
         </div>
     </div>
     <div>
-        <div class="col-xs-2">
+        <div class="col-xs-3">
             @Html.Partial("_Filter", Model.Filter)
         </div>
-        <div class="col-xs-9 col-xs-offset-1">
+        <div class="col-xs-8 col-xs-offset-1">
 
             @if (Model.Reisen == null || Model.Reisen.Count() <= 0)
             {
@@ -52,8 +52,8 @@
                                 @foreach (var datum in item.Reisedaten)
                                 {
                                 <tr>
-                                    <td>@datum.DatumsAnzeige</td>
-                                    <td>@Html.ActionLink("Details", "Anzeigen", new { id = datum.ID }, new { @class = "btn buttonind" })</td>
+                                    <td>@datum.DatumsAnzeige</td>                                    
+                                    <td>@Html.ActionLink("Details","Anzeigen", new { id = datum.ID }, new { @class = "btn buttonind" })</td>
                                 </tr>
                                 }
                             </table>
@@ -94,18 +94,18 @@
                 var slider = document.getElementById('preis');
 
                 noUiSlider.create(slider, {
-                    start: [0, 1000],
+                    start: [0, 1500],
                     range: {
                         'min': [0],
-                        'max': [1000]
+                        'max': [1500]
                     },
                     connect: true,
                     pips: {
                         mode: 'steps',
                         density: 5
                     },
-                    step: 200,
-                    margin: 200
+                    step: 300,
+                    margin: 100
                 });
 
                 var preisMin = document.getElementById("PreisMin"),
