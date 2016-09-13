@@ -514,8 +514,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 if (neueReise.NeuesLand != null)
                 {
-                    index = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand));
-                    if (index > 0)
+                    neueReise.Land_id=BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand);
+                    if (neueReise.Land_id > 0)
                     {
                         Debug.WriteLine("landspeichern erfolgreich");
                     }
@@ -535,7 +535,19 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Debug.WriteLine("Unterkunftspeichern erfolgreich");
                     }
                 }
-
+                Reise BlReise = new Reise();
+                BlReise.Titel = neueReise.Titel;
+                BlReise.Beschreibung = neueReise.Beschreibung;
+                BlReise.Unterkunft.ID = neueReise.Unterkunft_id;
+                BlReise.Preis_Erwachsener = neueReise.PreisErw;
+                BlReise.Preis_Kind = neueReise.PreisKind;
+                BlReise.Ort.ID = neueReise.Ort_id;
+                if (ReiseVerwaltung.SpeicherReise(BlReise) > 0)
+                {
+                    Debug.WriteLine("Reise anlegen erfolgreich");
+                    return RedirectToAction("");
+                }
+             
             }
             return RedirectToAction("Index");
         }

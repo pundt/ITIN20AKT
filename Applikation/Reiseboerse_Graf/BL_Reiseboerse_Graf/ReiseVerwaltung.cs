@@ -332,6 +332,29 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return gesuchtesReisedatum;
         }
+         public static int SpeicherReise(Reise neueReise)
+        {
+            int index = 0;          
+
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+                    context.AlleReisen.Add(neueReise);
+                    context.SaveChanges();
+                    index = neueReise.ID;
+                    Debug.WriteLine("Speichern erfolgreich");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Reise speichern");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                    Debug.Unindent();
+                }
+            }
+            return index;
+        }
 
      
 
