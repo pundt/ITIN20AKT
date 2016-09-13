@@ -271,6 +271,8 @@
     <Content Include="Views\Buchungen\Zahlung.cshtml" />
     <Content Include="Views\Buchungen\Bestaetigung.cshtml" />
     <Content Include="Views\Home\Verwaltung.cshtml" />
+    <Content Include="Views\Reisen\Verwalten.cshtml" />
+    <Content Include="Views\Shared\_LayoutVerwaltung.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
