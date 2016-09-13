@@ -581,13 +581,25 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View("Laden", viewmodel);
         }        
 
+        [HttpGet]
         public ActionResult Verwalten()
         {
             Debug.WriteLine("Reisen - Verwalten - GET");
             Debug.Indent();
+            List<Reise> BL_Reisen = ReiseVerwaltung.LadeAlleReisen();
+            List<ReiseVerwaltenModel> UI_Reisen = new List<ReiseVerwaltenModel>();
 
+            foreach (var reise in BL_Reisen)
+            {
+                UI_Reisen.Add(new ReiseVerwaltenModel()
+                {
+                    ID = reise.ID,
+                    Reisetitel = reise.Titel
+                });
+            }
+            UI_Reisen = UI_Reisen.OrderBy(x => x.ID).ToList();
             Debug.Unindent();
-            return View();
+            return View(UI_Reisen);
         }
 
 
