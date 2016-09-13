@@ -20,6 +20,16 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(liste);
         }
 
+        //[Authorize(Roles ="Mitarbeiter")]
+        [HttpGet]
+        public ActionResult Verwaltung()
+        {
+            Debug.WriteLine("Home - Verwaltung - GET");
+            Debug.Indent();
+            Debug.Unindent();
+            return View();
+        }
+
         
     }
 }
