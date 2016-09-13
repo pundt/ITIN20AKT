@@ -77,5 +77,7 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return gesuchterBenutzer;
         }
+
+        public static string BenutzerRolle = "";
     }
 }

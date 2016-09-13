@@ -21,7 +21,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Unindent();
             return View(liste);
         }
-
+        [PruefeBenutzer]
         [HttpGet]
         public ActionResult Verwaltung()
         {

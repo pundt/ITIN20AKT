@@ -7,9 +7,26 @@ using UI_Reiseboerse_Graf.Models;
 using BL_Reiseboerse_Graf;
 using System.Diagnostics;
 using System.Web.Security;
+using System.Reflection;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
+    /// <summary>
+    /// Attribut zum Prüfen ob der aktuell angemeldete Benutzer berechtigt ist
+    /// </summary>
+    public class PruefeBenutzer : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            string username = filterContext.HttpContext.User.Identity.Name;
+
+            if (!Tools.BistDuMitarbeiter(username))
+            {
+                filterContext.Result = new RedirectResult("~/Reisen/Laden");
+            }
+        }
+    }
+
     public class BenutzerController : Controller
     {
         [HttpGet]
@@ -17,7 +34,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             return View();
         }
-
+        
         [HttpGet]
         public ActionResult GebuchteReisen()
         {

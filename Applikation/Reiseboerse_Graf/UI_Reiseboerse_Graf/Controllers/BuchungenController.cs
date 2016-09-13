@@ -49,7 +49,6 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="reise_id"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "Mitarbeiter")]
         [HttpGet]
         public ActionResult LadeAlleBuchungenReise(int reise_id)
         {
