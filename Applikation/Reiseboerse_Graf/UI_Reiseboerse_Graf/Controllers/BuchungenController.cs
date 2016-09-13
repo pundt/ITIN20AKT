@@ -326,6 +326,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View("Hinzufuegen", model);
         }
 
+        /// <summary>
+        /// Erzeugt den Mailtext der als Buchungsbestätigung an den Benutzer gesendet wird
+        /// </summary>
+        /// <param name="model">Das Buchungsmodel, mit den Daten, die in den Mailtext vorbereitet</param>
+        /// <returns>den Mailtext als string</returns>
         private string MailTextErzeugen(BuchungGesamtModel model)
         {
             string text = @"<!DOCTYPE html><html lang = en xmlns = http://www.w3.org/1999/xhtml>
@@ -394,6 +399,41 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             Debug.Unindent();
             return erfolgreich;
+        }
+
+        /// <summary>
+        /// Liefert für die Mitarbeiter die Übersicht über alle stornierten Buchungen
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult StornoVerwalten()
+        {
+            Debug.WriteLine("Buchungen - StornoVerwalten - GET");
+            Debug.Indent();
+            List<Buchung> BL_Buchungen = BuchungsVerwaltung.LadeAlleStorniertenBuchungen();
+            List<StornoModel> UI_StornoauftragListe = new List<StornoModel>();
+            foreach (var buchung in BL_Buchungen)
+            {
+                StornoModel storno = new StornoModel()
+                {
+                    Id = buchung.ID,
+                    Name = string.Format("{0} {1}", buchung.Vorname, buchung.Nachname),
+                    Geburtsdatum = buchung.Geburtsdatum,
+                    GebuchtAm = buchung.ErstelltAm,
+                    Passnummer = buchung.Passnummer
+                };
+                if (buchung.Geburtsdatum.AddYears(13).Date<=DateTime.Now.Date)
+                {
+                    storno.Preis = buchung.Reisedatum.Reise.Preis_Erwachsener;
+                }
+                else
+                {
+                    storno.Preis = buchung.Reisedatum.Reise.Preis_Kind;
+                }
+                UI_StornoauftragListe.Add(storno);
+            }
+            Debug.Unindent();
+            return View(UI_StornoauftragListe);
         }
     }
 }
