@@ -32,6 +32,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {
+
             if (BenutzerVerwaltung.Anmelden(lm.Email, lm.Passwort))
             {                
                 if (lm.AngemeldetBleiben)
@@ -42,10 +43,18 @@ namespace UI_Reiseboerse_Graf.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(lm.Email, false);
                 }
-                if (!Request.UrlReferrer.AbsoluteUri.Contains("Reisen/Laden"))
+                if (User.IsInRole("Kunde"))
                 {
-                    return Redirect(Request.UrlReferrer.AbsoluteUri);
+                    if (!Request.UrlReferrer.AbsoluteUri.Contains("Reisen/Laden"))
+                    {
+                        return Redirect(Request.UrlReferrer.AbsoluteUri);
+                    }
                 }
+                else
+                {
+                    return RedirectToAction("Verwaltung", "Home");
+                }
+                
             }
 
             return RedirectToAction("Laden", "Reisen");
@@ -104,6 +113,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                         b.Land = l;
 
                         benutzerList.Add(b);
+
+                        Roles.AddUserToRole(bm.Email, "Kunde");
 
                         context.SaveChanges();
                     }
