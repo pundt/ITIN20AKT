@@ -160,9 +160,9 @@ namespace BL_Reiseboerse_Graf
 
 
             context.AlleBilder.Add(neuesBild);
-            int index = context.SaveChanges();
-
-            return index;
+            context.SaveChanges();
+            int bild_id = neuesBild.ID;
+            return bild_id;
         }
     }
 }
