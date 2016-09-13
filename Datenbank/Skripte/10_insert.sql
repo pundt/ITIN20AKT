@@ -92,8 +92,12 @@ INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(3, '2017-25-07', '2017-30-07', '2017-15-06');
 INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(4, '2017-07-01', '2017-21-01', '2016-23-12');
+INSERT INTO Reisedatum(reise_id,startdatum, enddatum,anmeldefrist) 
+VALUES(4,'2017-10-10','2017-11-09','2017-09-09');
 INSERT INTO Reisedatum(reise_id, startdatum, enddatum, anmeldefrist)
 VALUES(5, '2017-01-03', '2017-15-03', '2017-02-02');
+INSERT INTO Reisedatum(reise_id,startdatum, enddatum,anmeldefrist) 
+VALUES(5,'2017-10-10','2017-11-09','2017-09-09');
 GO
 
 INSERT INTO Bild (bilddaten)
@@ -220,6 +224,16 @@ INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(8);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(8);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(8);
 INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(8);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(9);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(9);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(9);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(9);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(9);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(10);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(10);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(10);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(10);
+INSERT INTO Reisedurchfuehrung(reisedatum_id) VALUES(10);
 GO
 
 INSERT INTO Buchung(vorname, nachname, geburtsdatum, reisedatum_id,benutzer_id,passnummer) 
