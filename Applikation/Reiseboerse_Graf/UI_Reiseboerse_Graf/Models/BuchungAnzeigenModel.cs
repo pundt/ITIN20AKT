@@ -13,5 +13,6 @@ namespace UI_Reiseboerse_Graf.Models
         public DateTime Startdatum { get; set; }
         public DateTime Enddatum { get; set; }
         public int? Bewertung { get; set; }
+        public int Reisedatum_ID { get; set; }
     }
 }

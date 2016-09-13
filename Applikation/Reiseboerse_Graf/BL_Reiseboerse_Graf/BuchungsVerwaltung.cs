@@ -12,6 +12,7 @@ namespace BL_Reiseboerse_Graf
         /// <summary>
         /// Lädt alle Buchungen zu einer bestimmten Reise an einem bestimmten Datum aus der Datenbank
         /// </summary>
+        /// <param name="reisedatum_id">int32</param>
         /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
         public static List<Buchung> LadeAlleBuchungen(int reisedatum_id)
         {
