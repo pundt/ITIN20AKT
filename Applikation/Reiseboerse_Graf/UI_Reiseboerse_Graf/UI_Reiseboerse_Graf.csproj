@@ -153,6 +153,7 @@
     <Compile Include="Models\ReiseLadenModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
     <Compile Include="Models\ReiseVerwaltenModel.cs" />
+    <Compile Include="Models\StornoModel.cs" />
     <Compile Include="Models\TextsucheModel.cs" />
     <Compile Include="Models\UnterkunftdetailModel.cs" />
     <Compile Include="Models\VerpflegungModel.cs" />
@@ -273,6 +274,7 @@
     <Content Include="Views\Home\Verwaltung.cshtml" />
     <Content Include="Views\Reisen\Verwalten.cshtml" />
     <Content Include="Views\Shared\_LayoutVerwaltung.cshtml" />
+    <Content Include="Views\Buchungen\StornoVerwalten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
