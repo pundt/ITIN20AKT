@@ -334,7 +334,7 @@ namespace BL_Reiseboerse_Graf
         }
          public static int SpeicherReise(Reise neueReise)
         {
-            int index = 0;          
+            int reise_id = 0;          
 
             using (reisebueroEntities context = new reisebueroEntities())
             {
@@ -342,7 +342,7 @@ namespace BL_Reiseboerse_Graf
                 {
                     context.AlleReisen.Add(neueReise);
                     context.SaveChanges();
-                    index = neueReise.ID;
+                    reise_id = neueReise.ID;
                     Debug.WriteLine("Speichern erfolgreich");
                 }
                 catch (Exception ex)
@@ -353,10 +353,7 @@ namespace BL_Reiseboerse_Graf
                     Debug.Unindent();
                 }
             }
-            return index;
+            return reise_id;
         }
-
-     
-
     }
 }

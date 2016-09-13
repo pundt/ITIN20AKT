@@ -19,7 +19,7 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("BildVerwaltung - LadeAlleBildIDs");
             Debug.Indent();
             List<int> liste = new List<int>();
-            using (var context=new reisebueroEntities())
+            using (var context = new reisebueroEntities())
             {
                 try
                 {
@@ -38,8 +38,8 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return liste;
         }
-        
-        
+
+
         /// <summary>
         /// Liest aus der Datebank ein Bild aus
         /// </summary>
@@ -138,7 +138,7 @@ namespace BL_Reiseboerse_Graf
             Debug.Write("BildVerwaltung - BildSpeichern");
             Debug.Indent();
 
-            Bild neuesBild = new Bild();        
+            Bild neuesBild = new Bild();
 
             reisebueroEntities context = new reisebueroEntities();
 
@@ -163,6 +163,51 @@ namespace BL_Reiseboerse_Graf
             int bild_id = neuesBild.ID;
 
             return bild_id;
+        }
+
+        public static int BildZuReiseSpeichern(int reiseid, int[]bildid)
+        {
+            reisebueroEntities context = new reisebueroEntities();
+            int index = 0;
+            for (int i = 0; i < bildid.Length-1; i++)
+            {
+                if (bildid[i] != 0)
+                {
+                    Reise_Bild neueBildReise = new Reise_Bild();
+                    neueBildReise.Reise.ID = reiseid;
+                    neueBildReise.Bild.ID = bildid[i];
+                    context.AlleReise_Bilder.Add(neueBildReise);
+                    index += context.SaveChanges();
+                }
+                else
+                {
+                    return index;
+                }
+           
+            }
+            return index;
+        }
+        public static int BildZuUnterkunft(int unterkunftid, int[]bildid)
+        {
+            reisebueroEntities context = new reisebueroEntities();
+            int index = 0;
+            for (int i = 0; i < bildid.Length - 1; i++)
+            {
+                if (bildid[i] != 0)
+                {
+                    Unterkunft_Bild neueBildUnterkunft = new Unterkunft_Bild();
+                    neueBildUnterkunft.Bild.ID = bildid[i];
+                    neueBildUnterkunft.Unterkunft.ID = unterkunftid;
+                    context.AlleUnterkunft_Bilder.Add(neueBildUnterkunft);
+                    index += context.SaveChanges();
+                }
+                else
+                {
+                    return index;
+                }
+                
+            }
+            return index;
         }
     }
 }
