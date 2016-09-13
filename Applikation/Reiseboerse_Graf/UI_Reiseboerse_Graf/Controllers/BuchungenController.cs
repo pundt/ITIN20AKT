@@ -221,35 +221,34 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.WriteLine("Buchung - Zahlung - POST");
             Debug.Indent();
 
+            bool erfolgreich = false;
+
             if (ModelState.IsValid)
             {
                 if (!Regex.IsMatch(model.Nummer, "^[A-Z]{2}$"))
                 {
                     if (ZahlungsVerwaltung.PruefeLuhn(model.Nummer))
                     {
-
+                        erfolgreich = ZahlungSpeichern(model);
+                        //Aufruf Buchungsbestätigung für den Kunden
+                        string text = Session["Mailtext"] as string;
+                        bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
                     }
                 }
-
-                Zahlung zahlung = new Zahlung()
+                else
                 {
-                    Vorname = model.Vorname,
-                    Nachname = model.Nachname,
-                    Nummer = model.Nummer
-                };
-
-                int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
-                List<int> BuchungIDs = Session["Buchungen"] as List<int>;
-                ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
-
-                //Aufruf Buchungsbestätigung für den Kunden
-                string text = Session["Mailtext"] as string;
-                bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                    erfolgreich = ZahlungSpeichern(model);
+                    //Aufruf Buchungsbestätigung für den Kunden
+                    string text = Session["Mailtext"] as string;
+                    bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                }
+                
 
                 //Könnte man noch einbauen:
                 // Wenn gesendet false ergibt, Nachfrage ob Email korrekt war etc...
+
             }
-            else
+            if (!erfolgreich)
             {
                 ZahlungModel zahlung = new ZahlungModel()
                 {
@@ -269,7 +268,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return View(zahlung);                
             }
             Debug.Unindent();
-            return null;
+            return View(); //Bestätgungs-View
         }
 
         /// <summary>
@@ -355,10 +354,12 @@ namespace UI_Reiseboerse_Graf.Controllers
             return text;
         }
 
-        private void ZahlungSpeichern(ZahlungModel model)
+        private bool ZahlungSpeichern(ZahlungModel model)
         {
             Debug.WriteLine("Buchungen - Zahlung Speichern");
             Debug.Indent();
+
+            bool erfolgreich = false;
 
             try
             {
@@ -371,7 +372,12 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                 int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
                 List<int> BuchungIDs = Session["Buchungen"] as List<int>;
-                ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
+                int zeilen = ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
+
+                if (zeilen == BuchungIDs.Count)
+                {
+                    erfolgreich = true;
+                }
             }
             catch (Exception ex)
             {
@@ -381,6 +387,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
 
             Debug.Unindent();
+            return erfolgreich;
         }
     }
 }
