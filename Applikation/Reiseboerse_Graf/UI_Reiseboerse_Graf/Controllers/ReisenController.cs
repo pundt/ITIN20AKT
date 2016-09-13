@@ -311,7 +311,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             BewertungVerwaltung.BewertungSpeichern(reiseID, bewertung);
             return new EmptyResult();
         }
-
+        [PruefeBenutzer]
         [HttpGet]
         public ActionResult ReiseHinzufuegen()
         {
@@ -643,7 +643,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return View("Laden", viewmodel);
         }
-
+        [PruefeBenutzer]
         [HttpGet]
         public ActionResult Verwalten()
         {

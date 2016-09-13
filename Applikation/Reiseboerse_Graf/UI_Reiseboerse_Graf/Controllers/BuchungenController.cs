@@ -254,7 +254,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             if (ModelState.IsValid)
             {
-                if (!Regex.IsMatch(model.Nummer, "^[A-Z]{2}$"))
+                if (!Regex.IsMatch(model.Nummer, "^[A-Z]{2}"))
                 {
                     if (ZahlungsVerwaltung.PruefeLuhn(model.Nummer))
                     {
