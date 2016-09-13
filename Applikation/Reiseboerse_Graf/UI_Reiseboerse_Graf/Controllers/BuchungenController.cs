@@ -24,6 +24,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="reise_id"></param>
         /// <returns></returns>
+        //[Authorize(Roles = "Mitarbeiter")]
         [HttpGet]
         public ActionResult LadeAlleBuchungen(int reise_id)
         {
@@ -67,6 +68,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="anzahl">die ausgewählte Anzahl der Buchungen bei der View Anzeigen</param>
         /// <returns>die View zum Eingeben der Daten</returns>
+        [Authorize]
         [HttpGet]
         public ActionResult Hinzufuegen(BuchungHinzufuegenModel model)
         {
@@ -79,6 +81,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Fügt Buchungen anhand der Formulardaten (Request) hinzu
         /// </summary>
         /// <returns>Kontrollansicht der Daten</returns>
+        [Authorize]
         [HttpPost]
         public ActionResult Hinzufuegen()
         {
@@ -193,6 +196,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// müsste im Produktivbetrieb eigentlich SSL verschlüsselt sein (https)
         /// </summary>
         /// <returns>View zur Eingabe der Zahlungsdaten</returns>
+        [Authorize]
         [HttpGet]
         public ActionResult Zahlung()
         {
@@ -215,6 +219,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="model">das ZahlungModel</param>
         /// <returns>falls ModelState.IsValid falsch zurück liefert, gibt es die View zurück</returns>
+        [Authorize]
         [HttpPost]
         public ActionResult Zahlung(ZahlungModel model)
         {
@@ -276,6 +281,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="anzahlmodel">Die Anzahl der gewünschten Buchungen und zusätzl. Daten</param>
         /// <returns>View zum Eingeben der Daten</returns>
+        [Authorize]
         [HttpPost]
         public ActionResult Buchen()
         {
