@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title= "Verwaltung";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reisebüro Graf - @ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/Content/bilder/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Content/bilder/favicon.ico" type="image/x-icon">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <h2 class="Schriftartblau">Verwaltung</h2>
+    <div class="col-xs-10">
+        <img src="~/Content/bilder/reisebüro_logo.jpg" class="center-block"/>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 box">
+            @Html.ActionLink("Reisen", "Verwalten", "Reisen")
+            <hr />
+            <ul>
+                <li>Reisen hinzufügen</li>
+                <li>Reisen ändern</li>
+                <li>Reisen löschen</li>
+            </ul>
+        </div>
+        <div class="col-xs-3 box">
+            @Html.ActionLink("Buchungen", "Verwalten", "Buchungen")
+            <hr />
+            <ul>
+                <li>Alle Buchungen auflisten</li>
+                <li>Alle Buchungen zu einem Benutzer auflisten</li>
+                <li>Alle Buchungen zu einem Reisedatum auflisten</li>
+                <li>Eine Buchung stornieren</li>
+            </ul>
+        </div>
+        <div class="col-xs-3 box">
+            @Html.ActionLink("Stornoaufträge", "StornoVerwalten", "Buchungen")
+            <hr />
+            <ul>
+                <li>Alle Stornoaufträge einsehen</li>
+                <li>Stornoaufträge rückgängig machen</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -579,7 +579,17 @@ namespace UI_Reiseboerse_Graf.Controllers
             };
 
             return View("Laden", viewmodel);
+        }        
+
+        public ActionResult Verwalten()
+        {
+            Debug.WriteLine("Reisen - Verwalten - GET");
+            Debug.Indent();
+
+            Debug.Unindent();
+            return View();
         }
+
 
         /// <summary>
         /// Befüllen mit Daten im Testsytem für Reise anzeigen 
