@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BL_Reiseboerse_Graf;
 using System.Diagnostics;
+using System.Web.Security;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -16,8 +17,19 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Indent();
             List<int> liste = new List<int>();
             liste=BildVerwaltung.LadeAlleBildIDs();
+
             Debug.Unindent();
             return View(liste);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Verwaltung()
+        {
+            Debug.WriteLine("Home - Verwaltung - GET");
+            Debug.Indent();
+            Debug.Unindent();
+            return View();
         }
 
         

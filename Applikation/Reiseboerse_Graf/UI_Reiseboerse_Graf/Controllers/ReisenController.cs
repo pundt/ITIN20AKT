@@ -77,7 +77,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                                 ID = datum.ID,
                                 Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
                             };
-                            if (reisedatum.Anmeldefrist>=DateTime.Now&&reisedatum.Restplätze>=1)
+                            if (reisedatum.Anmeldefrist >= DateTime.Now && reisedatum.Restplätze >= 1)
                             {
                                 reiseModel.Reisedaten.Add(reisedatum);
                             }
@@ -376,138 +376,152 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4, HttpPostedFileBase file5, HttpPostedFileBase file6, HttpPostedFileBase file7, HttpPostedFileBase file8, HttpPostedFileBase file9, HttpPostedFileBase file10)
         {
-
+            int e = 0;
+            int i = 0;
+            int bild_id = 0;
+            int unterkunft_id;
+            int[] Reisebild_id = new int[5];
+            int[] Unterkunftbild_id = new int[5];
             Debug.Indent();
-            Debug.WriteLine("Reise - ReiseHinzufügen - Post");
-
-
-            int index = 0;
+            Debug.WriteLine("Reise - ReiseHinzufügen - Post");            
             if (ModelState.IsValid)
             {
 
-
                 if (file1 != null && file1.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
 
                 if (file2 != null && file2.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
-                if (file3 != null && file2.ContentLength > 0)
+                if (file3 != null && file3.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
-                if (file4 != null && file2.ContentLength > 0)
+                if (file4 != null && file4.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
-                if (file5 != null && file2.ContentLength > 0)
+                if (file5 != null && file5.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    if (bild_id > 0)
                     {
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        Reisebild_id[i] = bild_id;
+                        i++;
+                        bild_id = 0;
                     }
                 }
-                if (file6 != null && file2.ContentLength > 0)
+                if (file6 != null && file6.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file7 != null && file2.ContentLength > 0)
+                if (file7 != null && file7.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file8 != null && file2.ContentLength > 0)
+                if (file8 != null && file8.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file8 != null && file2.ContentLength > 0)
+                if (file9 != null && file9.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file9 != null && file2.ContentLength > 0)
+                if (file10 != null && file10.ContentLength > 0)
                 {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    if (bild_id > 0)
                     {
+                        Unterkunftbild_id[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
+                        e++;
+                        bild_id = 0;
                     }
                 }
-                if (file10 != null && file2.ContentLength > 0)
-                {
-                    index = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
-                    if (index > 0)
-                    {
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        index = 0;
-                    }
-                }
+
                 else
                 {
                     Debug.WriteLine("kein Bild vorhanden");
                 }
                 if (neueReise.NeuerOrt != null)
                 {
-                    index = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuenOrt(neueReise.NeuerOrt, neueReise.Land_id);
-                    if (index > 0)
+                    neueReise.Ort_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuenOrt(neueReise.NeuerOrt, neueReise.Land_id);
+                    if (neueReise.Ort_id > 0)
                     {
                         Debug.WriteLine("Ortspeichern erfolgreich");
                     }
                 }
                 if (neueReise.NeuesLand != null)
                 {
-                    index = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand));
-                    if (index > 0)
+                    neueReise.Land_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand);
+                    if (neueReise.Land_id > 0)
                     {
                         Debug.WriteLine("landspeichern erfolgreich");
                     }
                 }
-                if (neueReise.Unterkunft == null && neueReise.NeueUnterkunft != null)
+                if (neueReise.NeueUnterkunft != null)
                 {
+
                     Unterkunft neueUnterkunft = new Unterkunft()
                     {
                         Bezeichnung = neueReise.NeueUnterkunft.Bezeichnung,
@@ -515,11 +529,49 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Kategorie = neueReise.NeueUnterkunft.Kategorie
                     };
                     neueUnterkunft.Verpflegung = ReiseVerwaltung.SucheVerpflegung(neueReise.Verpflegung_id);
-                    index = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeichereNeueUnterkunft(neueUnterkunft));
-                    if (index > 0)
+                    unterkunft_id = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeichereNeueUnterkunft(neueUnterkunft));
+                    if (unterkunft_id > 0)
                     {
                         Debug.WriteLine("Unterkunftspeichern erfolgreich");
                     }
+                }
+                Reise BlReise = new Reise();
+                BlReise.Titel = neueReise.Titel;
+                BlReise.Beschreibung = neueReise.Beschreibung;
+                BlReise.Unterkunft.ID = neueReise.Unterkunft_id;
+                BlReise.Preis_Erwachsener = neueReise.PreisErw;
+                BlReise.Preis_Kind = neueReise.PreisKind;
+                BlReise.Ort.ID = neueReise.Ort_id;
+                neueReise.Id = ReiseVerwaltung.SpeicherReise(BlReise);
+                if (neueReise.Id > 0)
+                {
+                    Debug.WriteLine("Reise anlegen erfolgreich");
+                    return RedirectToAction("");
+                }
+                try
+                {
+                    if (BildVerwaltung.BildZuReiseSpeichern(neueReise.Id, Reisebild_id)>0)
+                    {
+                        Debug.WriteLine("BildZuReiseSpeichern - erfolgreich");
+                    }                
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine("BildZuReiseSpeichern - fehlgeschlagen");
+                    Debug.WriteLine(ex.Message);
+                }
+                try
+                {
+                    if(BildVerwaltung.BildZuReiseSpeichern(neueReise.Id, Unterkunftbild_id) > 0)
+                    {
+                        Debug.WriteLine("UnterkunftBildSpeichern - erfolgreich");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("UnterkunftBildSpeichern - fehlgeschlagen");
+                    Debug.WriteLine(ex.Message);
                 }
 
             }
@@ -579,6 +631,28 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return View("Laden", viewmodel);
         }
+
+        [HttpGet]
+        public ActionResult Verwalten()
+        {
+            Debug.WriteLine("Reisen - Verwalten - GET");
+            Debug.Indent();
+            List<Reise> BL_Reisen = ReiseVerwaltung.LadeAlleReisen();
+            List<ReiseVerwaltenModel> UI_Reisen = new List<ReiseVerwaltenModel>();
+
+            foreach (var reise in BL_Reisen)
+            {
+                UI_Reisen.Add(new ReiseVerwaltenModel()
+                {
+                    ID = reise.ID,
+                    Reisetitel = reise.Titel
+                });
+            }
+            UI_Reisen = UI_Reisen.OrderBy(x => x.ID).ToList();
+            Debug.Unindent();
+            return View(UI_Reisen);
+        }
+
 
         /// <summary>
         /// Befüllen mit Daten im Testsytem für Reise anzeigen 

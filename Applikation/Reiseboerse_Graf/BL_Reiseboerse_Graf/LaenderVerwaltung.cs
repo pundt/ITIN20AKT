@@ -119,7 +119,8 @@ namespace BL_Reiseboerse_Graf
                     neuerOrt.Bezeichnung = neuerort;
                     neuerOrt.Land = neuesLand;
                     context.AlleOrte.Add(neuerOrt);
-                    index = context.SaveChanges();
+                    context.SaveChanges();
+                    index = neuerOrt.ID;
 
                 }
                 catch (Exception ex)
@@ -135,7 +136,7 @@ namespace BL_Reiseboerse_Graf
         }
         public static int SpeicherNeuesLand(string neuesLand)
         {
-            int index = -1;
+            int index = 0;
 
             Debug.WriteLine("Länderverwaltung - SpeicherNeuesLand");
             Debug.Indent();
@@ -149,7 +150,8 @@ namespace BL_Reiseboerse_Graf
                     try
                     {
                         context.AlleLaender.Add(land);
-                        index = context.SaveChanges();
+                        context.SaveChanges();
+                        index = land.ID;
                         Debug.WriteLine("Speichern erfolgreich");
                     }
                     catch (Exception ex)
@@ -177,7 +179,8 @@ namespace BL_Reiseboerse_Graf
                     try
                     {
                         context.AlleUnterkuenfte.Add(neueUnterkunft);
-                        index = context.SaveChanges();
+                        context.SaveChanges();
+                        index = neueUnterkunft.ID;
                         Debug.WriteLine("Speichern erfolgreich");
                     }
                     catch (Exception ex)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace BL_Reiseboerse_Graf
 {
@@ -90,6 +91,48 @@ namespace BL_Reiseboerse_Graf
 
             }
             return null;
+        }
+
+        /// <summary>
+        /// Prüft ob ein Benutzer ein Mitarbeiter ist, wenn ja gibt die Methode true, ansonsten false zurück
+        /// </summary>
+        /// <param name="email">Die Email-Adresse des zu prüfenden Benutzers</param>
+        /// <returns>true oder false</returns>
+        public static bool BistDuMitarbeiter(string email)
+        {
+            Debug.WriteLine("Tools - Bist du Mitarbeiter");
+            Debug.Indent();
+
+            bool istMitarbeiter = false;
+
+            reisebueroEntities context = new reisebueroEntities();
+
+            try
+            {
+                using (context)
+                {
+                    //Gibt es einen Benutzer, bei der die Email Adresse dem Parameter entspricht
+                    // UND das Feld Ist_Mitarbeiter TRUE ist
+                    istMitarbeiter = context.AlleBenutzer.Any(x => x.Email == email && x.Ist_Mitarbeiter);
+
+                    //foreach (var item in context.AlleBenutzer)
+                    //{
+                    //    if (item.Email == email && item.Ist_Mitarbeiter)
+                    //    {
+                    //        istMitarbeiter = true;
+                    //    }
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler beim Prüfen ob ein Benutzer ein Mitarbeiter ist");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return istMitarbeiter;
         }
     }
 }

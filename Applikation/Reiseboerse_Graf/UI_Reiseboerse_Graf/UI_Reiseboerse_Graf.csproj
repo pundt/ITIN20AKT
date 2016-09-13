@@ -159,6 +159,8 @@
     <Compile Include="Models\ReisedetailModel.cs" />
     <Compile Include="Models\ReiseLadenModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
+    <Compile Include="Models\ReiseVerwaltenModel.cs" />
+    <Compile Include="Models\StornoModel.cs" />
     <Compile Include="Models\TextsucheModel.cs" />
     <Compile Include="Models\UnterkunftdetailModel.cs" />
     <Compile Include="Models\VerpflegungModel.cs" />
@@ -275,6 +277,11 @@
     <Content Include="Views\Buchungen\LadeAlleBuchungenBenutzer.cshtml" />
     <Content Include="Views\Buchungen\ZeigeGesamt.cshtml" />
     <Content Include="Views\Buchungen\Zahlung.cshtml" />
+    <Content Include="Views\Buchungen\Bestaetigung.cshtml" />
+    <Content Include="Views\Home\Verwaltung.cshtml" />
+    <Content Include="Views\Reisen\Verwalten.cshtml" />
+    <Content Include="Views\Shared\_LayoutVerwaltung.cshtml" />
+    <Content Include="Views\Buchungen\StornoVerwalten.cshtml" />
     <Content Include="Views\Buchungen\LadeAlleBuchungenDatum.cshtml" />
   </ItemGroup>
   <ItemGroup>

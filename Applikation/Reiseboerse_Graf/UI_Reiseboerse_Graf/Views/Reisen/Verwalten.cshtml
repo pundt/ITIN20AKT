@@ -1,0 +1,38 @@
+﻿@model IEnumerable<UI_Reiseboerse_Graf.Models.ReiseVerwaltenModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutVerwaltung.cshtml";
+}
+
+<h2 class="Schriftartblau">Verwaltung aller Reisen</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>@Html.DisplayNameFor(model => model.Reisetitel)</th>
+        <th>Aktionen</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reisetitel)
+            </td>
+            <td>
+                @Html.ActionLink("Ändern", "Bearbeiten", new { id = item.ID }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Löschen", "Entfernen", new { id = item.ID }, new { @class = "btn btn-warning" })
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="3" align="right">
+            @Html.ActionLink("Neue Reise anlegen", "ReiseHinzufuegen", "Reisen",new { @class="btn btn-primary"})
+        </td>
+    </tr>
+</table>
+

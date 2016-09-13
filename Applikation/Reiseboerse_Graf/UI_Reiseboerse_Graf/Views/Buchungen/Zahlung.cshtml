@@ -4,7 +4,7 @@
     ViewBag.Title = "Zahlung";
 }
 
-<h2>Zahlung</h2>
+<h2 class="Schriftartblau">Zahlung</h2>
 
 
 @using (Html.BeginForm("Zahlung","Buchungen",FormMethod.Post)) 
@@ -12,8 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>ZahlungModel</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -49,15 +47,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Buchung abschließen" class="btn btn-default" />
+                <input type="submit" value="Buchung abschließen" class="btn anmeldung" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -25,9 +25,9 @@ namespace UI_Reiseboerse_Graf.Models
 
         public string NeuerOrt { get; set; }
 
-        public double PreisErw { get; set; }
+        public decimal PreisErw { get; set; }
 
-        public double PreisKind { get; set; }
+        public decimal PreisKind { get; set; }
 
         public List<VerpflegungModel> Verpflegung { get; set; }
 

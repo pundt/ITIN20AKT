@@ -49,6 +49,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="reise_id"></param>
         /// <returns></returns>
+        //[Authorize(Roles = "Mitarbeiter")]
         [HttpGet]
         public ActionResult LadeAlleBuchungenReise(int reise_id)
         {
@@ -92,6 +93,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="anzahl">die ausgewählte Anzahl der Buchungen bei der View Anzeigen</param>
         /// <returns>die View zum Eingeben der Daten</returns>
+        [Authorize]
         [HttpGet]
         public ActionResult Hinzufuegen(BuchungHinzufuegenModel model)
         {
@@ -104,6 +106,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Fügt Buchungen anhand der Formulardaten (Request) hinzu
         /// </summary>
         /// <returns>Kontrollansicht der Daten</returns>
+        [Authorize]
         [HttpPost]
         public ActionResult Hinzufuegen()
         {
@@ -218,6 +221,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// müsste im Produktivbetrieb eigentlich SSL verschlüsselt sein (https)
         /// </summary>
         /// <returns>View zur Eingabe der Zahlungsdaten</returns>
+        [Authorize]
         [HttpGet]
         public ActionResult Zahlung()
         {
@@ -240,11 +244,14 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="model">das ZahlungModel</param>
         /// <returns>falls ModelState.IsValid falsch zurück liefert, gibt es die View zurück</returns>
+        [Authorize]
         [HttpPost]
         public ActionResult Zahlung(ZahlungModel model)
         {
             Debug.WriteLine("Buchung - Zahlung - POST");
             Debug.Indent();
+
+            bool erfolgreich = false;
 
             if (ModelState.IsValid)
             {
@@ -252,29 +259,26 @@ namespace UI_Reiseboerse_Graf.Controllers
                 {
                     if (ZahlungsVerwaltung.PruefeLuhn(model.Nummer))
                     {
-
+                        erfolgreich = ZahlungSpeichern(model);
+                        //Aufruf Buchungsbestätigung für den Kunden
+                        string text = Session["Mailtext"] as string;
+                        bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
                     }
                 }
-
-                Zahlung zahlung = new Zahlung()
+                else
                 {
-                    Vorname = model.Vorname,
-                    Nachname = model.Nachname,
-                    Nummer = model.Nummer
-                };
-
-                int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
-                List<int> BuchungIDs = Session["Buchungen"] as List<int>;
-                ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
-
-                //Aufruf Buchungsbestätigung für den Kunden
-                string text = Session["Mailtext"] as string;
-                bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                    erfolgreich = ZahlungSpeichern(model);
+                    //Aufruf Buchungsbestätigung für den Kunden
+                    string text = Session["Mailtext"] as string;
+                    bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                }
+                
 
                 //Könnte man noch einbauen:
                 // Wenn gesendet false ergibt, Nachfrage ob Email korrekt war etc...
+
             }
-            else
+            if (!erfolgreich)
             {
                 ZahlungModel zahlung = new ZahlungModel()
                 {
@@ -294,7 +298,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return View(zahlung);                
             }
             Debug.Unindent();
-            return null;
+            return View("Bestaetigung");
         }
 
         /// <summary>
@@ -302,6 +306,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="anzahlmodel">Die Anzahl der gewünschten Buchungen und zusätzl. Daten</param>
         /// <returns>View zum Eingeben der Daten</returns>
+        [Authorize]
         [HttpPost]
         public ActionResult Buchen()
         {
@@ -346,6 +351,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View("Hinzufuegen", model);
         }
 
+        /// <summary>
+        /// Erzeugt den Mailtext der als Buchungsbestätigung an den Benutzer gesendet wird
+        /// </summary>
+        /// <param name="model">Das Buchungsmodel, mit den Daten, die in den Mailtext vorbereitet</param>
+        /// <returns>den Mailtext als string</returns>
         private string MailTextErzeugen(BuchungGesamtModel model)
         {
             string text = @"<!DOCTYPE html><html lang = en xmlns = http://www.w3.org/1999/xhtml>
@@ -380,10 +390,12 @@ namespace UI_Reiseboerse_Graf.Controllers
             return text;
         }
 
-        private void ZahlungSpeichern(ZahlungModel model)
+        private bool ZahlungSpeichern(ZahlungModel model)
         {
             Debug.WriteLine("Buchungen - Zahlung Speichern");
             Debug.Indent();
+
+            bool erfolgreich = false;
 
             try
             {
@@ -396,7 +408,12 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                 int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
                 List<int> BuchungIDs = Session["Buchungen"] as List<int>;
-                ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
+                int zeilen = ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
+
+                if (zeilen == BuchungIDs.Count)
+                {
+                    erfolgreich = true;
+                }
             }
             catch (Exception ex)
             {
@@ -406,6 +423,42 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
 
             Debug.Unindent();
+            return erfolgreich;
+        }
+
+        /// <summary>
+        /// Liefert für die Mitarbeiter die Übersicht über alle stornierten Buchungen
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult StornoVerwalten()
+        {
+            Debug.WriteLine("Buchungen - StornoVerwalten - GET");
+            Debug.Indent();
+            List<Buchung> BL_Buchungen = BuchungsVerwaltung.LadeAlleStorniertenBuchungen();
+            List<StornoModel> UI_StornoauftragListe = new List<StornoModel>();
+            foreach (var buchung in BL_Buchungen)
+            {
+                StornoModel storno = new StornoModel()
+                {
+                    Id = buchung.ID,
+                    Name = string.Format("{0} {1}", buchung.Vorname, buchung.Nachname),
+                    Geburtsdatum = buchung.Geburtsdatum,
+                    GebuchtAm = buchung.ErstelltAm,
+                    Passnummer = buchung.Passnummer
+                };
+                if (buchung.Geburtsdatum.AddYears(13).Date<=DateTime.Now.Date)
+                {
+                    storno.Preis = buchung.Reisedatum.Reise.Preis_Erwachsener;
+                }
+                else
+                {
+                    storno.Preis = buchung.Reisedatum.Reise.Preis_Kind;
+                }
+                UI_StornoauftragListe.Add(storno);
+            }
+            Debug.Unindent();
+            return View(UI_StornoauftragListe);
         }
     }
 }

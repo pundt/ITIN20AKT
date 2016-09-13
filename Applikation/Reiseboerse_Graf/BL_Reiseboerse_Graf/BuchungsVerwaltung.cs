@@ -50,7 +50,9 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    buchungsListe = context.AlleBuchungen.Where(x => x.BuchungStorniert != null).ToList();
+                    buchungsListe = context.AlleBuchungen.Include("Benutzer").Include("Reisedatum.Reise")
+                                            .Where(x => x.BuchungStorniert != null)
+                                            .ToList();
                 }
                 catch (Exception ex)
                 {
