@@ -36,6 +36,35 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return buchungsListe;
         }
+        /// <summary>
+        /// Lädt alle Buchungen zu allen Reisen an einem bestimmten Datum und einer bestimmten Person aus der Datenbank
+        /// </summary>
+        /// <param name="reisedatum_id">Reisedatum.ID</param>
+        /// <param name="benutzer_id">Benutzer.ID</param>
+        /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
+        public static List<Buchung> LadeAlleBuchungenMitarbeiter(int reisedatum_id,int benutzer_id)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen Reisedatum und Benutzer");
+            Debug.Indent();
+            List<Buchung> buchungsListe = new List<Buchung>();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                     buchungsListe = (from r in context.AlleBuchungen
+                                                 where r.Reisedatum.ID == reisedatum_id && r.Benutzer.ID == benutzer_id
+                                                 select r).ToList();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Laden der Buchungen eines Reisedatums");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return buchungsListe;
+        }
 
         /// <summary>
         /// Lädt alle Buchungen die storniert wurden aus der Datenbank

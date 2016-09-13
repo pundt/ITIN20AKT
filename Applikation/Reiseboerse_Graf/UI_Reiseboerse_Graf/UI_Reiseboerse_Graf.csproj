@@ -280,6 +280,7 @@
     <Content Include="Views\Shared\_LayoutVerwaltung.cshtml" />
     <Content Include="Views\Buchungen\StornoVerwalten.cshtml" />
     <Content Include="Views\Buchungen\LadeAlleBuchungenDatum.cshtml" />
+    <Content Include="Views\Buchungen\LadeAlleBuchungenMitarbeiter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

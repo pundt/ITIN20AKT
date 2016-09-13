@@ -19,10 +19,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
         /// <summary>
-        /// Lädt alle Buchungen aus der Datenbank zu eines bestimmten BuchungsDatum.
+        /// Lädt alle Buchungen aus der Datenbank zu einem bestimmten BuchungsDatums.
         /// </summary>
         /// <param name="reisedatum_id"></param>
-        /// <returns></returns>
+        /// <returns>Eine View mit allen Daten laut der Filterung</returns>
+        //[Authorize(Roles = "Mitarbeiter")]
         [HttpGet]
         public ActionResult LadeAlleBuchungenDatum(int reisedatum_id)
         {
@@ -84,6 +85,35 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             Debug.Unindent();
             return PartialView(UI_Liste);
+        }
+        /// <summary>
+        /// Lädt alle Buchungen für den Mitarbeiter die nach reisedatum_id und benutzer_id sortiert sind
+        /// </summary>
+        /// <param name="reiseDatum_id">int32</param>
+        /// <param name="benutzer_id">in32</param>
+        /// <returns>Eine View mit allen Daten der gefilterten Buchungen</returns>
+        //[Authorize(Roles = "Mitarbeiter")]
+        [HttpGet]
+        public ActionResult LadeAlleBuchungenMitarbeiter(int reiseDatum_id, int benutzer_id)
+        {
+            Debug.WriteLine("Buchungen - LadeAlleBuchungenMitarbeiter - GET");
+            Debug.Indent();
+            List<Buchung> BL_ListeMitarbeiter = BuchungsVerwaltung.LadeAlleBuchungenMitarbeiter(reiseDatum_id,benutzer_id);
+            List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
+            foreach (var aktbuchung in BL_ListeMitarbeiter)
+            {
+                UI_Liste.Add(new BuchungAnzeigenModel()
+                {
+                    ReiseID = aktbuchung.Reisedatum.Reise.ID,
+                    Startdatum = aktbuchung.Reisedatum.Startdatum,
+                    Enddatum = aktbuchung.Reisedatum.Enddatum,
+                    Reisetitel = aktbuchung.Reisedatum.Reise.Titel 
+                });
+            }
+            Debug.Unindent();
+
+            return View();
+
         }
 
 
@@ -470,5 +500,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             return RedirectToAction("StornoVerwalten");
 
         }
+
+
     }
 }

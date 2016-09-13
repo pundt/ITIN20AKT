@@ -1,0 +1,64 @@
+﻿@model IEnumerable<UI_Reiseboerse_Graf.Models.BuchungAnzeigenModel>
+
+@{
+    ViewBag.Title = "LadeAlleBuchungenMitarbeiter";
+    Layout = "~/Views/Shared/_LayoutVerwaltung.cshtml";
+}
+
+<h2>LadeAlleBuchungenMitarbeiter</h2>
+
+
+@using (Html.BeginForm()) 
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Reisetitel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReiseID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reisedatum_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Startdatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enddatum)
+            </th>
+            <th></th>
+        </tr>
+
+    </table>
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reisetitel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReiseID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reisedatum_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Startdatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enddatum)
+            </td>
+        </tr>
+    }
+
+}
+
+<div>
+    @Html.ActionLink("Back to Search", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
