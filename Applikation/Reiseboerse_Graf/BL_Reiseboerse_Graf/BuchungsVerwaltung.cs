@@ -120,8 +120,8 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return buchungsListe;
         }
-        
-       
+
+
 
         /// <summary>
         /// Neue Buchung in der Datenbank speichern
@@ -189,8 +189,38 @@ namespace BL_Reiseboerse_Graf
                     Debugger.Break();
                 }
             }
-                Debug.Unindent();
-                return wurdeStorniert;
+            Debug.Unindent();
+            return wurdeStorniert;
+        }
+
+        /// <summary>
+        /// Entfernt die Stornierung von einer Buchung anhand der ID
+        /// </summary>
+        /// <param name="id">die Id der Buchung</param>
+        public static bool StornierungAufheben(int id)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Buchung Prüfen");
+            Debug.Indent();
+            bool erfolgreich = false;
+            using (var context=new reisebueroEntities())
+            {
+                try
+                {
+                    BuchungStorniert buchung=context.AlleBuchungenStorniert.Find(id);
+                    context.AlleBuchungenStorniert.Remove(buchung);
+                    context.SaveChanges();
+                    
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Aufhebung einer Stornierung!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
             }
+            Debug.Unindent();
+            return erfolgreich;
+
         }
     }
+}

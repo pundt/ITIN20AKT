@@ -51,7 +51,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 UI_Liste.Add(new BuchungAnzeigenModel()
                 {
-                    ReiseID=aktbuchung.Reisedatum.Reise.ID,
+                    ReiseID = aktbuchung.Reisedatum.Reise.ID,
                     Startdatum = aktbuchung.Reisedatum.Startdatum,
                     Enddatum = aktbuchung.Reisedatum.Enddatum,
                     Reisetitel = aktbuchung.Reisedatum.Reise.Titel
@@ -186,7 +186,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
                 }
                 Session["Buchungen"] = model.BuchungIDs as List<int>;
-                Session["Mailtext"]=MailTextErzeugen(model) as string;
+                Session["Mailtext"] = MailTextErzeugen(model) as string;
             }
             return View("ZeigeGesamt", model);
         }
@@ -247,7 +247,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     string text = Session["Mailtext"] as string;
                     bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
                 }
-                
+
 
                 //Könnte man noch einbauen:
                 // Wenn gesendet false ergibt, Nachfrage ob Email korrekt war etc...
@@ -270,7 +270,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         ID = zahlungsart.ID
                     });
                 }
-                return View(zahlung);                
+                return View(zahlung);
             }
             Debug.Unindent();
             return View("Bestaetigung");
@@ -422,7 +422,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     GebuchtAm = buchung.ErstelltAm,
                     Passnummer = buchung.Passnummer
                 };
-                if (buchung.Geburtsdatum.AddYears(13).Date<=DateTime.Now.Date)
+                if (buchung.Geburtsdatum.AddYears(13).Date <= DateTime.Now.Date)
                 {
                     storno.Preis = buchung.Reisedatum.Reise.Preis_Erwachsener;
                 }
@@ -434,6 +434,16 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             Debug.Unindent();
             return View(UI_StornoauftragListe);
+        }
+
+        [HttpGet]
+        public ActionResult StornoEntfernen(int id)
+        {
+            Debug.WriteLine("Buchungen - StornoVerwalten - POST");
+            Debug.Indent();
+            bool erfolgreich = BuchungsVerwaltung.StornierungAufheben(id);
+            return RedirectToAction("StornoVerwalten");
+
         }
     }
 }

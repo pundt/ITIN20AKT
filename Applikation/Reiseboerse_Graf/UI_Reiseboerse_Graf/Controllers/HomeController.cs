@@ -22,7 +22,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(liste);
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Verwaltung()
         {
