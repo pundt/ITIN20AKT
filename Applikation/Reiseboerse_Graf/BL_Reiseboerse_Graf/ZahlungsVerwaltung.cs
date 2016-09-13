@@ -104,5 +104,18 @@ namespace BL_Reiseboerse_Graf
                 }
             }
         }
+
+        public static bool PruefeLuhn(string nummer)
+        {
+            int sum = 0;
+            int len = nummer.Length;
+            for (int i = 0; i < len; i++)
+            {
+                int add = (nummer[i] - '0') * (2 - (i + len) % 2);
+                add -= add > 9 ? 9 : 0;
+                sum += add;
+            }
+            return sum % 10 == 0;
+        }
     }
 }

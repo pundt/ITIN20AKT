@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using UI_Reiseboerse_Graf.Models;
 using BL_Reiseboerse_Graf;
 using System.Collections.Specialized;
+using System.Text.RegularExpressions;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
@@ -222,6 +223,14 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             if (ModelState.IsValid)
             {
+                if (!Regex.IsMatch(model.Nummer, "^[A-Z]{2}$"))
+                {
+                    if (ZahlungsVerwaltung.PruefeLuhn(model.Nummer))
+                    {
+
+                    }
+                }
+
                 Zahlung zahlung = new Zahlung()
                 {
                     Vorname = model.Vorname,
@@ -344,6 +353,34 @@ namespace UI_Reiseboerse_Graf.Controllers
             text += @"</ul></div>";
             text += @"<p class='logoschrift'>Wir wünschen Ihnen viel Freude in Ihrem Urlaub und hoffen, dass Sie auch das nächste mal bei uns buchen</p></body></html>";
             return text;
+        }
+
+        private void ZahlungSpeichern(ZahlungModel model)
+        {
+            Debug.WriteLine("Buchungen - Zahlung Speichern");
+            Debug.Indent();
+
+            try
+            {
+                Zahlung zahlung = new Zahlung()
+                {
+                    Vorname = model.Vorname,
+                    Nachname = model.Nachname,
+                    Nummer = model.Nummer
+                };
+
+                int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
+                List<int> BuchungIDs = Session["Buchungen"] as List<int>;
+                ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler beim Speichern der Zahlung");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
         }
     }
 }
