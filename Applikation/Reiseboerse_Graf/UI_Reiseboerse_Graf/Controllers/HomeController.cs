@@ -18,14 +18,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             List<int> liste = new List<int>();
             liste=BildVerwaltung.LadeAlleBildIDs();
 
-            Roles.AddUserToRole("marco@itfox.at", "Mitarbeiter");
-            Roles.AddUserToRole("claudia@itfox.at", "Mitarbeiter");
-
             Debug.Unindent();
             return View(liste);
         }
 
-        //[Authorize(Roles ="Mitarbeiter")]
+        [Authorize]
         [HttpGet]
         public ActionResult Verwaltung()
         {

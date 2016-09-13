@@ -43,18 +43,14 @@ namespace UI_Reiseboerse_Graf.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(lm.Email, false);
                 }
-                if (User.IsInRole("Kunde"))
-                {
-                    if (!Request.UrlReferrer.AbsoluteUri.Contains("Reisen/Laden"))
-                    {
-                        return Redirect(Request.UrlReferrer.AbsoluteUri);
-                    }
-                }
-                else
+                if (Tools.BistDuMitarbeiter(lm.Email))
                 {
                     return RedirectToAction("Verwaltung", "Home");
                 }
-                
+                if (!Request.UrlReferrer.AbsoluteUri.Contains("Reisen/Laden"))
+                {
+                    return Redirect(Request.UrlReferrer.AbsoluteUri);
+                } 
             }
 
             return RedirectToAction("Laden", "Reisen");
