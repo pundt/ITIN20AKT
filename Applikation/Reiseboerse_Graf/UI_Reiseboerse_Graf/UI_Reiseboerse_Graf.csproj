@@ -154,6 +154,7 @@
     <Compile Include="Models\ReiseAnzeigenModel.cs" />
     <Compile Include="Models\ReisedatumModel.cs" />
     <Compile Include="Models\ReisedetailModel.cs" />
+    <Compile Include="Models\ReisedurchfuehrenModel.cs" />
     <Compile Include="Models\ReiseLadenModel.cs" />
     <Compile Include="Models\ReiseModel.cs" />
     <Compile Include="Models\ReiseVerwaltenModel.cs" />
