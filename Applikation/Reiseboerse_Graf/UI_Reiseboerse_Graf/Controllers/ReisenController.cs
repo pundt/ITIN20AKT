@@ -577,7 +577,19 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             return RedirectToAction("Index");
         }
+        /// <summary>
+        /// ReiseStart- und Enddatum sowie Anzahl der Reisen wird gesetzt.
+        /// </summary>
+        /// <param name="Reiseid"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ReiseAnzahlErstellen(int? Reiseid)
+        {
+            ReisedurchfuehrenModel DatumUndAnzahl = new ReisedurchfuehrenModel();
+            DatumUndAnzahl.Reise_id = Reiseid;
 
+            return View(DatumUndAnzahl);
+        }
         /// <summary>
         /// Löscht das übergebene ReiseModel
         /// </summary>
