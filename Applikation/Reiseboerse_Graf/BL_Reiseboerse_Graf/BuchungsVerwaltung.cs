@@ -42,7 +42,7 @@ namespace BL_Reiseboerse_Graf
         /// <param name="reisedatum_id">Reisedatum.ID</param>
         /// <param name="benutzer_id">Benutzer.ID</param>
         /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
-        public static List<Buchung> LadeAlleBuchungenMitarbeiter(int reisedatum_id,int benutzer_id)
+        public static List<Buchung> LadeAlleBuchungenZuReiseDatumUndBenutzer(int reisedatum_id,int benutzer_id)
         {
             Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen Reisedatum und Benutzer");
             Debug.Indent();

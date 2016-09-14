@@ -97,7 +97,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - LadeAlleBuchungenMitarbeiter - GET");
             Debug.Indent();
-            List<Buchung> BL_ListeMitarbeiter = BuchungsVerwaltung.LadeAlleBuchungenMitarbeiter(reiseDatum_id,benutzer_id);
+            List<Buchung> BL_ListeMitarbeiter = BuchungsVerwaltung.LadeAlleBuchungenZuReiseDatumUndBenutzer(reiseDatum_id,benutzer_id);
             List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
             foreach (var aktbuchung in BL_ListeMitarbeiter)
             {
@@ -291,7 +291,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         erfolgreich = ZahlungSpeichern(model);
                         //Aufruf Buchungsbestätigung für den Kunden
                         string text = Session["Mailtext"] as string;
-                        bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                        //bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
                     }
                 }
                 else
@@ -299,7 +299,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     erfolgreich = ZahlungSpeichern(model);
                     //Aufruf Buchungsbestätigung für den Kunden
                     string text = Session["Mailtext"] as string;
-                    bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
+                    //bool gesendet = EmailVerwaltung.BuchungBestaetigen(User.Identity.Name, text);
                 }
 
 
@@ -309,22 +309,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             if (!erfolgreich)
             {
-                ZahlungModel zahlung = new ZahlungModel()
-                {
-                    Vorname = model.Vorname,
-                    Nachname = model.Nachname,
-                    Nummer = model.Nummer
-                };
-                zahlung.Zahlungsarten = new List<ZahlungsartModel>();
-                foreach (var zahlungsart in ZahlungsVerwaltung.LadeAlleZahlungsArten())
-                {
-                    zahlung.Zahlungsarten.Add(new ZahlungsartModel()
-                    {
-                        Bezeichnung = zahlungsart.Bezeichnung,
-                        ID = zahlungsart.ID
-                    });
-                }
-                return View(zahlung);
+                return RedirectToAction("Zahlung");
             }
             Debug.Unindent();
             return View("Bestaetigung");
@@ -436,13 +421,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                 };
 
                 int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
+                zahlung.ID = neueID;
                 List<int> BuchungIDs = Session["Buchungen"] as List<int>;
-                int zeilen = ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, neueID);
-
-                if (zeilen == BuchungIDs.Count)
-                {
-                    erfolgreich = true;
-                }
+                int zeilen = ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, zahlung);
+                erfolgreich = true;
             }
             catch (Exception ex)
             {
