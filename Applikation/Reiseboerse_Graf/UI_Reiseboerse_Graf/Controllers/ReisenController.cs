@@ -373,17 +373,18 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="neueReise">Model mit den entsprechenden Daten</param>
         /// <returns></returns>
+        [PruefeBenutzer]
         [HttpPost]
         public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4, HttpPostedFileBase file5, HttpPostedFileBase file6, HttpPostedFileBase file7, HttpPostedFileBase file8, HttpPostedFileBase file9, HttpPostedFileBase file10)
         {
+            
             int e = 0;
             int i = 0;
-            int bild_id = 0;
-            int unterkunft_id;
+            int bild_id = 0;           
             int[] Reisebild_id = new int[5];
             int[] Unterkunftbild_id = new int[5];
             Debug.Indent();
-            Debug.WriteLine("Reise - ReiseHinzufügen - Post");            
+            Debug.WriteLine("Reise - ReiseHinzufügen - Post");
             if (ModelState.IsValid)
             {
 
@@ -505,23 +506,33 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 if (neueReise.NeuerOrt != null)
                 {
+                    neueReise.Ort_id = 0;
                     neueReise.Ort_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuenOrt(neueReise.NeuerOrt, neueReise.Land_id);
                     if (neueReise.Ort_id > 0)
                     {
                         Debug.WriteLine("Ortspeichern erfolgreich");
                     }
+                    else
+                    {
+                        Debug.WriteLine("Ortspeichern fehlgeschlagen");
+                    }
                 }
                 if (neueReise.NeuesLand != null)
                 {
+                    neueReise.Land_id = 0;
                     neueReise.Land_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand);
                     if (neueReise.Land_id > 0)
                     {
                         Debug.WriteLine("landspeichern erfolgreich");
                     }
+                    else
+                    {
+                        Debug.WriteLine("Landspeichern fehlgeschlagen");
+                    }
                 }
-                if (neueReise.NeueUnterkunft != null)
+                if (neueReise.NeueUnterkunft.Beschreibung != null)// man muss kontrollieren ob in der Unterkunft Werte sind, anscheinend ist es immer NULL
                 {
-
+                    neueReise.Unterkunft_id = 0;
                     Unterkunft neueUnterkunft = new Unterkunft()
                     {
                         Bezeichnung = neueReise.NeueUnterkunft.Bezeichnung,
@@ -529,10 +540,15 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Kategorie = neueReise.NeueUnterkunft.Kategorie
                     };
                     neueUnterkunft.Verpflegung = ReiseVerwaltung.SucheVerpflegung(neueReise.Verpflegung_id);
-                    unterkunft_id = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeichereNeueUnterkunft(neueUnterkunft));
-                    if (unterkunft_id > 0)
+                    neueReise.Unterkunft_id = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeichereNeueUnterkunft(neueUnterkunft));
+                    if (neueReise.Unterkunft_id > 0)
                     {
                         Debug.WriteLine("Unterkunftspeichern erfolgreich");
+                    }
+                    else
+                    {
+
+                        Debug.WriteLine("Unterkunftspeichern fehlgeschlagen");
                     }
                 }
                 Reise BlReise = new Reise();
@@ -550,20 +566,19 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 try
                 {
-                    if (BildVerwaltung.BildZuReiseSpeichern(neueReise.Id, Reisebild_id)>0)
+                    if (BildVerwaltung.BildZuReiseSpeichern(neueReise.Id, Reisebild_id) > 0)
                     {
                         Debug.WriteLine("BildZuReiseSpeichern - erfolgreich");
-                    }                
+                    }
                 }
                 catch (Exception ex)
                 {
-
                     Debug.WriteLine("BildZuReiseSpeichern - fehlgeschlagen");
                     Debug.WriteLine(ex.Message);
                 }
                 try
                 {
-                    if(BildVerwaltung.BildZuReiseSpeichern(neueReise.Id, Unterkunftbild_id) > 0)
+                    if (BildVerwaltung.BildZuUnterkunft(neueReise.Unterkunft_id, Unterkunftbild_id) > 0)
                     {
                         Debug.WriteLine("UnterkunftBildSpeichern - erfolgreich");
                     }
