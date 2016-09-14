@@ -99,6 +99,12 @@ namespace UI_Reiseboerse_Graf.Controllers
             return PartialView(neueListe);
         }
 
+        /// <summary>
+        /// Zeigt die Details zu der Buchung eines Benutzers (alle Reisenden),
+        /// die er dann einzeln stornieren kann
+        /// </summary>
+        /// <param name="id">die ID der Buchung (Reidedatum)</param>
+        /// <returns>View</returns>
         [HttpGet]
         public ActionResult ZeigeDetails(int id)
         {
@@ -154,7 +160,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
 
         }
-
 
 
         /// <summary>
@@ -439,11 +444,29 @@ namespace UI_Reiseboerse_Graf.Controllers
                 string name = string.Format("{0} {1}", buchung.Vorname, buchung.Nachname);
                 text += string.Format("<li>{0} Alter: {1}</li>", name, alter);
             }
+            foreach (var buchung in model.BuchungKind)
+            {
+                DateTime geburtsdatum = buchung.Geburtsdatum;
+                int alter = DateTime.Now.Year - geburtsdatum.Year;
+                if (geburtsdatum.Month > DateTime.Now.Month)
+                {
+                    alter = alter + 1;
+                }
+                string name = string.Format("{0} {1}", buchung.Vorname, buchung.Nachname);
+                text += string.Format("<li>{0} Alter: {1}</li>", name, alter);
+            }
             text += @"</ul></div>";
             text += @"<p class='logoschrift'>Wir wünschen Ihnen viel Freude in Ihrem Urlaub und hoffen, dass Sie auch das nächste mal bei uns buchen</p></body></html>";
             return text;
         }
 
+
+        /// <summary>
+        /// Ausgelagerte Methode zum Zahlung speichern damit man sowohl für Kreditkarte als auch für IBAN 
+        /// diese Methode aufrufen
+        /// </summary>
+        /// <param name="model">das ausgefüllte ZahlungModel</param>
+        /// <returns>true wenn erfolgreich in DB gespeichert sonst false</returns>
         private bool ZahlungSpeichern(ZahlungModel model)
         {
             Debug.WriteLine("Buchungen - Zahlung Speichern");
@@ -523,12 +546,23 @@ namespace UI_Reiseboerse_Graf.Controllers
 
         }
 
+        /// <summary>
+        /// Stornieren einer Buchung (sowohl für Mitarbeiter als auch für Kunde)
+        /// eigentlich kein guter Stil Httpget besser wäre POST damit man nicht einfach irgendwelche Reisen
+        /// über die URL löschen kann
+        /// </summary>
+        /// <param name="id">die ID der Reise</param>
+        /// <returns>Weiterleitung zu StornoVerwalten wenn Mitarbeiter sonst zur Profilseite wenn Kunde</returns>
         [HttpGet]
         public ActionResult Stornieren(int id)
         {
             Debug.WriteLine("Buchungen - Stornieren - GET");
             Debug.Indent();
             bool erfolgreich = BuchungsVerwaltung.Stornieren(id);
+            if(!Tools.BistDuMitarbeiter(User.Identity.Name))
+            {
+                return RedirectToAction("Aktualisieren", "Benutzer");
+            }
             return RedirectToAction("StornoVerwalten");
 
         }

@@ -64,6 +64,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 {
                     return RedirectToAction("Verwaltung", "Home");
                 }
+                //wenn der User nicht von Reisen/laden kommt leite ihn dahin weiter woher er kam
                 if (!Request.UrlReferrer.AbsoluteUri.Contains("Reisen/Laden"))
                 {
                     return Redirect(Request.UrlReferrer.AbsoluteUri);
