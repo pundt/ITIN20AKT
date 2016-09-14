@@ -680,6 +680,18 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(UI_Reisen);
         }
 
+        [PruefeBenutzer]
+        [HttpGet]
+        public ActionResult Entfernen(int id)
+        {
+            Debug.WriteLine("Reisen - Entfernen - GET");
+            Debug.Indent();
+
+
+
+            Debug.Unindent();
+            return View();
+        }
 
         /// <summary>
         /// Befüllen mit Daten im Testsytem für Reise anzeigen 
