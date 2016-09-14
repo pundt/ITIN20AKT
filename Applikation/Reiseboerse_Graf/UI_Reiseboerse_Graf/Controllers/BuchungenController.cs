@@ -70,21 +70,67 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - LadeAlleBuchungenBenutzer - GET");
             Debug.Indent();
-            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleReiseBuchungenBenutzer(id);
             List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
-            foreach (var aktbuchung in BL_Liste)
+            List<Buchung> BL_Buchung = BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
+            foreach (var buchung in BL_Buchung)
             {
                 UI_Liste.Add(new BuchungAnzeigenModel()
                 {
-                    ReiseID = aktbuchung.Reisedatum.Reise.ID,
-                    Startdatum = aktbuchung.Reisedatum.Startdatum,
-                    Enddatum = aktbuchung.Reisedatum.Enddatum,
-                    Reisetitel = aktbuchung.Reisedatum.Reise.Titel
+                    Reisetitel = buchung.Reisedatum.Reise.Titel,
+                    Startdatum = buchung.Reisedatum.Startdatum,
+                    Enddatum=buchung.Reisedatum.Enddatum,
+                    ReiseID = buchung.Reisedatum.Reise.ID,
+                    Benutzer_ID = id,
+                    Reisedatum_ID=buchung.Reisedatum.ID
                 });
             }
+            List<BuchungAnzeigenModel> neueListe = new List<BuchungAnzeigenModel>();
+            BuchungAnzeigenModel model = UI_Liste[0];
+            neueListe.Add(model);
+            for (int i = 1; i < UI_Liste.Count; i++)
+            {
+                if (UI_Liste[i].Reisedatum_ID!=model.Reisedatum_ID)
+                {
+                    neueListe.Add(model);
+                    model = UI_Liste[i];
+                }
+            }
             Debug.Unindent();
-            return PartialView(UI_Liste);
+            return PartialView(neueListe);
         }
+
+        /// <summary>
+        /// Zeigt die Details zu der Buchung eines Benutzers (alle Reisenden),
+        /// die er dann einzeln stornieren kann
+        /// </summary>
+        /// <param name="id">die ID der Buchung (Reidedatum)</param>
+        /// <returns>View</returns>
+        [HttpGet]
+        public ActionResult ZeigeDetails(int id)
+        {
+            Debug.WriteLine("Buchungen - ZeigeDetails - GET");
+            Debug.Indent();
+            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
+            List<BuchungenModel> UI_BuchungListe = new List<BuchungenModel>();
+            foreach (var buchung in BL_Liste)
+            {
+                if (buchung.Reisedatum.ID==id)
+                {
+                    UI_BuchungListe.Add(new BuchungenModel()
+                    {
+                        Vorname = buchung.Vorname,
+                        Nachname = buchung.Nachname,
+                        ReisePassNummer = buchung.Passnummer,
+                        Reisedatum_ID = buchung.ID,
+                        ID=buchung.ID
+                    });
+                }
+            }
+            
+            Debug.Unindent();
+            return View(UI_BuchungListe);
+        }
+
         /// <summary>
         /// Lädt alle Buchungen für den Mitarbeiter die nach reisedatum_id und benutzer_id sortiert sind
         /// </summary>
@@ -114,7 +160,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
 
         }
-
 
 
         /// <summary>
@@ -399,11 +444,29 @@ namespace UI_Reiseboerse_Graf.Controllers
                 string name = string.Format("{0} {1}", buchung.Vorname, buchung.Nachname);
                 text += string.Format("<li>{0} Alter: {1}</li>", name, alter);
             }
+            foreach (var buchung in model.BuchungKind)
+            {
+                DateTime geburtsdatum = buchung.Geburtsdatum;
+                int alter = DateTime.Now.Year - geburtsdatum.Year;
+                if (geburtsdatum.Month > DateTime.Now.Month)
+                {
+                    alter = alter + 1;
+                }
+                string name = string.Format("{0} {1}", buchung.Vorname, buchung.Nachname);
+                text += string.Format("<li>{0} Alter: {1}</li>", name, alter);
+            }
             text += @"</ul></div>";
             text += @"<p class='logoschrift'>Wir wünschen Ihnen viel Freude in Ihrem Urlaub und hoffen, dass Sie auch das nächste mal bei uns buchen</p></body></html>";
             return text;
         }
 
+
+        /// <summary>
+        /// Ausgelagerte Methode zum Zahlung speichern damit man sowohl für Kreditkarte als auch für IBAN 
+        /// diese Methode aufrufen
+        /// </summary>
+        /// <param name="model">das ausgefüllte ZahlungModel</param>
+        /// <returns>true wenn erfolgreich in DB gespeichert sonst false</returns>
         private bool ZahlungSpeichern(ZahlungModel model)
         {
             Debug.WriteLine("Buchungen - Zahlung Speichern");
@@ -476,12 +539,34 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult StornoEntfernen(int id)
         {
-            Debug.WriteLine("Buchungen - StornoVerwalten - POST");
+            Debug.WriteLine("Buchungen - StornoVerwalten - GET");
             Debug.Indent();
             bool erfolgreich = BuchungsVerwaltung.StornierungAufheben(id);
             return RedirectToAction("StornoVerwalten");
 
         }
+
+        /// <summary>
+        /// Stornieren einer Buchung (sowohl für Mitarbeiter als auch für Kunde)
+        /// eigentlich kein guter Stil Httpget besser wäre POST damit man nicht einfach irgendwelche Reisen
+        /// über die URL löschen kann
+        /// </summary>
+        /// <param name="id">die ID der Reise</param>
+        /// <returns>Weiterleitung zu StornoVerwalten wenn Mitarbeiter sonst zur Profilseite wenn Kunde</returns>
+        [HttpGet]
+        public ActionResult Stornieren(int id)
+        {
+            Debug.WriteLine("Buchungen - Stornieren - GET");
+            Debug.Indent();
+            bool erfolgreich = BuchungsVerwaltung.Stornieren(id);
+            if(!Tools.BistDuMitarbeiter(User.Identity.Name))
+            {
+                return RedirectToAction("Aktualisieren", "Benutzer");
+            }
+            return RedirectToAction("StornoVerwalten");
+
+        }
+
 
 
     }

@@ -123,32 +123,37 @@ namespace BL_Reiseboerse_Graf
         }
 
         /// <summary>
-        /// Lädt alle Buchung gebündelt pro Reise eines Benutzers
+        /// Storniert eine Buchung anhand einer Buchungs_ID
         /// </summary>
-        /// <param name="benutzer_id">ID des Benutzers</param>
-        /// <returns>Liste von Buchungen oder Null bei Fehler</returns>
-        public static List<Buchung> LadeAlleReiseBuchungenBenutzer(int benutzer_id)
+        /// <param name="benutzer_id">die ID der Buchung</param>
+        /// <returns>true wenn Stornieren erfolgreich sonst false</returns>
+        public static bool Stornieren(int buchung_id)
         {
-            Debug.WriteLine("Buchungsverwaltung - Lade alle ReiseBuchungen Benutzer");
+            Debug.WriteLine("Buchungsverwaltung - Stornieren");
             Debug.Indent();
-            List<Buchung> buchungsListe = new List<Buchung>();
+            bool erfolgreich = false;
             using (var context = new reisebueroEntities())
             {
                 try
                 {
-                    buchungsListe = context.AlleBuchungen.Include("Reisedatum.Reise")
-                                     .Where(x => x.Benutzer.ID == benutzer_id).ToList();
-                    buchungsListe.GroupBy(x => x.Reisedatum).ToList();
+                    Buchung buchung = context.AlleBuchungen.Where(x => x.ID == buchung_id).FirstOrDefault();
+                    context.AlleBuchungenStorniert.Add(new BuchungStorniert()
+                    {
+                        Buchung_ID = buchung.ID
+                    });
+                    context.SaveChanges();
+                    erfolgreich = true;
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Fehler beim Laden der Buchungen pro Reise eines Benutzers");
+                    Debug.WriteLine("Fehler beim Stornieren einer Buchung");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
                 }
             }
             Debug.Unindent();
-            return buchungsListe;
+            return erfolgreich;
+
         }
 
 
