@@ -70,21 +70,61 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - LadeAlleBuchungenBenutzer - GET");
             Debug.Indent();
-            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleReiseBuchungenBenutzer(id);
             List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
-            foreach (var aktbuchung in BL_Liste)
+            List<Buchung> BL_Buchung = BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
+            foreach (var buchung in BL_Buchung)
             {
                 UI_Liste.Add(new BuchungAnzeigenModel()
                 {
-                    ReiseID = aktbuchung.Reisedatum.Reise.ID,
-                    Startdatum = aktbuchung.Reisedatum.Startdatum,
-                    Enddatum = aktbuchung.Reisedatum.Enddatum,
-                    Reisetitel = aktbuchung.Reisedatum.Reise.Titel
+                    Reisetitel = buchung.Reisedatum.Reise.Titel,
+                    Startdatum = buchung.Reisedatum.Startdatum,
+                    Enddatum=buchung.Reisedatum.Enddatum,
+                    ReiseID = buchung.Reisedatum.Reise.ID,
+                    Benutzer_ID = id,
+                    Reisedatum_ID=buchung.Reisedatum.ID
                 });
             }
+            List<BuchungAnzeigenModel> neueListe = new List<BuchungAnzeigenModel>();
+            BuchungAnzeigenModel model = UI_Liste[0];
+            neueListe.Add(model);
+            for (int i = 1; i < UI_Liste.Count; i++)
+            {
+                if (UI_Liste[i].Reisedatum_ID!=model.Reisedatum_ID)
+                {
+                    neueListe.Add(model);
+                    model = UI_Liste[i];
+                }
+            }
             Debug.Unindent();
-            return PartialView(UI_Liste);
+            return PartialView(neueListe);
         }
+
+        [HttpGet]
+        public ActionResult ZeigeDetails(int id)
+        {
+            Debug.WriteLine("Buchungen - ZeigeDetails - GET");
+            Debug.Indent();
+            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
+            List<BuchungenModel> UI_BuchungListe = new List<BuchungenModel>();
+            foreach (var buchung in BL_Liste)
+            {
+                if (buchung.Reisedatum.ID==id)
+                {
+                    UI_BuchungListe.Add(new BuchungenModel()
+                    {
+                        Vorname = buchung.Vorname,
+                        Nachname = buchung.Nachname,
+                        ReisePassNummer = buchung.Passnummer,
+                        Reisedatum_ID = buchung.ID,
+                        ID=buchung.ID
+                    });
+                }
+            }
+            
+            Debug.Unindent();
+            return View(UI_BuchungListe);
+        }
+
         /// <summary>
         /// Lädt alle Buchungen für den Mitarbeiter die nach reisedatum_id und benutzer_id sortiert sind
         /// </summary>
@@ -493,12 +533,23 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult StornoEntfernen(int id)
         {
-            Debug.WriteLine("Buchungen - StornoVerwalten - POST");
+            Debug.WriteLine("Buchungen - StornoVerwalten - GET");
             Debug.Indent();
             bool erfolgreich = BuchungsVerwaltung.StornierungAufheben(id);
             return RedirectToAction("StornoVerwalten");
 
         }
+
+        [HttpGet]
+        public ActionResult Stornieren(int id)
+        {
+            Debug.WriteLine("Buchungen - Stornieren - GET");
+            Debug.Indent();
+            bool erfolgreich = BuchungsVerwaltung.Stornieren(id);
+            return RedirectToAction("StornoVerwalten");
+
+        }
+
 
 
     }

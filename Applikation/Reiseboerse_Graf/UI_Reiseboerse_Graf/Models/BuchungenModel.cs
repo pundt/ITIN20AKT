@@ -6,8 +6,9 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
-    public abstract class BuchungenModel
+    public class BuchungenModel
     {
+        public int ID { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public string Vorname { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
