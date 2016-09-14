@@ -23,7 +23,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="reisedatum_id"></param>
         /// <returns>Eine View mit allen Daten laut der Filterung</returns>
-        //[Authorize(Roles = "Mitarbeiter")]
+        [PruefeBenutzer]
         [HttpGet]
         public ActionResult LadeAlleBuchungenDatum(int reisedatum_id)
         {
@@ -91,7 +91,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <param name="reiseDatum_id">int32</param>
         /// <param name="benutzer_id">in32</param>
         /// <returns>Eine View mit allen Daten der gefilterten Buchungen</returns>
-        //[Authorize(Roles = "Mitarbeiter")]
+        [PruefeBenutzer]
         [HttpGet]
         public ActionResult LadeAlleBuchungenMitarbeiter(int reiseDatum_id, int benutzer_id)
         {
@@ -459,6 +459,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Liefert für die Mitarbeiter die Übersicht über alle stornierten Buchungen
         /// </summary>
         /// <returns></returns>
+        [PruefeBenutzer]
         [HttpGet]
         public ActionResult StornoVerwalten()
         {
@@ -489,7 +490,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Unindent();
             return View(UI_StornoauftragListe);
         }
-
+        [PruefeBenutzer]
         [HttpGet]
         public ActionResult StornoEntfernen(int id)
         {
