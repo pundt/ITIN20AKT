@@ -12,7 +12,7 @@ using System.Reflection;
 namespace UI_Reiseboerse_Graf.Controllers
 {
     /// <summary>
-    /// Attribut zum Prüfen ob der aktuell angemeldete Benutzer berechtigt ist
+    /// Attribut zum Prüfen ob der aktuell angemeldete Benutzer berechtigt ist (also ein MA ist)
     /// </summary>
     public class PruefeBenutzer : ActionFilterAttribute
     {
@@ -29,17 +29,6 @@ namespace UI_Reiseboerse_Graf.Controllers
 
     public class BenutzerController : Controller
     {
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
-        
-        [HttpGet]
-        public ActionResult GebuchteReisen()
-        {
-            return View();
-        }
         //[ChildActionOnly]
         [HttpGet]
         public ActionResult Login()
@@ -81,6 +70,75 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        /// <summary>
+        /// Registrieren eines Benutzers (Erstellen eines Kundenmodel und Befüllen der Dropdownlisten)
+        /// </summary>
+        /// <returns>View mit dem Kundenmodel</returns>
+        [HttpGet]
+        public ActionResult BenutzerAnlegen()
+        {
+            Debug.WriteLine("Benutzer - Benutzer Anlegen - GET".ToUpper());
+            Debug.Indent();
+
+            reisebueroEntities context = new reisebueroEntities();
+
+            KundenModel model = new KundenModel();
+            model.GeburtsDatum = DateTime.Now;
+
+            using (context)
+            {
+                try
+                {
+                    List<Land> laender = BenutzerVerwaltung.AlleLaender();
+                    List<LandModel> lmListe = new List<LandModel>();
+
+                    /// Hier werden die Laender der lmList hinzugefügt um
+                    /// die Dropdown-Liste in der View zu füllen
+                    foreach (Land l in laender)
+                    {
+                        lmListe.Add(new LandModel() { landName = l.Bezeichnung, land_ID = l.ID });
+                    }
+
+                    model.Land = lmListe;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Holen der Daten!");
+                    Debug.WriteLine(ex.Message);
+                    Debug.Unindent();
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return View(model);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         [HttpPost]
         public ActionResult BenutzerAnlegen(KundenAnlegenModel bm, HttpPostedFileBase bild)
@@ -159,46 +217,12 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult BenutzerAnlegen()
-        {
-            Debug.WriteLine("Benutzer - Benutzer Anlegen - GET".ToUpper());
-            Debug.Indent();
+      
 
-            reisebueroEntities context = new reisebueroEntities();
-
-            KundenModel model = new KundenModel();
-            model.GeburtsDatum = DateTime.Now;
-
-            using (context)
-            {
-                try
-                {
-                    List<Land> laender = BenutzerVerwaltung.AlleLaender();
-                    List<LandModel> lmListe = new List<LandModel>();
-
-                    /// Hier werden die Laender der lmList hinzugefügt um
-                    /// die Dropdown-Liste in der View zu füllen
-                    foreach (Land l in laender)
-                    {
-                        lmListe.Add(new LandModel() { landName = l.Bezeichnung, land_ID = l.ID });
-                    }
-
-                    model.Land = lmListe;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Fehler beim Holen der Daten!");
-                    Debug.WriteLine(ex.Message);
-                    Debug.Unindent();
-                    Debugger.Break();
-                }
-            }
-
-            Debug.Unindent();
-            return View(model);
-        }
-
+        /// <summary>
+        /// Die Profilseite des Kunden wo er seine Daten ändern kann
+        /// </summary>
+        /// <returns>die View mit dem KundenModel des aktuellen Benutzers</returns>
         [Authorize]
         [HttpGet]
         public ActionResult Aktualisieren()
@@ -253,6 +277,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Speichern der geänderten Kundendaten des Benutzers
+        /// </summary>
+        /// <param name="model">das übergebene KudenModel</param>
+        /// <returns>leitet zurück auf Reisen/Laden</returns>
         [Authorize]
         [HttpPost]
         public ActionResult Aktualisieren(KundenModel model)
@@ -311,6 +340,10 @@ namespace UI_Reiseboerse_Graf.Controllers
             return RedirectToAction("Laden", "Reisen");
         }
 
+        /// <summary>
+        /// Generiert Dummydaten zum Anmelden
+        /// </summary>
+        /// <returns>List von Kundenmodel</returns>
         private List<KundenModel> DummyKundenAnlegen()
         {
             List<KundenModel> kunden = new List<KundenModel>();

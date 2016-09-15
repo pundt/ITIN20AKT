@@ -304,6 +304,12 @@ namespace UI_Reiseboerse_Graf.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Speichern der Bewertung
+        /// </summary>
+        /// <param name="bewertung">den Wert der Bewertung (1-5)</param>
+        /// <param name="reiseID">die bewertete Reise</param>
+        /// <returns>gibt nichts zurück (Empty Result)</returns>
         [HttpPost]
         public EmptyResult Bewerten(int bewertung, int reiseID)
         {
@@ -311,6 +317,9 @@ namespace UI_Reiseboerse_Graf.Controllers
             BewertungVerwaltung.BewertungSpeichern(reiseID, bewertung);
             return new EmptyResult();
         }
+
+
+
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult ReiseHinzufuegen()
@@ -658,6 +667,12 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return View("Laden", viewmodel);
         }
+
+        /// <summary>
+        /// Bekommt eine Liste von Reisen aus BL und mappt diese auf das ReisenverwaltenModel
+        /// der Mitarbeiter kann dort Reisen ändern oder löschen
+        /// </summary>
+        /// <returns>die View mit der Reisenliste</returns>
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult Verwalten()

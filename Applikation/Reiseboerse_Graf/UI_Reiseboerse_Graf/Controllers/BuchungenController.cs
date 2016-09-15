@@ -502,8 +502,9 @@ namespace UI_Reiseboerse_Graf.Controllers
 
         /// <summary>
         /// Liefert für die Mitarbeiter die Übersicht über alle stornierten Buchungen
+        /// von dort kann der Mitarbeiter die Stornierung rückgängig machen
         /// </summary>
-        /// <returns></returns>
+        /// <returns>View mit Liste von StornoAufträgen</returns>
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult StornoVerwalten()

@@ -332,7 +332,7 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return gesuchtesReisedatum;
         }
-         public static int SpeicherReise(Reise neueReise)
+        public static int SpeicherReise(Reise neueReise)
         {
             int reise_id = 0;          
 

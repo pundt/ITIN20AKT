@@ -21,6 +21,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Unindent();
             return View(liste);
         }
+
+        /// <summary>
+        /// Liefert die Oberfläche für die Verwaltung zurück (nur aufrufbar für den Mitarbeiter)
+        /// </summary>
+        /// <returns>die View</returns>
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult Verwaltung()
