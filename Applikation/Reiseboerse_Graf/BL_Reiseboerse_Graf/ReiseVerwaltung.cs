@@ -355,5 +355,38 @@ namespace BL_Reiseboerse_Graf
             }
             return reise_id;
         }
+
+        /// <summary>
+        /// Entfernt eine Reise und alle zugehörigen Daten und gibt true zurück, falls alles geklappt hat
+        /// </summary>
+        /// <param name="reise_id">Die Id der zu entfernenden Reise</param>
+        /// <returns>true oder false</returns>
+        public static bool ReiseEntfernen(int reise_id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Reise Entfernen");
+            Debug.Indent();
+
+            bool entfernenErfolg = false;
+
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+
+
+                    entfernenErfolg = true;
+                    return entfernenErfolg;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Entfernen einer Reise");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return entfernenErfolg;
+        }
     }
 }
