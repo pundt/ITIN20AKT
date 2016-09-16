@@ -281,7 +281,6 @@
     <Content Include="Views\Reisen\Verwalten.cshtml" />
     <Content Include="Views\Shared\_LayoutVerwaltung.cshtml" />
     <Content Include="Views\Buchungen\StornoVerwalten.cshtml" />
-    <Content Include="Views\Buchungen\LadeAlleBuchungenDatum.cshtml" />
     <Content Include="Views\Reisen\ReiseAnzahlErstellen.cshtml" />
     <Content Include="Views\Buchungen\LadeAlleBuchungenMitarbeiter.cshtml" />
     <Content Include="Views\Buchungen\ZeigeDetails.cshtml" />
@@ -289,8 +288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Validierungs\" />
-    <Folder Include="Views\Validierung\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
