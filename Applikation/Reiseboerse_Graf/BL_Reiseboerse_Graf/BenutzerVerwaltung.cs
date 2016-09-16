@@ -29,10 +29,12 @@ namespace BL_Reiseboerse_Graf
         /// <returns>Liste aller Kunden</returns>
         public static List<Benutzer> AlleBenutzer()
         {
-            reisebueroEntities context = new reisebueroEntities();
+            List<Benutzer> benutzerListe = new List<Benutzer>();
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
 
-            List<Benutzer> benutzerListe = context.AlleBenutzer.ToList();
-
+             benutzerListe =  context.AlleBenutzer.ToList();
+            }
             return benutzerListe;
         }
 
