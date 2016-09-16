@@ -25,7 +25,7 @@ namespace UI_Reiseboerse_Graf.Models
         {
             get { return string.Format("{0} {1}",Vorname,Nachname); }
         }
-
+        public bool Stornierbar { get; set; }
 
 
 

@@ -6,6 +6,17 @@
     overflow-y: scroll;
 }
 
+.Schriftart{
+    font-family:'Bradley Hand ITC';
+    color:#005ead;
+    padding:8%;
+    font-size:1.1em;
+}
+
+.abstand{
+    margin-bottom:1.5%;
+}
+
 .reise {
     border: solid;
     border-color: #576a8f;

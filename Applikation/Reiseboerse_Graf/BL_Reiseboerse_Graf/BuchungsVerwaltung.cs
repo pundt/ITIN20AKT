@@ -10,11 +10,11 @@ namespace BL_Reiseboerse_Graf
     public class BuchungsVerwaltung
     {
         /// <summary>
-        /// Lädt alle Buchungen zu einer bestimmten Reise an einem bestimmten Datum aus der Datenbank
+        /// Lädt alle Buchungen aus der Datenbank deren Anmeldefrist schon vorbei sind
         /// </summary>
-        /// <param name="reisedatum_id">int32</param>
+        /// <param name="reisedatum_id">Reisedatum ID</param>
         /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
-        public static List<Buchung> LadeAlleBuchungen(int reisedatum_id)
+        public static List<Buchung> LadeAlleBuchungen()
         {
             Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen Reisedatum");
             Debug.Indent();
@@ -23,12 +23,12 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    buchungsListe = context.AlleBuchungen.
-                        Where(x => x.Reisedatum.ID == reisedatum_id).ToList();
+                    buchungsListe = context.AlleBuchungen.Include("Benutzer").Include("Reisedatum.Reise").
+                        Where(x=>x.Reisedatum.Anmeldefrist>=DateTime.Now).ToList();
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Fehler beim Laden der Buchungen eines Reisedatums");
+                    Debug.WriteLine("Fehler beim Laden der Buchungen");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
                 }
@@ -52,8 +52,8 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                      buchungsListe = (from r in context.AlleBuchungen
-                                                 where r.Reisedatum.ID == reisedatum_id && r.Benutzer.ID == benutzer_id
-                                                 select r).ToList();
+                                      where r.Reisedatum.ID == reisedatum_id && r.Benutzer.ID == benutzer_id
+                                      select r).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -255,6 +255,40 @@ namespace BL_Reiseboerse_Graf
             }
             Debug.Unindent();
             return erfolgreich;
+
+        }
+
+        /// <summary>
+        /// Prüft anhand der Buchungs_ID ob die Anmeldefrist schon vorbei ist
+        /// (nicht mehr stornierbar für Kunden)
+        /// </summary>
+        /// <param name="buchung_id">die ID der Buchung</param>
+        /// <returns></returns>
+        public static bool Stornierbar(int buchung_id)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Stornierbar");
+            Debug.Indent();
+            bool stornierbar = false;
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    Buchung buchung = context.AlleBuchungen.Find(buchung_id);
+                    if (buchung.Reisedatum.Anmeldefrist>=DateTime.Now)
+                    {
+                        stornierbar = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Prüfen ob Buchung stornierbar!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return stornierbar;
 
         }
     }
