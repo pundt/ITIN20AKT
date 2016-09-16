@@ -257,5 +257,39 @@ namespace BL_Reiseboerse_Graf
             return erfolgreich;
 
         }
+
+        /// <summary>
+        /// Prüft anhand der Buchungs_ID ob die Anmeldefrist schon vorbei ist
+        /// (nicht mehr stornierbar für Kunden)
+        /// </summary>
+        /// <param name="buchung_id">die ID der Buchung</param>
+        /// <returns></returns>
+        public static bool Stornierbar(int buchung_id)
+        {
+            Debug.WriteLine("Buchungsverwaltung - Stornierbar");
+            Debug.Indent();
+            bool stornierbar = false;
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    Buchung buchung = context.AlleBuchungen.Find(buchung_id);
+                    if (buchung.Reisedatum.Anmeldefrist>=DateTime.Now)
+                    {
+                        stornierbar = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Prüfen ob Buchung stornierbar!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return stornierbar;
+
+        }
     }
 }
