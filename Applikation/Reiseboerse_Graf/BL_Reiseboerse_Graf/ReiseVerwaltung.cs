@@ -162,7 +162,6 @@ namespace BL_Reiseboerse_Graf
                     Debugger.Break();
                 }
             }
-
             Debug.Unindent();
             return restplätze;
         }
@@ -388,5 +387,28 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return entfernenErfolg;
         }
+        //public static int SucheUnterkunft(Unterkunft unterkunft)
+        //{
+        //    Debug.WriteLine("ReiseVerwaltung - SucheUnterkunft");
+        //    Debug.Indent();
+
+        //    Unterkunft gesuchteUnterkunft = new Unterkunft();
+
+        //    using (var context = new reisebueroEntities())
+        //    {
+        //        try
+        //        {
+        //            gesuchteUnterkunft = context.AlleUnterkuenfte.Where(x => x.).FirstOrDefault();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Debug.WriteLine("Fehler beim Laden der Verpflegung!");
+        //            Debug.WriteLine(ex.Message);
+        //            Debugger.Break();
+        //        }
+        //    }
+        //    Debug.Unindent();
+        //    return gesuchteUnterkunft.ID;
+        //}
     }
 }

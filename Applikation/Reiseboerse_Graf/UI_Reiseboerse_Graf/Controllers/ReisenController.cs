@@ -386,10 +386,10 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4, HttpPostedFileBase file5, HttpPostedFileBase file6, HttpPostedFileBase file7, HttpPostedFileBase file8, HttpPostedFileBase file9, HttpPostedFileBase file10)
         {
-            
+            Unterkunft neueUnterkunft = null;
             int e = 0;
             int i = 0;
-            int bild_id = 0;           
+            int bild_id = 0;
             int[] Reisebild_id = new int[5];
             int[] Unterkunftbild_id = new int[5];
             Debug.Indent();
@@ -515,7 +515,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 if (neueReise.NeuerOrt != null)
                 {
-                    neueReise.Ort_id = 0;
+
                     neueReise.Ort_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuenOrt(neueReise.NeuerOrt, neueReise.Land_id);
                     if (neueReise.Ort_id > 0)
                     {
@@ -528,7 +528,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 if (neueReise.NeuesLand != null)
                 {
-                    neueReise.Land_id = 0;
+
                     neueReise.Land_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand);
                     if (neueReise.Land_id > 0)
                     {
@@ -539,34 +539,40 @@ namespace UI_Reiseboerse_Graf.Controllers
                         Debug.WriteLine("Landspeichern fehlgeschlagen");
                     }
                 }
-                if (neueReise.NeueUnterkunft.Beschreibung != null)// man muss kontrollieren ob in der Unterkunft Werte sind, anscheinend ist es immer NULL
+                if (UnterkunftdetailModel.PruefeUnterkunft(neueReise.NeueUnterkunft))// man muss kontrollieren ob in der Unterkunft Werte sind, anscheinend ist es immer NULL
                 {
-                    neueReise.Unterkunft_id = 0;
-                    Unterkunft neueUnterkunft = new Unterkunft()
+                    Verpflegung verpflegung = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheVerpflegung(neueReise.Verpflegung_id);
+                    neueUnterkunft = new Unterkunft()
                     {
                         Bezeichnung = neueReise.NeueUnterkunft.Bezeichnung,
                         Beschreibung = neueReise.NeueUnterkunft.Beschreibung,
-                        Kategorie = neueReise.NeueUnterkunft.Kategorie
+                        Kategorie = neueReise.NeueUnterkunft.Kategorie,
+                        Verpflegung = verpflegung,
+                        
                     };
-                    neueUnterkunft.Verpflegung = ReiseVerwaltung.SucheVerpflegung(neueReise.Verpflegung_id);
-                    neueReise.Unterkunft_id = (BL_Reiseboerse_Graf.LaenderVerwaltung.SpeichereNeueUnterkunft(neueUnterkunft));
-                    if (neueReise.Unterkunft_id > 0)
-                    {
-                        Debug.WriteLine("Unterkunftspeichern erfolgreich");
-                    }
-                    else
-                    {
+                    neueUnterkunft.ID = LaenderVerwaltung.SpeichereNeueUnterkunft(neueUnterkunft.Bezeichnung, neueUnterkunft.Beschreibung, neueUnterkunft.Kategorie, neueUnterkunft.Verpflegung);
 
-                        Debug.WriteLine("Unterkunftspeichern fehlgeschlagen");
-                    }
+                }
+
+
+
+
+                if (neueReise.Unterkunft_id > 0)
+                {
+                    Debug.WriteLine("Unterkunftspeichern erfolgreich");
+                }
+                else
+                {
+                    Debug.WriteLine("Unterkunftspeichern fehlgeschlagen");
+
                 }
                 Reise BlReise = new Reise();
                 BlReise.Titel = neueReise.Titel;
                 BlReise.Beschreibung = neueReise.Beschreibung;
-                BlReise.Unterkunft.ID = neueReise.Unterkunft_id;
                 BlReise.Preis_Erwachsener = neueReise.PreisErw;
                 BlReise.Preis_Kind = neueReise.PreisKind;
-                BlReise.Ort.ID = neueReise.Ort_id;
+                BlReise.Ort = BL_Reiseboerse_Graf.LaenderVerwaltung.SucheOrt(neueReise.Ort_id);
+                BlReise.Unterkunft = neueUnterkunft;
                 neueReise.Id = ReiseVerwaltung.SpeicherReise(BlReise);
                 if (neueReise.Id > 0)
                 {

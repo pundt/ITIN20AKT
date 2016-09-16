@@ -14,5 +14,17 @@ namespace UI_Reiseboerse_Graf.Models
         public string Beschreibung { get; set; }
         public int Kategorie { get; set; }
 
+
+        public static bool PruefeUnterkunft(UnterkunftdetailModel unterkunft)
+        {
+            if (unterkunft.Beschreibung != null && unterkunft.Bezeichnung!= null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

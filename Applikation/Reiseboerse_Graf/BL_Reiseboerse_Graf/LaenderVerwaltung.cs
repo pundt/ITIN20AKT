@@ -160,28 +160,29 @@ namespace BL_Reiseboerse_Graf
                         Debug.WriteLine(ex.Message);
                         Debugger.Break();
                         Debug.Unindent();
-                    }                    
+                    }
                 }
             }
 
             return index;
         }
-        public static int SpeichereNeueUnterkunft(Unterkunft neueUnterkunft)
+        public static int SpeichereNeueUnterkunft(string beschreibung, string bezeichnung, int kategorie, Verpflegung verpflegung)
         {
             int index = -1;
             Debug.WriteLine("Länderverwaltung - SpeichereNeueUnterkunft");
             Debug.Indent();
 
-            if (neueUnterkunft != null)
-            {            
+            if (beschreibung != null && bezeichnung != null && kategorie != 0 && verpflegung != null)
+            {
                 using (reisebueroEntities context = new reisebueroEntities())
                 {
                     try
                     {
+                        Unterkunft neueUnterkunft = new Unterkunft() { Beschreibung = beschreibung, Bezeichnung = bezeichnung, Kategorie = kategorie, Verpflegung = verpflegung };
                         context.AlleUnterkuenfte.Add(neueUnterkunft);
-                        context.SaveChanges();
-                        index = neueUnterkunft.ID;
+                        context.SaveChanges();                      
                         Debug.WriteLine("Speichern erfolgreich");
+                        return neueUnterkunft.ID;
                     }
                     catch (Exception ex)
                     {
@@ -194,5 +195,26 @@ namespace BL_Reiseboerse_Graf
             }
             return index;
         }
+        public static Ort SucheOrt(int ord_id)
+        {
+            Ort gesuchterOrt = null;
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+                    gesuchterOrt = context.AlleOrte.Where(x => x.ID == ord_id).FirstOrDefault();
+                    Debug.WriteLine("Ortsuche erfolgreich");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Ortsuchen");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                    Debug.Unindent();
+                }
+            }
+            return gesuchterOrt;
+        }
+
     }
 }
