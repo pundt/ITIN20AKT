@@ -143,6 +143,7 @@
     <Compile Include="Models\BuchungGesamtModel.cs" />
     <Compile Include="Models\BuchungHinzufuegenModel.cs" />
     <Compile Include="Models\BuchungKindModel.cs" />
+    <Compile Include="Models\BuchungVerwaltenModel.cs" />
     <Compile Include="Models\KundenAnlegenModel.cs" />
     <Compile Include="Models\BuchungenModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
@@ -284,6 +285,7 @@
     <Content Include="Views\Reisen\ReiseAnzahlErstellen.cshtml" />
     <Content Include="Views\Buchungen\LadeAlleBuchungenMitarbeiter.cshtml" />
     <Content Include="Views\Buchungen\ZeigeDetails.cshtml" />
+    <Content Include="Views\Buchungen\Verwalten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

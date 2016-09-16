@@ -23,28 +23,28 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="reisedatum_id"></param>
         /// <returns>Eine View mit allen Daten laut der Filterung</returns>
-        [PruefeBenutzer]
-        [HttpGet]
-        public ActionResult LadeAlleBuchungenDatum(int reisedatum_id)
-        {
-            Debug.WriteLine("Buchungen - Lade Alle Buchungen Datum - GET");
-            Debug.Indent();
-            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleBuchungen(reisedatum_id);
-            List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
-            foreach (Buchung buchung in BL_Liste)
-            {
-                UI_Liste.Add(new BuchungAnzeigenModel()
-                {
-                    ReiseID = buchung.Reisedatum.Reise.ID,
-                    Startdatum = buchung.Reisedatum.Startdatum,
-                    Enddatum = buchung.Reisedatum.Enddatum,
-                    Reisetitel = buchung.Reisedatum.Reise.Titel,
-                    Reisedatum_ID = buchung.Reisedatum.ID
-                });
-            }
-            Debug.Unindent();
-            return View();
-        }
+        //[PruefeBenutzer]
+        //[HttpGet]
+        //public ActionResult LadeAlleBuchungenDatum(int reisedatum_id)
+        //{
+        //    Debug.WriteLine("Buchungen - Lade Alle Buchungen Datum - GET");
+        //    Debug.Indent();
+        //    List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleBuchungen(reisedatum_id);
+        //    List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
+        //    foreach (Buchung buchung in BL_Liste)
+        //    {
+        //        UI_Liste.Add(new BuchungAnzeigenModel()
+        //        {
+        //            ReiseID = buchung.Reisedatum.Reise.ID,
+        //            Startdatum = buchung.Reisedatum.Startdatum,
+        //            Enddatum = buchung.Reisedatum.Enddatum,
+        //            Reisetitel = buchung.Reisedatum.Reise.Titel,
+        //            Reisedatum_ID = buchung.Reisedatum.ID
+        //        });
+        //    }
+        //    Debug.Unindent();
+        //    return View();
+        //}
         /// <summary>
         /// Lädt alle Buchungen aus der Datenbank zu einer bestimmten Reise
         /// </summary>
@@ -498,6 +498,38 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             Debug.Unindent();
             return erfolgreich;
+        }
+
+        /// <summary>
+        /// Anzeige aller Buchungen (für den Mitarbeiter)
+        /// </summary>
+        /// <returns></returns>
+        [PruefeBenutzer]
+        [HttpGet]
+        public ActionResult Verwalten()
+        {
+            Debug.WriteLine("Buchung - Verwalten - GET");
+            Debug.Indent();
+            List<BuchungVerwaltenModel> UI_Buchungen = new List<BuchungVerwaltenModel>();
+            List<Buchung> BL_Buchungen = BuchungsVerwaltung.LadeAlleBuchungen();
+            foreach (var buchung in BL_Buchungen)
+            {
+                UI_Buchungen.Add(new BuchungVerwaltenModel()
+                {
+                    ID=buchung.ID,
+                    BenutzerName = buchung.Benutzer.Email,
+                    Geburtsdatum = buchung.Geburtsdatum,
+                    Nachname = buchung.Nachname,
+                    Vorname = buchung.Vorname,
+                    Enddatum = buchung.Reisedatum.Enddatum,
+                    Startdatum = buchung.Reisedatum.Startdatum,
+                    Passnummer = buchung.Passnummer,
+                    Reisedatum_ID = buchung.Reisedatum.ID,
+                    Reisetitel = buchung.Reisedatum.Reise.Titel
+                });
+            }
+            Debug.Unindent();
+            return View(UI_Buchungen);
         }
 
         /// <summary>
