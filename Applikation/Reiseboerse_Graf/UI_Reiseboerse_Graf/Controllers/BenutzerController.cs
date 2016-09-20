@@ -116,32 +116,8 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         [HttpPost]
-        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm, HttpPostedFileBase bild)
+        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm)
         {
             Debug.WriteLine("Benutzer - Benutzer Anlegen - POST".ToUpper());
             Debug.Indent();

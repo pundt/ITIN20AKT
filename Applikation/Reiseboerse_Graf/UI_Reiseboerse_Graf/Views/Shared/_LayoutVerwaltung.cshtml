@@ -22,8 +22,20 @@
         @RenderBody()
     </div>
     @Scripts.Render("~/bundles/jquery")
+    <script src="/Scripts/globalize/globalize.js" type="text/javascript"></script>
+    <script src="~/Scripts/cldr.js" type="text/javascript"></script>
+    <script src="~/Scripts/cldr/event.js" type="text/javascript"></script>
+    <script src="~/Scripts/cldr/supplemental.js" type="text/javascript"></script>
+    <script src="/scripts/globalize/cultures/globalize.culture.de-DE.js" type="text/javascript"></script>
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        Globalize.culture('de');
+
+        // Only there to show which culture are being used.
+        console.log(Globalize.culture().name);
+
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
