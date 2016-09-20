@@ -23,18 +23,19 @@ namespace UI_Reiseboerse_Graf.Controllers
         //        return true;
         //}
 
-
+        /// Überprüft ob eine Email bereits vorhanden ist
+        /// wenn ja, dann gib auf der Registrierungs-View false,
+        /// ansonsten gib true aus
         public JsonResult EmailFrei(string email)
         {
             bool benutzerExistiert = false;
 
-            /// gehe in die BL und prüfe ob 
-            /// die Email bereits vergeben ist
+            benutzerExistiert = Tools.EmailVorhanden(email);
 
-            if (!benutzerExistiert)
-                return Json(true, JsonRequestBehavior.AllowGet);
-            else
+            if (benutzerExistiert)
                 return Json(false, JsonRequestBehavior.AllowGet);
+            else
+                return Json(true, JsonRequestBehavior.AllowGet);
         } 
 
     }
