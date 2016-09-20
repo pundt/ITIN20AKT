@@ -254,3 +254,5 @@ Datenbank/reisebüro_skripten_datenbank/05_create_fk.sql
 Datenbank/reisebüro_skripten_datenbank/05_create_fk.sql
 Applikation/Reiseboerse_Graf/UI_Reiseboerse_Graf/Content/eigeneStyles.css
 Applikation/Reiseboerse_Graf/UI_Reiseboerse_Graf/Views/Reisen/Filter.cshtml
+Applikation/Reiseboerse_Graf/BL_Reiseboerse_Graf/App.Config
+Applikation/Reiseboerse_Graf/UI_Reiseboerse_Graf/Web.config
