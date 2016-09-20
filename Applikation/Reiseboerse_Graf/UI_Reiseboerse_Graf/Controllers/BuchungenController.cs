@@ -509,7 +509,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns></returns>
         [PruefeBenutzer]
         [HttpGet]
-        public ActionResult Verwalten()
+        public ActionResult Verwalten(int id)
         {
             Debug.WriteLine("Buchung - Verwalten - GET");
             Debug.Indent();
@@ -530,6 +530,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Reisedatum_ID = buchung.Reisedatum.ID,
                     Reisetitel = buchung.Reisedatum.Reise.Titel
                 });
+            }
+            if (id!=0)
+            {
+                UI_Buchungen = UI_Buchungen.Where(x => x.Reisedatum_ID == id).ToList();
             }
             Debug.Unindent();
             return View(UI_Buchungen);
@@ -572,6 +576,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(UI_StornoauftragListe);
         }
 
+        /// <summary>
+        /// Der Mitarbeiter kann die Stornierung rückgängig machen
+        /// </summary>
+        /// <param name="id">die ID der stornierten Buchung</param>
+        /// <returns>leitet den Mitarbeiter weiter zu Storno verwalten Oberfläche</returns>
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult StornoEntfernen(int id)
@@ -600,10 +609,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 BuchungsVerwaltung.Stornieren(id);
                 return RedirectToAction("Aktualisieren", "Benutzer");
-            }
-            else
-            {
-
             }
             return RedirectToAction("StornoVerwalten");
 

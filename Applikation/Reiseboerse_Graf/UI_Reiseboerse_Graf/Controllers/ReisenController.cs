@@ -775,6 +775,34 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(UI_Reisen);
         }
 
+        /// <summary>
+        /// Alle Reisedaten einer Reise anzeigen
+        /// </summary>
+        /// <param name="id">ID der Reise</param>
+        /// <returns></returns>
+        [PruefeBenutzer]
+        [HttpGet]
+        public ActionResult Reisedaten(int id)
+        {
+            Debug.WriteLine("Reisen - Reisedaten - GET");
+            Debug.Indent();
+            List<ReisedatumModel> UI_Liste = new List<ReisedatumModel>();
+            List<Reisedatum> BL_Liste = ReiseVerwaltung.LadeReiseZeitpunkte(id);
+            foreach (var datum in BL_Liste)
+            {
+                UI_Liste.Add(new ReisedatumModel()
+                {
+                    Anmeldefrist = datum.Anmeldefrist,
+                    Beginndatum = datum.Startdatum,
+                    Enddatum = datum.Enddatum,
+                    Restplätze = ReiseVerwaltung.Restplätze(datum.ID),
+                    ID = datum.ID
+                });
+            }
+            Debug.Unindent();
+            return View(UI_Liste);
+        }
+
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult Entfernen(int id)

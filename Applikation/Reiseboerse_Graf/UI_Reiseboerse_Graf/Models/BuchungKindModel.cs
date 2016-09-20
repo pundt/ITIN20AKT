@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace UI_Reiseboerse_Graf.Models
 {
@@ -10,7 +11,7 @@ namespace UI_Reiseboerse_Graf.Models
     {
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
-        [AlterKindValidierung(ErrorMessage ="Kinder müssen unter 14 Jahre alt sein")]
+        [Remote("AlterKind","Validierung",ErrorMessage="Kinder dürfen nur bis 14 Jahre sein")]
         public DateTime Geburtsdatum { get; set; }
     }
 }
