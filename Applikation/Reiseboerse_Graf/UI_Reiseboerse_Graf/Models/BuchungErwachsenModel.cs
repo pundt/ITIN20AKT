@@ -10,7 +10,7 @@ namespace UI_Reiseboerse_Graf.Models
     {
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
-        [AlterErwachsenValidierung]
+        [AlterErwachsenValidierung(ErrorMessage ="Erwachsene ab 14 Jahre")]
         public DateTime Geburtsdatum { get; set; }
     }
 }

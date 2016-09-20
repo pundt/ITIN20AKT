@@ -8,6 +8,7 @@ namespace UI_Reiseboerse_Graf.Models
     public class ReiseAnzeigenModel
     {
         public ReisedetailModel Reisedetail { get; set; }
+
         public ReisedatumModel Reisedatum { get; set; }
     }
 }

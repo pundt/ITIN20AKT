@@ -10,7 +10,6 @@
 
 @using (Html.BeginForm("ReiseHinzufuegen", "Reisen", "", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    Html.BeginForm();
 
     <div class="form-horizontal">
         <h4>ReiseAnlegenModel</h4>
@@ -53,6 +52,19 @@
 
                     </div>
                     <div class="form-group">
+                        @Html.Label("Ort", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.Ort_id, new SelectList(Model.ReiseOrt, "Id", "Bezeichnung"))
+                            <input type="button" id="b" value="Neuen Ort hinzufuegen" />
+                        </div>
+                        <div>
+                            <div class="col-md-9 NichtZeigen" id="Ort">
+                                @Html.EditorFor(model => model.NeuerOrt, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NeuerOrt, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         @Html.Label("Preis Erw", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-9">
                             @Html.EditorFor(model => model.PreisErw, new { htmlAttributes = new { @class = "form-control" } })
@@ -67,72 +79,6 @@
                             @Html.ValidationMessageFor(model => model.PreisKind, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
-
-                    <div class="form-group">
-                        @Html.Label("Ort", htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="col-md-9">
-                            @Html.DropDownListFor(model => model.Ort_id, new SelectList(Model.ReiseOrt, "Id", "Bezeichnung"))
-                            <input type="button" id="b" value="Neuen Ort hinzufuegen" />
-                        </div>
-                        <div>
-                            <div class="col-md-9 NichtZeigen" id="Ort">
-                                @Html.EditorFor(model => model.NeuerOrt, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.NeuerOrt, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Reisebild 1", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file1" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Reisebild 2", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file2" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Reisebild 3", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file3" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Reisebild 4", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file4" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Reisebild 5", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file5" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-
 
 
 
@@ -171,15 +117,15 @@
                                     <td>
                                         <div class="acidjs-rating-stars">
                                             <form>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-0" value="@Model.NeueUnterkunft.Kategorie=5" />
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-0" value="5" />
                                                 <label for="group-2-0"></label>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-1" value="@Model.NeueUnterkunft.Kategorie=4" />
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-1" value="4" />
                                                 <label for="group-2-1"></label>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-2" value="@Model.NeueUnterkunft.Kategorie=3" />
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-2" value="=3" />
                                                 <label for="group-2-2"></label>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-3" value="@Model.NeueUnterkunft.Kategorie=2" />
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-3" value="2" />
                                                 <label for="group-2-3"></label>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-4" value="@Model.NeueUnterkunft.Kategorie=1" />
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-4" value="1" />
                                                 <label for="group-2-4"></label>
 
                                             </form>
@@ -201,7 +147,56 @@
                             </div>
                         </div>
                     </div>
-                    
+
+                    <div class="row">
+                        <div>
+                            @Html.Label("Reisebild 1", htmlAttributes: new { @class = "control-label col-md-3" })
+                        </div>
+                        <div class="col-md-9">
+                            <div>
+                                <input type="file" id="file1" name="file1" />
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            @Html.Label("Reisebild 2", htmlAttributes: new { @class = "control-label col-md-3" })
+                        </div>
+                        <div class="col-md-9">
+                            <div>
+                                <input type="file" id="file2" name="file2" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            @Html.Label("Reisebild 3", htmlAttributes: new { @class = "control-label col-md-3" })
+                        </div>
+                        <div class="col-md-9">
+                            <div>
+                                <input type="file" id="file3" name="file3" />
+                            </div>
+                        </div>
+                    </div>             <div class="row">
+                        <div>
+                            @Html.Label("Reisebild 4", htmlAttributes: new { @class = "control-label col-md-3" })
+                        </div>
+                        <div class="col-md-9">
+                            <div>
+                                <input type="file" id="file4" name="file4" />
+                            </div>
+                        </div>
+                    </div>             <div class="row">
+                        <div>
+                            @Html.Label("Reisebild 5", htmlAttributes: new { @class = "control-label col-md-3" })
+                        </div>
+                        <div class="col-md-9">
+                            <div>
+                                <input type="file" id="file5" name="file5" />
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div>
@@ -209,7 +204,7 @@
                         </div>
                         <div class="col-md-9">
                             <div>
-                                <input type="file" id="file6" name="file1" />
+                                <input type="file" id="file6" name="file6" />
                             </div>
                         </div>
                     </div>
@@ -219,7 +214,7 @@
                         </div>
                         <div class="col-md-9">
                             <div>
-                                <input type="file" id="file7" name="file1" />
+                                <input type="file" id="file7" name="file7" />
                             </div>
                         </div>
                     </div>
@@ -229,7 +224,7 @@
                         </div>
                         <div class="col-md-9">
                             <div>
-                                <input type="file" id="file8" name="file1" />
+                                <input type="file" id="file8" name="file8" />
                             </div>
                         </div>
                     </div>
@@ -239,7 +234,7 @@
                         </div>
                         <div class="col-md-9">
                             <div>
-                                <input type="file" id="file9" name="file1" />
+                                <input type="file" id="file9" name="file9" />
                             </div>
                         </div>
                     </div>
@@ -249,7 +244,7 @@
                         </div>
                         <div class="col-md-9">
                             <div>
-                                <input type="file" id="file10" name="file1" />
+                                <input type="file" id="file10" name="file10" />
                             </div>
                         </div>
                     </div>
@@ -257,32 +252,63 @@
             </div>
         </div>
     </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
+    </div>
 
 
-        }
+}
 
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 
-            <script type="text/javascript">
-               
-        
-                $(document).ready(function () {
-                    $("#b").click(function () {
-                        $("#Ort").removeClass("NichtZeigen");
-                    });
-                });
+    <script type="text/javascript">
 
-                $(document).ready(function () {
-                    $("#a").click(function () {
-                        $("#Land").removeClass("NichtZeigen");
-                    });
-                });
-            </script>
-        }
+
+        $(document).ready(function () {
+            $("#b").click(function () {
+                $("#Ort").removeClass("NichtZeigen");
+            });
+        });
+
+        $(document).ready(function () {
+            $("#a").click(function () {
+                $("#Land").removeClass("NichtZeigen");
+            });
+        });
+        $(document).ready(function () {
+            $("#c").click(function () {
+                $("#NeueUnterkunft").removeClass("NichtZeigen");
+            });
+        });
+        var upload_file = document.getElementById('upload_file').files[0];
+        // Daten, die mitgesendet werden sollen
+        var data = new FormData();
+        data.append('parameter', 'wert'); // es können viele weitere Parameter definiert werden
+        data.append('file1', upload_file); // dieser Parameter kann auch anders heißen
+
+        // AJAX Request
+        $.ajax({
+            url: "~/BildVerwaltung/BildSpeichern",
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+            dataType: "json", // in meinem Fall JSON, da ich ein JSON-Objekt mit einigen Infos zurückgebe
+            xhr: function () {
+                var xhr = $.ajaxSettings.xhr();
+                xhr.upload.onprogress = function (evt) { /* Hier kann man die Fortschrittsanzeige updaten. Beispielsweise prozent = (evt.loaded/evt.total*100); */ };
+                xhr.upload.onload = function () { console.log('Upload done.') };
+                return xhr;
+            },
+            success: function (response) {
+                console.log(response.status); // dafür muss man natürlich einen Status zurückgeben. Andernfalls tut man eben nichts.
+            },
+            error: function () { console.log("General error occured", "e"); },
+            complete: function () { /* Fertig. */ }
+        });
+    </script>
+}

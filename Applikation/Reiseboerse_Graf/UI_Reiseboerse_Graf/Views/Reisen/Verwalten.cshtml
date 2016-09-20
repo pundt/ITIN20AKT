@@ -24,9 +24,10 @@
                 @Html.DisplayFor(modelItem => item.Reisetitel)
             </td>
             <td>
-                @Html.ActionLink("Ändern", "Bearbeiten", new { id = item.ID }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Anzeigen", "Anzeigen","Reisen" , new { id = item.ID }, new { @class = "btn btn-success" }) |
                 @Html.ActionLink("Löschen", "Entfernen", new { id = item.ID }, new { @class = "btn btn-warning" })
             </td>
+      
         </tr>
     }
     <tr>

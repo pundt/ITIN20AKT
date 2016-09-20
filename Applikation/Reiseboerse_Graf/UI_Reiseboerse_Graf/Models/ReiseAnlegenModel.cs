@@ -25,9 +25,9 @@ namespace UI_Reiseboerse_Graf.Models
 
         public string NeuerOrt { get; set; }
 
-        public decimal PreisErw { get; set; }
+        public double PreisErw { get; set; }
 
-        public decimal PreisKind { get; set; }
+        public double PreisKind { get; set; }
 
         public List<VerpflegungModel> Verpflegung { get; set; }
 
@@ -37,11 +37,7 @@ namespace UI_Reiseboerse_Graf.Models
 
         public UnterkunftdetailModel NeueUnterkunft { get; set; }
 
-        public int Unterkunft_id { get; set; }       
-
-        public DateTime StartDatum { get; set; }
-
-        public DateTime EndDatum { get; set; }
+        public int Unterkunft_id { get; set; }             
 
         public DateTime Anmeldefrist { get; set; }
 

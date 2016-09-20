@@ -386,90 +386,92 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4, HttpPostedFileBase file5, HttpPostedFileBase file6, HttpPostedFileBase file7, HttpPostedFileBase file8, HttpPostedFileBase file9, HttpPostedFileBase file10)
         {
-            Unterkunft neueUnterkunft = null;
-            int e = 0;
+            Unterkunft BL_Unterkunft = null;
             int i = 0;
-            int bild_id = 0;
-            int[] Reisebild_id = new int[5];
-            int[] Unterkunftbild_id = new int[5];
+            int e = 0;
+            int bild_id;
+            int[] bildUnterkunftId = new int[5];
+            int[] bildReiseId = new int[5];
             Debug.Indent();
             Debug.WriteLine("Reise - ReiseHinzufügen - Post");
             if (ModelState.IsValid)
             {
-
+                #region Reise-Bilder
                 if (file1 != null && file1.ContentLength > 0)
                 {
                     bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
                     if (bild_id > 0)
                     {
+                        bildReiseId[i] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        Reisebild_id[i] = bild_id;
                         i++;
                         bild_id = 0;
                     }
                 }
-
                 if (file2 != null && file2.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
                     if (bild_id > 0)
                     {
+                        bildReiseId[i] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        Reisebild_id[i] = bild_id;
                         i++;
                         bild_id = 0;
                     }
                 }
                 if (file3 != null && file3.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file3);
                     if (bild_id > 0)
                     {
+                        bildReiseId[i] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        Reisebild_id[i] = bild_id;
                         i++;
                         bild_id = 0;
                     }
                 }
                 if (file4 != null && file4.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file4);
                     if (bild_id > 0)
                     {
+                        bildReiseId[i] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        Reisebild_id[i] = bild_id;
                         i++;
                         bild_id = 0;
                     }
                 }
                 if (file5 != null && file5.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file5);
                     if (bild_id > 0)
                     {
+                        bildReiseId[i] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
-                        Reisebild_id[i] = bild_id;
                         i++;
                         bild_id = 0;
                     }
                 }
+                #endregion
+
+                #region Unterkunfts-Bilder
                 if (file6 != null && file6.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
                     if (bild_id > 0)
                     {
-                        Unterkunftbild_id[e] = bild_id;
+                        bildReiseId[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
                         e++;
                         bild_id = 0;
                     }
                 }
-                if (file7 != null && file7.ContentLength > 0)
+                 if (file7 != null && file7.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
                     if (bild_id > 0)
                     {
-                        Unterkunftbild_id[e] = bild_id;
+                        bildReiseId[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
                         e++;
                         bild_id = 0;
@@ -477,10 +479,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 if (file8 != null && file8.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
                     if (bild_id > 0)
                     {
-                        Unterkunftbild_id[e] = bild_id;
+                        bildReiseId[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
                         e++;
                         bild_id = 0;
@@ -488,31 +490,28 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 if (file9 != null && file9.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
                     if (bild_id > 0)
                     {
-                        Unterkunftbild_id[e] = bild_id;
+                        bildReiseId[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
                         e++;
                         bild_id = 0;
                     }
                 }
-                if (file10 != null && file10.ContentLength > 0)
+                 if (file10 != null && file10.ContentLength > 0)
                 {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
+                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
                     if (bild_id > 0)
                     {
-                        Unterkunftbild_id[e] = bild_id;
+                        bildReiseId[e] = bild_id;
                         Debug.WriteLine("Bildspeicher erfolgreich");
                         e++;
                         bild_id = 0;
                     }
                 }
+                #endregion
 
-                else
-                {
-                    Debug.WriteLine("kein Bild vorhanden");
-                }
                 if (neueReise.NeuerOrt != null)
                 {
 
@@ -542,18 +541,21 @@ namespace UI_Reiseboerse_Graf.Controllers
                 if (UnterkunftdetailModel.PruefeUnterkunft(neueReise.NeueUnterkunft))// man muss kontrollieren ob in der Unterkunft Werte sind, anscheinend ist es immer NULL
                 {
                     Verpflegung verpflegung = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheVerpflegung(neueReise.Verpflegung_id);
-                    neueUnterkunft = new Unterkunft()
+                    BL_Unterkunft = new Unterkunft()
                     {
                         Bezeichnung = neueReise.NeueUnterkunft.Bezeichnung,
                         Beschreibung = neueReise.NeueUnterkunft.Beschreibung,
                         Kategorie = neueReise.NeueUnterkunft.Kategorie,
                         Verpflegung = verpflegung,
-                        
+
                     };
-                    neueUnterkunft.ID = LaenderVerwaltung.SpeichereNeueUnterkunft(neueUnterkunft.Bezeichnung, neueUnterkunft.Beschreibung, neueUnterkunft.Kategorie, neueUnterkunft.Verpflegung);
+                    BL_Unterkunft.ID = LaenderVerwaltung.SpeichereNeueUnterkunft(BL_Unterkunft);
 
                 }
-
+                else
+                {
+                    BL_Unterkunft = ReiseVerwaltung.SucheUnterkunft(neueReise.Unterkunft_id);
+                }
 
 
 
@@ -569,22 +571,21 @@ namespace UI_Reiseboerse_Graf.Controllers
                 Reise BlReise = new Reise();
                 BlReise.Titel = neueReise.Titel;
                 BlReise.Beschreibung = neueReise.Beschreibung;
-                BlReise.Preis_Erwachsener = neueReise.PreisErw;
-                BlReise.Preis_Kind = neueReise.PreisKind;
+                BlReise.Preis_Erwachsener = Convert.ToDecimal(neueReise.PreisErw);
+                BlReise.Preis_Kind = Convert.ToDecimal(neueReise.PreisKind);
                 BlReise.Ort = BL_Reiseboerse_Graf.LaenderVerwaltung.SucheOrt(neueReise.Ort_id);
-                BlReise.Unterkunft = neueUnterkunft;
+                BlReise.Unterkunft = BL_Unterkunft;
                 neueReise.Id = ReiseVerwaltung.SpeicherReise(BlReise);
                 if (neueReise.Id > 0)
                 {
                     Debug.WriteLine("Reise anlegen erfolgreich");
-                    return RedirectToAction("");
                 }
                 try
                 {
-                    if (BildVerwaltung.BildZuReiseSpeichern(neueReise.Id, Reisebild_id) > 0)
-                    {
-                        Debug.WriteLine("BildZuReiseSpeichern - erfolgreich");
-                    }
+                    //if (BildVerwaltung.BildZuReiseSpeichern(neueReise.Id) > 0)
+                    //{
+                    //    Debug.WriteLine("BildZuReiseSpeichern - erfolgreich");
+                    //}
                 }
                 catch (Exception ex)
                 {
@@ -593,19 +594,56 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 try
                 {
-                    if (BildVerwaltung.BildZuUnterkunft(neueReise.Unterkunft_id, Unterkunftbild_id) > 0)
-                    {
-                        Debug.WriteLine("UnterkunftBildSpeichern - erfolgreich");
-                    }
+                    //    if (BildVerwaltung.BildZuUnterkunft(neueReise.Unterkunft_id, Unterkunftbild_id) > 0)
+                    //    {
+                    //        Debug.WriteLine("UnterkunftBildSpeichern - erfolgreich");
+                    //    }
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("UnterkunftBildSpeichern - fehlgeschlagen");
                     Debug.WriteLine(ex.Message);
                 }
+                return RedirectToAction("ReiseAnzahlErstellen", neueReise.Id);
+            }
+            else
+            {
+                return View(neueReise);
+            }
+        }
+        /// <summary>
+        /// Hier kann man Bilder den jeweiligen Reisen zufügen
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult BildHinzufügenZuReise(int reise_id)
+        {
+            List<Reise> alleReisen = ReiseVerwaltung.LadeAlleReisen();
+
+            return View(alleReisen);
+        }
+        [HttpPost]
+        public ActionResult BildHinzufügenZuReise(BildHinzufuegenModel bildhinzuguegen, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (bildhinzuguegen.ID > 0)
+                {
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        //bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file);
+                        //if (bild_id > 0)
+                        //{
+                        //    Unterkunftbild_id[e] = bild_id;
+                        //    Debug.WriteLine("Bildspeicher erfolgreich");
+                        //    e++;
+                        //    bild_id = 0;
+                        //}
+                    }
+                }
 
             }
-            return RedirectToAction("Index");
+            return View();
         }
         /// <summary>
         /// ReiseStart- und Enddatum sowie Anzahl der Reisen wird gesetzt.
@@ -620,11 +658,47 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return View(DatumUndAnzahl);
         }
+
+        [HttpPost]
+        public ActionResult ReiseAnzahlErstellen(ReisedurchfuehrenModel anzahlReisen)
+        {
+            int index = 0;
+            Debug.WriteLine("ReiseAnzahlErstellen - ReiseController - POST");
+            Debug.Indent();
+            Reisedatum ReiseDaten = new Reisedatum();
+           
+            if (ModelState.IsValid)
+            {
+                if (anzahlReisen.ReiseAnzahl>0)
+                {
+                    ReiseDaten.Startdatum = anzahlReisen.StartDatum;
+                    ReiseDaten.Enddatum = anzahlReisen.EndDatum;
+                    ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;                 
+                    ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
+               
+                    for (int i = 0; i < anzahlReisen.ReiseAnzahl; i++)
+                    {
+                        if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten) > 1)
+                            index++;
+                    }
+                    if (index==anzahlReisen.ReiseAnzahl)
+                    {
+                        Debug.WriteLine("Speichern aller ReisenDurchgange erfolgreich");
+                    }
+                }
+            }
+            if (anzahlReisen.WeitereReisenHinzufuegen)
+            {
+                return View(anzahlReisen.Reise_id);
+            }
+            return View("Index", "Home");
+        }
+
         /// <summary>
         /// Löscht das übergebene ReiseModel
         /// </summary>
         /// <param name="reise">Das ReiseModel das gelöscht werden soll</param>
-        /// <returns>Redirect to Index (Reise)</returns>
+        /// <returns>Redirect to Index (Reise)</returns>      
         public ActionResult Loeschen(ReiseModel reise)
         {
 

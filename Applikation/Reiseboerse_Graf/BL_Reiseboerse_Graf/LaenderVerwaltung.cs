@@ -166,19 +166,18 @@ namespace BL_Reiseboerse_Graf
 
             return index;
         }
-        public static int SpeichereNeueUnterkunft(string beschreibung, string bezeichnung, int kategorie, Verpflegung verpflegung)
+        public static int SpeichereNeueUnterkunft(Unterkunft neueUnterkunft)
         {
             int index = -1;
             Debug.WriteLine("Länderverwaltung - SpeichereNeueUnterkunft");
             Debug.Indent();
 
-            if (beschreibung != null && bezeichnung != null && kategorie != 0 && verpflegung != null)
+            if (neueUnterkunft!= null)
             {
                 using (reisebueroEntities context = new reisebueroEntities())
                 {
                     try
-                    {
-                        Unterkunft neueUnterkunft = new Unterkunft() { Beschreibung = beschreibung, Bezeichnung = bezeichnung, Kategorie = kategorie, Verpflegung = verpflegung };
+                    {            
                         context.AlleUnterkuenfte.Add(neueUnterkunft);
                         context.SaveChanges();                      
                         Debug.WriteLine("Speichern erfolgreich");
@@ -195,14 +194,14 @@ namespace BL_Reiseboerse_Graf
             }
             return index;
         }
-        public static Ort SucheOrt(int ord_id)
+        public static Ort SucheOrt(int ort_id)
         {
             Ort gesuchterOrt = null;
             using (reisebueroEntities context = new reisebueroEntities())
             {
                 try
                 {
-                    gesuchterOrt = context.AlleOrte.Where(x => x.ID == ord_id).FirstOrDefault();
+                    gesuchterOrt = context.AlleOrte.Include("Land").Where(x => x.ID == ort_id).FirstOrDefault();
                     Debug.WriteLine("Ortsuche erfolgreich");
                 }
                 catch (Exception ex)

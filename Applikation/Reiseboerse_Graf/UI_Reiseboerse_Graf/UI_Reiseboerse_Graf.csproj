@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Models\AlterErwachsenValidierung.cs" />
     <Compile Include="Models\AlterKindValidierung.cs" />
+    <Compile Include="Models\BildHinzufuegenModel.cs" />
     <Compile Include="Models\BuchungAnzahlModel.cs" />
     <Compile Include="Models\BuchungAnzeigenModel.cs" />
     <Compile Include="Models\BuchungErwachsenModel.cs" />
@@ -285,6 +286,7 @@
     <Content Include="Views\Buchungen\LadeAlleBuchungenMitarbeiter.cshtml" />
     <Content Include="Views\Buchungen\ZeigeDetails.cshtml" />
     <Content Include="Views\Buchungen\Verwalten.cshtml" />
+    <Content Include="Views\Reisen\BildHinzufügenZuReise.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
