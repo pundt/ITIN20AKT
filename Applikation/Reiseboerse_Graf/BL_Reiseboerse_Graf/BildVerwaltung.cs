@@ -164,7 +164,12 @@ namespace BL_Reiseboerse_Graf
 
             return bild_id;
         }
-
+        /// <summary>
+        /// Geht in Datenbank und prüft ob das Bild an der Stelle i leer ist und mappt diese um
+        /// </summary>
+        /// <param name="reiseid"></param>
+        /// <param name="bildid"></param>
+        /// <returns>bei erfolg index</returns>
         public static int BildZuReiseSpeichern(int reiseid, int[]bildid)
         {
             reisebueroEntities context = new reisebueroEntities();
@@ -187,6 +192,12 @@ namespace BL_Reiseboerse_Graf
             }
             return index;
         }
+        /// <summary>
+        /// Geht in Datenbank und prüft ob das Bild an der Stelle i leer ist und mappt diese um
+        /// </summary>
+        /// <param name="unterkunftid"></param>
+        /// <param name="bildid"></param>
+        /// <returns>bei erfolg index</returns>
         public static int BildZuUnterkunft(int unterkunftid, int[]bildid)
         {
             reisebueroEntities context = new reisebueroEntities();
