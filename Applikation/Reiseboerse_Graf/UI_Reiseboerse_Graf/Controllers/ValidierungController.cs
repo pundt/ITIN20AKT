@@ -35,7 +35,29 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
             else
                 return Json(false, JsonRequestBehavior.AllowGet);
-        } 
+        }
+
+        public JsonResult AlterErwachsen()
+        {
+            string geburtsDatumKey = Request.Params.AllKeys.Where(x => x.ToLower().Contains("geburtsdatum")).FirstOrDefault();
+            string geburtsDatum = Request.Params[geburtsDatumKey ?? ""];
+
+            if (!string.IsNullOrEmpty(geburtsDatum) && DateTime.Parse(geburtsDatum) <= DateTime.Now.AddYears(-14))
+                return Json(true, JsonRequestBehavior.AllowGet);
+            else
+                return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AlterKind()
+        {
+            string geburtsDatumKey = Request.Params.AllKeys.Where(x => x.ToLower().Contains("geburtsdatum")).FirstOrDefault();
+            string geburtsDatum = Request.Params[geburtsDatumKey ?? ""];
+
+            if (!string.IsNullOrEmpty(geburtsDatum) && DateTime.Parse(geburtsDatum) > DateTime.Now.AddYears(-14))
+                return Json(true, JsonRequestBehavior.AllowGet);
+            else
+                return Json(false, JsonRequestBehavior.AllowGet);
+        }
 
     }
 

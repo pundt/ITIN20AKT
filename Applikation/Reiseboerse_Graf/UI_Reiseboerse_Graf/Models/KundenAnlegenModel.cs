@@ -14,7 +14,7 @@ namespace UI_Reiseboerse_Graf.Models
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DataType(DataType.EmailAddress, ErrorMessage = "Ungültige E-Mail Adresse!")]
-        [Remote("EmailFrei", "Validation", ErrorMessage = "Email Adresse bereits vergeben")]
+        [Remote("EmailFrei", "Validierung", ErrorMessage = "Email Adresse bereits vergeben")]
         [DisplayName("Email")]
         public string Email { get; set; }
 

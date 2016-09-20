@@ -34,6 +34,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname)
+                                        @Html.ValidationMessageFor(model => model.BuchungenErwachsen[i].Vorname, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -42,6 +43,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname)
+                                        @Html.ValidationMessageFor(model => model.BuchungenErwachsen[i].Nachname, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,6 +52,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer)
+                                        @Html.ValidationMessageFor(model => model.BuchungenErwachsen[i].ReisePassNummer, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -58,6 +61,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Geburtsdatum, "{0:dd.MM.yyyy}")
+                                        @Html.ValidationMessageFor(model => model.BuchungenErwachsen[i].Geburtsdatum, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                             </table>
