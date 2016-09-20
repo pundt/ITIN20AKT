@@ -102,7 +102,12 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return alleVerpflegung;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="neuerort"></param>
+        /// <param name="land_id"></param>
+        /// <returns></returns>
         public static int SpeicherNeuenOrt(string neuerort, int land_id)
         {
             int index = -1;
