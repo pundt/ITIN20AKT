@@ -285,6 +285,7 @@
     <Content Include="Views\Buchungen\LadeAlleBuchungenMitarbeiter.cshtml" />
     <Content Include="Views\Buchungen\ZeigeDetails.cshtml" />
     <Content Include="Views\Buchungen\Verwalten.cshtml" />
+    <Content Include="Views\Reisen\Reisedaten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

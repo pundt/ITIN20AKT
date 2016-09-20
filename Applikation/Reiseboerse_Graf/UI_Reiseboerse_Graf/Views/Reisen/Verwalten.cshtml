@@ -25,7 +25,8 @@
             </td>
             <td>
                 @Html.ActionLink("Ändern", "Bearbeiten", new { id = item.ID }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Löschen", "Entfernen", new { id = item.ID }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Löschen", "Entfernen", new { id = item.ID }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Alle Reisedaten","Reisedaten", new { id=item.ID},new { @class="btn btn-default"})
             </td>
         </tr>
     }
