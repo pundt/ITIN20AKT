@@ -53,7 +53,6 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    //Zahlungsart art=context.AlleZahlungsarten.Where(x => x.ID == zahlungsart_id).FirstOrDefault();
                     neueZahlung.Zahlungsart = context.AlleZahlungsarten.Where(x => x.ID == zahlungsart_id).FirstOrDefault();
                     context.AlleZahlungen.Add(neueZahlung);
                     context.SaveChanges();
@@ -70,7 +69,7 @@ namespace BL_Reiseboerse_Graf
             return neueID;
         }
 
-        public static int ZuordnungZahlungBuchung(List<int> buchungIDs, Zahlung neueZahlung)
+        public static int ZuordnungZahlungBuchung(List<int> buchungIDs, int zahlung_id)
         {
             Debug.WriteLine("Zahlungsverwaltung - Zuordnung Zahlung_Buchung");
             Debug.Indent();
@@ -87,8 +86,7 @@ namespace BL_Reiseboerse_Graf
                             {
                                 Buchung_ID = id
                             };
-                            bz.Zahlung = new Zahlung();
-                            bz.Zahlung = neueZahlung;
+                            bz.Zahlung = context.AlleZahlungen.Where(x => x.ID == zahlung_id).FirstOrDefault();
                             context.AlleBuchung_Zahlungen.Add(bz);                            
                         }
                         zeilen=context.SaveChanges();
