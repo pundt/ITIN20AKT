@@ -384,26 +384,26 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <returns></returns>
         [PruefeBenutzer]
         [HttpPost]
-        public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4, HttpPostedFileBase file5, HttpPostedFileBase file6, HttpPostedFileBase file7, HttpPostedFileBase file8, HttpPostedFileBase file9, HttpPostedFileBase file10)
+        public ActionResult ReiseHinzufuegen(ReiseAnlegenModel neueReise, HttpPostedFileBase file1, HttpPostedFileBase file2)
         {
             Unterkunft BL_Unterkunft = null;
             int i = 0;
             int e = 0;
             int bild_id;
-            int[] bildUnterkunftId = new int[5];
-            int[] bildReiseId = new int[5];
+            int bildUnterkunftId =0;
+            int bildReiseId = 0;
             Debug.Indent();
             Debug.WriteLine("Reise - ReiseHinzufügen - Post");
             if (ModelState.IsValid)
             {
-                #region Reise-Bilder
+              
                 if (file1 != null && file1.ContentLength > 0)
                 {
                     bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
                     if (bild_id > 0)
                     {
-                        bildReiseId[i] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
+                        bildUnterkunftId = bild_id;
+                        Debug.WriteLine("Bildspeichern erfolgreich");
                         i++;
                         bild_id = 0;
                     }
@@ -413,104 +413,13 @@ namespace UI_Reiseboerse_Graf.Controllers
                     bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file2);
                     if (bild_id > 0)
                     {
-                        bildReiseId[i] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
+                        bildReiseId = bild_id;
+                        Debug.WriteLine("Bildspeichern erfolgreich");
                         i++;
                         bild_id = 0;
                     }
                 }
-                if (file3 != null && file3.ContentLength > 0)
-                {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file3);
-                    if (bild_id > 0)
-                    {
-                        bildReiseId[i] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        i++;
-                        bild_id = 0;
-                    }
-                }
-                if (file4 != null && file4.ContentLength > 0)
-                {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file4);
-                    if (bild_id > 0)
-                    {
-                        bildReiseId[i] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        i++;
-                        bild_id = 0;
-                    }
-                }
-                if (file5 != null && file5.ContentLength > 0)
-                {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file5);
-                    if (bild_id > 0)
-                    {
-                        bildReiseId[i] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        i++;
-                        bild_id = 0;
-                    }
-                }
-                #endregion
-
-                #region Unterkunfts-Bilder
-                if (file6 != null && file6.ContentLength > 0)
-                {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
-                    if (bild_id > 0)
-                    {
-                        bildReiseId[e] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        e++;
-                        bild_id = 0;
-                    }
-                }
-                 if (file7 != null && file7.ContentLength > 0)
-                {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
-                    if (bild_id > 0)
-                    {
-                        bildReiseId[e] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        e++;
-                        bild_id = 0;
-                    }
-                }
-                if (file8 != null && file8.ContentLength > 0)
-                {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
-                    if (bild_id > 0)
-                    {
-                        bildReiseId[e] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        e++;
-                        bild_id = 0;
-                    }
-                }
-                if (file9 != null && file9.ContentLength > 0)
-                {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
-                    if (bild_id > 0)
-                    {
-                        bildReiseId[e] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        e++;
-                        bild_id = 0;
-                    }
-                }
-                 if (file10 != null && file10.ContentLength > 0)
-                {
-                    bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file6);
-                    if (bild_id > 0)
-                    {
-                        bildReiseId[e] = bild_id;
-                        Debug.WriteLine("Bildspeicher erfolgreich");
-                        e++;
-                        bild_id = 0;
-                    }
-                }
-                #endregion
+             
 
                 if (neueReise.NeuerOrt != null)
                 {
@@ -611,40 +520,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return View(neueReise);
             }
         }
-        /// <summary>
-        /// Hier kann man Bilder den jeweiligen Reisen zufügen
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult BildHinzufügenZuReise(int reise_id)
-        {
-            List<Reise> alleReisen = ReiseVerwaltung.LadeAlleReisen();
-
-            return View(alleReisen);
-        }
-        [HttpPost]
-        public ActionResult BildHinzufügenZuReise(BildHinzufuegenModel bildhinzuguegen, HttpPostedFileBase file)
-        {
-            if (ModelState.IsValid)
-            {
-                if (bildhinzuguegen.ID > 0)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        //bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file);
-                        //if (bild_id > 0)
-                        //{
-                        //    Unterkunftbild_id[e] = bild_id;
-                        //    Debug.WriteLine("Bildspeicher erfolgreich");
-                        //    e++;
-                        //    bild_id = 0;
-                        //}
-                    }
-                }
-
-            }
-            return View();
-        }
+       
+       
         /// <summary>
         /// ReiseStart- und Enddatum sowie Anzahl der Reisen wird gesetzt.
         /// </summary>
