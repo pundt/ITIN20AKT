@@ -623,28 +623,28 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(alleReisen);
         }
         [HttpPost]
-        public ActionResult BildHinzufügenZuReise(BildHinzufuegenModel bildhinzuguegen, HttpPostedFileBase file)
-        {
-            if (ModelState.IsValid)
-            {
-                if (bildhinzuguegen.ID > 0)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        //bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file);
-                        //if (bild_id > 0)
-                        //{
-                        //    Unterkunftbild_id[e] = bild_id;
-                        //    Debug.WriteLine("Bildspeicher erfolgreich");
-                        //    e++;
-                        //    bild_id = 0;
-                        //}
-                    }
-                }
+        //public ActionResult BildHinzufügenZuReise(BildHinzufuegenModel bildhinzuguegen, HttpPostedFileBase file)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (bildhinzuguegen.ID > 0)
+        //        {
+        //            if (file != null && file.ContentLength > 0)
+        //            {
+        //                //bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file);
+        //                //if (bild_id > 0)
+        //                //{
+        //                //    Unterkunftbild_id[e] = bild_id;
+        //                //    Debug.WriteLine("Bildspeicher erfolgreich");
+        //                //    e++;
+        //                //    bild_id = 0;
+        //                //}
+        //            }
+        //        }
 
-            }
-            return View();
-        }
+        //    }
+        //    return View();
+        //}
         /// <summary>
         /// ReiseStart- und Enddatum sowie Anzahl der Reisen wird gesetzt.
         /// </summary>
@@ -774,6 +774,52 @@ namespace UI_Reiseboerse_Graf.Controllers
             Debug.Unindent();
             return View(UI_Reisen);
         }
+
+        [PruefeBenutzer]
+        [HttpGet]
+        public ActionResult AnzeigenMitarbeiter(int id)
+        {
+            Debug.WriteLine("Reisen AnzeigenMitarbeiter GET");
+            Debug.Indent();
+            Reise BL_Reise = ReiseVerwaltung.SucheReise(id);
+
+            ReisedetailModel UI_Reise = new ReisedetailModel()
+            {
+                Beschreibung = BL_Reise.Beschreibung,
+                Hotelkategorie = BL_Reise.Unterkunft.Kategorie,
+                Preis_Kind = BL_Reise.Preis_Kind,
+                Preis_Erwachsene = BL_Reise.Preis_Erwachsener,
+                Unterkunft = BL_Reise.Unterkunft.Bezeichnung,
+                ID = BL_Reise.ID,
+                Land = BL_Reise.Ort.Land.Bezeichnung,
+                Ort = BL_Reise.Ort.Bezeichnung,
+                Titel = BL_Reise.Titel,
+                Verpflegung = BL_Reise.Unterkunft.Verpflegung.Bezeichnung
+            };
+            UI_Reise.Reisedaten = new List<ReisedatumModel>();
+            foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(id))
+            {
+                UI_Reise.Reisedaten.Add(new ReisedatumModel()
+                {
+                    Anmeldefrist = datum.Anmeldefrist,
+                    Beginndatum = datum.Startdatum,
+                    Enddatum = datum.Enddatum,
+                    Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
+                });
+            }
+
+            Debug.Unindent();
+
+            return View(UI_Reise);
+        }
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Alle Reisedaten einer Reise anzeigen

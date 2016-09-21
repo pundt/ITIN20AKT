@@ -1,0 +1,105 @@
+﻿@model UI_Reiseboerse_Graf.Models.ReisedetailModel
+
+@{
+    ViewBag.Title = "AnzeigenMitarbeiter";
+    Layout = "~/Views/Shared/_LayoutVerwaltung.cshtml";
+}
+
+<h2>Reise anzeigen</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Verpflegung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Verpflegung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Land)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Land)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hotelkategorie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotelkategorie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unterkunft)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unterkunft)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Beschreibung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Beschreibung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preis_Erwachsene)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preis_Erwachsene)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preis_Kind)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preis_Kind)
+        </dd>
+
+    </dl>
+    <table class="table table-striped">
+        <tr>
+            <th>@Html.DisplayNameFor(x=>x.Reisedaten[0].DatumsAnzeige)</th>
+            <th>@Html.DisplayNameFor(x => x.Reisedaten[0].Anmeldefrist)</th>
+            <th>@Html.DisplayNameFor(x => x.Reisedaten[0].Restplätze)</th>
+        </tr>
+        @foreach (var datum in Model.Reisedaten)
+        {
+            <tr>
+                <td>@datum.DatumsAnzeige</td>
+                <td>@datum.Anmeldefrist</td>
+                <td>@datum.Restplätze</td>
+            </tr>
+        }
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Löschen", "Entfernen", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -162,8 +162,6 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                         benutzerList.Add(b);
 
-                        Roles.AddUserToRole(bm.Email, "Kunde");
-
                         context.SaveChanges();
                     }
                     else

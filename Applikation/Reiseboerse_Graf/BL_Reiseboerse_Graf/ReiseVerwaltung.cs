@@ -38,6 +38,33 @@ namespace BL_Reiseboerse_Graf
             return reisen;
         }
 
+
+        public static Reise SucheReise(int id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Suche Reise");
+            Debug.Indent();
+            Reise reise = new Reise();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    List<Reise> reisen = LadeAlleReisen();
+                    reise = reisen.Where(x => x.ID == id).FirstOrDefault();    
+                        
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Suchen einer Reise");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return reise;
+        }
+        
+
+
         /// <summary>
         /// Lädt zu einer Reise alle Zeitpunkte dieser Reise (also alle Reisedaten)
         /// </summary>

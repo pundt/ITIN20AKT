@@ -646,6 +646,7 @@
     <Content Include="Views\Buchungen\ZeigeDetails.cshtml" />
     <Content Include="Views\Buchungen\Verwalten.cshtml" />
     <Content Include="Views\Reisen\Reisedaten.cshtml" />
+    <Content Include="Views\Reisen\AnzeigenMitarbeiter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
