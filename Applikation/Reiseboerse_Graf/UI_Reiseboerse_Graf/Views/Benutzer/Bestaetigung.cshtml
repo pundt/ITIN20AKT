@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Bestaetigung";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="Schriftartblau">Willkommen bei Reisebuero Graf, @User.Identity.Name</h2>
+<div class="suchergebnis">
+    <h3>Stöbern Sie in unserem umfangreichem Reiseangebot nach Ihrer Traumreise!</h3>
+    @Html.ActionLink("Los gehts", "Laden", "Reisen")
+</div>
