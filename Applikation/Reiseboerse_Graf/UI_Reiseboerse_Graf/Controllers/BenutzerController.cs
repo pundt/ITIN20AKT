@@ -40,7 +40,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
 
             if (BenutzerVerwaltung.Anmelden(lm.Email, lm.Passwort))
-            {                
+            {
                 if (lm.AngemeldetBleiben)
                 {
                     FormsAuthentication.SetAuthCookie(lm.Email, true);
@@ -57,7 +57,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 if (!Request.UrlReferrer.AbsoluteUri.Contains("Reisen/Laden"))
                 {
                     return Redirect(Request.UrlReferrer.AbsoluteUri);
-                } 
+                }
             }
 
             return RedirectToAction("Laden", "Reisen");
@@ -91,7 +91,9 @@ namespace UI_Reiseboerse_Graf.Controllers
                 try
                 {
                     List<Land> laender = BenutzerVerwaltung.AlleLaender();
+                    List<Ort> orte = LaenderVerwaltung.AlleOrte();
                     List<LandModel> lmListe = new List<LandModel>();
+                    List<OrtModel> ortListe = new List<OrtModel>();
 
                     /// Hier werden die Laender der lmList hinzugefügt um
                     /// die Dropdown-Liste in der View zu füllen
@@ -100,7 +102,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                         lmListe.Add(new LandModel() { landName = l.Bezeichnung, land_ID = l.ID });
                     }
 
+                    foreach (Ort ort in orte)
+                    {
+                        ortListe.Add(new OrtModel() { Id = ort.ID, Bezeichnung = ort.Bezeichnung });
+                    }
                     model.Land = lmListe;
+                    model.Ort = ortListe;
                 }
                 catch (Exception ex)
                 {
@@ -139,30 +146,28 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                     if (ModelState.IsValid)
                     {
-                        b.Adresse.Adressdaten = bm.Adresse;
+                        if (LaenderVerwaltung.SucheAdresse(bm.Adresse) == null)
+                        {
+                            b.Adresse = new Adresse()
+                            {
+                                Adressdaten = bm.Adresse,
+                                Ort=LaenderVerwaltung.SucheOrt(bm.Ort_ID)
+                            };
+                        }
+                        else
+                        {
+                            b.Adresse = LaenderVerwaltung.SucheAdresse(bm.Adresse);
+                        }
                         b.Email = bm.Email;
                         b.Geschlecht = bm.Geschlecht;
                         b.Passwort = Tools.PasswortZuByteArray(bm.Passwort);
                         b.Telefon = bm.Telefon;
                         b.Vorname = bm.Vorname;
                         b.Nachname = bm.Nachname;
-                        b.Land.ID = bm.Land_ID;
-
-                        lmList = bm.Land;
-                        foreach (LandModel lm in lmList)
-                        {
-                            if (lm.land_ID == bm.Land_ID)
-                            {
-                                l.Bezeichnung = lm.landName;
-                                l.ID = lm.land_ID;
-                            }
-                        }
-
-                        b.Land = l;
-
-                        benutzerList.Add(b);
-
-                        Roles.AddUserToRole(bm.Email, "Kunde");
+                        b.Land = LaenderVerwaltung.SucheLand(bm.Land_ID);
+                        b.Geburtsdatum = bm.GeburtsDatum;
+                        
+                        context.AlleBenutzer.Add(b);
 
                         context.SaveChanges();
                     }
@@ -190,10 +195,10 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
 
             Debug.Unindent();
-            return View();
+            return View("Bestaetigung");
         }
 
-      
+
 
         /// <summary>
         /// Die Profilseite des Kunden wo er seine Daten ändern kann
@@ -247,7 +252,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Debug.WriteLine(ex.Message);
                     Debug.Unindent();
                     Debugger.Break();
-                }                
+                }
             }
 
             return View(model);

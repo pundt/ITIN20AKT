@@ -52,12 +52,13 @@ namespace UI_Reiseboerse_Graf.Models
         [DisplayName("Land")]
         public List<LandModel> Land { get; set; }
 
-        //[Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
-        //[RegularExpression("^[0-9]{4,5}$",ErrorMessage ="Nur Ziffern zwischen 4 und 5 Zeichen")]
-        //[DisplayName("Postleitzahl")]
-        //public string Plz { get; set; }
+        [Required]
+        public int Ort_ID { get; set; }
 
-        
+        [DisplayName("Ort")]
+        public List<OrtModel> Ort { get; set; }
+
+
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         [DisplayName("Adresse")]
         public string Adresse { get; set; }

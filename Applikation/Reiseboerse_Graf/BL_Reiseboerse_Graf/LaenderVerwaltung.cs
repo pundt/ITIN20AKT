@@ -220,5 +220,47 @@ namespace BL_Reiseboerse_Graf
             return gesuchterOrt;
         }
 
+        public static Land SucheLand(int land_id)
+        {
+            Land gesuchtesLand = null;
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+                    gesuchtesLand = context.AlleLaender.Where(x => x.ID == land_id).FirstOrDefault();
+                    Debug.WriteLine("Landsuche erfolgreich");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler bei Landsuche");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                    Debug.Unindent();
+                }
+            }
+            return gesuchtesLand;
+        }
+
+        public static Adresse SucheAdresse(string adresse)
+        {
+            Adresse gesuchteAdresse = null;
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+                    gesuchteAdresse = context.AlleAdressen.Where(x => x.Adressdaten.Contains(adresse)).FirstOrDefault();
+                    Debug.WriteLine("Adresssuche erfolgreich");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler bei Landsuche");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                    Debug.Unindent();
+                }
+            }
+            return gesuchteAdresse;
+        }
+
     }
 }

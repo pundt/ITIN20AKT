@@ -489,7 +489,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 int neueID = ZahlungsVerwaltung.NeueZahlungSpeichern(zahlung, model.Zahlungsart_ID);
                 zahlung.ID = neueID;
                 List<int> BuchungIDs = Session["Buchungen"] as List<int>;
-                int zeilen = ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, zahlung);
+                int zeilen = ZahlungsVerwaltung.ZuordnungZahlungBuchung(BuchungIDs, zahlung.ID);
                 erfolgreich = true;
             }
             catch (Exception ex)

@@ -24,11 +24,9 @@
                 @Html.DisplayFor(modelItem => item.Reisetitel)
             </td>
             <td>
+                @Html.ActionLink("Anzeigen", "AnzeigenMitarbeiter","Reisen" , new { id = item.ID }, new { @class = "btn btn-success" }) |
                 @Html.ActionLink("Ändern", "Bearbeiten", new { id = item.ID }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Löschen", "Entfernen", new { id = item.ID }, new { @class = "btn btn-warning" }) |
                 @Html.ActionLink("Alle Reisedaten","Reisedaten", new { id=item.ID},new { @class="btn btn-default"})
-                @Html.ActionLink("Anzeigen", "Anzeigen","Reisen" , new { id = item.ID }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Löschen", "Entfernen", new { id = item.ID }, new { @class = "btn btn-warning" })
             </td>
       
         </tr>
