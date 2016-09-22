@@ -73,24 +73,24 @@ namespace BL_Reiseboerse_Graf
         /// <returns>ByteArray</returns>
         public static byte[] PasswortZuByteArray(string passwort)
         {
-            reisebueroEntities context = new reisebueroEntities();
+            //reisebueroEntities context = new reisebueroEntities();
 
             SHA512 hash = SHA512.Create();
 
             byte[] pw = hash.ComputeHash(Encoding.UTF8.GetBytes(passwort));
 
-            using (context)
-            {
-                foreach (Benutzer b in context.AlleBenutzer)
-                {
-                    if (pw.SequenceEqual(b.Passwort))
-                    {
-                        return pw;
-                    }
-                }
+            //using (context)
+            //{
+            //    foreach (Benutzer b in context.AlleBenutzer)
+            //    {
+            //        if (pw.SequenceEqual(b.Passwort))
+            //        {
+            //            return pw;
+            //        }
+            //    }
 
-            }
-            return null;
+            //}
+            return pw;
         }
 
         /// <summary>
