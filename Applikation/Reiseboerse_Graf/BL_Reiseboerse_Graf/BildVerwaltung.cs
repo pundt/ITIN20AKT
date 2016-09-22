@@ -165,32 +165,75 @@ namespace BL_Reiseboerse_Graf
             return bild_id;
         }
         /// <summary>
-        /// Geht in Datenbank und prüft ob das Bild an der Stelle i leer ist und mappt diese um
+        /// Speichert das Reisebild mit den Übergabewerten von Reise_id und Bild_id
         /// </summary>
         /// <param name="reiseid"></param>
         /// <param name="bildid"></param>
-        /// <returns>bei erfolg index</returns>
-        public static int BildZuReiseSpeichern(int reiseid, int[]bildid)
+        /// <returns>bei erfolg Reise_Bild.ID</returns>
+        public static int BildZuReiseSpeichern(int reiseid, int bild_id)
         {
-            reisebueroEntities context = new reisebueroEntities();
-            int index = 0;
-            for (int i = 0; i < bildid.Length-1; i++)
+
+            Reise_Bild reisebild = new Reise_Bild();
+      
+            using (reisebueroEntities context = new reisebueroEntities())
             {
-                if (bildid[i] != 0)
+
+
+                try
                 {
-                    Reise_Bild neueBildReise = new Reise_Bild();
-                    neueBildReise.Reise.ID = reiseid;
-                    neueBildReise.Bild.ID = bildid[i];
-                    context.AlleReise_Bilder.Add(neueBildReise);
-                    index += context.SaveChanges();
+                    Reise reise = context.AlleReisen.Where(x => x.ID == reiseid).FirstOrDefault();                    
+                    Bild bild = context.AlleBilder.Where(x => x.ID == bild_id).FirstOrDefault();                
+
+                    reisebild.Reise = reise;
+                    reisebild.Bild = bild;
+                    context.AlleReise_Bilder.Add(reisebild);
+                    context.SaveChanges();
+
+                    Debug.WriteLine("ReiseBild speichern erfolgreich");
                 }
-                else
+                catch (Exception ex)
                 {
-                    return index;
+                    Debug.WriteLine("ReiseBild speichern fehlgeschlagen");
+                    Debug.WriteLine(ex.Message);
                 }
-           
             }
-            return index;
+            return reisebild.ID;
+        }
+        /// <summary>
+        /// Speichert das Reisebild mit den Übergabewerten von Reise_id und Bild_id
+        /// </summary>
+        /// <param name="reiseid"></param>
+        /// <param name="bildid"></param>
+        /// <returns>bei erfolg Reise_Bild.ID</returns>
+        public static int BildZuUnterkunftSpeichern(int bild_id, int unterkunft_id)
+        {
+
+            Unterkunft_Bild unterkunftBild = new Unterkunft_Bild();
+
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+
+                try
+                {
+                    Bild bild = context.AlleBilder.Where(x => x.ID == bild_id).FirstOrDefault();                    ;
+
+                    Unterkunft unterkunft = context.AlleUnterkuenfte.Where(x => x.ID == unterkunft_id).FirstOrDefault();
+                  
+                    unterkunftBild.Unterkunft = unterkunft;
+                    unterkunftBild.Bild = bild;
+
+                    context.AlleUnterkunft_Bilder.Add(unterkunftBild);
+                    context.SaveChanges();
+
+                    Debug.WriteLine("UnterkunftBild speichern erfolgreich");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("UnterkunftBild speichern fehlgeschlagen");
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+            return unterkunftBild.ID;
         }
         /// <summary>
         /// Geht in Datenbank und prüft ob das Bild an der Stelle i leer ist und mappt diese um

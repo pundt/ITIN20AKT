@@ -491,10 +491,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 try
                 {
-                    //if (BildVerwaltung.BildZuReiseSpeichern(neueReise.Id) > 0)
-                    //{
-                    //    Debug.WriteLine("BildZuReiseSpeichern - erfolgreich");
-                    //}
+                    if (BildVerwaltung.BildZuReiseSpeichern(BlReise.ID,bildReiseId) > 0)
+                    {
+                        Debug.WriteLine("BildZuReiseSpeichern - erfolgreich");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -503,10 +503,10 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 try
                 {
-                    //    if (BildVerwaltung.BildZuUnterkunft(neueReise.Unterkunft_id, Unterkunftbild_id) > 0)
-                    //    {
-                    //        Debug.WriteLine("UnterkunftBildSpeichern - erfolgreich");
-                    //    }
+                    if (BildVerwaltung.BildZuUnterkunftSpeichern(bildUnterkunftId, BlReise.Unterkunft.ID)>0)
+                    {
+                        Debug.WriteLine("UnterkunftBildSpeichern - erfolgreich");
+                    }
                 }
                 catch (Exception ex)
                 {
