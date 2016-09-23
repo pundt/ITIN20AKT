@@ -17,14 +17,17 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <h2 class="Schriftartblau">Verwaltung</h2>
-    <div class="col-xs-10">
-        <img src="~/Content/bilder/reisebüro_logo.jpg" class="center-block img-responsive"/>
+    <div class="row">
+        <div class="col-xs-8 col-xs-push-2">
+            <img src="~/Content/bilder/reisebüro_logo.jpg" class="center-block img-responsive" />
+        </div>
     </div>
+   
     <div class="row">
         <div class="col-xs-3 box">
-            @Html.ActionLink("Reisen", "Verwalten", "Reisen")
+            @Html.ActionLink("Reisen", "Verwalten", "Reisen",null,new { @class="btn buttonind"})
             <hr />
+            <p>Hier kommen Sie zu: </p>
             <ul>
                 <li>Reisen hinzufügen</li>
                 <li>Reisen ändern</li>
@@ -32,8 +35,9 @@
             </ul>
         </div>
         <div class="col-xs-3 box">
-            @Html.ActionLink("Buchungen", "Verwalten", "Buchungen",new { id=0},null)
+            @Html.ActionLink("Buchungen", "Verwalten", "Buchungen",new { id=0}, new { @class = "btn buttonind" })
             <hr />
+            <p>Hier kommen Sie zu: </p>
             <ul>
                 <li>Alle Buchungen auflisten</li>
                 <li>Alle Buchungen zu einem Benutzer auflisten</li>
@@ -42,8 +46,9 @@
             </ul>
         </div>
         <div class="col-xs-3 box">
-            @Html.ActionLink("Stornoaufträge", "StornoVerwalten", "Buchungen")
+            @Html.ActionLink("Stornoaufträge", "StornoVerwalten", "Buchungen",null, new { @class = "btn buttonind" })
             <hr />
+            <p>Hier kommen Sie zu: </p>
             <ul>
                 <li>Alle Stornoaufträge einsehen</li>
                 <li>Stornoaufträge rückgängig machen</li>
