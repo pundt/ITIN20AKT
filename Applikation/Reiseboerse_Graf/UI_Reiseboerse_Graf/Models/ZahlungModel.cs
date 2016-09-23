@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace UI_Reiseboerse_Graf.Models
 {
@@ -10,7 +11,7 @@ namespace UI_Reiseboerse_Graf.Models
     {
         public string Vorname { get; set; }
         public string Nachname { get; set; }
-        [RegularExpression("^[A-Z0-9]{10,36}$", ErrorMessage ="Geben Sie eine gültige Nummer ein")]
+        [Remote("LuhnUndIBANPruefung", "Validierung", ErrorMessage = "Geben Sie eine gültige IBAN- oder Kreditkartennummer ein")]
         public string Nummer { get; set; }
         [Display(Name ="Zahlungsart")]
         public int Zahlungsart_ID { get; set; }

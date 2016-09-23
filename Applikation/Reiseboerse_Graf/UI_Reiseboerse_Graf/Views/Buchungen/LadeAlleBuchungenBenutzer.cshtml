@@ -17,7 +17,7 @@
                 <td>
                     @if (DateTime.Now > model.Enddatum && model.Bewertung == null)
                     {
-                        <button id="button" class="anmeldung">Bewerten</button>
+                        <button id="button" class="btn anmeldung abstand">Bewerten</button>
                         <div id="bewerten" class="NichtZeigen">
                             @using (Html.BeginForm("Bewerten", "Reisen"))
                             {
@@ -30,7 +30,7 @@
                                     <input type="radio" name="Bewertung" id="group-2-3" value="2" /><label for="group-2-3"></label>
                                     <input type="radio" name="Bewertung" id="group-2-4" value="1" /><label for="group-2-4"></label>
                                 </div>
-                                <input type="submit" value="Jetzt bewerten" />
+                                <input type="submit" value="Jetzt bewerten" class="btn anmeldung abstand"/>
                             }
                         </div>
                     }
