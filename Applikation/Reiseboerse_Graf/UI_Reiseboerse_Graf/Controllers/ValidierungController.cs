@@ -66,7 +66,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             string kartenNummerKey = Request.Params.AllKeys.Where(x => x.ToLower().Contains("nummer")).FirstOrDefault();
             string kartenNummer = Request.Params[kartenNummerKey ?? ""];
 
-            if (!kartenNummer.Contains("AT"))
+            if (!kartenNummer.Contains("AT") && kartenNummer.Length >= 12 && kartenNummer.Length <= 16)
             {
                 if (ZahlungsVerwaltung.PruefeLuhn(kartenNummer))
                     return Json(true, JsonRequestBehavior.AllowGet);
