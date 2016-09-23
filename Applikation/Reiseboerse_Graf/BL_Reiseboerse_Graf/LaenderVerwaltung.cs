@@ -30,7 +30,6 @@ namespace BL_Reiseboerse_Graf
                     Debug.WriteLine("Fehler beim Laden aller Orte aus der DB");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
-
                 }
 
             }
@@ -60,11 +59,7 @@ namespace BL_Reiseboerse_Graf
                     Debug.WriteLine("Fehler beim Laden aller Unterkuenfte");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
-
-
                 }
-
-
             }
             Debug.Unindent();
             return alleUnterkuenfte;
@@ -86,16 +81,14 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-
                     alleVerpflegung = context.AlleVerpflegungen.ToList();
+                    Debug.WriteLine("Speichern erfolgreich beim Laden aller Verpflegungen");
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Fehler beim Laden aller Verpflegungen");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
-
-
                 }
 
             }
@@ -146,17 +139,18 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("Länderverwaltung - SpeicherNeuesLand");
             Debug.Indent();
 
+            Land land = new Land();
             if (neuesLand != null)
             {
-                Land land = new Land();
                 land.Bezeichnung = neuesLand;
+                
                 using (reisebueroEntities context = new reisebueroEntities())
                 {
                     try
                     {
                         context.AlleLaender.Add(land);
                         context.SaveChanges();
-                        index = land.ID;
+                        index = land.ID;                        
                         Debug.WriteLine("Speichern erfolgreich");
                     }
                     catch (Exception ex)
@@ -169,7 +163,7 @@ namespace BL_Reiseboerse_Graf
                 }
             }
 
-            return index;
+            return land.ID;
         }
         public static int SpeichereNeueUnterkunft(Unterkunft neueUnterkunft)
         {
@@ -177,14 +171,14 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("Länderverwaltung - SpeichereNeueUnterkunft");
             Debug.Indent();
 
-            if (neueUnterkunft!= null)
+            if (neueUnterkunft != null)
             {
                 using (reisebueroEntities context = new reisebueroEntities())
                 {
                     try
-                    {            
+                    {
                         context.AlleUnterkuenfte.Add(neueUnterkunft);
-                        context.SaveChanges();                      
+                        context.SaveChanges();
                         Debug.WriteLine("Speichern erfolgreich");
                         return neueUnterkunft.ID;
                     }
