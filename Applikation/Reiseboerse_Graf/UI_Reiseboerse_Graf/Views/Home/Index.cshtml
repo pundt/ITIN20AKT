@@ -4,13 +4,10 @@
 }
 
 
+
+
 <div class="row">
-    <div class="col-md-12 startlink">
-        @Html.ActionLink("Zu unseren Reisen", "Laden", "Reisen")
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 slide1">
         <div id="mycarousel" class="carousel slide" data-ride="carousel">
             <!-- Punkte/Kennzeichen für Bilder -->
             <!--Hier werden weitere Punkte hinzugefügt - pro Bild ein listitem zufügen,
@@ -69,7 +66,10 @@
         });
 
         var $item = $('.carousel .item');
-        var $wHeight = $(window).height();
+        var h = $(window).height();
+        var newheight = h * 0.6;
+        var $wHeight = newheight;
+        //var $wHeight = $(window).height();
 
         $item.height($wHeight);
         $item.addClass('full-screen');
