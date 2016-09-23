@@ -76,5 +76,40 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return gesuchterBenutzer;
         }
+
+
+        public static int Aktualisieren(Benutzer benutzer)
+        {
+            Debug.WriteLine("BenutzerVerwaltung - Aktualisieren(id)");
+            Debug.Indent();
+            int zeilen = 0;
+            Benutzer gesuchterBenutzer = null;
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    gesuchterBenutzer = context.AlleBenutzer.Where(x => x.ID == benutzer.ID).FirstOrDefault();
+                    gesuchterBenutzer.Nachname = benutzer.Nachname;
+                    gesuchterBenutzer.ID = benutzer.ID;
+                    gesuchterBenutzer.Geburtsdatum = benutzer.Geburtsdatum;
+                    gesuchterBenutzer.Vorname = benutzer.Vorname;
+                    gesuchterBenutzer.Land = benutzer.Land;
+                    gesuchterBenutzer.Passwort = benutzer.Passwort;
+                    gesuchterBenutzer.Telefon = benutzer.Telefon;
+                    gesuchterBenutzer.Titel = benutzer.Titel;
+                    zeilen=context.SaveChanges();
+                    Debug.WriteLineIf(zeilen == 1, "Benutzer erfolgreich geändert!");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Aktualisieren des Benutzers");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return zeilen;
+
+        }
     }
 }
