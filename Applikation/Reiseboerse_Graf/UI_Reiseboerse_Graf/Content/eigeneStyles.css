@@ -17,6 +17,18 @@
     margin-bottom: 1.5%;
 }
 
+.slide1{
+    padding-left:0px;
+    padding-right:0px;
+
+}
+
+.slide2{
+    padding-left:-15px;
+    padding-right:-15px;
+
+}
+
 .reise {
     border: solid;
     border-color: #576a8f;
@@ -124,6 +136,25 @@
     border-color: white;
     border-style: dashed;
 }
+.headerimg {
+    border-radius: 340px;
+    border-color: white;
+    border-style: dashed;
+    width: 65%;
+    margin-right:2%;
+    margin-left:6%;
+    margin-bottom:2%;
+
+}
+
+.headerimg2 {
+    border-radius: 340px;
+    border-color: white;
+    border-style: dashed;
+    width: 70%;
+    margin-left:27%;
+    margin-top:7%;
+}
 
 .acidjs-rating-stars,
 .acidjs-rating-stars label::before {
@@ -205,6 +236,7 @@
     color: #005ead;
     font-size: 1.6em;
     text-align: right;
+    margin-top:6%;
 }
 
 
