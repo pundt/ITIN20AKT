@@ -268,7 +268,8 @@ namespace UI_Reiseboerse_Graf.Controllers
         public ActionResult Aktualisieren(KundenModel model)
         {
             Land l = new Land();
-
+            //ModelState.IsValid funktioniert nicht da es nur KundenAnlegenModel gibt,
+            //mit Land &Remote Validierung email --> liefert false, deswegen hier nicht angewendet
             Benutzer benutzer = new Benutzer()
             {
                 Email = User.Identity.Name,
