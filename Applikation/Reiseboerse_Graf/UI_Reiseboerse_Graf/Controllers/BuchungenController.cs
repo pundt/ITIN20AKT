@@ -289,6 +289,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 Session["Buchungen"] = model.BuchungIDs as List<int>;
                 Session["Mailtext"] = MailTextErzeugen(model) as string;
+                Session["Bestaetigung"] = Bestaetigungstext(model) as string;
             }
             return View("ZeigeGesamt", model);
         }
@@ -315,6 +316,8 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             return View(zahlung);
         }
+
+        
 
         /// <summary>
         /// Nimmt das übergebene ZahlungModel entgegen und übergibt es an die BL
@@ -360,7 +363,14 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return RedirectToAction("Zahlung");
             }
             Debug.Unindent();
-            return View("Bestaetigung");
+            return RedirectToAction("Bestaetigung");
+        }
+
+        [HttpGet]
+        public ActionResult Bestaetigung()
+        {
+            ViewBag.text=Session["Bestaetigung"] as string;
+            return View();
         }
 
         /// <summary>
@@ -462,6 +472,14 @@ namespace UI_Reiseboerse_Graf.Controllers
             text += @"<p class='logoschrift'>Wir wünschen Ihnen viel Freude in Ihrem Urlaub und hoffen, dass Sie auch das nächste mal bei uns buchen</p></body></html>";
             return text;
         }
+
+        private string Bestaetigungstext(BuchungGesamtModel model)
+        {
+            string text = "Wir wünschen Ihnen sehr viel Freude bei Ihrer Reise";
+            text=string.Format("{0} {1} von {2} bis {3}", text, model.Reisetitel, model.Startdatum.ToLongDateString(), model.Enddatum.ToLongDateString());
+            return text;
+        }
+
 
 
         /// <summary>

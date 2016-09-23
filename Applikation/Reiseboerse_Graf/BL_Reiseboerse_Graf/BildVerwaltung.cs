@@ -174,22 +174,34 @@ namespace BL_Reiseboerse_Graf
         {
 
             Reise_Bild reisebild = new Reise_Bild();
-      
+
             using (reisebueroEntities context = new reisebueroEntities())
             {
 
 
                 try
                 {
-                    Reise reise = context.AlleReisen.Where(x => x.ID == reiseid).FirstOrDefault();                    
-                    Bild bild = context.AlleBilder.Where(x => x.ID == bild_id).FirstOrDefault();                
+                    Reise reise = context.AlleReisen.Where(x => x.ID == reiseid).FirstOrDefault();
+                    Bild bild = context.AlleBilder.Where(x => x.ID == bild_id).FirstOrDefault();
+                    if (reise == null)
+                    {
+                        Debug.WriteLine("Keine Reise gefunden");
+                    }
+                    if (bild == null)
+                    {
+                        Debug.WriteLine("Kein Bild gefunden");
+                    }
+                    if (reise.ID > 0 && bild.ID > 0)
+                    {
 
-                    reisebild.Reise = reise;
-                    reisebild.Bild = bild;
-                    context.AlleReise_Bilder.Add(reisebild);
-                    context.SaveChanges();
+                        reisebild.Reise = reise;
+                        reisebild.Bild = bild;
+                        context.AlleReise_Bilder.Add(reisebild);
+                        context.SaveChanges();
 
-                    Debug.WriteLine("ReiseBild speichern erfolgreich");
+                        Debug.WriteLine("ReiseBild speichern erfolgreich");
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -215,17 +227,28 @@ namespace BL_Reiseboerse_Graf
 
                 try
                 {
-                    Bild bild = context.AlleBilder.Where(x => x.ID == bild_id).FirstOrDefault();                    ;
-
+                    Bild bild = context.AlleBilder.Where(x => x.ID == bild_id).FirstOrDefault(); ;
                     Unterkunft unterkunft = context.AlleUnterkuenfte.Where(x => x.ID == unterkunft_id).FirstOrDefault();
-                  
-                    unterkunftBild.Unterkunft = unterkunft;
-                    unterkunftBild.Bild = bild;
+                    if (unterkunft == null)
+                    {
+                        Debug.WriteLine("Keine Unterkunft gefunden");
+                    }
+                    if (bild == null)
+                    {
+                        Debug.WriteLine("Kein Bild gefunden");
+                    }
+                    if (unterkunft.ID > 0 && bild.ID > 0)
+                    {
 
-                    context.AlleUnterkunft_Bilder.Add(unterkunftBild);
-                    context.SaveChanges();
+                        unterkunftBild.Unterkunft = unterkunft;
+                        unterkunftBild.Bild = bild;
 
-                    Debug.WriteLine("UnterkunftBild speichern erfolgreich");
+                        context.AlleUnterkunft_Bilder.Add(unterkunftBild);
+                        context.SaveChanges();
+
+                        Debug.WriteLine("UnterkunftBild speichern erfolgreich");
+
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -235,33 +258,6 @@ namespace BL_Reiseboerse_Graf
             }
             return unterkunftBild.ID;
         }
-        /// <summary>
-        /// Geht in Datenbank und prüft ob das Bild an der Stelle i leer ist und mappt diese um
-        /// </summary>
-        /// <param name="unterkunftid"></param>
-        /// <param name="bildid"></param>
-        /// <returns>bei erfolg index</returns>
-        public static int BildZuUnterkunft(int unterkunftid, int[]bildid)
-        {
-            reisebueroEntities context = new reisebueroEntities();
-            int index = 0;
-            for (int i = 0; i < bildid.Length - 1; i++)
-            {
-                if (bildid[i] != 0)
-                {
-                    Unterkunft_Bild neueBildUnterkunft = new Unterkunft_Bild();
-                    neueBildUnterkunft.Bild.ID = bildid[i];
-                    neueBildUnterkunft.Unterkunft.ID = unterkunftid;
-                    context.AlleUnterkunft_Bilder.Add(neueBildUnterkunft);
-                    index += context.SaveChanges();
-                }
-                else
-                {
-                    return index;
-                }
-                
-            }
-            return index;
-        }
+
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -36,7 +37,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return Json(false, JsonRequestBehavior.AllowGet);
             else
                 return Json(true, JsonRequestBehavior.AllowGet);
-        } 
+        }
 
         public JsonResult AlterErwachsen()
         {
@@ -56,6 +57,26 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             if (!string.IsNullOrEmpty(geburtsDatum) && DateTime.Parse(geburtsDatum) > DateTime.Now.AddYears(-14))
                 return Json(true, JsonRequestBehavior.AllowGet);
+            else
+                return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LuhnUndIBANPruefung()
+        {
+            string kartenNummerKey = Request.Params.AllKeys.Where(x => x.ToLower().Contains("nummer")).FirstOrDefault();
+            string kartenNummer = Request.Params[kartenNummerKey ?? ""];
+
+            if (!kartenNummer.Contains("AT"))
+            {
+                if (ZahlungsVerwaltung.PruefeLuhn(kartenNummer))
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                else
+                    return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            else if (Regex.IsMatch(kartenNummer, "^[A-Z0-9]{10,36}$"))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
             else
                 return Json(false, JsonRequestBehavior.AllowGet);
         }
