@@ -390,13 +390,13 @@ namespace UI_Reiseboerse_Graf.Controllers
             int i = 0;
             int e = 0;
             int bild_id;
-            int bildUnterkunftId =0;
+            int bildUnterkunftId = 0;
             int bildReiseId = 0;
             Debug.Indent();
             Debug.WriteLine("Reise - ReiseHinzufügen - Post");
             if (ModelState.IsValid)
             {
-              
+
                 if (file1 != null && file1.ContentLength > 0)
                 {
                     bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file1);
@@ -419,7 +419,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         bild_id = 0;
                     }
                 }
-             
+
 
                 if (neueReise.NeuerOrt != null)
                 {
@@ -491,9 +491,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 try
                 {
-                    if (BildVerwaltung.BildZuReiseSpeichern(BlReise.ID,bildReiseId) > 0)
+                    if (bildReiseId > 0)
                     {
-                        Debug.WriteLine("BildZuReiseSpeichern - erfolgreich");
+                        if (BildVerwaltung.BildZuReiseSpeichern(BlReise.ID, bildReiseId) > 0)
+                        {
+                            Debug.WriteLine("BildZuReiseSpeichern - erfolgreich");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -503,9 +506,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
                 try
                 {
-                    if (BildVerwaltung.BildZuUnterkunftSpeichern(bildUnterkunftId, BlReise.Unterkunft.ID)>0)
+                    if (bildUnterkunftId > 0)
                     {
-                        Debug.WriteLine("UnterkunftBildSpeichern - erfolgreich");
+                        if (BildVerwaltung.BildZuUnterkunftSpeichern(bildUnterkunftId, BlReise.Unterkunft.ID) > 0)
+                        {
+                            Debug.WriteLine("UnterkunftBildSpeichern - erfolgreich");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -513,53 +519,20 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Debug.WriteLine("UnterkunftBildSpeichern - fehlgeschlagen");
                     Debug.WriteLine(ex.Message);
                 }
-                return RedirectToAction("ReiseAnzahlErstellen", neueReise.Id);
+                return RedirectToAction("ReiseAnzahlErstellen", new { Reiseid = neueReise.Id });
             }
             else
             {
                 return View(neueReise);
             }
         }
-        /// <summary>
-        /// Hier kann man Bilder den jeweiligen Reisen zufügen
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult BildHinzufügenZuReise(int reise_id)
-        {
-            List<Reise> alleReisen = ReiseVerwaltung.LadeAlleReisen();
 
-            return View(alleReisen);
-        }
-        [HttpPost]
-        //public ActionResult BildHinzufügenZuReise(BildHinzufuegenModel bildhinzuguegen, HttpPostedFileBase file)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (bildhinzuguegen.ID > 0)
-        //        {
-        //            if (file != null && file.ContentLength > 0)
-        //            {
-        //                //bild_id = BL_Reiseboerse_Graf.BildVerwaltung.BildSpeichern(file);
-        //                //if (bild_id > 0)
-        //                //{
-        //                //    Unterkunftbild_id[e] = bild_id;
-        //                //    Debug.WriteLine("Bildspeicher erfolgreich");
-        //                //    e++;
-        //                //    bild_id = 0;
-        //                //}
-        //            }
-        //        }
 
-        //    }
-        //    return View();
-        //}
         /// <summary>
         /// ReiseStart- und Enddatum sowie Anzahl der Reisen wird gesetzt.
         /// </summary>
         /// <param name="Reiseid"></param>
         /// <returns></returns>
-        [HttpGet]
         public ActionResult ReiseAnzahlErstellen(int? Reiseid)
         {
             ReisedurchfuehrenModel DatumUndAnzahl = new ReisedurchfuehrenModel();
@@ -568,40 +541,40 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(DatumUndAnzahl);
         }
 
-        [HttpPost]
-        public ActionResult ReiseAnzahlErstellen(ReisedurchfuehrenModel anzahlReisen)
-        {
-            int index = 0;
-            Debug.WriteLine("ReiseAnzahlErstellen - ReiseController - POST");
-            Debug.Indent();
-            Reisedatum ReiseDaten = new Reisedatum();
-           
-            if (ModelState.IsValid)
-            {
-                if (anzahlReisen.ReiseAnzahl>0)
-                {
-                    ReiseDaten.Startdatum = anzahlReisen.StartDatum;
-                    ReiseDaten.Enddatum = anzahlReisen.EndDatum;
-                    ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;                 
-                    ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
-               
-                    for (int i = 0; i < anzahlReisen.ReiseAnzahl; i++)
-                    {
-                        if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten) > 1)
-                            index++;
-                    }
-                    if (index==anzahlReisen.ReiseAnzahl)
-                    {
-                        Debug.WriteLine("Speichern aller ReisenDurchgange erfolgreich");
-                    }
-                }
-            }
-            if (anzahlReisen.WeitereReisenHinzufuegen)
-            {
-                return View(anzahlReisen.Reise_id);
-            }
-            return View("Index", "Home");
-        }
+        //[HttpPost]
+        //public ActionResult ReiseAnzahlErstellen(ReisedurchfuehrenModel anzahlReisen)
+        //{
+        //    int index = 0;
+        //    Debug.WriteLine("ReiseAnzahlErstellen - ReiseController - POST");
+        //    Debug.Indent();
+        //    Reisedatum ReiseDaten = new Reisedatum();
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (anzahlReisen.ReiseAnzahl > 0)
+        //        {
+        //            ReiseDaten.Startdatum = anzahlReisen.StartDatum;
+        //            ReiseDaten.Enddatum = anzahlReisen.EndDatum;
+        //            ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;
+        //            ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
+
+        //            for (int i = 0; i < anzahlReisen.ReiseAnzahl; i++)
+        //            {
+        //                if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten) > 1)
+        //                    index++;
+        //            }
+        //            if (index == anzahlReisen.ReiseAnzahl)
+        //            {
+        //                Debug.WriteLine("Speichern aller ReisenDurchgange erfolgreich");
+        //            }
+        //        }
+        //    }
+        //    if (anzahlReisen.WeitereReisenHinzufuegen)
+        //    {
+        //        return View(anzahlReisen.Reise_id);
+        //    }
+        //    return View("Index", "Home");
+        //}
 
         /// <summary>
         /// Löscht das übergebene ReiseModel

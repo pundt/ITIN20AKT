@@ -48,8 +48,9 @@
                                 @Html.ValidationMessageFor(model => model.NeuesLand, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                     </div>
+
+
                     <div class="form-group">
                         @Html.Label("Ort", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-9">
@@ -63,6 +64,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         @Html.Label("Preis Erw", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-9">
@@ -78,7 +81,6 @@
                             @Html.ValidationMessageFor(model => model.PreisKind, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
                 </div>
 
                 <div class="row col-xs-6">
@@ -185,6 +187,7 @@
                 $("#Land").removeClass("NichtZeigen");
             });
         });
+
         $(document).ready(function () {
             $("#c").click(function () {
                 $("#NeueUnterkunft").removeClass("NichtZeigen");
