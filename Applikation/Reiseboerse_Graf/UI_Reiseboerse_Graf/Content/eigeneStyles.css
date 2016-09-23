@@ -6,15 +6,27 @@
     overflow-y: scroll;
 }
 
-.Schriftart{
-    font-family:'Bradley Hand ITC';
-    color:#005ead;
-    padding:8%;
-    font-size:1.1em;
+.Schriftart {
+    font-family: 'Bradley Hand ITC';
+    color: #005ead;
+    padding: 8%;
+    font-size: 1.1em;
 }
 
-.abstand{
-    margin-bottom:1.5%;
+.abstand {
+    margin-bottom: 1.5%;
+}
+
+.slide1{
+    padding-left:0px;
+    padding-right:0px;
+
+}
+
+.slide2{
+    padding-left:-15px;
+    padding-right:-15px;
+
 }
 
 .reise {
@@ -124,6 +136,25 @@
     border-color: white;
     border-style: dashed;
 }
+.headerimg {
+    border-radius: 340px;
+    border-color: white;
+    border-style: dashed;
+    width: 65%;
+    margin-right:2%;
+    margin-left:6%;
+    margin-bottom:2%;
+
+}
+
+.headerimg2 {
+    border-radius: 340px;
+    border-color: white;
+    border-style: dashed;
+    width: 70%;
+    margin-left:27%;
+    margin-top:7%;
+}
 
 .acidjs-rating-stars,
 .acidjs-rating-stars label::before {
@@ -205,6 +236,7 @@
     color: #005ead;
     font-size: 1.6em;
     text-align: right;
+    margin-top:6%;
 }
 
 
@@ -317,18 +349,11 @@
         cursor: pointer;
     }
 
-.ausgegraut {
-    background-color: #514f4f;
-    color: #f8f1f1;
-    margin: 4%;
-    text-align: center;
+.ausgegraut:hover {
+    cursor: not-allowed;
 }
 
-    .ausgegraut:hover {
-        cursor: not-allowed;
-    }
-
-.mytooltip {
+/*.mytooltip {
     position: relative;
 }
 
@@ -357,16 +382,16 @@
     .tooltiptext:hover {
         visibility: visible;
         opacity: 1;
-    }
+    }*/
 
 .box {
     color: #005ead;
     border-color: #005ead;
     border-radius: 4px;
-    border-width:0.2em;
-    font-size: 1.2em;
-    margin:3%;
-    padding:2%
+    border-width: 0.2em;
+    font-size: 1.1em;
+    margin: 2%;
+    padding: 1%;
 }
 
     .box > a {

@@ -121,7 +121,7 @@
                                         @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum)
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum)
+                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum, "{0:dd.MM.yyyy}")
                                         @*<input type="date" name="BuchungenKind[@i].Geburtsdatum" />*@
                                         @Html.ValidationMessageFor(x => x.BuchungenKind[i].Geburtsdatum, "", new { @class = "text-danger" })
                                     </td>

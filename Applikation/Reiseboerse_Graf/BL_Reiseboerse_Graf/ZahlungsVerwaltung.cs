@@ -105,16 +105,36 @@ namespace BL_Reiseboerse_Graf
             }
         }
 
+        /// <summary>
+        /// Püft eine Kreditkartennummer auf ihre Gültigkeit mittels Luhn-Algorithmus
+        /// </summary>
+        /// <param name="nummer">die zu prüfende Kartennummer</param>
+        /// <returns>true für gültig oder false für nicht gültig</returns>
         public static bool PruefeLuhn(string nummer)
         {
+            Debug.WriteLine("ZahlungsVerwaltung - Pruefe Luhn");
+            Debug.Indent();
+
             int sum = 0;
-            int len = nummer.Length;
-            for (int i = 0; i < len; i++)
+
+            try
             {
-                int add = (nummer[i] - '0') * (2 - (i + len) % 2);
-                add -= add > 9 ? 9 : 0;
-                sum += add;
+                int len = nummer.Length;
+                for (int i = 0; i < len; i++)
+                {
+                    int add = (nummer[i] - '0') * (2 - (i + len) % 2);
+                    add -= add > 9 ? 9 : 0;
+                    sum += add;
+                }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler bei Luhn-Prüfung");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
             return sum % 10 == 0;
         }
     }

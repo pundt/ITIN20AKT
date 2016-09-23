@@ -18,7 +18,7 @@
                 Willkommen auf Ihrer Profilseite, @Model.Email!<br />
                 Wir freuen uns dass Sie wieder mal vorbeischauen <hr />
                 Sollten Sie Fragen haben: <br />
-                <a href="mailto:kontakt@reisebuerograf.de?Subject=Kontaktanfrage">Kontaktieren Sie uns</a>
+                <a href="mailto:kontakt@reisebuerograf.de?Subject=Kontaktanfrage">Wir freuen uns über Ihre Mail</a>
             </div>
         </div>
         <div class="col-xs-8 col-xs-offset-1 reise abstand">
@@ -57,10 +57,10 @@
                         </td>
                         <td>
                             <div class="radio-inline">
-                                @Html.RadioButtonFor(x => x.Geschlecht, true)<span>männlich</span>
+                                @Html.RadioButtonFor(x => x.Geschlecht, false)<span>männlich</span>
                             </div>
                             <div class="radio-inline">
-                                @Html.RadioButtonFor(x => x.Geschlecht, false)<span>weiblich</span>
+                                @Html.RadioButtonFor(x => x.Geschlecht, true)<span>weiblich</span>
                             </div>
                             @Html.ValidationMessageFor(model => model.Geschlecht, "", new { @class = "text-danger" })
                         </td>
