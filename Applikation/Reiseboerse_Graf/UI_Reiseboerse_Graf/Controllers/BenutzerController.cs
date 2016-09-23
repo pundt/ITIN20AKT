@@ -151,7 +151,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                             b.Adresse = new Adresse()
                             {
                                 Adressdaten = bm.Adresse,
-                                Ort=LaenderVerwaltung.SucheOrt(bm.Ort_ID)
+                                Ort = LaenderVerwaltung.SucheOrt(bm.Ort_ID)
                             };
                         }
                         else
@@ -166,7 +166,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                         b.Nachname = bm.Nachname;
                         b.Land = LaenderVerwaltung.SucheLand(bm.Land_ID);
                         b.Geburtsdatum = bm.GeburtsDatum;
-                        
+
                         context.AlleBenutzer.Add(b);
 
                         context.SaveChanges();
@@ -267,59 +267,56 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult Aktualisieren(KundenModel model)
         {
-            List<Benutzer> benutzerListe = BenutzerVerwaltung.AlleBenutzer();
             Land l = new Land();
 
-            foreach (Benutzer b in benutzerListe)
+            Benutzer benutzer = new Benutzer()
             {
-                if (b.ID == model.ID)
+                Email = User.Identity.Name,
+                Geburtsdatum = model.GeburtsDatum,
+                ID = model.ID,
+                Land = LaenderVerwaltung.SucheLand(model.Land_ID),
+                Geschlecht = model.Geschlecht,
+                Nachname = model.Nachname,
+                Vorname = model.Vorname,
+                Passwort = Tools.PasswortZuByteArray(model.Passwort),
+                Telefon = model.Telefon,
+                Titel = model.Titel
+            };
+
+            if (LaenderVerwaltung.SucheAdresse(model.Adresse) == null)
+            {
+                benutzer.Adresse = new Adresse()
                 {
-                    using (var context = new reisebueroEntities())
-                    {
-                        try
-                        {
-                            Debug.WriteLine("Benutzer - Aktualisieren - POST".ToUpper());
-                            Debug.Indent();
-
-                            /// Das ausgewählte Land wird hier umgemappt für die DB
-                            #region Landmapping
-                            foreach (LandModel lm in model.Land)
-                            {
-                                if (lm.land_ID == b.Land.ID)
-                                {
-                                    l.ID = lm.land_ID;
-                                    l.Bezeichnung = lm.landName;
-                                }
-                            }
-                            #endregion
-
-                            b.Adresse.Adressdaten = model.Adresse;
-                            b.Email = model.Email;
-                            b.Geburtsdatum = model.GeburtsDatum;
-                            b.Geschlecht = model.Geschlecht;
-                            b.ID = model.ID;
-                            b.Land = l;
-                            b.Nachname = model.Nachname;
-                            b.Vorname = model.Vorname;
-                            b.Passwort = Tools.PasswortZuByteArray(model.Passwort);
-                            b.Telefon = model.Telefon;
-                            b.Titel = model.Titel;
-
-                            context.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine("Fehler beim Aktualisieren des Benutzers!");
-                            Debug.WriteLine(ex.Message);
-                            Debug.Unindent();
-                            Debugger.Break();
-                        }
-                    }
-                }
+                    Adressdaten = model.Adresse,
+                    Ort = LaenderVerwaltung.SucheOrt(model.Ort_ID)
+                };
+            }
+            else
+            {
+                benutzer.Adresse = LaenderVerwaltung.SucheAdresse(model.Adresse);
             }
 
-            return RedirectToAction("Laden", "Reisen");
+
+            if (BenutzerVerwaltung.Aktualisieren(benutzer) == 1)
+            {
+                return RedirectToAction("Aktualisieren");
+            }
+            else
+            {
+                model.Land = new List<LandModel>();
+                List<Land> BL_Liste = BenutzerVerwaltung.AlleLaender();
+                foreach (var land in BL_Liste)
+                {
+                    model.Land.Add(new LandModel()
+                    {
+                        landName = land.Bezeichnung,
+                        land_ID = land.ID
+                    });
+                }
+                return View(model);
+            }
         }
+
 
         /// <summary>
         /// Generiert Dummydaten zum Anmelden
