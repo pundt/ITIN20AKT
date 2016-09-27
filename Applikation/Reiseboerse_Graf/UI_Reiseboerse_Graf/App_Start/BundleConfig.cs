@@ -27,7 +27,7 @@ namespace UI_Reiseboerse_Graf
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                        "~/Scripts/moment.min.js",
-                      "~/Scripts/bootstrap-datetimepicker.min.js",
+                      "~/Scripts/bootstrap-datepicker.min.js",
                       "~/Scripts/moment-with-locales.js"));
 
            
@@ -35,7 +35,7 @@ namespace UI_Reiseboerse_Graf
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/eigeneStyles.css",
-                      "~/Content/bootstrap-datetimepicker.min.css",
+                      "~/Content/bootstrap-datepicker.min.css",
                       "~/Content/nouislider.*"));
 
         }

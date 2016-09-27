@@ -82,14 +82,23 @@
 
         <script type="text/javascript">
             $(function () {
-                $('#datetimepicker1').datetimepicker({
-                    format: "DD.MM.YYYY",
-                });
-                $('#datetimepicker2').datetimepicker({
-                    format: "DD.MM.YYYY",
-                    useCurrent: false//Important! See issue #1075
+                //$('#datetimepicker1').datetimepicker({
+                //    format: "DD.MM.YYYY",
+                //});
+                //$('#datetimepicker2').datetimepicker({
+                //    format: "DD.MM.YYYY",
+                //    useCurrent: false//Important! See issue #1075
 
-                });
+                //});
+
+                $('#datetimepicker1').datepicker({
+                    language: 'de'
+                })
+
+                $('#datetimepicker2').datepicker({
+                    language: 'de'
+                })
+
                 $("#datetimepicker1").on("dp.change", function (e) {
                     $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
                 });
