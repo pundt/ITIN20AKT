@@ -703,14 +703,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(UI_Reise);
         }
 
-
-
-
-
-
-
-
-
         /// <summary>
         /// Alle Reisedaten einer Reise anzeigen
         /// </summary>
@@ -739,19 +731,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             Debug.Unindent();
             return View(UI_Liste);
-        }
-
-        [PruefeBenutzer]
-        [HttpGet]
-        public ActionResult Entfernen(int id)
-        {
-            Debug.WriteLine("Reisen - Entfernen - GET");
-            Debug.Indent();
-
-
-
-            Debug.Unindent();
-            return View();
         }
 
         /// <summary>
