@@ -619,7 +619,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Reisen\Laden.cshtml" />
     <Content Include="Views\Reisen\Anzeigen.cshtml" />
@@ -648,6 +648,7 @@
     <Content Include="Views\Reisen\AnzeigenMitarbeiter.cshtml" />
     <Content Include="Views\Benutzer\Bestaetigung.cshtml" />
     <Content Include="Views\Reisen\ReiseAnzahlErstellen.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
