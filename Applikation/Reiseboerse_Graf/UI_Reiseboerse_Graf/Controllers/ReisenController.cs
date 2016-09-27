@@ -539,7 +539,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         public ActionResult ReiseAnzahlErstellen(int? Reiseid)
         {
             ReisedurchfuehrenModel DatumUndAnzahl = new ReisedurchfuehrenModel();
-            DatumUndAnzahl.Reise_id = Reiseid;
+            DatumUndAnzahl.Reise_id = (int)Reiseid;
             DatumUndAnzahl.StartDatum = DateTime.Now;
             DatumUndAnzahl.EndDatum = DateTime.Now;
             DatumUndAnzahl.Anmeldefrist = DateTime.Now;
