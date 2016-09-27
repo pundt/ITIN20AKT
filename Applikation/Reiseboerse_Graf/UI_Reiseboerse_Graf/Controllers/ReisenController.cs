@@ -536,7 +536,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="Reiseid"></param>
         /// <returns></returns>
-        public ActionResult ReiseAnzahlErstellen(int? Reiseid)
+        public ActionResult ReiseAnzahlErstellen(int Reiseid)
         {
             ReisedurchfuehrenModel DatumUndAnzahl = new ReisedurchfuehrenModel();
             DatumUndAnzahl.Reise_id = Reiseid;

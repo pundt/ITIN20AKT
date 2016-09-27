@@ -51,15 +51,21 @@
                             <table class="scrollbar table-condensed">
                                 @foreach (var datum in item.Reisedaten)
                                 {
-                                <tr>
-                                    <td>@datum.DatumsAnzeige</td>                                    
-                                    <td>@Html.ActionLink("Details","Anzeigen", new { id = datum.ID }, new { @class = "btn buttonind" })</td>
-                                </tr>
+                                    <tr>
+
+                                        <td>
+                                            <p class="badge">Noch @datum.Restplätze Plätze vorhanden</p>
+                                            @datum.DatumsAnzeige
+                                        </td>
+                                        <td>@Html.ActionLink("Details", "Anzeigen", new { id = datum.ID }, new { @class = "btn buttonind" })</td>
+
+
+                                    </tr>
                                 }
                             </table>
                             @for (int i = 0; i < item.Bewertung; i++)
                             {
-                            <span><img src="~/Content/bilder/Entypo_2605(0)_32.png" /></span>
+                                <span><img src="~/Content/bilder/Entypo_2605(0)_32.png" /></span>
                             }
                         </div>
                         <br />
@@ -82,7 +88,7 @@
                 $('#datetimepicker2').datetimepicker({
                     format: "DD.MM.YYYY",
                     useCurrent: false//Important! See issue #1075
-                    
+
                 });
                 $("#datetimepicker1").on("dp.change", function (e) {
                     $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
