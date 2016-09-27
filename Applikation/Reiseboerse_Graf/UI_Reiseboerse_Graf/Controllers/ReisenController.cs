@@ -311,11 +311,11 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <param name="reiseID">die bewertete Reise</param>
         /// <returns>gibt nichts zurück (Empty Result)</returns>
         [HttpPost]
-        public EmptyResult Bewerten(int bewertung, int reiseID)
+        public ActionResult Bewerten(int bewertung, int reiseID)
         {
             Debug.WriteLine("Reise - Bewerten - POST");
             BewertungVerwaltung.BewertungSpeichern(reiseID, bewertung);
-            return new EmptyResult();
+            return RedirectToAction("Aktualisieren", "Benutzer");
         }
 
 

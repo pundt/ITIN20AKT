@@ -131,9 +131,6 @@
                 <input type="submit" value="Speichern" class="btn anmeldung abstand" />
             </div>
         </div>
-        <div class="col-xs-12 reise">
-            @Html.Action("LadeAlleBuchungenBenutzer","Buchungen",new {id=Model.ID})
-        </div>
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -141,8 +138,8 @@
 
     </div>
 }
-<div>
-    @Html.ActionLink("Zurück zu Reisen", "Laden", "Reisen")
+<div class="col-xs-12 reise">
+    @Html.Action("LadeAlleBuchungenBenutzer", "Buchungen", new { id = Model.ID })
 </div>
 
 @section Scripts {
@@ -151,5 +148,12 @@
         $('#date').datetimepicker({
             format: "DD.MM.YYYY"
         });
+
+        $(document).ready(function () {
+            $("#button").click(function () {
+                $("#bewerten").removeClass("NichtZeigen");
+            });
+        });
     </script>
 }
+

@@ -81,7 +81,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Enddatum=buchung.Reisedatum.Enddatum,
                     ReiseID = buchung.Reisedatum.Reise.ID,
                     Benutzer_ID = id,
-                    Reisedatum_ID=buchung.Reisedatum.ID
+                    Reisedatum_ID=buchung.Reisedatum.ID,
+                    Bewertung=BewertungVerwaltung.LadeBewertungReise(buchung.Reisedatum.Reise.ID)
                 });
             }
             List<BuchungAnzeigenModel> neueListe = new List<BuchungAnzeigenModel>();

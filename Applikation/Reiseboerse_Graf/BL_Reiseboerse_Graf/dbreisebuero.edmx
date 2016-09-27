@@ -39,7 +39,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="wertung" Type="int" Nullable="false" />
           <Property Name="reise_id" Type="int" Nullable="false" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Bild">
           <Key>
@@ -562,7 +562,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Wertung" Type="Int32" Nullable="false" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Reise" Relationship="Self.FK_Bewertung_Reise" FromRole="Bewertung" ToRole="Reise" />
         </EntityType>
         <EntityType Name="Bild">
