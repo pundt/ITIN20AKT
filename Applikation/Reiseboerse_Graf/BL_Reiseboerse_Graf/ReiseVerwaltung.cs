@@ -428,8 +428,6 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-
-
                     entfernenErfolg = true;
                     return entfernenErfolg;
                 }
@@ -491,7 +489,9 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                     context.AlleReisedurchfuehrungen.Add(neuerReiseDurchgang);
+                    context.SaveChanges();
                     Debug.WriteLine("Speichern Reisedurchfuehrung erfolgreich");
+                    return neuerReiseDurchgang.ID;
                 }
                 catch (Exception ex)
                 {
