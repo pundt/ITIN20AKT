@@ -43,7 +43,7 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "ZeigeDetails", "Buchungen", new { id = model.Reisedatum_ID }, new { @class = "btn anmeldung" })
+                    @Html.ActionLink("Details", "ZeigeDetails", "Buchungen", new { id = model.Reisedatum_ID,benutzer_id=model.Benutzer_ID }, new { @class = "btn anmeldung" })
                 </td>
             </tr>
         }

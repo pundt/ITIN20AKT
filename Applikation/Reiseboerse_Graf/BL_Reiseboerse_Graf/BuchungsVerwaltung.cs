@@ -51,8 +51,8 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                     buchungsListe = (from r in context.AlleBuchungen
-                                      where r.Reisedatum.ID == reisedatum_id && r.Benutzer.ID == benutzer_id
+                     buchungsListe = (from r in context.AlleBuchungen.Include("Reisedatum")
+                                      where r.Reisedatum.ID == reisedatum_id && r.Benutzer.ID == benutzer_id && r.BuchungStorniert==null
                                       select r).ToList();
                 }
                 catch (Exception ex)
@@ -109,7 +109,7 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                     buchungsListe = context.AlleBuchungen.Include("Reisedatum.Reise")
-                                     .Where(x => x.Benutzer.ID == benutzer_id).ToList();
+                                     .Where(x => x.Benutzer.ID == benutzer_id&&x.BuchungStorniert==null).ToList();
                 }
                 catch (Exception ex)
                 {
