@@ -527,7 +527,9 @@ namespace UI_Reiseboerse_Graf.Controllers
 
         /// <summary>
         /// Anzeige aller Buchungen (für den Mitarbeiter)
+        /// 
         /// </summary>
+        /// <param name="id">Id des Reisedatums</param>
         /// <returns></returns>
         [PruefeBenutzer]
         [HttpGet]

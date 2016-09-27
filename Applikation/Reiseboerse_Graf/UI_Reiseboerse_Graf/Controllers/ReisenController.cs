@@ -732,7 +732,9 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Beginndatum = datum.Startdatum,
                     Enddatum = datum.Enddatum,
                     Restplätze = ReiseVerwaltung.Restplätze(datum.ID),
-                    ID = datum.ID
+                    ID = datum.ID,
+                    BuchungenVorhanden = BuchungsVerwaltung.BuchungenVorhanden(datum.ID)
+
                 });
             }
             Debug.Unindent();

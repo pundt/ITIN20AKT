@@ -27,32 +27,51 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Beginndatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Enddatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Anmeldefrist)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Restplätze)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DatumsAnzeige)
-        </td>
-        <td>
-            @if (item.Anmeldefrist>DateTime.Now)
-            {
-            @Html.ActionLink("Alle Buchungen","Verwalten","Buchungen",new { id=item.ID},new { @class="btn btn-success"})
-            }
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beginndatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enddatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anmeldefrist)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restplätze)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumsAnzeige)
+            </td>
+            <td>
+
+                @if (item.Anmeldefrist < DateTime.Now)
+                {
+
+                    if (item.BuchungenVorhanden)
+                    {
+                        @Html.ActionLink("Alle Buchungen", "Verwalten", "Buchungen", new { id = item.ID }, new { @class = "btn btn-success" })}
+                    else
+                    {
+                        <p class="badge">Keine Buchungen vorhanden!</p>
+                    }
+
+                }
+                else
+                {
+                    <p class="badge">Anmeldefrist endet in: @((item.Anmeldefrist - DateTime.Now).Days) Tagen </p>}
+
+
+
+
+
+
+
+
+
+            </td>
+        </tr>
+    }
 </table>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
