@@ -7,22 +7,28 @@ using UI_Reiseboerse_Graf.Models;
 using BL_Reiseboerse_Graf;
 using System.Diagnostics;
 using System.Web.Security;
+using System.Reflection;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
+    /// <summary>
+    /// Attribut zum Prüfen ob der aktuell angemeldete Benutzer berechtigt ist (also ein MA ist)
+    /// </summary>
+    public class PruefeBenutzer : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            string username = filterContext.HttpContext.User.Identity.Name;
+
+            if (!Tools.BistDuMitarbeiter(username))
+            {
+                filterContext.Result = new RedirectResult("~/Reisen/Laden");
+            }
+        }
+    }
+
     public class BenutzerController : Controller
     {
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult GebuchteReisen()
-        {
-            return View();
-        }
         //[ChildActionOnly]
         [HttpGet]
         public ActionResult Login()
@@ -34,7 +40,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
 
             if (BenutzerVerwaltung.Anmelden(lm.Email, lm.Passwort))
-            {                
+            {
                 if (lm.AngemeldetBleiben)
                 {
                     FormsAuthentication.SetAuthCookie(lm.Email, true);
@@ -47,10 +53,11 @@ namespace UI_Reiseboerse_Graf.Controllers
                 {
                     return RedirectToAction("Verwaltung", "Home");
                 }
+                //wenn der User nicht von Reisen/laden kommt leite ihn dahin weiter woher er kam
                 if (!Request.UrlReferrer.AbsoluteUri.Contains("Reisen/Laden"))
                 {
                     return Redirect(Request.UrlReferrer.AbsoluteUri);
-                } 
+                }
             }
 
             return RedirectToAction("Laden", "Reisen");
@@ -64,8 +71,60 @@ namespace UI_Reiseboerse_Graf.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Registrieren eines Benutzers (Erstellen eines Kundenmodel und Befüllen der Dropdownlisten)
+        /// </summary>
+        /// <returns>View mit dem Kundenmodel</returns>
+        [HttpGet]
+        public ActionResult BenutzerAnlegen()
+        {
+            Debug.WriteLine("Benutzer - Benutzer Anlegen - GET".ToUpper());
+            Debug.Indent();
+
+            reisebueroEntities context = new reisebueroEntities();
+
+            KundenModel model = new KundenModel();
+            model.GeburtsDatum = DateTime.Now;
+
+            using (context)
+            {
+                try
+                {
+                    List<Land> laender = BenutzerVerwaltung.AlleLaender();
+                    List<Ort> orte = LaenderVerwaltung.AlleOrte();
+                    List<LandModel> lmListe = new List<LandModel>();
+                    List<OrtModel> ortListe = new List<OrtModel>();
+
+                    /// Hier werden die Laender der lmList hinzugefügt um
+                    /// die Dropdown-Liste in der View zu füllen
+                    foreach (Land l in laender)
+                    {
+                        lmListe.Add(new LandModel() { landName = l.Bezeichnung, land_ID = l.ID });
+                    }
+
+                    foreach (Ort ort in orte)
+                    {
+                        ortListe.Add(new OrtModel() { Id = ort.ID, Bezeichnung = ort.Bezeichnung });
+                    }
+                    model.Land = lmListe;
+                    model.Ort = ortListe;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Holen der Daten!");
+                    Debug.WriteLine(ex.Message);
+                    Debug.Unindent();
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return View(model);
+        }
+
+
         [HttpPost]
-        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm, HttpPostedFileBase bild)
+        public ActionResult BenutzerAnlegen(KundenAnlegenModel bm)
         {
             Debug.WriteLine("Benutzer - Benutzer Anlegen - POST".ToUpper());
             Debug.Indent();
@@ -87,30 +146,28 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                     if (ModelState.IsValid)
                     {
-                        b.Adresse.Adressdaten = bm.Adresse;
+                        if (LaenderVerwaltung.SucheAdresse(bm.Adresse) == null)
+                        {
+                            b.Adresse = new Adresse()
+                            {
+                                Adressdaten = bm.Adresse,
+                                Ort = LaenderVerwaltung.SucheOrt(bm.Ort_ID)
+                            };
+                        }
+                        else
+                        {
+                            b.Adresse = LaenderVerwaltung.SucheAdresse(bm.Adresse);
+                        }
                         b.Email = bm.Email;
                         b.Geschlecht = bm.Geschlecht;
                         b.Passwort = Tools.PasswortZuByteArray(bm.Passwort);
                         b.Telefon = bm.Telefon;
                         b.Vorname = bm.Vorname;
                         b.Nachname = bm.Nachname;
-                        b.Land.ID = bm.Land_ID;
+                        b.Land = LaenderVerwaltung.SucheLand(bm.Land_ID);
+                        b.Geburtsdatum = bm.GeburtsDatum;
 
-                        lmList = bm.Land;
-                        foreach (LandModel lm in lmList)
-                        {
-                            if (lm.land_ID == bm.Land_ID)
-                            {
-                                l.Bezeichnung = lm.landName;
-                                l.ID = lm.land_ID;
-                            }
-                        }
-
-                        b.Land = l;
-
-                        benutzerList.Add(b);
-
-                        Roles.AddUserToRole(bm.Email, "Kunde");
+                        context.AlleBenutzer.Add(b);
 
                         context.SaveChanges();
                     }
@@ -138,49 +195,15 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
 
             Debug.Unindent();
-            return View();
+            return View("Bestaetigung");
         }
 
-        [HttpGet]
-        public ActionResult BenutzerAnlegen()
-        {
-            Debug.WriteLine("Benutzer - Benutzer Anlegen - GET".ToUpper());
-            Debug.Indent();
 
-            reisebueroEntities context = new reisebueroEntities();
 
-            KundenModel model = new KundenModel();
-            model.GeburtsDatum = DateTime.Now;
-
-            using (context)
-            {
-                try
-                {
-                    List<Land> laender = BenutzerVerwaltung.AlleLaender();
-                    List<LandModel> lmListe = new List<LandModel>();
-
-                    /// Hier werden die Laender der lmList hinzugefügt um
-                    /// die Dropdown-Liste in der View zu füllen
-                    foreach (Land l in laender)
-                    {
-                        lmListe.Add(new LandModel() { landName = l.Bezeichnung, land_ID = l.ID });
-                    }
-
-                    model.Land = lmListe;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Fehler beim Holen der Daten!");
-                    Debug.WriteLine(ex.Message);
-                    Debug.Unindent();
-                    Debugger.Break();
-                }
-            }
-
-            Debug.Unindent();
-            return View(model);
-        }
-
+        /// <summary>
+        /// Die Profilseite des Kunden wo er seine Daten ändern kann
+        /// </summary>
+        /// <returns>die View mit dem KundenModel des aktuellen Benutzers</returns>
         [Authorize]
         [HttpGet]
         public ActionResult Aktualisieren()
@@ -229,70 +252,77 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Debug.WriteLine(ex.Message);
                     Debug.Unindent();
                     Debugger.Break();
-                }                
+                }
             }
 
             return View(model);
         }
 
+        /// <summary>
+        /// Speichern der geänderten Kundendaten des Benutzers
+        /// </summary>
+        /// <param name="model">das übergebene KudenModel</param>
+        /// <returns>leitet zurück auf Reisen/Laden</returns>
         [Authorize]
         [HttpPost]
         public ActionResult Aktualisieren(KundenModel model)
         {
-            List<Benutzer> benutzerListe = BenutzerVerwaltung.AlleBenutzer();
             Land l = new Land();
-
-            foreach (Benutzer b in benutzerListe)
+            //ModelState.IsValid funktioniert nicht da es nur KundenAnlegenModel gibt,
+            //mit Land &Remote Validierung email --> liefert false, deswegen hier nicht angewendet
+            Benutzer benutzer = new Benutzer()
             {
-                if (b.ID == model.ID)
+                Email = User.Identity.Name,
+                Geburtsdatum = model.GeburtsDatum,
+                ID = model.ID,
+                Land = LaenderVerwaltung.SucheLand(model.Land_ID),
+                Geschlecht = model.Geschlecht,
+                Nachname = model.Nachname,
+                Vorname = model.Vorname,
+                Passwort = Tools.PasswortZuByteArray(model.Passwort),
+                Telefon = model.Telefon,
+                Titel = model.Titel
+            };
+
+            if (LaenderVerwaltung.SucheAdresse(model.Adresse) == null)
+            {
+                benutzer.Adresse = new Adresse()
                 {
-                    using (var context = new reisebueroEntities())
-                    {
-                        try
-                        {
-                            Debug.WriteLine("Benutzer - Aktualisieren - POST".ToUpper());
-                            Debug.Indent();
-
-                            /// Das ausgewählte Land wird hier umgemappt für die DB
-                            #region Landmapping
-                            foreach (LandModel lm in model.Land)
-                            {
-                                if (lm.land_ID == b.Land.ID)
-                                {
-                                    l.ID = lm.land_ID;
-                                    l.Bezeichnung = lm.landName;
-                                }
-                            }
-                            #endregion
-
-                            b.Adresse.Adressdaten = model.Adresse;
-                            b.Email = model.Email;
-                            b.Geburtsdatum = model.GeburtsDatum;
-                            b.Geschlecht = model.Geschlecht;
-                            b.ID = model.ID;
-                            b.Land = l;
-                            b.Nachname = model.Nachname;
-                            b.Vorname = model.Vorname;
-                            b.Passwort = Tools.PasswortZuByteArray(model.Passwort);
-                            b.Telefon = model.Telefon;
-                            b.Titel = model.Titel;
-
-                            context.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine("Fehler beim Aktualisieren des Benutzers!");
-                            Debug.WriteLine(ex.Message);
-                            Debug.Unindent();
-                            Debugger.Break();
-                        }
-                    }
-                }
+                    Adressdaten = model.Adresse,
+                    Ort = LaenderVerwaltung.SucheOrt(model.Ort_ID)
+                };
+            }
+            else
+            {
+                benutzer.Adresse = LaenderVerwaltung.SucheAdresse(model.Adresse);
             }
 
-            return RedirectToAction("Laden", "Reisen");
+
+            if (BenutzerVerwaltung.Aktualisieren(benutzer) == 1)
+            {
+                return RedirectToAction("Aktualisieren");
+            }
+            else
+            {
+                model.Land = new List<LandModel>();
+                List<Land> BL_Liste = BenutzerVerwaltung.AlleLaender();
+                foreach (var land in BL_Liste)
+                {
+                    model.Land.Add(new LandModel()
+                    {
+                        landName = land.Bezeichnung,
+                        land_ID = land.ID
+                    });
+                }
+                return View(model);
+            }
         }
 
+
+        /// <summary>
+        /// Generiert Dummydaten zum Anmelden
+        /// </summary>
+        /// <returns>List von Kundenmodel</returns>
         private List<KundenModel> DummyKundenAnlegen()
         {
             List<KundenModel> kunden = new List<KundenModel>();

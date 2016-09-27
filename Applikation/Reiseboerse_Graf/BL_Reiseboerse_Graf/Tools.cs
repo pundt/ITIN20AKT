@@ -73,24 +73,24 @@ namespace BL_Reiseboerse_Graf
         /// <returns>ByteArray</returns>
         public static byte[] PasswortZuByteArray(string passwort)
         {
-            reisebueroEntities context = new reisebueroEntities();
+            //reisebueroEntities context = new reisebueroEntities();
 
             SHA512 hash = SHA512.Create();
 
             byte[] pw = hash.ComputeHash(Encoding.UTF8.GetBytes(passwort));
 
-            using (context)
-            {
-                foreach (Benutzer b in context.AlleBenutzer)
-                {
-                    if (pw.SequenceEqual(b.Passwort))
-                    {
-                        return pw;
-                    }
-                }
+            //using (context)
+            //{
+            //    foreach (Benutzer b in context.AlleBenutzer)
+            //    {
+            //        if (pw.SequenceEqual(b.Passwort))
+            //        {
+            //            return pw;
+            //        }
+            //    }
 
-            }
-            return null;
+            //}
+            return pw;
         }
 
         /// <summary>
@@ -133,6 +133,38 @@ namespace BL_Reiseboerse_Graf
 
             Debug.Unindent();
             return istMitarbeiter;
+        }
+
+        /// <summary>
+        /// Prüft ob eine Email schon vergeben worden ist, wenn ja, dann gibt true zurück
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public static bool EmailVorhanden(string email)
+        {
+            Debug.WriteLine("Tools - Email Vorhanden");
+            Debug.Indent();
+
+            bool emailVorhanden = false;
+
+            reisebueroEntities context = new reisebueroEntities();
+
+            try
+            {
+                using (context)
+                {
+                    emailVorhanden = context.AlleBenutzer.Any(x => x.Email == email);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler beim Prüfen ob Email vorhanden ist");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
+            return emailVorhanden;
         }
     }
 }

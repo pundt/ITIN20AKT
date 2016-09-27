@@ -11,7 +11,7 @@
         <div class="col-xs-4 reisedetailbild">
             <img src="~/Bild/BildzuReise/@Model.Reisedetail.ID" class="img-responsive img-rounded" />
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4">         
             <h4 class="Schriftartblau">@Html.DisplayFor(model => model.Reisedetail.Titel), @Html.DisplayFor(model => model.Reisedetail.Ort)</h4>
             @Html.DisplayFor(model => model.Reisedetail.Beschreibung)
             <br />
@@ -53,8 +53,7 @@
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <td colspan="3" align="center">
-                                <div class="btn ausgegraut mytooltip">Buchen<span class="tooltiptext">Bitte erst anmelden</span>
-                                </div>
+                                <div class="btn ausgegraut buttonind">Bitte erst anmelden</div>
                             </td>
                         }
                         else

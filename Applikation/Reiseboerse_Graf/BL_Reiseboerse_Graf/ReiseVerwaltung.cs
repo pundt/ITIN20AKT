@@ -22,7 +22,7 @@ namespace BL_Reiseboerse_Graf
             using (var context = new reisebueroEntities())
             {
                 try
-                {  
+                {
                     reisen = context.AlleReisen.Include("AlleReisedaten")
                         .Include("Unterkunft.Verpflegung").Include("Ort.Land")
                         .ToList();
@@ -32,11 +32,38 @@ namespace BL_Reiseboerse_Graf
                     Debug.WriteLine("Fehler beim Laden aller Reisen");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
-                }     
+                }
             }
             Debug.Unindent();
             return reisen;
         }
+
+
+        public static Reise SucheReise(int id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Suche Reise");
+            Debug.Indent();
+            Reise reise = new Reise();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    List<Reise> reisen = LadeAlleReisen();
+                    reise = reisen.Where(x => x.ID == id).FirstOrDefault();    
+                        
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Suchen einer Reise");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return reise;
+        }
+        
+
 
         /// <summary>
         /// Lädt zu einer Reise alle Zeitpunkte dieser Reise (also alle Reisedaten)
@@ -52,7 +79,7 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    liste=context.AlleReisedaten.Where(x => x.Reise.ID == reise_id).ToList();
+                    liste = context.AlleReisedaten.Where(x => x.Reise.ID == reise_id).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -101,20 +128,20 @@ namespace BL_Reiseboerse_Graf
                     {
                         reisenGefiltert = reisenGefiltert.Where(x => x.Unterkunft.Kategorie >= kategorie_id).ToList();
                     }
-                    if (verpflegung_id!=0)
+                    if (verpflegung_id != 0)
                     {
                         reisenGefiltert = reisenGefiltert.Where(x => x.Unterkunft.Verpflegung.ID == verpflegung_id).ToList();
                     }
-                    if (preis_min!=0)
+                    if (preis_min != 0)
                     {
-                        reisenGefiltert = reisenGefiltert.Where(x => x.Preis_Erwachsener>=preis_min).ToList();
+                        reisenGefiltert = reisenGefiltert.Where(x => x.Preis_Erwachsener >= preis_min).ToList();
                     }
                     if (preis_max != 0)
                     {
                         reisenGefiltert = reisenGefiltert.Where(x => x.Preis_Erwachsener <= preis_max).ToList();
                     }
                     if (startdatum >= DateTime.Now)
-                    {   
+                    {
                         reisenGefiltert = reisenGefiltert.Where(x => x.AlleReisedaten.Any(y => y.Startdatum >= startdatum)).ToList();
                     }
                     if (enddatum > startdatum)
@@ -143,13 +170,13 @@ namespace BL_Reiseboerse_Graf
         {
             Debug.WriteLine("ReiseVerwaltung - Restplätze");
             Debug.Indent();
-            int restplätze=-1;
+            int restplätze = -1;
             using (var context = new reisebueroEntities())
             {
                 try
                 {
                     List<Reisedurchfuehrung> reisedurchfuehrungen = context.AlleReisedurchfuehrungen.Where(x => x.Reisedatum.ID == reisedatum_id).ToList();
-                    List<Buchung> buchungen = context.AlleBuchungen.Where(x => x.Reisedatum.ID == reisedatum_id&&x.BuchungStorniert==null).ToList();
+                    List<Buchung> buchungen = context.AlleBuchungen.Where(x => x.Reisedatum.ID == reisedatum_id && x.BuchungStorniert == null).ToList();
                     int anzahlReisen = reisedurchfuehrungen.Count;
                     int anzahlBuchungen = buchungen.Count;
                     restplätze = anzahlReisen - anzahlBuchungen;
@@ -162,7 +189,6 @@ namespace BL_Reiseboerse_Graf
                     Debugger.Break();
                 }
             }
-
             Debug.Unindent();
             return restplätze;
         }
@@ -177,16 +203,16 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("ReiseVerwaltung - Suche Reise");
             Debug.Indent();
             List<Reise> liste = new List<Reise>();
-            using (var context=new reisebueroEntities())
+            using (var context = new reisebueroEntities())
             {
                 try
                 {
                     liste = context.AlleReisen.Include("AlleReisedaten").Include("Unterkunft.Verpflegung").Include("Ort.Land").ToList();
-                    if (liste != null&&liste.Count>0)
+                    if (liste != null && liste.Count > 0)
                     {
                         liste = liste.Where(x => x.Beschreibung.Contains(suchtext)).ToList();
                     }
-                  
+
                 }
                 catch (Exception ex)
                 {
@@ -332,9 +358,39 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return gesuchtesReisedatum;
         }
-         public static int SpeicherReise(Reise neueReise)
+        /// <summary>
+        /// hier wird ein Datum gespeichert und die neue Id davon zurückgeliefert
+        /// </summary>
+        /// <param name="reisedatum"></param>
+        /// <returns>wenn alles geklappt hat die neue ID ansonsten -1</returns>
+        public static int SpeicherReiseDatum(Reisedatum reisedatum)
         {
-            int reise_id = 0;          
+            Debug.WriteLine("ReiseVerwaltung - Suche Reisedatum");
+            Debug.Indent();
+           
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {                   
+                    context.AlleReisedaten.Add(reisedatum);
+                    context.SaveChanges();
+                    return reisedatum.ID;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Speichern des Reisedatums!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            
+            Debug.Unindent();
+            return -1;
+
+        }
+        public static int SpeicherReise(Reise neueReise)
+        {
+            int reise_id = 0;
 
             using (reisebueroEntities context = new reisebueroEntities())
             {
@@ -354,6 +410,98 @@ namespace BL_Reiseboerse_Graf
                 }
             }
             return reise_id;
+        }
+
+        /// <summary>
+        /// Entfernt eine Reise und alle zugehörigen Daten und gibt true zurück, falls alles geklappt hat
+        /// </summary>
+        /// <param name="reise_id">Die Id der zu entfernenden Reise</param>
+        /// <returns>true oder false</returns>
+        public static bool ReiseEntfernen(int reise_id)
+        {
+            Debug.WriteLine("ReiseVerwaltung - Reise Entfernen");
+            Debug.Indent();
+
+            bool entfernenErfolg = false;
+
+            using (reisebueroEntities context = new reisebueroEntities())
+            {
+                try
+                {
+
+
+                    entfernenErfolg = true;
+                    return entfernenErfolg;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Entfernen einer Reise");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            Debug.Unindent();
+            return entfernenErfolg;
+        }
+        /// <summary>
+        /// Sucht eine Unterkunft anhand der ID
+        /// </summary>
+        /// <param name="unterkunft_id"></param>
+        /// <returns>gesuchte Unterkunft</returns>
+        public static Unterkunft SucheUnterkunft(int unterkunft_id)
+        {
+            
+            Debug.WriteLine("ReiseVerwaltung - SucheUnterkunft");
+            Debug.Indent();
+
+            Unterkunft gesuchteUnterkunft = new Unterkunft();
+
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    gesuchteUnterkunft = context.AlleUnterkuenfte.Include("Verpflegung").Where(x => x.ID == unterkunft_id).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Suchen der UNTERKUNFT!");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                }
+            }
+            Debug.Unindent();
+            return gesuchteUnterkunft;
+        }
+
+        /// <summary>
+        /// hier wird die ReiseAnzahl festgelegt / wird so oft wie freie Plätze aufgerufen und nur das Reisedatum eingetragen
+        /// </summary>
+        /// <param name="reisedatum"></param>
+        /// <returns>wenn erfolgreich neue Reisedurchfuehrung_id / wenn nicht -1</returns>
+        public static int SpeicherReiseAnzahl(Reisedatum reisedatum)
+        {
+            Debug.WriteLine("ReiseVerwaltung - SucheUnterkunft");
+            Debug.Indent();
+            Reisedurchfuehrung neuerReiseDurchgang = new Reisedurchfuehrung();
+            neuerReiseDurchgang.Reisedatum = reisedatum;
+            
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    context.AlleReisedurchfuehrungen.Add(neuerReiseDurchgang);
+                    Debug.WriteLine("Speichern Reisedurchfuehrung erfolgreich");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Speichern Reisedurchfuehrung fehlgeschlagen");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                    neuerReiseDurchgang.ID = -1;
+                }
+            }
+            return neuerReiseDurchgang.ID;
         }
     }
 }

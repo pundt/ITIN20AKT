@@ -1,7 +1,7 @@
 ﻿@model List<UI_Reiseboerse_Graf.Models.BuchungAnzeigenModel>
 
 <div>
-    <table>
+    <table class="table table-responsive">
         <tr>
             <td>@Html.DisplayNameFor(x => x[0].Reisetitel)</td>
             <td>@Html.DisplayNameFor(x => x[0].Startdatum)</td>
@@ -17,7 +17,7 @@
                 <td>
                     @if (DateTime.Now > model.Enddatum && model.Bewertung == null)
                     {
-                        <button id="button" class="anmeldung">Bewerten</button>
+                        <button id="button" class="btn anmeldung abstand">Bewerten</button>
                         <div id="bewerten" class="NichtZeigen">
                             @using (Html.BeginForm("Bewerten", "Reisen"))
                             {
@@ -30,7 +30,7 @@
                                     <input type="radio" name="Bewertung" id="group-2-3" value="2" /><label for="group-2-3"></label>
                                     <input type="radio" name="Bewertung" id="group-2-4" value="1" /><label for="group-2-4"></label>
                                 </div>
-                                <input type="submit" value="Jetzt bewerten" />
+                                <input type="submit" value="Jetzt bewerten" class="btn anmeldung abstand"/>
                             }
                         </div>
                     }
@@ -41,6 +41,9 @@
                             <img src = "~/Content/bilder/Entypo_2605(0)_32.png" />
                         }
                     }
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "ZeigeDetails","Buchungen",new { id=model.Reisedatum_ID}, new { @class="btn anmeldung"})
                 </td>
             </tr>
         }

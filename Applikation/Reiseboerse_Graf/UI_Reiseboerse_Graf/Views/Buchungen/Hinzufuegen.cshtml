@@ -11,6 +11,8 @@
 
     @using (Html.BeginForm("Hinzufuegen", "Buchungen", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
+
         @Html.HiddenFor(x => x.AnzahlModel.Anzahl_Erwachsene)
         @Html.HiddenFor(x => x.AnzahlModel.Reisedatum_ID)
         @Html.HiddenFor(x => x.AnzahlModel.Anzahl_Kinder)
@@ -34,6 +36,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname)
+                                        @Html.ValidationMessageFor(x=>x.BuchungenErwachsen[i].Vorname, "", new { @class = "text-danger"})
                                     </td>
                                 </tr>
                                 <tr>
@@ -42,6 +45,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname)
+                                        @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].Nachname, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,6 +54,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer)
+                                        @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].ReisePassNummer, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -58,6 +63,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Geburtsdatum, "{0:dd.MM.yyyy}")
+                                        @Html.ValidationMessageFor(model => model.BuchungenErwachsen[i].Geburtsdatum, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                             </table>
@@ -89,6 +95,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Vorname)
+                                        @Html.ValidationMessageFor(x => x.BuchungenKind[i].Vorname, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -97,6 +104,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Nachname)
+                                        @Html.ValidationMessageFor(x => x.BuchungenKind[i].Nachname, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -105,6 +113,7 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].ReisePassNummer)
+                                        @Html.ValidationMessageFor(x => x.BuchungenKind[i].ReisePassNummer, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -113,6 +122,8 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum, "{0:dd.MM.yyyy}")
+                                        @*<input type="date" name="BuchungenKind[@i].Geburtsdatum" />*@
+                                        @Html.ValidationMessageFor(x => x.BuchungenKind[i].Geburtsdatum, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                             </table>

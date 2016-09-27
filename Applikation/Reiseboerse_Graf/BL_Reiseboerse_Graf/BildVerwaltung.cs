@@ -164,50 +164,100 @@ namespace BL_Reiseboerse_Graf
 
             return bild_id;
         }
+        /// <summary>
+        /// Speichert das Reisebild mit den Übergabewerten von Reise_id und Bild_id
+        /// </summary>
+        /// <param name="reiseid"></param>
+        /// <param name="bildid"></param>
+        /// <returns>bei erfolg Reise_Bild.ID</returns>
+        public static int BildZuReiseSpeichern(int reiseid, int bild_id)
+        {
 
-        public static int BildZuReiseSpeichern(int reiseid, int[]bildid)
-        {
-            reisebueroEntities context = new reisebueroEntities();
-            int index = 0;
-            for (int i = 0; i < bildid.Length-1; i++)
+            Reise_Bild reisebild = new Reise_Bild();
+
+            using (reisebueroEntities context = new reisebueroEntities())
             {
-                if (bildid[i] != 0)
+
+
+                try
                 {
-                    Reise_Bild neueBildReise = new Reise_Bild();
-                    neueBildReise.Reise.ID = reiseid;
-                    neueBildReise.Bild.ID = bildid[i];
-                    context.AlleReise_Bilder.Add(neueBildReise);
-                    index += context.SaveChanges();
+                    Reise reise = context.AlleReisen.Where(x => x.ID == reiseid).FirstOrDefault();
+                    Bild bild = context.AlleBilder.Where(x => x.ID == bild_id).FirstOrDefault();
+                    if (reise == null)
+                    {
+                        Debug.WriteLine("Keine Reise gefunden");
+                    }
+                    if (bild == null)
+                    {
+                        Debug.WriteLine("Kein Bild gefunden");
+                    }
+                    if (reise.ID > 0 && bild.ID > 0)
+                    {
+
+                        reisebild.Reise = reise;
+                        reisebild.Bild = bild;
+                        context.AlleReise_Bilder.Add(reisebild);
+                        context.SaveChanges();
+
+                        Debug.WriteLine("ReiseBild speichern erfolgreich");
+                    }
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    return index;
+                    Debug.WriteLine("ReiseBild speichern fehlgeschlagen");
+                    Debug.WriteLine(ex.Message);
                 }
-           
             }
-            return index;
+            return reisebild.ID;
         }
-        public static int BildZuUnterkunft(int unterkunftid, int[]bildid)
+        /// <summary>
+        /// Speichert das Reisebild mit den Übergabewerten von Reise_id und Bild_id
+        /// </summary>
+        /// <param name="reiseid"></param>
+        /// <param name="bildid"></param>
+        /// <returns>bei erfolg Reise_Bild.ID</returns>
+        public static int BildZuUnterkunftSpeichern(int bild_id, int unterkunft_id)
         {
-            reisebueroEntities context = new reisebueroEntities();
-            int index = 0;
-            for (int i = 0; i < bildid.Length - 1; i++)
+
+            Unterkunft_Bild unterkunftBild = new Unterkunft_Bild();
+
+            using (reisebueroEntities context = new reisebueroEntities())
             {
-                if (bildid[i] != 0)
+
+                try
                 {
-                    Unterkunft_Bild neueBildUnterkunft = new Unterkunft_Bild();
-                    neueBildUnterkunft.Bild.ID = bildid[i];
-                    neueBildUnterkunft.Unterkunft.ID = unterkunftid;
-                    context.AlleUnterkunft_Bilder.Add(neueBildUnterkunft);
-                    index += context.SaveChanges();
+                    Bild bild = context.AlleBilder.Where(x => x.ID == bild_id).FirstOrDefault(); ;
+                    Unterkunft unterkunft = context.AlleUnterkuenfte.Where(x => x.ID == unterkunft_id).FirstOrDefault();
+                    if (unterkunft == null)
+                    {
+                        Debug.WriteLine("Keine Unterkunft gefunden");
+                    }
+                    if (bild == null)
+                    {
+                        Debug.WriteLine("Kein Bild gefunden");
+                    }
+                    if (unterkunft.ID > 0 && bild.ID > 0)
+                    {
+
+                        unterkunftBild.Unterkunft = unterkunft;
+                        unterkunftBild.Bild = bild;
+
+                        context.AlleUnterkunft_Bilder.Add(unterkunftBild);
+                        context.SaveChanges();
+
+                        Debug.WriteLine("UnterkunftBild speichern erfolgreich");
+
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    return index;
+                    Debug.WriteLine("UnterkunftBild speichern fehlgeschlagen");
+                    Debug.WriteLine(ex.Message);
                 }
-                
             }
-            return index;
+            return unterkunftBild.ID;
         }
+
     }
 }

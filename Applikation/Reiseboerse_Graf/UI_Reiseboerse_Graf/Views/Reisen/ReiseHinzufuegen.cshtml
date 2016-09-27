@@ -10,10 +10,8 @@
 
 @using (Html.BeginForm("ReiseHinzufuegen", "Reisen", "", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    Html.BeginForm();
 
-    <div class="form-horizontal">
-        <h4>ReiseAnlegenModel</h4>
+    <div class="form-horizontal reise">       
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="container">
@@ -50,22 +48,6 @@
                                 @Html.ValidationMessageFor(model => model.NeuesLand, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Preis Erw", htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="col-md-9">
-                            @Html.EditorFor(model => model.PreisErw, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.PreisErw, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.Label("Preis Kind", htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="col-md-9">
-                            @Html.EditorFor(model => model.PreisKind, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.PreisKind, "", new { @class = "text-danger" })
-                        </div>
                     </div>
 
 
@@ -82,278 +64,137 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="form-group">
+                        @Html.Label("Preis Erw", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.PreisErw, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PreisErw, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Preis Kind", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.PreisKind, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PreisKind, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-xs-6">
+                    <div class="form-group">
+                        @Html.Label("Verpflegung", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.Verpflegung_id, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"))
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.Label("Unterkunft", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.Unterkunft_id, new SelectList(Model.Unterkunft, "ID", "Bezeichnung"))
+                            <input type="button" id="c" value="Unterkunft hinzufuegen" />
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-10 col-md-push-3 NichtZeigen" id="NeueUnterkunft">
+                            <div class="row">
+                                <div>@Html.Label("Beschreibung", htmlAttributes: new { @class = "control-label col-md-3" })</div>
+                                <div class="col-md-9">@Html.EditorFor(model => model.NeueUnterkunft.Beschreibung, new { htmlAttributes = new { @class = "form-control" } })</div>
+                            </div>
+                            <div class="row">
+                                <div>@Html.Label("Bezeichnung", htmlAttributes: new { @class = "control-label col-md-3" })</div>
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.NeueUnterkunft.Bezeichnung, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    @Html.LabelFor(model => model.NeueUnterkunft.Kategorie, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        <div class="acidjs-rating-stars">
+                                            <form>
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-0" value="5" />
+                                                <label for="group-2-0"></label>
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-1" value="4" />
+                                                <label for="group-2-1"></label>
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-2" value="=3" />
+                                                <label for="group-2-2"></label>
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-3" value="2" />
+                                                <label for="group-2-3"></label>
+                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-4" value="1" />
+                                                <label for="group-2-4"></label>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
                     <div class="row">
                         <div>
-                            @Html.Label("Reisebild 1", htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.Label("Reisebild", htmlAttributes: new { @class = "control-label col-md-3" })
                         </div>
                         <div class="col-md-9">
                             <div>
                                 <input type="file" id="file1" name="file1" />
                             </div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div>
-                            @Html.Label("Reisebild 2", htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.Label("Unterkunftbild", htmlAttributes: new { @class = "control-label col-md-3" })
                         </div>
                         <div class="col-md-9">
                             <div>
-                                <input type="file" id="file2" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Reisebild 3", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file3" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Reisebild 4", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file4" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Reisebild 5", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file5" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-                <div class="row col-xs-6">
-                    <div class="row form-group">
-                        @Html.Label("Unterkunft", htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="row col-md-9">
-                            <div>
-                                @Html.DropDownListFor(model => model.Unterkunft_id, new SelectList(Model.Unterkunft, "ID", "Bezeichnung"))
-                            </div>
-                            <div>
-                                <input type="button" id="c" value="Neue Unterkunft hinzufuegen" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 NichtZeigen" id="NeueUnterkunft">
-                        <div class="row">
-                            <table>
-                                <tr>
-                                    <td>@Html.Label("Beschreibung", htmlAttributes: new { @class = "control-label col-md-3" })</td>
-                                    <td>@Html.EditorFor(model => model.NeueUnterkunft.Beschreibung, new { htmlAttributes = new { @class = "form-control" } })</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.Label("Bezeichnung", htmlAttributes: new { @class = "control-label col-md-3" })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(model => model.NeueUnterkunft.Bezeichnung, new { htmlAttributes = new { @class = "form-control" } })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(model => model.NeueUnterkunft.Kategorie, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    </td>
-                                    <td>
-                                        <div class="acidjs-rating-stars">
-                                            <form>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-0" value="@Model.NeueUnterkunft.Kategorie=5" />
-                                                <label for="group-2-0"></label>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-1" value="@Model.NeueUnterkunft.Kategorie=4" />
-                                                <label for="group-2-1"></label>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-2" value="@Model.NeueUnterkunft.Kategorie=3" />
-                                                <label for="group-2-2"></label>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-3" value="@Model.NeueUnterkunft.Kategorie=2" />
-                                                <label for="group-2-3"></label>
-                                                <input type="radio" name="NeueUnterkunft.Kategorie" id="group-2-4" value="@Model.NeueUnterkunft.Kategorie=1" />
-                                                <label for="group-2-4"></label>
-
-                                            </form>
-                                        </div>
-
-                                    </td>
-                                </tr>
-
-                            </table>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="row">
-                            @Html.Label("Verpflegung", htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
-                                @Html.DropDownListFor(model => model.Verpflegung_id, new SelectList(Model.Verpflegung, "Id", "Bezeichnung"))
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div>
-                            @Html.LabelFor(model => model.StartDatum, htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class='input-group date' id='datetimepicker6'>
-                                <input type='text' class="form-control" name="Startdatum" value="@Model.StartDatum" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row form-group">
-                        <div>
-                            @Html.LabelFor(model => model.EndDatum, htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class='input-group date' id='datetimepicker7'>
-                                <input type='text' class="form-control" name="Enddatum" value="@Model.EndDatum" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div>
-                            @Html.LabelFor(model => model.Anmeldefrist, htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class='input-group date' id='datetimepicker8'>
-                                <input type='text' class="form-control" name="Anmeldefrist" value="@Model.Anmeldefrist" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div>
-                            @Html.Label("Unterkunft 1", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file6" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Unterkunft 2", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file7" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Unterkunft 3", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file8" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Unterkunft 4", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file9" name="file1" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            @Html.Label("Unterkunft 5", htmlAttributes: new { @class = "control-label col-md-3" })
-                        </div>
-                        <div class="col-md-9">
-                            <div>
-                                <input type="file" id="file10" name="file1" />
+                                <input type="file" id="file6" name="file2" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
+    </div>
+}
 
 
-        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
 
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
+        $(document).ready(function () {
+            $("#b").click(function () {
+                $("#Ort").removeClass("NichtZeigen");
+            });
+        });
 
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker6').datetimepicker({
-                        format: "DD.MM.YYYY"
-                    });
-                    $('#datetimepicker7').datetimepicker({
-                        format: "DD.MM.YYYY",
-                        useCurrent: false //Important! See issue #1075
-                    });
-                    $('#datetimepicker8').datetimepicker({
-                        format: "DD.MM.YYYY"
-                    });
+        $(document).ready(function () {
+            $("#a").click(function () {
+                $("#Land").removeClass("NichtZeigen");
+            });
+        });
 
+        $(document).ready(function () {
+            $("#c").click(function () {
+                $("#NeueUnterkunft").removeClass("NichtZeigen");
+            });
+        });
 
-                    $("#datetimepicker6").on("dp.change", function (e) {
-                        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                        $('#datetimepicker8').data("DateTimePicker").maxDate(e.date);
-                    });
-                    $("#datetimepicker7").on("dp.change", function (e) {
-                        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-                    });
-                    $("#datetimepicker8").on("dp.change", function (e) {
-                        $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
-                    });
-                })
-                $(document).ready(function () {
-                    $("#b").click(function () {
-                        $("#Ort").removeClass("NichtZeigen");
-                    });
-                });
-
-                $(document).ready(function () {
-                    $("#a").click(function () {
-                        $("#Land").removeClass("NichtZeigen");
-                    });
-                });
-                $(document).ready(function () {
-                    $("#c").click(function () {
-                        $("#NeueUnterkunft").removeClass("NichtZeigen");
-                    });
-                });
-            </script>
-        }
+    </script>
+}

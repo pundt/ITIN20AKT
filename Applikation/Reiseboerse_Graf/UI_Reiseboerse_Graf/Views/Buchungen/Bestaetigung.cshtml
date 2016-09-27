@@ -4,8 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="Schriftartblau">Sie haben es fast geschafft, @User.Identity.Name</h2>
+<h2 class="Schriftartblau">Ihre Buchung ist abgeschlossen, @User.Identity.Name!</h2>
 <div class="suchergebnis">
+
     <h4>Vielen Dank für Ihre Buchung <br /> In Kürze erhalten Sie eine Buchungsbestätigung per Mail</h4>
+    <h5>@ViewBag.text</h5>
     <h5>Überprüfen Sie bitte auch Ihren Spamordner</h5>
+    @Html.ActionLink("Zurück zur Startseite","Laden","Reisen",null,new { @class="btn anmeldung"})
 </div>

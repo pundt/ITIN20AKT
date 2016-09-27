@@ -53,8 +53,7 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    Zahlungsart art=context.AlleZahlungsarten.Where(x => x.ID == zahlungsart_id).FirstOrDefault();
-                    neueZahlung.Zahlungsart = art;
+                    neueZahlung.Zahlungsart = context.AlleZahlungsarten.Where(x => x.ID == zahlungsart_id).FirstOrDefault();
                     context.AlleZahlungen.Add(neueZahlung);
                     context.SaveChanges();
                     neueID = neueZahlung.ID;
@@ -70,7 +69,7 @@ namespace BL_Reiseboerse_Graf
             return neueID;
         }
 
-        public static int ZuordnungZahlungBuchung(List<int> buchungIDs, int zahlungID)
+        public static int ZuordnungZahlungBuchung(List<int> buchungIDs, int zahlung_id)
         {
             Debug.WriteLine("Zahlungsverwaltung - Zuordnung Zahlung_Buchung");
             Debug.Indent();
@@ -87,7 +86,7 @@ namespace BL_Reiseboerse_Graf
                             {
                                 Buchung_ID = id
                             };
-                            bz.Zahlung.ID = zahlungID;
+                            bz.Zahlung = context.AlleZahlungen.Where(x => x.ID == zahlung_id).FirstOrDefault();
                             context.AlleBuchung_Zahlungen.Add(bz);                            
                         }
                         zeilen=context.SaveChanges();
@@ -106,16 +105,36 @@ namespace BL_Reiseboerse_Graf
             }
         }
 
+        /// <summary>
+        /// Püft eine Kreditkartennummer auf ihre Gültigkeit mittels Luhn-Algorithmus
+        /// </summary>
+        /// <param name="nummer">die zu prüfende Kartennummer</param>
+        /// <returns>true für gültig oder false für nicht gültig</returns>
         public static bool PruefeLuhn(string nummer)
         {
+            Debug.WriteLine("ZahlungsVerwaltung - Pruefe Luhn");
+            Debug.Indent();
+
             int sum = 0;
-            int len = nummer.Length;
-            for (int i = 0; i < len; i++)
+
+            try
             {
-                int add = (nummer[i] - '0') * (2 - (i + len) % 2);
-                add -= add > 9 ? 9 : 0;
-                sum += add;
+                int len = nummer.Length;
+                for (int i = 0; i < len; i++)
+                {
+                    int add = (nummer[i] - '0') * (2 - (i + len) % 2);
+                    add -= add > 9 ? 9 : 0;
+                    sum += add;
+                }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Fehler bei Luhn-Prüfung");
+                Debug.WriteLine(ex.Message);
+                Debugger.Break();
+            }
+
+            Debug.Unindent();
             return sum % 10 == 0;
         }
     }

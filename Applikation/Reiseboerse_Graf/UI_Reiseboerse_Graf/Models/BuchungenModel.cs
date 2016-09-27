@@ -6,14 +6,15 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
-    public abstract class BuchungenModel
+    public class BuchungenModel
     {
+        public int ID { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public string Vorname { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
         public string Nachname { get; set; }
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
-        //[RegularExpression("^[A-Z0-9{5,10}]$",ErrorMessage ="Geben Sie eine gültige Reisepassnummer ein")]
+        [RegularExpression("^[A-Z]{1}[0-9]{7}$",ErrorMessage ="Geben Sie eine gültige Reisepassnummer ein")]
         [Display(Name ="Reisepassnummer")]
         public string ReisePassNummer { get; set; }       
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
@@ -24,7 +25,7 @@ namespace UI_Reiseboerse_Graf.Models
         {
             get { return string.Format("{0} {1}",Vorname,Nachname); }
         }
-
+        public bool Stornierbar { get; set; }
 
 
 

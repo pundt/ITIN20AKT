@@ -14,7 +14,9 @@ namespace UI_Reiseboerse_Graf
                       
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate.js",
+                        "~/Scripts/jquery.validate.globalize.js",
+                        "~/Scripts/jquery.validate.unobtrusive.js"));
 
             // Verwenden Sie die Entwicklungsversion von Modernizr zum Entwickeln und Erweitern Ihrer Kenntnisse. Wenn Sie dann
             // für die Produktion bereit sind, verwenden Sie das Buildtool unter "http://modernizr.com", um nur die benötigten Tests auszuwählen.

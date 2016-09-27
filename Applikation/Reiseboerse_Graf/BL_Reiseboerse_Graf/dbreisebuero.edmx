@@ -83,7 +83,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bezeichnung" Type="nvarchar" MaxLength="50" />
-          <Property Name="erstelldatum" Type="datetime" Nullable="false" />
+          <Property Name="erstelldatum" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Ort">
           <Key>
@@ -613,7 +613,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AlleBenutzer" Relationship="Self.FK_Benutzer_Land" FromRole="Land" ToRole="Benutzer" />
           <NavigationProperty Name="AlleOrte" Relationship="Self.FK_Ort_Land" FromRole="Land" ToRole="Ort" />
         </EntityType>
