@@ -181,15 +181,23 @@ namespace UI_Reiseboerse_Graf.Controllers
                         reiseModel.Reisedaten = new List<ReisedatumModel>();
                         foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(reiseModel.ID))
                         {
-                            reiseModel.Reisedaten.Add(new ReisedatumModel()
+                            ReisedatumModel reisedatum = new ReisedatumModel()
                             {
                                 Anmeldefrist = datum.Anmeldefrist,
                                 Beginndatum = datum.Startdatum,
                                 Enddatum = datum.Enddatum,
+                                ID = datum.ID,
                                 Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
-                            });
+                            };
+                            if (reisedatum.Anmeldefrist >= DateTime.Now && reisedatum.Restplätze >= 1)
+                            {
+                                reiseModel.Reisedaten.Add(reisedatum);
+                            }
                         }
-                        model.Reisen.Add(reiseModel);
+                        if (reiseModel.Reisedaten.Count >= 1)
+                        {
+                            model.Reisen.Add(reiseModel);
+                        }
                     }
                 }
                 catch (Exception ex)
