@@ -12044,7 +12044,7 @@
     });
 
     var moment_with_locales = moment__default;
-    moment_with_locales.locale('en');
+    moment_with_locales.locale('de');
 
     return moment_with_locales;
 

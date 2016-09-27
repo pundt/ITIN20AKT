@@ -423,8 +423,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                 if (neueReise.NeuesLand != null)
                 {
 
-                     neueReise.Land_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand);
-                
+                    neueReise.Land_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuesLand(neueReise.NeuesLand);
+
                     if (neueReise.Land_id > 0)
                     {
                         Debug.WriteLine("landspeichern erfolgreich");
@@ -439,7 +439,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 {
 
                     neueReise.Ort_id = BL_Reiseboerse_Graf.LaenderVerwaltung.SpeicherNeuenOrt(neueReise.NeuerOrt, neueReise.Land_id);
-                     
+
                     if (neueReise.Ort_id > 0)
                     {
                         Debug.WriteLine("Ortspeichern erfolgreich");
@@ -480,7 +480,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
                 }
                 Reise BlReise = new Reise();
-                
+
                 BlReise.Titel = neueReise.Titel;
                 BlReise.Beschreibung = neueReise.Beschreibung;
                 BlReise.Preis_Erwachsener = Convert.ToDecimal(neueReise.PreisErw);
@@ -539,7 +539,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         public ActionResult ReiseAnzahlErstellen(int Reiseid)
         {
             ReisedurchfuehrenModel DatumUndAnzahl = new ReisedurchfuehrenModel();
-            DatumUndAnzahl.Reise_id = Reiseid;
+            DatumUndAnzahl.Reise_id = (int)Reiseid;
             DatumUndAnzahl.StartDatum = DateTime.Now;
             DatumUndAnzahl.EndDatum = DateTime.Now;
             DatumUndAnzahl.Anmeldefrist = DateTime.Now;
@@ -553,21 +553,20 @@ namespace UI_Reiseboerse_Graf.Controllers
             int index = 0;
             Debug.WriteLine("ReiseAnzahlErstellen - ReiseController - POST");
             Debug.Indent();
-            Reisedatum ReiseDaten = new Reisedatum();
 
             if (ModelState.IsValid)
             {
                 if (anzahlReisen.ReiseAnzahl > 0)
                 {
-                    ReiseDaten.Reise = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheReise((int)anzahlReisen.Reise_id);
-                    ReiseDaten.Startdatum = anzahlReisen.StartDatum;
-                    ReiseDaten.Enddatum = anzahlReisen.EndDatum;
-                    ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;
-                    ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
-
                     for (int i = 0; i < anzahlReisen.ReiseAnzahl; i++)
                     {
-                        if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten) > 1)
+                        Reisedatum ReiseDaten = new Reisedatum();
+                        ReiseDaten.Reise = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheReise((int)anzahlReisen.Reise_id);
+                        ReiseDaten.Startdatum = anzahlReisen.StartDatum;
+                        ReiseDaten.Enddatum = anzahlReisen.EndDatum;
+                        ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;
+                        ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
+                        if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten) >= 1)
                         {
                             index++;
                         }
@@ -579,8 +578,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
             }
             if (anzahlReisen.WeitereReisenHinzufuegen)
-            {
-                return View(anzahlReisen.Reise_id);
+            {                
+                return RedirectToAction("ReiseAnzahlErstellen",anzahlReisen.Reise_id);
             }
             return View("Index", "Home");
         }
