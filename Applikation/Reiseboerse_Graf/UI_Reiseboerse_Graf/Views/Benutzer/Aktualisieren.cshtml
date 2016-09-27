@@ -136,12 +136,13 @@
         @Html.HiddenFor(model => model.ID)
 
 
+
+        
+        <div class="col-xs-12 reise">
+            @Html.Action("LadeAlleBuchungenBenutzer", "Buchungen", new { id = Model.ID })
+        </div>
     </div>
 }
-<div class="col-xs-12 reise">
-    @Html.Action("LadeAlleBuchungenBenutzer", "Buchungen", new { id = Model.ID })
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
