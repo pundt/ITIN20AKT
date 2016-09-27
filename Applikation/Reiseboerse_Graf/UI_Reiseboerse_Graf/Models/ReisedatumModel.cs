@@ -31,5 +31,7 @@ namespace UI_Reiseboerse_Graf.Models
             get { return string.Format("{0} bis {1}",Beginndatum.ToShortDateString(),Enddatum.ToShortDateString()); }
         }
 
+        public bool BuchungenVorhanden { get; set; }
+
     }
 }

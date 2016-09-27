@@ -78,17 +78,20 @@ namespace UI_Reiseboerse_Graf.Controllers
                 {
                     Reisetitel = buchung.Reisedatum.Reise.Titel,
                     Startdatum = buchung.Reisedatum.Startdatum,
-                    Enddatum=buchung.Reisedatum.Enddatum,
+                    Enddatum = buchung.Reisedatum.Enddatum,
                     ReiseID = buchung.Reisedatum.Reise.ID,
                     Benutzer_ID = id,
-                    Reisedatum_ID=buchung.Reisedatum.ID,
-                    Bewertung=BewertungVerwaltung.LadeBewertungReise(buchung.Reisedatum.Reise.ID)
+                    Reisedatum_ID = buchung.Reisedatum.ID,
+                    Bewertung = BewertungVerwaltung.LadeBewertungReise(buchung.Reisedatum.Reise.ID)
                 });
             }
             List<BuchungAnzeigenModel> neueListe = new List<BuchungAnzeigenModel>();
             List<int> reisedaten = new List<int>();
-            neueListe.Add(UI_Liste[0]);
-            reisedaten.Add(UI_Liste[0].Reisedatum_ID);
+            if (UI_Liste.Count > 0)
+            {
+                neueListe.Add(UI_Liste[0]);
+                reisedaten.Add(UI_Liste[0].Reisedatum_ID);
+            }
             for (int i = 0; i < UI_Liste.Count; i++)
             {
                 if (!reisedaten.Contains(UI_Liste[i].Reisedatum_ID))
@@ -108,15 +111,15 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <param name="id">die ID der Buchung (Reisedatum)</param>
         /// <returns>View</returns>
         [HttpGet]
-        public ActionResult ZeigeDetails(int id)
+        public ActionResult ZeigeDetails(int id,int benutzer_id)
         {
             Debug.WriteLine("Buchungen - ZeigeDetails - GET");
             Debug.Indent();
-            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleEinzelBuchungenBenutzer(id);
+            List<Buchung> BL_Liste = BuchungsVerwaltung.LadeAlleBuchungenZuReiseDatumUndBenutzer(id,benutzer_id);
             List<BuchungenModel> UI_BuchungListe = new List<BuchungenModel>();
             foreach (var buchung in BL_Liste)
             {
-                if (buchung.Reisedatum.ID==id)
+                if (buchung.Reisedatum.ID == id)
                 {
                     BuchungenModel model = new BuchungenModel()
                     {
@@ -130,7 +133,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     UI_BuchungListe.Add(model);
                 }
             }
-            
+
             Debug.Unindent();
             return View(UI_BuchungListe);
         }
@@ -147,7 +150,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - LadeAlleBuchungenMitarbeiter - GET");
             Debug.Indent();
-            List<Buchung> BL_ListeMitarbeiter = BuchungsVerwaltung.LadeAlleBuchungenZuReiseDatumUndBenutzer(reiseDatum_id,benutzer_id);
+            List<Buchung> BL_ListeMitarbeiter = BuchungsVerwaltung.LadeAlleBuchungenZuReiseDatumUndBenutzer(reiseDatum_id, benutzer_id);
             List<BuchungAnzeigenModel> UI_Liste = new List<BuchungAnzeigenModel>();
             foreach (var aktbuchung in BL_ListeMitarbeiter)
             {
@@ -156,7 +159,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     ReiseID = aktbuchung.Reisedatum.Reise.ID,
                     Startdatum = aktbuchung.Reisedatum.Startdatum,
                     Enddatum = aktbuchung.Reisedatum.Enddatum,
-                    Reisetitel = aktbuchung.Reisedatum.Reise.Titel 
+                    Reisetitel = aktbuchung.Reisedatum.Reise.Titel
                 });
             }
             Debug.Unindent();
@@ -318,7 +321,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(zahlung);
         }
 
-        
+
 
         /// <summary>
         /// Nimmt das übergebene ZahlungModel entgegen und übergibt es an die BL
@@ -370,7 +373,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpGet]
         public ActionResult Bestaetigung()
         {
-            ViewBag.text=Session["Bestaetigung"] as string;
+            ViewBag.text = Session["Bestaetigung"] as string;
             return View();
         }
 
@@ -477,7 +480,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         private string Bestaetigungstext(BuchungGesamtModel model)
         {
             string text = "Wir wünschen Ihnen sehr viel Freude bei Ihrer Reise";
-            text=string.Format("{0} {1} von {2} bis {3}", text, model.Reisetitel, model.Startdatum.ToLongDateString(), model.Enddatum.ToLongDateString());
+            text = string.Format("{0} {1} von {2} bis {3}", text, model.Reisetitel, model.Startdatum.ToLongDateString(), model.Enddatum.ToLongDateString());
             return text;
         }
 
@@ -524,7 +527,9 @@ namespace UI_Reiseboerse_Graf.Controllers
 
         /// <summary>
         /// Anzeige aller Buchungen (für den Mitarbeiter)
+        /// 
         /// </summary>
+        /// <param name="id">Id des Reisedatums</param>
         /// <returns></returns>
         [PruefeBenutzer]
         [HttpGet]
@@ -538,7 +543,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 UI_Buchungen.Add(new BuchungVerwaltenModel()
                 {
-                    ID=buchung.ID,
+                    ID = buchung.ID,
                     BenutzerName = buchung.Benutzer.Email,
                     Geburtsdatum = buchung.Geburtsdatum,
                     Nachname = buchung.Nachname,
@@ -550,7 +555,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Reisetitel = buchung.Reisedatum.Reise.Titel
                 });
             }
-            if (id!=0)
+            if (id != 0)
             {
                 UI_Buchungen = UI_Buchungen.Where(x => x.Reisedatum_ID == id).ToList();
             }
@@ -623,11 +628,12 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - Stornieren - GET");
             Debug.Indent();
-            bool erfolgreich = false; 
-            if(!Tools.BistDuMitarbeiter(User.Identity.Name))
+            bool erfolgreich = false;
+            if (!Tools.BistDuMitarbeiter(User.Identity.Name))
             {
                 BuchungsVerwaltung.Stornieren(id);
-                return RedirectToAction("Aktualisieren", "Benutzer");
+                string url=Request.UrlReferrer.AbsoluteUri;
+                return Redirect(url);
             }
             return RedirectToAction("StornoVerwalten");
 

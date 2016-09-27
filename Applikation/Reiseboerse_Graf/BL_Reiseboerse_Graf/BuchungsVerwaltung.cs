@@ -24,7 +24,7 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                     buchungsListe = context.AlleBuchungen.Include("Benutzer").Include("Reisedatum.Reise").
-                        Where(x=>x.Reisedatum.Anmeldefrist>=DateTime.Now).ToList();
+                        Where(x => x.Reisedatum.Anmeldefrist <= DateTime.Now).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -42,7 +42,7 @@ namespace BL_Reiseboerse_Graf
         /// <param name="reisedatum_id">Reisedatum.ID</param>
         /// <param name="benutzer_id">Benutzer.ID</param>
         /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
-        public static List<Buchung> LadeAlleBuchungenZuReiseDatumUndBenutzer(int reisedatum_id,int benutzer_id)
+        public static List<Buchung> LadeAlleBuchungenZuReiseDatumUndBenutzer(int reisedatum_id, int benutzer_id)
         {
             Debug.WriteLine("Buchungsverwaltung - Lade alle Buchungen Reisedatum und Benutzer");
             Debug.Indent();
@@ -51,9 +51,9 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                     buchungsListe = (from r in context.AlleBuchungen
-                                      where r.Reisedatum.ID == reisedatum_id && r.Benutzer.ID == benutzer_id
-                                      select r).ToList();
+                    buchungsListe = (from r in context.AlleBuchungen.Include("Reisedatum")
+                                     where r.Reisedatum.ID == reisedatum_id && r.Benutzer.ID == benutzer_id && r.BuchungStorniert == null
+                                     select r).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -109,7 +109,7 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                     buchungsListe = context.AlleBuchungen.Include("Reisedatum.Reise")
-                                     .Where(x => x.Benutzer.ID == benutzer_id).ToList();
+                                     .Where(x => x.Benutzer.ID == benutzer_id && x.BuchungStorniert == null).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -237,14 +237,14 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("Buchungsverwaltung - Buchung Prüfen");
             Debug.Indent();
             bool erfolgreich = false;
-            using (var context=new reisebueroEntities())
+            using (var context = new reisebueroEntities())
             {
                 try
                 {
-                    BuchungStorniert buchung=context.AlleBuchungenStorniert.Find(id);
+                    BuchungStorniert buchung = context.AlleBuchungenStorniert.Find(id);
                     context.AlleBuchungenStorniert.Remove(buchung);
                     context.SaveChanges();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -274,7 +274,7 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                     Buchung buchung = context.AlleBuchungen.Find(buchung_id);
-                    if (buchung.Reisedatum.Anmeldefrist>=DateTime.Now)
+                    if (buchung.Reisedatum.Anmeldefrist >= DateTime.Now)
                     {
                         stornierbar = true;
                     }
@@ -291,5 +291,49 @@ namespace BL_Reiseboerse_Graf
             return stornierbar;
 
         }
+        /// <summary>
+        /// Prüft ob es Buchungen zu einem Reisedatum gibt
+        /// </summary>
+        /// <param name="id">Reisedatum_id</param>
+        /// <returns></returns>
+        public static bool BuchungenVorhanden(int id)
+        {
+            Debug.WriteLine("Buchungsverwaltung - BuchungenVorhanden - ID");
+            Debug.Indent();
+            bool vorhanden = false;
+            List<Buchung> Buchungen = new List<Buchung>();
+
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+
+                    Buchungen = context.AlleBuchungen.Where(x => x.Reisedatum.ID == id).ToList();
+
+                    if (Buchungen.Count > 0)
+                    {
+                        vorhanden = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Fehler beim Prüfen ob es zu Reisedatum Buchungen gibt");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+
+
+                }
+                Debug.Unindent();
+            }
+            return vorhanden;
+
+
+
+        }
     }
 }
+
+
+
+
+

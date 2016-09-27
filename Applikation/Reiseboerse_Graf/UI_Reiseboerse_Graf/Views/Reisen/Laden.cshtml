@@ -1,4 +1,4 @@
-﻿@model UI_Reiseboerse_Graf.Models.ReiseLadenModel
+﻿    @model UI_Reiseboerse_Graf.Models.ReiseLadenModel
 
 @{
     ViewBag.Title = "Reisen";
@@ -6,8 +6,11 @@
 
 }
 <div class="container">
-    <div class="row">
-        <div class="col-xs-4 col-lg-offset-8">
+    <div class="row">      
+        <div class="col-xs-3 col-xs-offset-5">
+            @Html.ActionLink("Alle Reisen anzeigen", "Laden", "Reisen", null, new { @class = "btn anmeldung marginTop" })
+        </div> 
+        <div class="col-xs-4">
             @using (Html.BeginForm("Suchen", "Reisen"))
             {
                 <span class="input-group btn">
@@ -17,6 +20,7 @@
             }
 
         </div>
+       
     </div>
     <div>
         <div class="col-xs-3">
