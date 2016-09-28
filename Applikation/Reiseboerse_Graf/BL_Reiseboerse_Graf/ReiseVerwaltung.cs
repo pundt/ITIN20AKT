@@ -396,9 +396,16 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
+                    Ort ort = context.AlleOrte.Where(x => x.ID == neueReise.Ort.ID).FirstOrDefault();
+                    Unterkunft unterkunft = context.AlleUnterkuenfte.Where(x => x.ID == neueReise.Unterkunft.ID).FirstOrDefault();
+
+                    neueReise.Ort = ort;
+                    neueReise.Unterkunft = unterkunft;
+
                     context.AlleReisen.Add(neueReise);
                     context.SaveChanges();
                     reise_id = neueReise.ID;
+
                     Debug.WriteLine("Speichern erfolgreich");
                 }
                 catch (Exception ex)
