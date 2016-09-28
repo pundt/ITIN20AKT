@@ -63,7 +63,7 @@
                                         </td>
                                         <td>
                                             <div class='input-group date' id='datepicker'>
-                                                <input type='text' class="form-control" name="Startdatum" value="@Model.BuchungenErwachsen[i].Geburtsdatum" />
+                                                @Html.TextBoxFor(x=>x.BuchungenErwachsen[i].Geburtsdatum,"{0:dd.MM.yyyy}",new { @class="form-control"})
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
@@ -127,13 +127,12 @@
                                         </td>
                                         <td>
                                             <div class='input-group date' id='datepicker2'>
-                                                <input type='text' class="form-control" name="Startdatum" value="@Model.BuchungenKind[i].Geburtsdatum" />
+                                                @Html.TextBoxFor(modelItem=>modelItem.BuchungenKind[i].Geburtsdatum, "{0:dd.MM.yyyy}",new { @class="form-control"})                                               
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
                                             </div>
-                                           
-                                            @*<input type="date" name="BuchungenKind[@i].Geburtsdatum" />*@
+                                          
                                             @Html.ValidationMessageFor(x => x.BuchungenKind[i].Geburtsdatum, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>

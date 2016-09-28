@@ -16,6 +16,8 @@
 
 .abstand {
     margin-bottom: 1.5%;
+    /*Neu hinzugefügt am 28.09.2016 - falls was nicht passt*/
+    margin-left:5%;
 }
 
 .slide1{
@@ -446,4 +448,6 @@
     margin-top:2.5%;
 }
 
-
+.wrapper {
+    margin-left:3%;
+}

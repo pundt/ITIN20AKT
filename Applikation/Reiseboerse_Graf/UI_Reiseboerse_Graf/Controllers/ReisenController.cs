@@ -530,23 +530,29 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Debug.WriteLine("UnterkunftBildSpeichern - fehlgeschlagen");
                     Debug.WriteLine(ex.Message);
                 }
+                TempData["success"] = "Die neue Reise wurde erfolgreich erstellt!";
                 return RedirectToAction("ReiseAnzahlErstellen", new { Reiseid = neueReise.Id });
             }
             else
             {
+                TempData["error"] = "Fehler beim Hinzufügen einer neuen Reise!\nBitte überprüfen Sie Ihre Eingaben!";
                 return View(neueReise);
             }
         }
 
-
+        [HttpGet]
         /// <summary>
         /// ReiseStart- und Enddatum sowie Anzahl der Reisen wird gesetzt.
         /// </summary>
         /// <param name="Reiseid"></param>
-        /// <returns></returns>
-        public ActionResult ReiseAnzahlErstellen(int Reiseid)
+        /// <returns></returns>        
+        public ActionResult ReiseAnzahlErstellen(int? Reiseid)
         {
             ReisedurchfuehrenModel DatumUndAnzahl = new ReisedurchfuehrenModel();
+            if (Reiseid == null)
+            {
+                Reiseid = BL_Reiseboerse_Graf.ReiseVerwaltung.LiefereReiseID();
+            }
             DatumUndAnzahl.Reise_id = (int)Reiseid;
             DatumUndAnzahl.StartDatum = DateTime.Now;
             DatumUndAnzahl.EndDatum = DateTime.Now;
@@ -566,14 +572,14 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 if (anzahlReisen.ReiseAnzahl > 0)
                 {
+                    Reisedatum ReiseDaten = new Reisedatum();
+                    ReiseDaten.Reise = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheReise(anzahlReisen.Reise_id);
+                    ReiseDaten.Startdatum = anzahlReisen.StartDatum;
+                    ReiseDaten.Enddatum = anzahlReisen.EndDatum;
+                    ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;
+                    ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
                     for (int i = 0; i < anzahlReisen.ReiseAnzahl; i++)
                     {
-                        Reisedatum ReiseDaten = new Reisedatum();
-                        ReiseDaten.Reise = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheReise((int)anzahlReisen.Reise_id);
-                        ReiseDaten.Startdatum = anzahlReisen.StartDatum;
-                        ReiseDaten.Enddatum = anzahlReisen.EndDatum;
-                        ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;
-                        ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
                         if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten) >= 1)
                         {
                             index++;
@@ -586,13 +592,18 @@ namespace UI_Reiseboerse_Graf.Controllers
                 }
             }
             if (anzahlReisen.WeitereReisenHinzufuegen)
-            {                
-                return RedirectToAction("ReiseAnzahlErstellen",anzahlReisen.Reise_id);
+            {
+                ReisedurchfuehrenModel neuesModel = new ReisedurchfuehrenModel();
+                neuesModel.Reise_id = anzahlReisen.Reise_id;
+                neuesModel.StartDatum = anzahlReisen.StartDatum;
+                neuesModel.EndDatum = anzahlReisen.EndDatum;
+                neuesModel.Anmeldefrist = anzahlReisen.Anmeldefrist;             
+                return View(neuesModel);
             }
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
-       
+
 
 
         /// <summary>

@@ -38,6 +38,9 @@ namespace UI_Reiseboerse_Graf
                       "~/Content/bootstrap-datepicker.min.css",
                       "~/Content/nouislider.*"));
 
+            bundles.Add(new StyleBundle("~/Content/toastr").Include(
+                       "~/Content/toastr.*"));
+
         }
     }
 }
