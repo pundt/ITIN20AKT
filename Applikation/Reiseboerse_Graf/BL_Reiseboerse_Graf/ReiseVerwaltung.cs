@@ -47,8 +47,8 @@ namespace BL_Reiseboerse_Graf
             using (var context = new reisebueroEntities())
             {
                 try
-                {                   
-                    reise = context.AlleReisen.Where(x => x.ID == id).FirstOrDefault();                            
+                {
+                    reise = context.AlleReisen.Where(x => x.ID == id).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
@@ -60,7 +60,7 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return reise;
         }
-        
+
 
 
         /// <summary>
@@ -363,13 +363,16 @@ namespace BL_Reiseboerse_Graf
         /// <returns>wenn alles geklappt hat die neue ID ansonsten -1</returns>
         public static int SpeicherReiseDatum(Reisedatum reisedatum)
         {
+            Reise reise = new Reise();
             Debug.WriteLine("ReiseVerwaltung - Suche Reisedatum");
             Debug.Indent();
-           
+
             using (var context = new reisebueroEntities())
             {
                 try
-                {                   
+                {
+                    reise = context.AlleReisen.Where(x => x.ID == reisedatum.Reise.ID).FirstOrDefault();
+                    reisedatum.Reise = reise;
                     context.AlleReisedaten.Add(reisedatum);
                     context.SaveChanges();
                     return reisedatum.ID;
@@ -381,7 +384,7 @@ namespace BL_Reiseboerse_Graf
                     Debugger.Break();
                 }
             }
-            
+
             Debug.Unindent();
             return -1;
 
@@ -454,7 +457,7 @@ namespace BL_Reiseboerse_Graf
         /// <returns>gesuchte Unterkunft</returns>
         public static Unterkunft SucheUnterkunft(int unterkunft_id)
         {
-            
+
             Debug.WriteLine("ReiseVerwaltung - SucheUnterkunft");
             Debug.Indent();
 
@@ -487,12 +490,14 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("ReiseVerwaltung - SucheUnterkunft");
             Debug.Indent();
             Reisedurchfuehrung neuerReiseDurchgang = new Reisedurchfuehrung();
-            neuerReiseDurchgang.Reisedatum = reisedatum;
-            
+            Reise reise = new Reise();
             using (var context = new reisebueroEntities())
             {
                 try
                 {
+                    reise = context.AlleReisen.Where(x => x.ID == reisedatum.Reise.ID).FirstOrDefault();
+                    reisedatum.Reise = reise;
+                    neuerReiseDurchgang.Reisedatum = reisedatum;
                     context.AlleReisedurchfuehrungen.Add(neuerReiseDurchgang);
                     context.SaveChanges();
                     Debug.WriteLine("Speichern Reisedurchfuehrung erfolgreich");
@@ -518,8 +523,8 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    index=context.AlleReisedaten.Count();
-                    datum = context.AlleReisedaten.Where(x => x.ID == index).FirstOrDefault();                   
+                    index = context.AlleReisedaten.Count();
+                    datum = context.AlleReisedaten.Where(x => x.ID == index).FirstOrDefault();
                     Debug.WriteLine("Suche Reise_ID erfolgreich");
                     return datum.Reise.ID;
                 }
