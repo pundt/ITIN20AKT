@@ -37,7 +37,7 @@
                     <a href="tel:0699/11143907" class="btn buttonAction center-block">0800/206894</a>
                 </div>
                 <div class="col-xs-4 col-xs-push-1">
-                    @Html.ActionLink("Zu unseren Reisen", "Laden", "Reisen",null,new { @class="btn buttonAction center-block"})
+                    @Html.ActionLink("Zu unseren Reisen", "Laden", "Reisen", null, new { @class = "btn buttonAction center-block" })
                 </div>
                 <div class="col-xs-4 col-xs-push-1">
 
@@ -51,7 +51,7 @@
                     }
                     else
                     {
-                    @Html.Partial("~/Views/Benutzer/_Login.cshtml", new UI_Reiseboerse_Graf.Models.LoginModel());
+                        @Html.Partial("~/Views/Benutzer/_Login.cshtml", new UI_Reiseboerse_Graf.Models.LoginModel());
                     }
                 </div>
 
@@ -60,7 +60,7 @@
         <div class="slide1">
             @RenderBody()
         </div>
-        <footer class="footer navbar navbar-bottom">
+        <footer class="headerkleiner navbar navbar-bottom">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-4">
                     <ul class="nav navbar-nav">
@@ -71,6 +71,7 @@
                 </div>
             </div>
         </footer>
+
     </div>
 
 
