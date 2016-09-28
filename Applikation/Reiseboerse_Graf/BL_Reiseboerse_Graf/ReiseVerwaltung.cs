@@ -47,10 +47,8 @@ namespace BL_Reiseboerse_Graf
             using (var context = new reisebueroEntities())
             {
                 try
-                {
-                    List<Reise> reisen = LadeAlleReisen();
-                    reise = reisen.Where(x => x.ID == id).FirstOrDefault();    
-                        
+                {                   
+                    reise = context.AlleReisen.Where(x => x.ID == id).FirstOrDefault();                            
                 }
                 catch (Exception ex)
                 {
@@ -509,6 +507,31 @@ namespace BL_Reiseboerse_Graf
                 }
             }
             return neuerReiseDurchgang.ID;
+        }
+        public static int LiefereReiseID()
+        {
+            Reisedatum datum = new Reisedatum();
+            int index;
+            Debug.WriteLine("ReiseVerwaltung - LiefereReiseID");
+            Debug.Indent();
+            using (var context = new reisebueroEntities())
+            {
+                try
+                {
+                    index=context.AlleReisedaten.Count();
+                    datum = context.AlleReisedaten.Where(x => x.ID == index).FirstOrDefault();                   
+                    Debug.WriteLine("Suche Reise_ID erfolgreich");
+                    return datum.Reise.ID;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Suche letztes Reisedatum fehlgeschlagen");
+                    Debug.WriteLine(ex.Message);
+                    Debugger.Break();
+                    datum.Reise.ID = -1;
+                }
+            }
+            return datum.Reise.ID;
         }
     }
 }
