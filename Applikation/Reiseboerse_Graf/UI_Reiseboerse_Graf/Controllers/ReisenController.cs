@@ -591,10 +591,12 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             if (anzahlReisen.WeitereReisenHinzufuegen)
             {
-                {
-                    return RedirectToAction("ReiseAnzahlErstellen", "Reisen", anzahlReisen.Reise_id);
-                }
-
+                ReisedurchfuehrenModel neuesModel = new ReisedurchfuehrenModel();
+                neuesModel.Reise_id = anzahlReisen.Reise_id;
+                neuesModel.StartDatum = anzahlReisen.StartDatum;
+                neuesModel.EndDatum = anzahlReisen.EndDatum;
+                neuesModel.Anmeldefrist = anzahlReisen.Anmeldefrist;             
+                return View(neuesModel);
             }
             return RedirectToAction("Index", "Home");
         }
