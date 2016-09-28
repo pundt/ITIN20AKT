@@ -17,7 +17,7 @@ namespace UI_Reiseboerse_Graf.Models
         [RegularExpression("^[A-Z]{1}[0-9]{7}$",ErrorMessage ="Geben Sie eine gültige Reisepassnummer ein")]
         [Display(Name ="Reisepassnummer")]
         public string ReisePassNummer { get; set; }       
-        [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [Required]
         public int Zahlungsart_id { get; set; }
         public int Reisedatum_ID { get; set; }
         [Display(Name="Vollständiger Name")]

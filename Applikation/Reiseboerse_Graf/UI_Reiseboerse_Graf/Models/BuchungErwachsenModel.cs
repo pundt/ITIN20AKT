@@ -10,8 +10,7 @@ namespace UI_Reiseboerse_Graf.Models
     public class BuchungErwachsenModel:BuchungenModel
     {
         [Required]
-        //[DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
-        [Remote("AlterErwachsen","Validierung",ErrorMessage ="Erwachsene erst ab 14 Jahren")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime Geburtsdatum { get; set; }
     }
 }

@@ -180,6 +180,17 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - Hinzufuegen - GET");
             Debug.Indent();
+            foreach (var erwachsen in model.BuchungenErwachsen)
+            {
+                erwachsen.Geburtsdatum = new DateTime(1990, 01, 01);
+                erwachsen.Geburtsdatum.ToShortDateString();
+            }
+            foreach (var kind in model.BuchungenKind)
+            {
+                kind.Geburtsdatum = new DateTime(2010, 01, 01);
+                kind.Geburtsdatum.ToShortDateString();
+            }
+            Debug.Unindent();
             return View(model);
         }
 

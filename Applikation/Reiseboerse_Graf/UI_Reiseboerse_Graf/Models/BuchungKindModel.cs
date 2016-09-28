@@ -11,7 +11,6 @@ namespace UI_Reiseboerse_Graf.Models
     {
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
-        [Remote("AlterKind","Validierung",ErrorMessage="Kinder dürfen nur bis 14 Jahre sein")]
         public DateTime Geburtsdatum { get; set; }
     }
 }
