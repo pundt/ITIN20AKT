@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ReiseAnzahlErstellen</h2>
+<h2>Weitere Reisedaten eingeben</h2>
 
 
 @using (Html.BeginForm())
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal reise">
-        <h4>ReisedurchfuehrenModel</h4>
+        <h4>Durchführung der Reise</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -24,29 +24,26 @@
             </div>
         </div>
 
-        <div class="row form-group">
+        <div class="form-group">
             <div>
                 @Html.LabelFor(model => model.StartDatum, htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
-
-            <div class="col-md-3">
-                <div class='input-group date' id='datetimepicker6'>
-                    <input type='text' class="form-control" name="Startdatum" value="@Model.StartDatum" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                <div class="col-md-2">
+                    <div class='input-group date col-md-2' id='date2'>
+                        <input type='text' class="form-control" name="Enddatum" value="@Model.StartDatum" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="row form-group">
+        <div class="form-group">
             <div>
                 @Html.LabelFor(model => model.EndDatum, htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
 
-            <div class="col-md-3">
-                <div class='input-group date' id='datetimepicker7'>
+                <div class='input-group date col-md-2' id='date2'>
                     <input type='text' class="form-control" name="Enddatum" value="@Model.EndDatum" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -55,13 +52,13 @@
             </div>
         </div>
 
-        <div class="row form-group">
+
+
+        <div class="form-group">
             <div>
                 @Html.LabelFor(model => model.Anmeldefrist, htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
 
-            <div class="col-md-3">
-                <div class='input-group date' id='datetimepicker8'>
+                <div class='input-group date col-md-2' id='date3'>
                     <input type='text' class="form-control" name="Anmeldefrist" value="@Model.Anmeldefrist" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -69,6 +66,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.ReiseAnzahl, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -84,7 +83,7 @@
                 <div>
                     @Html.CheckBoxFor(x => x.WeitereReisenHinzufuegen)
                     @*@Html.EditorFor(model => model.WeitereReisenHinzufuegen)
-                    @Html.ValidationMessageFor(model => model.WeitereReisenHinzufuegen, "", new { @class = "text-danger" })*@
+                        @Html.ValidationMessageFor(model => model.WeitereReisenHinzufuegen, "", new { @class = "text-danger" })*@
                 </div>
             </div>
         </div>
@@ -105,29 +104,29 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
 
-    $(function () {
-        $('#datetimepicker6').datetimepicker({
-            format: "DD.MM.YYYY"
-        });
-        $('#datetimepicker7').datetimepicker({
-            format: "DD.MM.YYYY",
-            useCurrent: false //Important! See issue #1075
-        });
-        $('#datetimepicker8').datetimepicker({
-            format: "DD.MM.YYYY"
-        });
+        $(function () {
+            $('#datei1').datepicker({
+                language: 'de'
+            });
+            $('#date2').datepicker({
+                language: 'de',
+                useCurrent: false //Important! See issue #1075
+            });
+            $('#date3').datepicker({
+                language: 'de'
+            });
 
 
-        $("#datetimepicker6").on("dp.change", function (e) {
-            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-            $('#datetimepicker8').data("DateTimePicker").maxDate(e.date);
-        });
-        $("#datetimepicker7").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-        });
-        $("#datetimepicker8").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
-        });
-    })
+            $("#datei1").on("dp.change", function (e) {
+                $('#date2').data("DateTimePicker").minDate(e.date);
+                $('#date3').data("DateTimePicker").maxDate(e.date);
+            });
+            $("#date2").on("dp.change", function (e) {
+                $('#datei1').data("DateTimePicker").maxDate(e.date);
+            });
+            $("#date3").on("dp.change", function (e) {
+                $('#date1').data("DateTimePicker").minDate(e.date);
+            });
+        })
     </script>
 }
