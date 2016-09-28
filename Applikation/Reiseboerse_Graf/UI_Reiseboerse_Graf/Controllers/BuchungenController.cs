@@ -180,16 +180,6 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - Hinzufuegen - GET");
             Debug.Indent();
-            foreach (var erwachsen in model.BuchungenErwachsen)
-            {
-                erwachsen.Geburtsdatum = new DateTime(1990, 01, 01);
-                erwachsen.Geburtsdatum.ToShortDateString();
-            }
-            foreach (var kind in model.BuchungenKind)
-            {
-                kind.Geburtsdatum = new DateTime(2010, 01, 01);
-                kind.Geburtsdatum.ToShortDateString();
-            }
             Debug.Unindent();
             return View(model);
         }
@@ -420,11 +410,18 @@ namespace UI_Reiseboerse_Graf.Controllers
                 model.BuchungenKind = new List<BuchungKindModel>();
                 for (int i = 0; i < anzahl.Anzahl_Erwachsene; i++)
                 {
-                    model.BuchungenErwachsen.Add(new BuchungErwachsenModel());
+                    model.BuchungenErwachsen.Add(new BuchungErwachsenModel()
+                    {
+                        Geburtsdatum = new DateTime(1990, 01, 01)
+                    });
                 }
+               
                 for (int i = 0; i < anzahl.Anzahl_Kinder; i++)
                 {
-                    model.BuchungenKind.Add(new BuchungKindModel());
+                    model.BuchungenKind.Add(new BuchungKindModel()
+                    {
+                        Geburtsdatum = new DateTime(2010, 01, 01)
+                    });
                 }
 
             }
