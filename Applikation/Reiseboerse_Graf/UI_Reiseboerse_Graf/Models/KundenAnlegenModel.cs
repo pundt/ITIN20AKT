@@ -60,6 +60,7 @@ namespace UI_Reiseboerse_Graf.Models
 
 
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [DataType(DataType.MultilineText)]
         [DisplayName("Adresse")]
         public string Adresse { get; set; }
 
