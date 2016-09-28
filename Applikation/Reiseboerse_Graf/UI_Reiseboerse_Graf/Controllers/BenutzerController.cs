@@ -300,6 +300,7 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             if (BenutzerVerwaltung.Aktualisieren(benutzer) == 1)
             {
+                TempData["success"] = "Ihr Profil wurde erfolgreich aktualisiert!";
                 return RedirectToAction("Aktualisieren");
             }
             else
@@ -314,6 +315,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                         land_ID = land.ID
                     });
                 }
+                TempData["error"] = "Fehler beim Aktualisieren ihres Profils!\nBitte überprüfen Sie Ihre Eingaben!";
+
                 return View(model);
             }
         }

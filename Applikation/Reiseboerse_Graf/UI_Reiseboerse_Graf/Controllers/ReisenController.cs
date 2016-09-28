@@ -530,10 +530,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                     Debug.WriteLine("UnterkunftBildSpeichern - fehlgeschlagen");
                     Debug.WriteLine(ex.Message);
                 }
+                TempData["success"] = "Die neue Reise wurde erfolgreich erstellt!";
                 return RedirectToAction("ReiseAnzahlErstellen", new { Reiseid = neueReise.Id });
             }
             else
             {
+                TempData["error"] = "Fehler beim Hinzufügen einer neuen Reise!\nBitte überprüfen Sie Ihre Eingaben!";
                 return View(neueReise);
             }
         }
