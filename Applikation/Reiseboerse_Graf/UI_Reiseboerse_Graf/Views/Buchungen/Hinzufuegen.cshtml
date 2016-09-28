@@ -22,130 +22,162 @@
             <div class="col-xs-6">
                 @if (Model.AnzahlModel.Anzahl_Erwachsene > 0)
                 {
-                <h3 class="Schriftartblau">Daten der Erwachsenen</h3>
+                    <h3 class="Schriftartblau">Daten der Erwachsenen</h3>
                 }
                 @for (int i = 0; i < Model.AnzahlModel.Anzahl_Erwachsene; i++)
                 {
-                <div class="row reise">
-                    <div class="row">
-                        <div class="col-xs-6 col-xs-offset-3">
-                            <table class="table table-condensed">
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname)
-                                        @Html.ValidationMessageFor(x=>x.BuchungenErwachsen[i].Vorname, "", new { @class = "text-danger"})
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname)
-                                        @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].Nachname, "", new { @class = "text-danger" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer)
-                                        @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].ReisePassNummer, "", new { @class = "text-danger" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Geburtsdatum)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Geburtsdatum, "{0:dd.MM.yyyy}")
-                                        @Html.ValidationMessageFor(model => model.BuchungenErwachsen[i].Geburtsdatum, "", new { @class = "text-danger" })
-                                    </td>
-                                </tr>
-                            </table>
+                    <div class="row reise">
+                        <div class="row">
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname)
+                                            @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].Vorname, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname)
+                                            @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].Nachname, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer)
+                                            @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].ReisePassNummer, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Geburtsdatum)
+                                        </td>
+                                        <td>
+                                            <div class='input-group date' id='datepicker'>
+                                                @Html.TextBoxFor(x=>x.BuchungenErwachsen[i].Geburtsdatum,"{0:dd.MM.yyyy}",new { @class="form-control"})
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>                                         
+                                            @Html.ValidationMessageFor(model => model.BuchungenErwachsen[i].Geburtsdatum, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3 col-xs-offset-9 Schriftartblau">
+                                € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Erwachsene)
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-3 col-xs-offset-9 Schriftartblau">
-                            € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Erwachsene)
-                        </div>
-                    </div>
-                </div>
                 }
 
             </div>
             <div class="col-xs-6">
                 @if (Model.AnzahlModel.Anzahl_Kinder > 0)
                 {
-                <h3 class="Schriftartblau">Daten der Kinder</h3>
+                    <h3 class="Schriftartblau">Daten der Kinder</h3>
                 }
                 @for (int i = 0; i < Model.AnzahlModel.Anzahl_Kinder; i++)
                 {
-                <div class="row reise">
-                    <div class="row">
-                        <div class="col-xs-6 col-xs-offset-3">
-                            <table class="table table-condensed">
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].Vorname)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Vorname)
-                                        @Html.ValidationMessageFor(x => x.BuchungenKind[i].Vorname, "", new { @class = "text-danger" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].Nachname)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Nachname)
-                                        @Html.ValidationMessageFor(x => x.BuchungenKind[i].Nachname, "", new { @class = "text-danger" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].ReisePassNummer)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].ReisePassNummer)
-                                        @Html.ValidationMessageFor(x => x.BuchungenKind[i].ReisePassNummer, "", new { @class = "text-danger" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum, "{0:dd.MM.yyyy}")
-                                        @*<input type="date" name="BuchungenKind[@i].Geburtsdatum" />*@
-                                        @Html.ValidationMessageFor(x => x.BuchungenKind[i].Geburtsdatum, "", new { @class = "text-danger" })
-                                    </td>
-                                </tr>
-                            </table>
+                    <div class="row reise">
+                        <div class="row">
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].Vorname)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Vorname)
+                                            @Html.ValidationMessageFor(x => x.BuchungenKind[i].Vorname, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].Nachname)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].Nachname)
+                                            @Html.ValidationMessageFor(x => x.BuchungenKind[i].Nachname, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].ReisePassNummer)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenKind[i].ReisePassNummer)
+                                            @Html.ValidationMessageFor(x => x.BuchungenKind[i].ReisePassNummer, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(modelItem => modelItem.BuchungenKind[i].Geburtsdatum)
+                                        </td>
+                                        <td>
+                                            <div class='input-group date' id='datepicker2'>
+                                                @Html.TextBoxFor(modelItem=>modelItem.BuchungenKind[i].Geburtsdatum, "{0:dd.MM.yyyy}",new { @class="form-control"})                                               
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                          
+                                            @Html.ValidationMessageFor(x => x.BuchungenKind[i].Geburtsdatum, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3 col-xs-offset-9 Schriftartblau">
+                                € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Kind)
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-3 col-xs-offset-9 Schriftartblau">
-                            € @Html.DisplayFor(modelItem => Model.AnzahlModel.Preis_Kind)
-                        </div>
-                    </div>
-                </div>
                 }
             </div>
         </div>
         <hr />
-        <div class="row">           
+        <div class="row">
             <div class="col-xs-3 col-xs-offset-5 Schriftartblau">
                 Gesamtpreis: € @((Model.AnzahlModel.Anzahl_Erwachsene * Model.AnzahlModel.Preis_Erwachsene) + Model.AnzahlModel.Anzahl_Kinder * Model.AnzahlModel.Preis_Kind)
-            </div>            
+            </div>
             <div class="col-xs-3 col-xs-offset-1">
                 <input type="submit" value="Weiter zum nächsten Schritt" class="btn anmeldung" />
             </div>
         </div>
     }
-    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                language: 'de'                
+            })
+            $('#datepicker2').datepicker({
+                language: 'de'
+            })
+
+        });
+    </script>
+
+
+
+
+
+
+
+
+}

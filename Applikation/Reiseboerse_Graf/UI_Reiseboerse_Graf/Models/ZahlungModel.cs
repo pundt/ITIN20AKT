@@ -9,7 +9,9 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class ZahlungModel
     {
+        [Required(AllowEmptyStrings =false,ErrorMessage ="Pflichtfeld")]
         public string Vorname { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         public string Nachname { get; set; }
         [Remote("LuhnUndIBANPruefung", "Validierung", ErrorMessage = "Geben Sie eine gültige IBAN- oder Kreditkartennummer ein")]
         public string Nummer { get; set; }
