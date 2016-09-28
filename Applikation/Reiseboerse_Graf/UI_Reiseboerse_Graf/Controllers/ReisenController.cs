@@ -592,16 +592,7 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View("Index", "Home");
         }
 
-        /// <summary>
-        /// Löscht das übergebene ReiseModel
-        /// </summary>
-        /// <param name="reise">Das ReiseModel das gelöscht werden soll</param>
-        /// <returns>Redirect to Index (Reise)</returns>      
-        public ActionResult Loeschen(ReiseModel reise)
-        {
-
-            return RedirectToAction("Index");
-        }
+       
 
 
         /// <summary>
