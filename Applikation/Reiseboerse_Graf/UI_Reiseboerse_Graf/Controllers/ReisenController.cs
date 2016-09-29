@@ -595,9 +595,11 @@ namespace UI_Reiseboerse_Graf.Controllers
                 neuesModel.Reise_id = anzahlReisen.Reise_id;
                 neuesModel.StartDatum = anzahlReisen.StartDatum;
                 neuesModel.EndDatum = anzahlReisen.EndDatum;
-                neuesModel.Anmeldefrist = anzahlReisen.Anmeldefrist;             
+                neuesModel.Anmeldefrist = anzahlReisen.Anmeldefrist;
+                TempData["success"] = "Das neue Reisedatum wurde erfolgreich hinzugefügt";         
                 return View(neuesModel);
             }
+            TempData["success"] = "Das neue Reisedatum wurde erfolgreich hinzugefügt";
             return RedirectToAction("Index", "Home");
         }
 
