@@ -326,8 +326,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             return RedirectToAction("Aktualisieren", "Benutzer");
         }
 
-
-
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult ReiseHinzufuegen()
@@ -603,9 +601,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
-
         /// <summary>
         /// TextSuche nach Beschreibungstext der Reise
         /// </summary>
@@ -617,6 +612,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             List<Reise> liste = new List<Reise>();
             List<Reisedatum> reisedaten = new List<Reisedatum>();
             List<ReiseModel> viewliste = new List<ReiseModel>();
+            ReiseLadenModel viewmodel = new ReiseLadenModel()
+            {
+                Filter = FilterBefuellen(),
+                TextSuche = TextSuche
+            };
             ReiseModel rm = new ReiseModel();
             if (!string.IsNullOrEmpty(TextSuche))
             {
@@ -624,7 +624,6 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
             foreach (var reise in liste)
             {
-                reisedaten = reise.AlleReisedaten.ToList();
                 rm.Hotelkategorie = reise.Unterkunft.Kategorie;
                 rm.ID = reise.ID;
                 rm.Land = reise.Ort.Land.Bezeichnung;
@@ -636,15 +635,29 @@ namespace UI_Reiseboerse_Graf.Controllers
                 rm.Unterkunft = reise.Unterkunft.Bezeichnung;
                 rm.Verpflegung = reise.Unterkunft.Verpflegung.Bezeichnung;
                 rm.Verpflegungs_id = reise.Unterkunft.Verpflegung.ID;
+            }
+            rm.Reisedaten = new List<ReisedatumModel>();
+            rm.Bewertung = BewertungVerwaltung.LadeBewertungReise(rm.ID);
+            foreach (var datum in ReiseVerwaltung.LadeReiseZeitpunkte(rm.ID))
+            {
+                ReisedatumModel reisedatum = new ReisedatumModel()
+                {
+                    Anmeldefrist = datum.Anmeldefrist,
+                    Beginndatum = datum.Startdatum,
+                    Enddatum = datum.Enddatum,
+                    ID = datum.ID,
+                    Restplätze = ReiseVerwaltung.Restplätze(datum.ID)
+                };
+                if (reisedatum.Anmeldefrist >= DateTime.Now && reisedatum.Restplätze >= 1)
+                {
+                    rm.Reisedaten.Add(reisedatum);
+                }
+            }
+            if (rm.Reisedaten.Count >= 1)
+            {
                 viewliste.Add(rm);
             }
-            ReiseLadenModel viewmodel = new ReiseLadenModel()
-            {
-                Reisen = viewliste,
-                Filter = FilterBefuellen(),
-                TextSuche = TextSuche
-            };
-
+            viewmodel.Reisen = viewliste;
             return View("Laden", viewmodel);
         }
 
