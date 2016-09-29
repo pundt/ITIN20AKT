@@ -27,9 +27,9 @@
         <div class="form-group">
             <div>
                 @Html.LabelFor(model => model.StartDatum, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
+                <div class="col-md-10">
                     <div class='input-group date col-md-2' id='date2'>
-                        <input type='text' class="form-control" name="Enddatum" value="@Model.StartDatum" />
+                        @Html.TextBoxFor(model => model.StartDatum, "{0:dd.MM.yyyy}", new { @class = "form-control" })
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -42,12 +42,13 @@
         <div class="form-group">
             <div>
                 @Html.LabelFor(model => model.EndDatum, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                <div class='input-group date col-md-2' id='date2'>
-                    <input type='text' class="form-control" name="Enddatum" value="@Model.EndDatum" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                <div class="col-md-10">
+                    <div class='input-group date col-md-2' id='date2'>
+                        @Html.TextBoxFor(model => model.EndDatum, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,12 +58,13 @@
         <div class="form-group">
             <div>
                 @Html.LabelFor(model => model.Anmeldefrist, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                <div class='input-group date col-md-2' id='date3'>
-                    <input type='text' class="form-control" name="Anmeldefrist" value="@Model.Anmeldefrist" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                <div class="col-md-10">
+                    <div class='input-group date col-md-2' id='date3'>
+                        @Html.TextBoxFor(model => model.Anmeldefrist, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
