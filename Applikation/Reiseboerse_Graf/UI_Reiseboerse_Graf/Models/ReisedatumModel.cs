@@ -10,15 +10,15 @@ namespace UI_Reiseboerse_Graf.Models
     {
         public int ID { get; set; }
         [Required(ErrorMessage = "Pflichtfeld")]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yy}")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yy}",ApplyFormatInEditMode =true)]
         public DateTime Beginndatum { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yy}")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yy}",ApplyFormatInEditMode =true)]
         public DateTime Enddatum { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yy}")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yy}",ApplyFormatInEditMode =true)]
         public DateTime Anmeldefrist { get; set; }
 
         [Required(ErrorMessage = "Pflichtfeld")]
