@@ -571,12 +571,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                 if (anzahlReisen.ReiseAnzahl > 0)
                 {
                     Reisedatum ReiseDaten = new Reisedatum();
-                    ReiseDaten.Reise = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheReise(anzahlReisen.Reise_id);
+                    //ReiseDaten.Reise = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheReise(anzahlReisen.Reise_id);
                     ReiseDaten.Startdatum = anzahlReisen.StartDatum;
                     ReiseDaten.Enddatum = anzahlReisen.EndDatum;
                     ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;
                     ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
-                    for (int i = 0; i < anzahlReisen.ReiseAnzahl; i++)
+                    for (int i = 0; i < anzahlReisen.ReiseAnzahl; i++)//// hier die Schleife in die BLverlegen
                     {
                         if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten) >= 1)
                         {

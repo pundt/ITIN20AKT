@@ -362,8 +362,7 @@ namespace BL_Reiseboerse_Graf
         /// <param name="reisedatum"></param>
         /// <returns>wenn alles geklappt hat die neue ID ansonsten -1</returns>
         public static int SpeicherReiseDatum(Reisedatum reisedatum)
-        {
-            Reise reise = new Reise();
+        {            
             Debug.WriteLine("ReiseVerwaltung - Suche Reisedatum");
             Debug.Indent();
 
@@ -371,7 +370,7 @@ namespace BL_Reiseboerse_Graf
             {
                 try
                 {
-                    reise = context.AlleReisen.Where(x => x.ID == reisedatum.Reise.ID).FirstOrDefault();
+                    Reise reise = context.AlleReisen.Where(x => x.ID == reisedatum.Reise.ID).FirstOrDefault();
                     reisedatum.Reise = reise;
                     context.AlleReisedaten.Add(reisedatum);
                     context.SaveChanges();
