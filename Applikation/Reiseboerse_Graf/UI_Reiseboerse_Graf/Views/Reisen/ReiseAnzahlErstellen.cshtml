@@ -106,25 +106,21 @@
 
         $(function () {
             $('#date1').datepicker({
-                language: 'de'
+                language: 'de',
+                autoclose:true
             });
             $('#date2').datepicker({
-                language: 'de'
+                language: 'de',
+                autoclose: true
             });
             $('#date3').datepicker({
-                language: 'de'
+                language: 'de',
+                autoclose: true
             });
 
-
-            $("#date1").on("dp.change", function (e) {
-                $('#date2').data("DateTimePicker").minDate(e.date);
-                $('#date3').data("DateTimePicker").maxDate(e.date);
-            });
-            $("#date2").on("dp.change", function (e) {
-                $('#date1').data("DateTimePicker").maxDate(e.date);
-            });
-            $("#date3").on("dp.change", function (e) {
-                $('#date1').data("DateTimePicker").minDate(e.date);
+            $('#date1').on('changeDate', function (ev) {
+                $('#date2').datepicker("setStartDate", $('#date1').datepicker("getDate"));
+                $('#date3').datepicker("setEndDate", $('#date1').datepicker("getDate"));
             });
         })
     </script>
