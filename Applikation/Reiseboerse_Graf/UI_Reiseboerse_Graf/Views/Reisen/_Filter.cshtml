@@ -64,7 +64,7 @@
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Startdatum)
                     <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" name="Startdatum" value="@Model.Startdatum" />
+                        <input type='text' class="form-control" name="Startdatum" value="@Model.Startdatum.ToShortDateString()" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -76,7 +76,7 @@
                 <div class="col-md-12 form-group">
                     @Html.LabelFor(model => model.Enddatum)
                     <div class='input-group date' id='datetimepicker2'>
-                        <input type='text' class="form-control" name="Enddatum" value="@Model.Enddatum" />
+                        <input type='text' class="form-control" name="Enddatum" value="@Model.Enddatum.ToShortDateString()" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>

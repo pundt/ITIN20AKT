@@ -39,7 +39,7 @@ namespace UI_Reiseboerse_Graf
                       "~/Content/nouislider.*"));
 
             bundles.Add(new StyleBundle("~/Content/toastr").Include(
-                       "~/Content/toastr.*"));
+                       "~/Content/toastr.css"));
 
         }
     }

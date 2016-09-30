@@ -6,10 +6,10 @@
 
 }
 <div class="container">
-    <div class="row">      
+    <div class="row">
         <div class="col-xs-3 col-xs-offset-5">
             @Html.ActionLink("Alle Reisen anzeigen", "Laden", "Reisen", null, new { @class = "btn anmeldung marginTop" })
-        </div> 
+        </div>
         <div class="col-xs-4">
             @using (Html.BeginForm("Suchen", "Reisen"))
             {
@@ -20,7 +20,7 @@
             }
 
         </div>
-       
+
     </div>
     <div>
         <div class="col-xs-3">
@@ -82,34 +82,25 @@
         </div>
     </div>
     @section   scripts {
-        @*<script src="~/Scripts/nouislider.min.js"></script>*@
-
         <script type="text/javascript">
             $(function () {
-                //$('#datetimepicker1').datetimepicker({
-                //    format: "DD.MM.YYYY",
-                //});
-                //$('#datetimepicker2').datetimepicker({
-                //    format: "DD.MM.YYYY",
-                //    useCurrent: false//Important! See issue #1075
-
-                //});
-
                 $('#datetimepicker1').datepicker({
-                    language: 'de'
+                    language: 'de',
+                    autoclose: true,
+                    startDate: 'today'
                 })
 
                 $('#datetimepicker2').datepicker({
-                    language: 'de'
+                    language: 'de',
+                    autoclose: true,
+                    startDate: 'today'
                 })
 
-                $("#datetimepicker1").on("dp.change", function (e) {
-                    $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
-                });
-                $("#datetimepicker2").on("dp.change", function (e) {
-                    $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                $('#datetimepicker1').on('changeDate', function (ev) {
+                    $('#datetimepicker2').datepicker("setStartDate",$('#datetimepicker1').datepicker("getDate"));
                 });
 
+          
                 var slider = document.getElementById('preis');
 
                 noUiSlider.create(slider, {
