@@ -14,14 +14,14 @@
 
 
         <div class="col-xs-3 filter">
-            <div class="Schriftart">
+            <div class="Schriftart" style="height: 338px">
                 Willkommen auf Ihrer Profilseite, @Model.Email!<br />
                 Wir freuen uns dass Sie wieder mal vorbeischauen <hr />
                 Sollten Sie Fragen haben: <br />
                 <a href="mailto:kontakt@reisebuerograf.de?Subject=Kontaktanfrage">Wir freuen uns über Ihre Mail</a>
             </div>
         </div>
-        <div class="col-xs-8 col-xs-offset-1 reise abstand">
+        <div class="col-xs-8 col-xs-offset-1 reise abstand" style="width: 752px">
             <div class="col-xs-6">
                 <table class="table table-responsive">
                     <tr>
@@ -140,7 +140,7 @@
 
 
 
-        <div class="col-xs-11 reise">
+        <div class="col-xs-11 reise" style="width: 1095px; margin-bottom: 15px">
             @Html.Action("LadeAlleBuchungenBenutzer", "Buchungen", new { id = Model.ID })
         </div>
     }
