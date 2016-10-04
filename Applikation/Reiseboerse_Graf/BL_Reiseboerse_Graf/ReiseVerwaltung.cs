@@ -362,7 +362,7 @@ namespace BL_Reiseboerse_Graf
         /// <param name="reisedatum"></param>
         /// <returns>wenn alles geklappt hat die neue ID ansonsten -1</returns>
         public static int SpeicherReiseDatum(Reisedatum reisedatum)
-        {            
+        {
             Debug.WriteLine("ReiseVerwaltung - Suche Reisedatum");
             Debug.Indent();
 
@@ -484,33 +484,39 @@ namespace BL_Reiseboerse_Graf
         /// </summary>
         /// <param name="reisedatum"></param>
         /// <returns>wenn erfolgreich neue Reisedurchfuehrung_id / wenn nicht -1</returns>
-        public static int SpeicherReiseAnzahl(Reisedatum reisedatum)
+        public static int SpeicherReiseAnzahl(Reisedatum reisedatum, int Anzahl)
         {
             Debug.WriteLine("ReiseVerwaltung - SucheUnterkunft");
             Debug.Indent();
-            Reisedurchfuehrung neuerReiseDurchgang = new Reisedurchfuehrung();
+            int index = 0;
             Reise reise = new Reise();
             using (var context = new reisebueroEntities())
             {
                 try
                 {
-                    reise = context.AlleReisen.Where(x => x.ID == reisedatum.Reise.ID).FirstOrDefault();
-                    reisedatum.Reise = reise;
-                    neuerReiseDurchgang.Reisedatum = reisedatum;
-                    context.AlleReisedurchfuehrungen.Add(neuerReiseDurchgang);
-                    context.SaveChanges();
+                    
+                    for (int i = 0; i < Anzahl; i++)
+                    {
+                        Reisedurchfuehrung neuerReiseDurchgang = new Reisedurchfuehrung();
+                        reise = context.AlleReisen.Where(x => x.ID == reisedatum.Reise.ID).FirstOrDefault();
+                        reisedatum.Reise = reise;
+                        neuerReiseDurchgang.Reisedatum = reisedatum;
+                        context.AlleReisedurchfuehrungen.Add(neuerReiseDurchgang);
+                        context.SaveChanges();
+                        index++;
+                    }
                     Debug.WriteLine("Speichern Reisedurchfuehrung erfolgreich");
-                    return neuerReiseDurchgang.ID;
+                   
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Speichern Reisedurchfuehrung fehlgeschlagen");
                     Debug.WriteLine(ex.Message);
                     Debugger.Break();
-                    neuerReiseDurchgang.ID = -1;
+                    
                 }
             }
-            return neuerReiseDurchgang.ID;
+            return index;
         }
         public static int LiefereReiseID()
         {

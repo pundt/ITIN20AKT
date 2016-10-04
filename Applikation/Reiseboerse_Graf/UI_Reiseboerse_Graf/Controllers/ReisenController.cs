@@ -576,17 +576,13 @@ namespace UI_Reiseboerse_Graf.Controllers
                     ReiseDaten.Enddatum = anzahlReisen.EndDatum;
                     ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;
                     ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
-                    for (int i = 0; i < anzahlReisen.ReiseAnzahl; i++)//// hier die Schleife in die BLverlegen
-                    {
-                        if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten) >= 1)
+
+                    if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten, anzahlReisen.ReiseAnzahl) >= 1)
+
+                        if (index == anzahlReisen.ReiseAnzahl)
                         {
-                            index++;
+                            Debug.WriteLine("Speichern aller ReisenDurchgange erfolgreich");
                         }
-                    }
-                    if (index == anzahlReisen.ReiseAnzahl)
-                    {
-                        Debug.WriteLine("Speichern aller ReisenDurchgange erfolgreich");
-                    }
                 }
             }
             if (anzahlReisen.WeitereReisenHinzufuegen)
@@ -596,7 +592,7 @@ namespace UI_Reiseboerse_Graf.Controllers
                 neuesModel.StartDatum = anzahlReisen.StartDatum;
                 neuesModel.EndDatum = anzahlReisen.EndDatum;
                 neuesModel.Anmeldefrist = anzahlReisen.Anmeldefrist;
-                TempData["success"] = "Das neue Reisedatum wurde erfolgreich hinzugefügt";         
+                TempData["success"] = "Das neue Reisedatum wurde erfolgreich hinzugefügt";
                 return View(neuesModel);
             }
             TempData["success"] = "Das neue Reisedatum wurde erfolgreich hinzugefügt";
