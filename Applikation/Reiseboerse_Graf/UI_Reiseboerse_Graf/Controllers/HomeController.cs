@@ -9,8 +9,15 @@ using System.Web.Security;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
+    /// <summary>
+    /// Im HomeController werden die Startseite des Reisebüros und die Startseite der Verwaltung verarbeitet
+    /// </summary>
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Startseite des Projektes, hier wird auch die Ansicht mit Bildern aus der Datenbank gefüllt
+        /// </summary>
+        /// <returns>Die Startseite mit Bildern</returns>
         public ActionResult Index()
         {
             Debug.WriteLine("Home - Index - GET");

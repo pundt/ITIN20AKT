@@ -11,13 +11,17 @@ using System.Text.RegularExpressions;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
+    /// <summary>
+    /// Im BuchungenController wird alles verarbeitet, was mit Buchungen zu tun hat,
+    /// z.B. Lade alle Buchungen zu einer Reise, Zeige Details zu einer Buchung, etc...
+    /// </summary>
     public class BuchungenController : Controller
     {
-        // GET: Buchungen
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //// GET: Buchungen
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
         /// <summary>
         /// Lädt alle Buchungen aus der Datenbank zu einem bestimmten BuchungsDatums.
         /// </summary>
@@ -45,6 +49,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         //    Debug.Unindent();
         //    return View();
         //}
+
         /// <summary>
         /// Lädt alle Buchungen aus der Datenbank zu einer bestimmten Reise
         /// </summary>

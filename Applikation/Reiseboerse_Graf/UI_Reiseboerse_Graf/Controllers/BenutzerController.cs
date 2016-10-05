@@ -16,6 +16,10 @@ namespace UI_Reiseboerse_Graf.Controllers
     /// </summary>
     public class PruefeBenutzer : ActionFilterAttribute
     {
+        /// <summary>
+        /// Wenn die Action ausgeführt wird, soll überprüft werden, ob ein Benutzer auch ein Mitarbeiter ist
+        /// </summary>
+        /// <param name="filterContext">Die über das Request mitgegebenen Parameter</param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             string username = filterContext.HttpContext.User.Identity.Name;
@@ -27,14 +31,29 @@ namespace UI_Reiseboerse_Graf.Controllers
         }
     }
 
+    /// <summary>
+    /// BenutzerController für die spezifischen Action-Methoden
+    /// wie z.B. Login, Logout, Benutzer anlegen etc.
+    /// </summary>
     public class BenutzerController : Controller
     {
+        /// <summary>
+        /// Login-Seite durch HttpGet erreichbar
+        /// </summary>
+        /// <returns>Die Login-Ansicht</returns>
         //[ChildActionOnly]
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
+
+        /// <summary>
+        /// Login-Seite, zu der mittels Formular die Logindaten
+        /// eines Benutzer geschickt werden. Hier wird auch überprüft, ob der Benutzer ein Mitarbeiter ist, oder nicht
+        /// </summary>
+        /// <param name="lm">Das LoginModel, das Benutzername enthält</param>
+        /// <returns>Bei erfolgreichem Login wird der Benutzer dahingeleitet, wo er herkommt</returns>
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {
@@ -62,6 +81,10 @@ namespace UI_Reiseboerse_Graf.Controllers
 
             return RedirectToAction("Laden", "Reisen");
         }
+        /// <summary>
+        /// Die Logout-ActionMethode, liefert keine Ansicht und kann nur von bereits eingeloggten Benutzern aufgerufen werden
+        /// </summary>
+        /// <returns>Der Benutzer, der sich ausgeloggt hat, wird dann zur Home/Index - Seite weitergeleitet</returns>
         [Authorize]
         [HttpGet]
         public ActionResult Logout()
@@ -122,7 +145,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(model);
         }
 
-
+        /// <summary>
+        /// Hier werden die Daten des Registrierungsformulars mit den Daten der Datenbank abgeglichen, um eine doppelte Registrierung zu vermeiden.
+        /// </summary>
+        /// <param name="bm">Das KundenAnlegenModel, in dem alle Registrierungsdaten stecken</param>
+        /// <returns>bei Erfolg wird eine Bestätigungsseite angezeigt, bei Fehler wird wieder die Registrierungsseite angezeigt</returns>
         [HttpPost]
         public ActionResult BenutzerAnlegen(KundenAnlegenModel bm)
         {

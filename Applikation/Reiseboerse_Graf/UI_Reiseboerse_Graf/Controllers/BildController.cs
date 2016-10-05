@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
+    /// <summary>
+    /// Im BildController werden alle Action-Methoden verarbeitet, die mit Bildern zu tun haben
+    /// </summary>
     public class BildController : Controller
     {
         /// <summary>
