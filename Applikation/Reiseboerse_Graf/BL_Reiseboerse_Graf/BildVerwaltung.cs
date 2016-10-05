@@ -8,6 +8,9 @@ using System.Web;
 
 namespace BL_Reiseboerse_Graf
 {
+    /// <summary>
+    /// Die Verwaltung der Bilder aus der Datenbank
+    /// </summary>
     public class BildVerwaltung
     {
         /// <summary>
@@ -67,10 +70,10 @@ namespace BL_Reiseboerse_Graf
         }
 
         /// <summary>
-        /// Sucht die passende Bild ID zu der Reise
+        /// Sucht die alle Bild_IDs zu der Reise
         /// </summary>
         /// <param name="id">ID der Reise</param>
-        /// <returns></returns>
+        /// <returns>die Liste aller passender Bild IDs</returns>
         public static List<int> LadeBildID(int id)
         {
             Debug.WriteLine("BildVerwaltung - LadeBildID");
@@ -97,10 +100,10 @@ namespace BL_Reiseboerse_Graf
         }
 
         /// <summary>
-        /// Sucht die passende Bild ID zu der Unterkunft
+        /// Sucht alle passende Bild ID zu der Unterkunft
         /// </summary>
         /// <param name="id">ID der Unterkunft</param>
-        /// <returns></returns>
+        /// <returns>die Liste aller passender Bild IDs</returns>
         public static List<int> LadeUnterkunftBildID(int id)
         {
             Debug.WriteLine("BildVerwaltung - LadeUnterkunftBildID");
@@ -128,9 +131,9 @@ namespace BL_Reiseboerse_Graf
 
 
         /// <summary>
-        /// Bildfile wird übergeben, Bilddaten werden ausgelesen und in Tabelle gespeichert
+        /// Bildfile wird übergeben, Bilddaten werden ausgelesen und in Datenbank gespeichert
         /// </summary>
-        /// <param name="file"></param>
+        /// <param name="file">die hochgeladene Bilddatei</param>
         /// <returns>wenn speichern erfolgreich "true"</returns>
         public static int BildSpeichern(HttpPostedFileBase file)
         {
@@ -165,11 +168,12 @@ namespace BL_Reiseboerse_Graf
             return bild_id;
         }
         /// <summary>
-        /// Speichert das Reisebild mit den Übergabewerten von Reise_id und Bild_id
+        /// Speichert die Zuordnung der Reise zu dem Bild in der Zwischentabelle Reise_Bild
+        /// mit den Übergabewerten von Reise_id und Bild_id
         /// </summary>
-        /// <param name="reiseid"></param>
-        /// <param name="bildid"></param>
-        /// <returns>bei erfolg Reise_Bild.ID</returns>
+        /// <param name="reiseid">die ID der Reise</param>
+        /// <param name="bild_id">die ID des Bildes</param>
+        /// <returns>bei Erfolg die ID des Eintrags in die Zwischentabelle Reise_Bild</returns>
         public static int BildZuReiseSpeichern(int reiseid, int bild_id)
         {
 
@@ -212,11 +216,12 @@ namespace BL_Reiseboerse_Graf
             return reisebild.ID;
         }
         /// <summary>
-        /// Speichert das Reisebild mit den Übergabewerten von Reise_id und Bild_id
+        /// Speichert die Zuordnung der Unterkunft zu dem Bild in der Zwischentabelle Unterkunft_Bild
+        /// mit den Übergabewerten von Unterkunft_id und Bild_id
         /// </summary>
-        /// <param name="reiseid"></param>
-        /// <param name="bildid"></param>
-        /// <returns>bei erfolg Reise_Bild.ID</returns>
+        /// <param name="bild_id">die ID der Reise</param>
+        /// <param name="unterkunft_id">die ID der Unterkunft</param>
+        /// <returns>bei Erfolg die ID des Eintrags in die Zwischentabelle Unterkunft_Bild</returns>
         public static int BildZuUnterkunftSpeichern(int bild_id, int unterkunft_id)
         {
 

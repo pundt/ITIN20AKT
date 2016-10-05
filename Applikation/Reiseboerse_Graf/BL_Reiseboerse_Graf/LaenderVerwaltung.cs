@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace BL_Reiseboerse_Graf
 {
+    /// <summary>
+    /// Die Businesslogik der Datenbanktabellen Länder, Orte, Adressen,Unterkünfte
+    /// </summary>
     public class LaenderVerwaltung
     {
         /// <summary>
-        /// Liefert alle Orte aus der DB
+        /// Liest alle Orte aus der Datenbank aus
         /// </summary>
         /// <returns>Liste aller Orte</returns>
         public static List<Ort> AlleOrte()
@@ -39,9 +42,9 @@ namespace BL_Reiseboerse_Graf
 
         }
         /// <summary>
-        /// Liefert alle Unterkuenfte aus der DB
+        /// Liest alle Unterkünfte aus der Datenbank aus
         /// </summary>
-        /// <returns>Liste aller Unterkuenfte</returns>
+        /// <returns>Liste aller Unterkünfte</returns>
         public static List<Unterkunft> AlleUnterkuenfte()
         {
             Debug.WriteLine("Laenderverwaltung - Lade alle Unterkuenfte");
@@ -68,7 +71,7 @@ namespace BL_Reiseboerse_Graf
 
         }
         /// <summary>
-        /// Liefert alle Verpflegegungen aus der DB
+        /// Liefert alle Verpflegegungen aus der Datenbank
         /// </summary>
         /// <returns> Liste aller Verpflegungen</returns>
         public static List<Verpflegung> alleVerpflegung()
@@ -95,12 +98,13 @@ namespace BL_Reiseboerse_Graf
             Debug.Unindent();
             return alleVerpflegung;
         }
+
         /// <summary>
-        /// 
+        /// Speichert einen neuen Ort in der Datenbank
         /// </summary>
-        /// <param name="neuerort"></param>
-        /// <param name="land_id"></param>
-        /// <returns></returns>
+        /// <param name="neuerort">die Bezeichnung des Ortes</param>
+        /// <param name="land_id">die ID des Landes</param>
+        /// <returns>bei Erfolg die ID des neuen Orts in der Datenbank bei Fehler -1</returns>
         public static int SpeicherNeuenOrt(string neuerort, int land_id)
         {
             int index = -1;
@@ -132,6 +136,12 @@ namespace BL_Reiseboerse_Graf
             return index;
 
         }
+
+        /// <summary>
+        /// Speichert ein neues Land in der Datenbank
+        /// </summary>
+        /// <param name="neuesLand">die Bezeichnung des neuen Landes</param>
+        /// <returns>bei Erfolg die ID des neuen Landes</returns>
         public static int SpeicherNeuesLand(string neuesLand)
         {
             int index = 0;
@@ -165,6 +175,12 @@ namespace BL_Reiseboerse_Graf
 
             return land.ID;
         }
+
+        /// <summary>
+        /// Speichert eine neue Unterkunft in der Datenbank
+        /// </summary>
+        /// <param name="neueUnterkunft">das zu speichernde Unterkunft Objekt</param>
+        /// <returns>bei Erfolg die ID der neuen Unterkunft bei Fehler -1</returns>
         public static int SpeichereNeueUnterkunft(Unterkunft neueUnterkunft)
         {
             int index = -1;
@@ -193,6 +209,12 @@ namespace BL_Reiseboerse_Graf
             }
             return index;
         }
+
+        /// <summary>
+        /// Sucht einen Ort aus der Datenbank anhand einer ID
+        /// </summary>
+        /// <param name="ort_id">die ID des zu suchenden Ortes</param>
+        /// <returns>bei Erfolg das Ort Objekt bei Fehler null</returns>
         public static Ort SucheOrt(int ort_id)
         {
             Ort gesuchterOrt = null;
@@ -214,6 +236,11 @@ namespace BL_Reiseboerse_Graf
             return gesuchterOrt;
         }
 
+        /// <summary>
+        /// Sucht ein Land anhand einer ID aus der Datenbank
+        /// </summary>
+        /// <param name="land_id">die ID des zu suchenden Landes</param>
+        /// <returns>bei Erfolg das Land Objekt bei Fehler null</returns>
         public static Land SucheLand(int land_id)
         {
             Land gesuchtesLand = null;
@@ -235,6 +262,11 @@ namespace BL_Reiseboerse_Graf
             return gesuchtesLand;
         }
 
+        /// <summary>
+        /// Sucht ein Adressobjekt anhand von Adressdaten aus der Datenbank
+        /// </summary>
+        /// <param name="adresse">die Adressdaten des zu suchenden Adressobjektes</param>
+        /// <returns>bei Erfolg die gesuchte Adresse bei Fehler null</returns>
         public static Adresse SucheAdresse(string adresse)
         {
             Adresse gesuchteAdresse = null;
