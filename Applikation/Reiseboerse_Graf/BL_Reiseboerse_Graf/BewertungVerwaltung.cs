@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BL_Reiseboerse_Graf
 {
+    /// <summary>
+    /// Die Verwaltung der Bewertungen einer Reise
+    /// </summary>
     public class BewertungVerwaltung
     {
         /// <summary>

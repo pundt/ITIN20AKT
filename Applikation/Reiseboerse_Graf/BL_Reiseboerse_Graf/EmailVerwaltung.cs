@@ -9,6 +9,9 @@ using System.Diagnostics;
 
 namespace BL_Reiseboerse_Graf
 {
+    /// <summary>
+    /// Verwaltung des automatisierten Mailversands bei Bestätigungen
+    /// </summary>
     public class EmailVerwaltung
     {
         /// <summary>
