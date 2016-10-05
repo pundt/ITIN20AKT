@@ -38,16 +38,21 @@ namespace BL_Reiseboerse_Graf
             return reisen;
         }
 
-
+        /// <summary>
+        /// Sucht eine Reise anhand einer ID aus der Datenbank
+        /// </summary>
+        /// <param name="id">ID der Reise</param>
+        /// <returns>die gesuchte Reise oder null bei Fehler</returns>
         public static Reise SucheReise(int id)
         {
             Debug.WriteLine("ReiseVerwaltung - Suche Reise");
             Debug.Indent();
-            Reise reise = new Reise();
+            Reise reise = null;
             using (var context = new reisebueroEntities())
             {
                 try
                 {
+                    reise = new Reise();
                     reise = context.AlleReisen.Where(x => x.ID == id).FirstOrDefault();
                 }
                 catch (Exception ex)
@@ -388,6 +393,12 @@ namespace BL_Reiseboerse_Graf
             return -1;
 
         }
+
+        /// <summary>
+        /// Speichert eine Reise in der Datenbank
+        /// </summary>
+        /// <param name="neueReise">das zu speichernde Reiseobjekt</param>
+        /// <returns>bei Erfolg die ID der neuen Reise ansonsten 0</returns>
         public static int SpeicherReise(Reise neueReise)
         {
             int reise_id = 0;
