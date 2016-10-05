@@ -8,6 +8,9 @@ using System.Transactions;
 
 namespace BL_Reiseboerse_Graf
 {
+    /// <summary>
+    /// Verwaltung der Zahlungsvorgänge
+    /// </summary>
     public class ZahlungsVerwaltung
     {
         /// <summary>
@@ -69,6 +72,12 @@ namespace BL_Reiseboerse_Graf
             return neueID;
         }
 
+        /// <summary>
+        /// Zuordnung einer Zahlung zu den Buchungen (Eintrag in die Zwischentabelle Zahlung_Buchung) 
+        /// </summary>
+        /// <param name="buchungIDs">Liste von Buchungs IDs</param>
+        /// <param name="zahlung_id">die ID der Zahlung</param>
+        /// <returns>die Anzahl der betroffenen Zeilen</returns>
         public static int ZuordnungZahlungBuchung(List<int> buchungIDs, int zahlung_id)
         {
             Debug.WriteLine("Zahlungsverwaltung - Zuordnung Zahlung_Buchung");
