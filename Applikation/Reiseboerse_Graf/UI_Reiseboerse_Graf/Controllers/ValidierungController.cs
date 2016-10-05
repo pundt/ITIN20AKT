@@ -39,6 +39,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Überprüft ob ein Alter 14 Jahre überschreitet
+        /// wenn ja, dann erlaube weitere Schritte,
+        /// wenn nein, dann zeige Fehlermeldung
+        /// </summary>
+        /// <returns>true oder false</returns>
         public JsonResult AlterErwachsen()
         {
             string geburtsDatumKey = Request.Params.AllKeys.Where(x => x.ToLower().Contains("geburtsdatum")).FirstOrDefault();
@@ -50,6 +56,12 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return Json(false, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Überprüft ob ein Alter 13 Jahre unterschreitet
+        /// wenn ja, dann erlaube weitere Schritte,
+        /// wenn nein, dann zeige Fehlermeldung
+        /// </summary>
+        /// <returns>true oder false</returns>
         public JsonResult AlterKind()
         {
             string geburtsDatumKey = Request.Params.AllKeys.Where(x => x.ToLower().Contains("geburtsdatum")).FirstOrDefault();
@@ -61,6 +73,14 @@ namespace UI_Reiseboerse_Graf.Controllers
                 return Json(false, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Prüft von der Zahlungs-Ansicht die eingegeben IBAN- bzw. Kreditkartennummer.
+        /// Die Kreditkartennummer wird durch den Luhn-Algorithmus überprüft,
+        /// die IBAN wird durch eine Regular Expression überprüft.
+        /// Wenn Ergebnis true ist, dann erlaube weitere Schritte,
+        /// wenn Ergebnis false ist, dann gib eine Fehlermeldung aus
+        /// </summary>
+        /// <returns>true oder false</returns>
         public JsonResult LuhnUndIBANPruefung()
         {
             string kartenNummerKey = Request.Params.AllKeys.Where(x => x.ToLower().Contains("nummer")).FirstOrDefault();

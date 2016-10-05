@@ -326,6 +326,10 @@ namespace UI_Reiseboerse_Graf.Controllers
             return RedirectToAction("Aktualisieren", "Benutzer");
         }
 
+        /// <summary>
+        /// Hinzufügen einer Reise, wird nur für Mitarbeiter der Verwaltung angezeigt
+        /// </summary>
+        /// <returns>Oberfläche bzw. Formular zum Erzeugen einer Reise</returns>
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult ReiseHinzufuegen()
