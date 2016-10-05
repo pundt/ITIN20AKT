@@ -92,7 +92,7 @@
         {
             <tr>
                 <td>@datum.DatumsAnzeige</td>
-                <td>@datum.Anmeldefrist</td>
+                <td>@datum.Anmeldefrist.ToShortDateString()</td>
                 <td>@datum.Restplätze</td>
             </tr>
         }
@@ -100,7 +100,5 @@
     </table>
 </div>
 <p>
-    @Html.ActionLink("Löschen", "Entfernen", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")|
-    @Html.ActionLink("Ändern", "Aendern", Model);
+    @Html.ActionLink("Startseite","Verwaltung","Home",null,new { @class="btn btn-info"})
 </p>

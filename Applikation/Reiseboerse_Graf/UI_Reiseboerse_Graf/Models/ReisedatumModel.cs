@@ -25,7 +25,7 @@ namespace UI_Reiseboerse_Graf.Models
         public int Restplätze { get; set; }
 
         private string datumsAnzeige;
-
+        [Display(Name ="Datum")]
         public string DatumsAnzeige
         {
             get { return string.Format("{0} bis {1}",Beginndatum.ToShortDateString(),Enddatum.ToShortDateString()); }

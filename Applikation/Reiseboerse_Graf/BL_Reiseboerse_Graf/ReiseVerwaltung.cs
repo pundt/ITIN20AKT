@@ -53,7 +53,8 @@ namespace BL_Reiseboerse_Graf
                 try
                 {
                     reise = new Reise();
-                    reise = context.AlleReisen.Where(x => x.ID == id).FirstOrDefault();
+                    reise = context.AlleReisen.Include("Unterkunft.Verpflegung").Include("Ort.Land")
+                        .Where(x => x.ID == id).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
