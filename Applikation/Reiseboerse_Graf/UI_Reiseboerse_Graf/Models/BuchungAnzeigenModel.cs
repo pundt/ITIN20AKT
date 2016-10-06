@@ -6,6 +6,9 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Model zur Anzeige von Buchungen in der Buchungshistory für den Benutzer
+    /// </summary>
     public class BuchungAnzeigenModel
     {
         public int Benutzer_ID { get; set; }

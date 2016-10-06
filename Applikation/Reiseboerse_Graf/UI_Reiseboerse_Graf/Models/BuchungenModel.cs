@@ -6,6 +6,9 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Model zur Erfassung der Daten der Reisenden
+    /// </summary>
     public class BuchungenModel
     {
         public int ID { get; set; }

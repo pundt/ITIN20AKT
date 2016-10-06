@@ -7,6 +7,9 @@ using System.Web.Mvc;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Erbt von BuchungenModel, validiert das Geburtsdatum für Erwachsene
+    /// </summary>
     public class BuchungErwachsenModel:BuchungenModel
     {
         [Required]

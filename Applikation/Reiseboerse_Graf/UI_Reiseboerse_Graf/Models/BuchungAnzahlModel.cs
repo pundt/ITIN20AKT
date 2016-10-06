@@ -6,6 +6,10 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Model, das die Daten enthält um die passenden Felder für die Dateneingabe der Reisenden zu erzeugen
+    /// Es wird für jeden Erwachsenen und jedes Kind eine Eingabemaske erzeugt
+    /// </summary>
     public class BuchungAnzahlModel
     {
         public int Reisedatum_ID { get; set; }
