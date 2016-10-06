@@ -7,13 +7,14 @@
 <h2 class="Schriftartblau">Zahlung</h2>
 
 
-@using (Html.BeginForm("Zahlung","Buchungen",FormMethod.Post)) 
+@using (Html.BeginForm("Zahlung", "Buchungen", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="row reise">
-        <div class="form-horizontal">
+
+    <div class="form-horizontal">
+        <div class="row reise">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br>
             <div class="form-group">
                 @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -41,17 +42,18 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Zahlungsart_ID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Zahlungsart_ID, new SelectList(Model.Zahlungsarten, "ID", "Bezeichnung"))
+                    @Html.DropDownListFor(model => model.Zahlungsart_ID, new SelectList(Model.Zahlungsarten, "ID", "Bezeichnung"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Zahlungsart_ID, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Buchung abschließen" class="btn anmeldung" />
-                </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-offset-9 col-md-3">
+                <input type="submit" value="Buchung abschließen" class="btn anmeldung" />
             </div>
         </div>
-        </div>    
+    </div>
 }
 
 @section Scripts {
