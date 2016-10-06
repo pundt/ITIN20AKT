@@ -9,6 +9,9 @@ using System.Data.Entity;
 
 namespace BL_Reiseboerse_Graf
 {
+    /// <summary>
+    /// Verwaltung der Benutzer (Anlegen, Ändern, Anmelden) in der Datenbank
+    /// </summary>
     public class BenutzerVerwaltung
     {
         /// <summary>
@@ -77,7 +80,11 @@ namespace BL_Reiseboerse_Graf
             return gesuchterBenutzer;
         }
 
-
+        /// <summary>
+        /// Speichert das übergebene Objekt in die Datenbank
+        /// </summary>
+        /// <param name="benutzer">das Datenbankobjekt Benutzer</param>
+        /// <returns>die Anzahl der betroffenen Zeilen</returns>
         public static int Aktualisieren(Benutzer benutzer)
         {
             Debug.WriteLine("BenutzerVerwaltung - Aktualisieren(id)");

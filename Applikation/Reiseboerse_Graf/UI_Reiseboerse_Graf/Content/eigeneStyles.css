@@ -1,6 +1,5 @@
 ﻿body {
     font-family: Tahoma;
-    
 }
 
 .scrollbar {
@@ -17,19 +16,17 @@
 .abstand {
     margin-bottom: 1.5%;
     /*Neu hinzugefügt am 28.09.2016 - falls was nicht passt*/
-    margin-left:5%;
+    margin-left: 5%;
 }
 
-.slide1{
-    padding-left:0px;
-    padding-right:0px;
-
+.slide1 {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
-.slide2{
-    padding-left:-15px;
-    padding-right:-15px;
-
+.slide2 {
+    padding-left: -15px;
+    padding-right: -15px;
 }
 
 .reise {
@@ -38,7 +35,7 @@
     border-radius: 4px;
     border-width: 0.2em;
     background-color: rgba(193, 193, 193, 0.24);
-    font-size:12px;
+    font-size: 12px;
     /*padding:30px;*/
 }
 
@@ -140,15 +137,15 @@
     border-color: white;
     border-style: dashed;
 }
+
 .headerimg {
     border-radius: 340px;
     border-color: white;
     border-style: dashed;
     width: 65%;
-    margin-right:2%;
-    margin-left:6%;
-    margin-bottom:2%;
-
+    margin-right: 2%;
+    margin-left: 6%;
+    margin-bottom: 2%;
 }
 
 .headerimg2 {
@@ -156,8 +153,8 @@
     border-color: white;
     border-style: dashed;
     width: 70%;
-    margin-left:27%;
-    margin-top:7%;
+    margin-left: 27%;
+    margin-top: 7%;
 }
 
 .acidjs-rating-stars,
@@ -209,8 +206,8 @@
     background-color: #003a6a;
     text-align: center;
     color: #ffffff;
-    margin-left:-15px;
-    margin-right:-15px;
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 .login {
@@ -242,7 +239,7 @@
     color: #005ead;
     font-size: 1.6em;
     text-align: right;
-    margin-top:6%;
+    margin-top: 6%;
 }
 
 
@@ -408,30 +405,31 @@
             cursor: pointer;
         }
 
-.glyphTel{
-    color:white;
-    font-size:1.2em;
+.glyphTel {
+    color: white;
+    font-size: 1.2em;
 }
 
 .buttonAction {
-    color:white;
-    font-family:'Bradley Hand ITC';
-    font-weight:bold;
-    font-size:1.4em;
-    margin:1%;
-}
-.buttonAction:hover{
-    color:#efbd20;
+    color: white;
+    font-family: 'Bradley Hand ITC';
+    font-weight: bold;
+    font-size: 1.4em;
+    margin: 1%;
 }
 
-.header{
+    .buttonAction:hover {
+        color: #efbd20;
+    }
+
+.header {
     border: solid;
     border-color: #576a8f;
     border-radius: 4px;
     border-width: 0.2em;
-    background-color:#005ead;
-    margin-left:1px;
-    margin-right:-1px;
+    background-color: #005ead;
+    margin-left: 1px;
+    margin-right: -1px;
 }
 
 .headerkleiner {
@@ -439,15 +437,14 @@
     border-color: #576a8f;
     border-radius: 4px;
     border-width: 0.2em;
-    background-color:#005ead;
-    margin-left:50px;
-    margin-right:-4px;
+    background-color: #005ead;
+    margin-bottom: 1%;
 }
 
 .marginTop {
-    margin-top:2.5%;
+    margin-top: 2.5%;
 }
 
 .wrapper {
-    margin-left:3%;
+    margin-left: 3%;
 }

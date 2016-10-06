@@ -35,7 +35,7 @@
                                             @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname)
                                         </td>
                                         <td>
-                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname)
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Vorname, new { @class = "form-control" })
                                             @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].Vorname, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
@@ -44,7 +44,7 @@
                                             @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname)
                                         </td>
                                         <td>
-                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname)
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].Nachname, new { @class = "form-control" })
                                             @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].Nachname, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
@@ -53,7 +53,7 @@
                                             @Html.LabelFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer)
                                         </td>
                                         <td>
-                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer)
+                                            @Html.TextBoxFor(modelItem => modelItem.BuchungenErwachsen[i].ReisePassNummer,new { @class = "form-control" })
                                             @Html.ValidationMessageFor(x => x.BuchungenErwachsen[i].ReisePassNummer, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
