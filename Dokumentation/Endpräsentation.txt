@@ -1,0 +1,21 @@
+Bei jeder Folie: Logo von der Sonne einbauen
+
+1. Start
+2. Ablauf/Inhalt
+3. Technische Voraussetzungen
+
+
+
+
+3-4 Folien von den gelösten Aufgaben: 
+Screenshot von Startseite/ Teil von Startseite : kurze Passagen wie : - freundliches Layout , CI wiedergespiegelt 
+
+- Reise suchen- Screenshot 
+- Ablauf der Buchung
+- Mitarbeiter-Interface: Reise verwalten (Oberfläche zeigen)
+
+Insgesamt circa 8-9 Folien, mit jeweils eineer Gesprächsdauer von ca. 3-4 Minuten
+
+
+Am Schluss der Präsentation kommt der praktische Teil vom Kunden, indem er die Applikation selbst testet. (mit Checkliste?)
+ 
