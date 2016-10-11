@@ -22,11 +22,11 @@ namespace UI_Reiseboerse_Graf.Controllers
         //{
         //    return View();
         //}
-        /// <summary>
-        /// Lädt alle Buchungen aus der Datenbank zu einem bestimmten BuchungsDatums.
-        /// </summary>
-        /// <param name="reisedatum_id"></param>
-        /// <returns>Eine View mit allen Daten laut der Filterung</returns>
+        // <summary>
+        // Lädt alle Buchungen aus der Datenbank zu einem bestimmten BuchungsDatums.
+        // </summary>
+        // <param name="reisedatum_id"></param>
+        // <returns>Eine View mit allen Daten laut der Filterung</returns>
         //[PruefeBenutzer]
         //[HttpGet]
         //public ActionResult LadeAlleBuchungenDatum(int reisedatum_id)
@@ -114,6 +114,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// die er dann einzeln stornieren kann
         /// </summary>
         /// <param name="id">die ID der Buchung (Reisedatum)</param>
+        /// <param name="benutzer_id">die ID des Benutzers</param>
         /// <returns>View</returns>
         [HttpGet]
         public ActionResult ZeigeDetails(int id,int benutzer_id)
@@ -177,7 +178,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <summary>
         /// Fügt alle notwendigen Eingabefelder für Buchungsdaten in eine View
         /// </summary>
-        /// <param name="anzahl">die ausgewählte Anzahl der Buchungen bei der View Anzeigen</param>
+        /// <param name="model">Das ViewModel zum Befüllen der Oberfläche</param>
         /// <returns>die View zum Eingeben der Daten</returns>
         [Authorize]
         [HttpGet]
@@ -376,6 +377,10 @@ namespace UI_Reiseboerse_Graf.Controllers
             return RedirectToAction("Bestaetigung");
         }
 
+        /// <summary>
+        /// Die Seite zur Bestätigung einer Buchung
+        /// </summary>
+        /// <returns>Die Bestätigungsseite</returns>
         [HttpGet]
         public ActionResult Bestaetigung()
         {
@@ -386,7 +391,6 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <summary>
         /// Erstellt für jede Person in AnzahlModel Eingabefelder für die Daten, die für die Buchung erforderlich sind
         /// </summary>
-        /// <param name="anzahlmodel">Die Anzahl der gewünschten Buchungen und zusätzl. Daten</param>
         /// <returns>View zum Eingeben der Daten</returns>
         [Authorize]
         [HttpPost]
@@ -641,7 +645,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Debug.WriteLine("Buchungen - Stornieren - GET");
             Debug.Indent();
-            bool erfolgreich = false;
+            //bool erfolgreich = false;
             if (!Tools.BistDuMitarbeiter(User.Identity.Name))
             {
                 BuchungsVerwaltung.Stornieren(id);

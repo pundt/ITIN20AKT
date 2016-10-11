@@ -9,6 +9,10 @@ using BL_Reiseboerse_Graf;
 
 namespace UI_Reiseboerse_Graf.Controllers
 {
+    /// <summary>
+    /// ReisenController für die spezifischen ActionMethoden
+    /// wie z.B. Laden der Reisen, Anzeigen von Reisedetails
+    /// </summary>
     public class ReisenController : Controller
     {
         /// <summary>
@@ -26,19 +30,19 @@ namespace UI_Reiseboerse_Graf.Controllers
             if (Globals.IST_TESTSYSTEM)
             {
                 #region test
-                try
-                {
-                    Debug.WriteLine("Testsystem");
-                    model.Reisen = ReiseAnzeigeListeTest();
+                //try
+                //{
+                //    Debug.WriteLine("Testsystem");
+                //    model.Reisen = ReiseAnzeigeListeTest();
 
-                    Debug.WriteLine($"{model.Reisen.Count()} Reisen geladen");
-                }
+                //    Debug.WriteLine($"{model.Reisen.Count()} Reisen geladen");
+                //}
 
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Fehler beim Laden aller Reisen");
-                    Debug.WriteLine(ex.Message);
-                }
+                //catch (Exception ex)
+                //{
+                //    Debug.WriteLine("Fehler beim Laden aller Reisen");
+                //    Debug.WriteLine(ex.Message);
+                //}
                 #endregion test
             }
             else
@@ -117,41 +121,41 @@ namespace UI_Reiseboerse_Graf.Controllers
             if (Globals.IST_TESTSYSTEM)
             {
                 #region Testsystem
-                Debug.WriteLine("Testsystem");
-                // holt sich die FakeReisen von ReiseAnzeigeListeTest
-                model.Reisen = ReiseAnzeigeListeTest();
+                //Debug.WriteLine("Testsystem");
+                //// holt sich die FakeReisen von ReiseAnzeigeListeTest
+                //model.Reisen = ReiseAnzeigeListeTest();
 
-                // kontrolliert Validierung
-                //if (ModelState.IsValid)
-                //{
+                //// kontrolliert Validierung
+                ////if (ModelState.IsValid)
+                ////{
 
-                if (filterModel.Land_id != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Land_id == filterModel.Land_id).ToList();
-
-
-                if (filterModel.Ort_ID != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Ort_id == filterModel.Ort_ID).ToList();
+                //if (filterModel.Land_id != 0)
+                //    model.Reisen = model.Reisen.Where(x => x.Land_id == filterModel.Land_id).ToList();
 
 
-                if (filterModel.HotelKategorie != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Hotelkategorie == filterModel.HotelKategorie).ToList();
+                //if (filterModel.Ort_ID != 0)
+                //    model.Reisen = model.Reisen.Where(x => x.Ort_id == filterModel.Ort_ID).ToList();
 
-                if (filterModel.PreisMin != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Preis >= filterModel.PreisMin).ToList();
 
-                if (filterModel.PreisMax != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Preis <= filterModel.PreisMax).ToList();
+                //if (filterModel.HotelKategorie != 0)
+                //    model.Reisen = model.Reisen.Where(x => x.Hotelkategorie == filterModel.HotelKategorie).ToList();
 
-                if (filterModel.Verpflegungs_ID != 0)
-                    model.Reisen = model.Reisen.Where(x => x.Verpflegungs_id == filterModel.Verpflegungs_ID).ToList();
+                //if (filterModel.PreisMin != 0)
+                //    model.Reisen = model.Reisen.Where(x => x.Preis >= filterModel.PreisMin).ToList();
 
-                //model.Reisen = model.Reisen.ToList();
+                //if (filterModel.PreisMax != 0)
+                //    model.Reisen = model.Reisen.Where(x => x.Preis <= filterModel.PreisMax).ToList();
 
-                //}
-                //return RedirectToAction("Laden", gefilterteReisen);
-                ///Wenn ich zur Action Laden gehe bekomm ich alle Reisen, aber zur View Laden
-                /// mit gefilterten Reisen als Model landet in einer Endlosschleife ...
-                return View(model);
+                //if (filterModel.Verpflegungs_ID != 0)
+                //    model.Reisen = model.Reisen.Where(x => x.Verpflegungs_id == filterModel.Verpflegungs_ID).ToList();
+
+                ////model.Reisen = model.Reisen.ToList();
+
+                ////}
+                ////return RedirectToAction("Laden", gefilterteReisen);
+                /////Wenn ich zur Action Laden gehe bekomm ich alle Reisen, aber zur View Laden
+                ///// mit gefilterten Reisen als Model landet in einer Endlosschleife ...
+                //return View(model);
                 #endregion Testsystem
             }
             else
@@ -225,8 +229,8 @@ namespace UI_Reiseboerse_Graf.Controllers
             if (Globals.IST_TESTSYSTEM)
             {
                 #region Testsystem
-                List<ReisedetailModel> liste = ReiseDetailListeTest();
-                model.Reisedetail = liste.Find(x => x.ID == id);
+                //List<ReisedetailModel> liste = ReiseDetailListeTest();
+                //model.Reisedetail = liste.Find(x => x.ID == id);
                 #endregion Testsystem
             }
             else
@@ -391,6 +395,8 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// Fügt eine neue Reise hinzu
         /// </summary>
         /// <param name="neueReise">Model mit den entsprechenden Daten</param>
+        /// <param name="file1">mitgeschickte Datei wie z.B. ein Bild</param>
+        /// <param name="file2">zusätzlich mitgeschickte Dateien</param>
         /// <returns></returns>
         [PruefeBenutzer]
         [HttpPost]
@@ -398,7 +404,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         {
             Unterkunft BL_Unterkunft = null;
             int i = 0;
-            int e = 0;
+            //int e = 0;
             int bild_id;
             int bildUnterkunftId = 0;
             int bildReiseId = 0;
@@ -542,20 +548,20 @@ namespace UI_Reiseboerse_Graf.Controllers
             }
         }
 
-        [HttpGet]
         /// <summary>
-        /// ReiseStart- und Enddatum sowie Anzahl der Reisen wird gesetzt.
+        /// Start- und Enddatum sowie Anzahl der Reisen wird gesetzt.
         /// </summary>
-        /// <param name="Reiseid"></param>
-        /// <returns></returns>        
+        /// <param name="Reiseid">Die ID der Reise</param>
+        /// <returns>Die Oberfläche zum Eingeben der Reisedaten</returns>        
+        [HttpGet]
         public ActionResult ReiseAnzahlErstellen(int Reiseid)
         {
             ReisedurchfuehrenModel DatumUndAnzahl = new ReisedurchfuehrenModel();
-            if (Reiseid == null)
-            {
-                Reiseid = BL_Reiseboerse_Graf.ReiseVerwaltung.LiefereReiseID();
-            }
-            DatumUndAnzahl.Reise_id = (int)Reiseid;
+            //if (Reiseid == null)
+            //{
+            //    Reiseid = 1;
+            //}
+            DatumUndAnzahl.Reise_id = Reiseid;
             DatumUndAnzahl.StartDatum = DateTime.Now;
             DatumUndAnzahl.EndDatum = DateTime.Now;
             DatumUndAnzahl.Anmeldefrist = DateTime.Now;
@@ -563,6 +569,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(DatumUndAnzahl);
         }
 
+        /// <summary>
+        /// Erstellt soviele Reisedurchführen, wie im Model übergeben wird
+        /// </summary>
+        /// <param name="anzahlReisen">ein ReisedurchfuehrenModel</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ReiseAnzahlErstellen(ReisedurchfuehrenModel anzahlReisen)
         {
@@ -603,7 +614,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// <summary>
         /// TextSuche nach Beschreibungstext der Reise
         /// </summary>
-        /// <param name="model">Suchtext</param>
+        /// <param name="TextSuche">Der gesuchte Text</param>
         /// <returns>Liste von Reisen bei Fehler oder ungültigen Suchtext Null</returns>
         [HttpPost]
         public ActionResult Suchen(string TextSuche)
@@ -687,6 +698,11 @@ namespace UI_Reiseboerse_Graf.Controllers
             return View(UI_Reisen);
         }
 
+        /// <summary>
+        /// Zeigt eine Reise in der Ansicht für den Mitarbeiter an
+        /// </summary>
+        /// <param name="id">die ID der Reise</param>
+        /// <returns>Die Oberfläche zum Anzeigen einer Reise</returns>
         [PruefeBenutzer]
         [HttpGet]
         public ActionResult AnzeigenMitarbeiter(int id)
@@ -863,90 +879,90 @@ namespace UI_Reiseboerse_Graf.Controllers
             {
                 #region Testsystem
                 #region Land
-                model.Land = new List<LandModel>();
+                //model.Land = new List<LandModel>();
 
-                model.Land.Add(new LandModel()
-                {
-                    land_ID = 0,
-                    landName = "Alle"
-                });
+                //model.Land.Add(new LandModel()
+                //{
+                //    land_ID = 0,
+                //    landName = "Alle"
+                //});
 
-                LandModel lm1 = new LandModel()
-                {
-                    land_ID = 1,
-                    landName = "Österreich"
-                };
-                LandModel lm2 = new LandModel()
-                {
-                    land_ID = 2,
-                    landName = "Deutschland"
-                };
-                LandModel lm3 = new LandModel()
-                {
-                    land_ID = 3,
-                    landName = "Italien"
-                };
-                model.Land.Add(lm1);
-                model.Land.Add(lm2);
-                model.Land.Add(lm3);
+                //LandModel lm1 = new LandModel()
+                //{
+                //    land_ID = 1,
+                //    landName = "Österreich"
+                //};
+                //LandModel lm2 = new LandModel()
+                //{
+                //    land_ID = 2,
+                //    landName = "Deutschland"
+                //};
+                //LandModel lm3 = new LandModel()
+                //{
+                //    land_ID = 3,
+                //    landName = "Italien"
+                //};
+                //model.Land.Add(lm1);
+                //model.Land.Add(lm2);
+                //model.Land.Add(lm3);
                 #endregion
                 #region Ort
-                model.Ort = new List<OrtModel>();
+                //model.Ort = new List<OrtModel>();
 
-                model.Ort.Add(new OrtModel()
-                {
-                    Id = 0,
-                    Bezeichnung = "Alle"
-                });
+                //model.Ort.Add(new OrtModel()
+                //{
+                //    Id = 0,
+                //    Bezeichnung = "Alle"
+                //});
 
-                OrtModel om1 = new OrtModel()
-                {
-                    Id = 1,
-                    Bezeichnung = "Wien"
-                };
-                OrtModel om2 = new OrtModel()
-                {
-                    Id = 2,
-                    Bezeichnung = "Hamburg"
-                };
-                OrtModel om3 = new OrtModel()
-                {
-                    Id = 3,
-                    Bezeichnung = "Rom"
-                };
+                //OrtModel om1 = new OrtModel()
+                //{
+                //    Id = 1,
+                //    Bezeichnung = "Wien"
+                //};
+                //OrtModel om2 = new OrtModel()
+                //{
+                //    Id = 2,
+                //    Bezeichnung = "Hamburg"
+                //};
+                //OrtModel om3 = new OrtModel()
+                //{
+                //    Id = 3,
+                //    Bezeichnung = "Rom"
+                //};
 
-                model.Ort.Add(om1);
-                model.Ort.Add(om2);
-                model.Ort.Add(om3);
+                //model.Ort.Add(om1);
+                //model.Ort.Add(om2);
+                //model.Ort.Add(om3);
                 #endregion
                 #region Verpflegung
-                model.Verpflegung = new List<VerpflegungModel>();
+                //model.Verpflegung = new List<VerpflegungModel>();
 
-                model.Verpflegung.Add(new VerpflegungModel()
-                {
-                    Id = 0,
-                    Bezeichnung = "Alle"
-                });
+                //model.Verpflegung.Add(new VerpflegungModel()
+                //{
+                //    Id = 0,
+                //    Bezeichnung = "Alle"
+                //});
 
-                VerpflegungModel vm1 = new VerpflegungModel()
-                {
-                    Id = 1,
-                    Bezeichnung = "Halbpension"
-                };
-                VerpflegungModel vm2 = new VerpflegungModel()
-                {
-                    Id = 2,
-                    Bezeichnung = "Vollpension"
-                };
-                VerpflegungModel vm3 = new VerpflegungModel()
-                {
-                    Id = 3,
-                    Bezeichnung = "All Inclusive"
-                };
+                //VerpflegungModel vm1 = new VerpflegungModel()
+                //{
+                //    Id = 1,
+                //    Bezeichnung = "Halbpension"
+                //};
+                //VerpflegungModel vm2 = new VerpflegungModel()
+                //{
+                //    Id = 2,
+                //    Bezeichnung = "Vollpension"
+                //};
+                //VerpflegungModel vm3 = new VerpflegungModel()
+                //{
+                //    Id = 3,
+                //    Bezeichnung = "All Inclusive"
+                //};
 
-                model.Verpflegung.Add(vm1);
-                model.Verpflegung.Add(vm2);
-                model.Verpflegung.Add(vm3);
+                //model.Verpflegung.Add(vm1);
+                //model.Verpflegung.Add(vm2);
+                //model.Verpflegung.Add(vm3);
 
                 #endregion
                 #endregion Testsystem

@@ -4,9 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Benutzeroberfläche
-/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>
@@ -15,9 +12,13 @@ namespace UI_Reiseboerse_Graf.Models
     public class ReisedatumModel
     {
         /// <summary>
-        /// Beginndatum
+        /// Die ID des Reisedatums
         /// </summary>
         public int ID { get; set; }
+
+        /// <summary>
+        /// Das Beginndatum
+        /// </summary>
         [Required(ErrorMessage = "Pflichtfeld")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yy}",ApplyFormatInEditMode =true)]
         public DateTime Beginndatum { get; set; }
@@ -45,7 +46,6 @@ namespace UI_Reiseboerse_Graf.Models
         /// <summary>
         /// Datumsanzeige
         /// </summary>
-        private string datumsAnzeige;
         [Display(Name ="Datum")]
         public string DatumsAnzeige
         {

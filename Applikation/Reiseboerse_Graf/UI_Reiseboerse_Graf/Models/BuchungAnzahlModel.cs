@@ -4,9 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Benutzeroberfläche
-/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>
@@ -39,15 +36,13 @@ namespace UI_Reiseboerse_Graf.Models
         /// Preis pro Kind
         /// </summary>
         public decimal Preis_Kind { get; set; }
-        /// <summary>
-        /// Berechnung der Gesamtanzahl aller Reisenden
-        /// </summary>
-        private int anzahl;
-
-        public int Anzahl
-        {
-            get { return Anzahl_Erwachsene+Anzahl_Kinder; }
-        }
+        // <summary>
+        // Berechnung der Gesamtanzahl aller Reisenden
+        // </summary>
+        //public int Anzahl
+        //{
+        //    get { return Anzahl_Erwachsene+Anzahl_Kinder; }
+        //}
 
     }
 }

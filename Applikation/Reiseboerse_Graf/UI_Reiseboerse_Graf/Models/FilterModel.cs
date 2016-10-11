@@ -4,9 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Benutzeroberfläche
-/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>
@@ -31,13 +28,19 @@ namespace UI_Reiseboerse_Graf.Models
         /// </summary>        
         public List<LandModel> Land { get; set; }
 
+        /// <summary>
+        /// Die ID des Landes
+        /// </summary>
         public int Land_id { get; set; }
 
         /// <summary>
         /// Liste von OrtModel für die DropDownListe
         /// </summary>
         public List<OrtModel> Ort { get; set; }
-          
+        
+        /// <summary>
+        /// Die ID des Ortes
+        /// </summary>
         public int Ort_ID { get; set; }
 
         /// <summary>
@@ -52,6 +55,9 @@ namespace UI_Reiseboerse_Graf.Models
         /// </summary>
         public List<VerpflegungModel> Verpflegung { get; set; }
 
+        /// <summary>
+        /// Die ID der Verpflegung
+        /// </summary>
         public int Verpflegungs_ID { get; set; }
 
         /// <summary>

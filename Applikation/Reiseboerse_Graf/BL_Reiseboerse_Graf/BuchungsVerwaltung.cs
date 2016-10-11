@@ -18,7 +18,6 @@ namespace BL_Reiseboerse_Graf
         /// <summary>
         /// Lädt alle Buchungen aus der Datenbank deren Anmeldefrist in der Vergangenheit liegt
         /// </summary>
-        /// <param name="reisedatum_id">Reisedatum ID</param>
         /// <returns>Liste von Buchungen oder null bei einem Fehler</returns>
         public static List<Buchung> LadeAlleBuchungen()
         {
@@ -135,7 +134,7 @@ namespace BL_Reiseboerse_Graf
         /// <summary>
         /// Storniert eine Buchung anhand einer Buchungs_ID
         /// </summary>
-        /// <param name="benutzer_id">die ID der Buchung</param>
+        /// <param name="buchung_id">die ID der Buchung</param>
         /// <returns>true wenn Stornieren erfolgreich sonst false</returns>
         public static bool Stornieren(int buchung_id)
         {

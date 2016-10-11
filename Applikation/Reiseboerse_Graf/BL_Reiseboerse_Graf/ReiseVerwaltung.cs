@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// Geschäftslogik inklusive Datenbankverbindung
-/// </summary>
 namespace BL_Reiseboerse_Graf
 {
+    /// <summary>
+    /// enthält Methoden um bestimmte Aufgaben automatisiert durchzuführen, z.B. Lade alle Reisen
+    /// </summary>
     public class ReiseVerwaltung
     {
         /// <summary>
@@ -106,6 +106,9 @@ namespace BL_Reiseboerse_Graf
         /// <param name="land_id">ID des ausgewählten Landes aus der Dropdownbox</param>
         /// <param name="ort_id">ID des ausgewählten Ortes aus der Dropdownbox</param>
         /// <param name="kategorie_id">Alle IDs der ausgewählten Kategorien (Checkboxen)</param>
+        /// <param name="verpflegung_id">ID der ausgewählten Verpflegung</param>
+        /// <param name="preis_min">Der gewählte Minimum-Preis</param>
+        /// <param name="preis_max">Der gewählte Maximum-Preis</param>
         /// <param name="startdatum">Das gewählte Startdatum</param>
         /// <param name="enddatum">Das gewählte Enddatum</param>
         /// <returns>eine Liste von Reisen</returns>
@@ -496,7 +499,8 @@ namespace BL_Reiseboerse_Graf
         /// <summary>
         /// hier wird die ReiseAnzahl festgelegt / wird so oft wie freie Plätze aufgerufen und nur das Reisedatum eingetragen
         /// </summary>
-        /// <param name="reisedatum"></param>
+        /// <param name="reisedatum">Die festgelegten Reisedaten</param>
+        /// <param name="Anzahl">Die Anzahl wie oft die Reisedaten angelegt werden sollen</param>
         /// <returns>wenn erfolgreich neue Reisedurchfuehrung_id / wenn nicht -1</returns>
         public static int SpeicherReiseAnzahl(Reisedatum reisedatum, int Anzahl)
         {
@@ -531,31 +535,6 @@ namespace BL_Reiseboerse_Graf
                 }
             }
             return index;
-        }
-        public static int LiefereReiseID()
-        {
-            Reisedatum datum = new Reisedatum();
-            int index;
-            Debug.WriteLine("ReiseVerwaltung - LiefereReiseID");
-            Debug.Indent();
-            using (var context = new reisebueroEntities())
-            {
-                try
-                {
-                    index = context.AlleReisedaten.Count();
-                    datum = context.AlleReisedaten.Where(x => x.ID == index).FirstOrDefault();
-                    Debug.WriteLine("Suche Reise_ID erfolgreich");
-                    return datum.Reise.ID;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Suche letztes Reisedatum fehlgeschlagen");
-                    Debug.WriteLine(ex.Message);
-                    Debugger.Break();
-                    datum.Reise.ID = -1;
-                }
-            }
-            return datum.Reise.ID;
         }
     }
 }

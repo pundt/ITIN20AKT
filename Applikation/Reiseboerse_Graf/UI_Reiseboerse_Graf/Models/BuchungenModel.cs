@@ -4,9 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Benutzeroberfläche
-/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>
@@ -14,6 +11,9 @@ namespace UI_Reiseboerse_Graf.Models
     /// </summary>
     public class BuchungenModel
     {
+        /// <summary>
+        /// Die ID der Buchung
+        /// </summary>
         public int ID { get; set; }
         /// <summary>
         /// Vorname des Reisenden (Pflichtefeld)

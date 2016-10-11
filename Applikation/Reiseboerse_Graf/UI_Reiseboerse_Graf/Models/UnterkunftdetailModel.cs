@@ -4,9 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Benutzeroberfläche
-/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>
@@ -43,8 +40,8 @@ namespace UI_Reiseboerse_Graf.Models
         /// <summary>
         /// es wird geprüft ob eine neue Unterkunft angelegt wurde
         /// </summary>
-        /// <param name="unterkunft"></param>
-        /// <returns></returns>
+        /// <param name="unterkunft">Das übergebene UnterkunftdetailModel</param>
+        /// <returns>True oder False</returns>
         public static bool PruefeUnterkunft(UnterkunftdetailModel unterkunft)
         {
             if (unterkunft.Beschreibung != null && unterkunft.Bezeichnung!= null)

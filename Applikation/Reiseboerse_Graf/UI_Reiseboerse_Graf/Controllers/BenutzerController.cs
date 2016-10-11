@@ -118,8 +118,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                     List<LandModel> lmListe = new List<LandModel>();
                     List<OrtModel> ortListe = new List<OrtModel>();
 
-                    /// Hier werden die Laender der lmList hinzugefügt um
-                    /// die Dropdown-Liste in der View zu füllen
+                    // Hier werden die Laender der lmList hinzugefügt um
+                    // die Dropdown-Liste in der View zu füllen
                     foreach (Land l in laender)
                     {
                         lmListe.Add(new LandModel() { landName = l.Bezeichnung, land_ID = l.ID });
@@ -200,8 +200,8 @@ namespace UI_Reiseboerse_Graf.Controllers
                     }
                     else
                     {
-                        /// Wenn das Model nicht valide ist, wird eine neue Landliste generiert,
-                        /// da dieses bei erneutem Aufruf sonst verloren geht
+                        // Wenn das Model nicht valide ist, wird eine neue Landliste generiert,
+                        // da dieses bei erneutem Aufruf sonst verloren geht
                         foreach (Land ld in laender)
                         {
                             lmList.Add(new LandModel() { landName = ld.Bezeichnung, land_ID = ld.ID });

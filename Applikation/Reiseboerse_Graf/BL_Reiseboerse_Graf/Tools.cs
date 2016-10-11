@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Diagnostics;
 
-/// <summary>
-/// Geschäftslogik inklusive Datenbankverbindung
-/// </summary>
 namespace BL_Reiseboerse_Graf
 {
+    /// <summary>
+    /// Tools enthält Methoden um gewisse Vorgänge zu automatisieren, wie z.B. ob eine Email vorhanden ist
+    /// </summary>
     public class Tools
     {
         /// <summary>

@@ -6,9 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-/// <summary>
-/// Geschäftslogik inklusive Datenbankverbindung
-/// </summary>
 namespace BL_Reiseboerse_Graf
 {
     /// <summary>
@@ -47,6 +44,7 @@ namespace BL_Reiseboerse_Graf
         /// Speichert die neue Zahlung in der DB und liefert die ID dieser zurück
         /// </summary>
         /// <param name="neueZahlung">die zu speichernde Zahlung</param>
+        /// <param name="zahlungsart_id">die ID der ausgewählten Zahlungsart</param>
         /// <returns>die gefundene ID oder 0 wenn Zahlung NULL ist</returns>
         public static int NeueZahlungSpeichern(Zahlung neueZahlung, int zahlungsart_id)
         {
