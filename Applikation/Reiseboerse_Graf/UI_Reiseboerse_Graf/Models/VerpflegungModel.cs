@@ -5,6 +5,10 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Model für Verpflegung (beinhaltet ID und Bezeichnung)
+    /// wird für befüllen der Dropdownlisten verwendet
+    /// </summary>
     public class VerpflegungModel
     {
         /// <summary>
