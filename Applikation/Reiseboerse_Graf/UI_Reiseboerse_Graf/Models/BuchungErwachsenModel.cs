@@ -12,6 +12,10 @@ namespace UI_Reiseboerse_Graf.Models
     /// </summary>
     public class BuchungErwachsenModel:BuchungenModel
     {
+        /// <summary>
+        /// Geburtsdatum wird mittels Remote Validierung (Validierungscontroller) überprüft
+        /// nur gültig wenn Alter größer 14 Jahre ist
+        /// </summary>
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}",ApplyFormatInEditMode =true)]
         [Remote("AlterErwachsen","Validierung",ErrorMessage ="Erwachsene müssen über 14 Jahre sein")]
