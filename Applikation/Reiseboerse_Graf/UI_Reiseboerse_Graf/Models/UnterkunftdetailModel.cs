@@ -6,23 +6,42 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Model für Unterkunftsanzeige/Erstellung
+    /// </summary>
     public class UnterkunftdetailModel
     {
-        // Id
+        /// <summary>
+        /// Id der Unterkunft
+        /// </summary>
         public int ID { get; set; }
-        // Bezeichnung
+        /// <summary>
+        /// Bezeichnung der Unterkunft
+        /// </summary>
         public string Bezeichnung { get; set; }
-        //Verpflegungs_id
+        /// <summary>
+        /// Verpflegungs_id/ für eroieren einer Verpflegungsart
+        /// </summary>
         public int Verpflegung_ID { get; set; }
-        // Unterkunftsverpflegung
+        /// <summary>
+        /// VerpflegungsModel/ für jede Unterkunft muss eine Verpflegung vorhanden sein
+        /// </summary>
         public VerpflegungModel Verpflegung { get; set; }
-        //Beschreibung
+        /// <summary>
+        /// Beschreibung der Unterkunft
+        /// </summary>
         [DataType(DataType.MultilineText)]
         public string Beschreibung { get; set; }
-        // Kategorie
+        /// <summary>
+        /// Kategorie der Unterkunft / Bewertunsschema
+        /// </summary>
         public int Kategorie { get; set; }
 
-        // es wird geprüft ob eine neue Unterkunft angelegt wurde
+        /// <summary>
+        /// es wird geprüft ob eine neue Unterkunft angelegt wurde
+        /// </summary>
+        /// <param name="unterkunft"></param>
+        /// <returns></returns>
         public static bool PruefeUnterkunft(UnterkunftdetailModel unterkunft)
         {
             if (unterkunft.Beschreibung != null && unterkunft.Bezeichnung!= null)
