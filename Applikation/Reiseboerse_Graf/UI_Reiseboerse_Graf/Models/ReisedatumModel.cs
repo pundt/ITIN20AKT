@@ -8,23 +8,33 @@ namespace UI_Reiseboerse_Graf.Models
 {
     public class ReisedatumModel
     {
-        // Beginndatum
+        /// <summary>
+        /// Beginndatum
+        /// </summary>
         public int ID { get; set; }
         [Required(ErrorMessage = "Pflichtfeld")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yy}",ApplyFormatInEditMode =true)]
         public DateTime Beginndatum { get; set; }
-        //Enddatum
+       /// <summary>
+       /// Enddatum
+       /// </summary>
         [Required(ErrorMessage = "Pflichtfeld")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yy}",ApplyFormatInEditMode =true)]
         public DateTime Enddatum { get; set; }
-        //Anmeldefrist
+        /// <summary>
+        /// Anmeldefrist
+        /// </summary>
         [Required(ErrorMessage = "Pflichtfeld")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yy}",ApplyFormatInEditMode =true)]
         public DateTime Anmeldefrist { get; set; }
-        // Restplätze
+        /// <summary>
+        /// Restplätze
+        /// </summary>
         [Required(ErrorMessage = "Pflichtfeld")]
         public int Restplätze { get; set; }
-        // Datumsanzeige
+        /// <summary>
+        /// Datumsanzeige
+        /// </summary>
         private string datumsAnzeige;
         [Display(Name ="Datum")]
         public string DatumsAnzeige
