@@ -1,0 +1,26 @@
+View Buchungen/Buchen
+
+Buchen- 1.schritt
+(1)Je nach Anzahl der Personen müssen hier die Persönlichen Daten der Mitreisenden
+angegeben werden. (Vorname, Nachname, Reisepassnummer, Geburtsdatum)
+
+(2) Gesamtpreis aller Reisenden
+
+(3) Bestätigung durch Klicken auf Button "Weiter zum nächsten Schritt"
+
+Buchen- 2.Schritt
+
+(1) Zusammenfassung der Reise : Name der Reise mit Datum , Gesamtpreis
+(2) Zusammenfassung der Daten aller mitreisenden Personen
+(3) Durch Klicken auf Button "Zur Zahlung" zum nächsten Schritt
+
+Zahlung
+(1) Eingabe der persönlichen Daten für die Übermittlung einer Zahlungsmodalität (Vorname, Nachname)
+(2) Nummer/IBAN : Eingabe der Kreditkartennummer / IBAN , Erkennung ob diese Nummer korrekt ist
+(3) Zahlungsart: Auswahl zwischen Visa, Überweisung und MasterCard
+(4) Mit Klick auf Button "Buchung abschließen" wird man auf die nächste Seite weitergeleitet
+
+Bestätigung
+(1) Bestätigung der Buchung - Erhalt einer Mail über die Buchungsbestätigung in Kürze
+(2) Mit Klick auf "Zurück zur Startseite" kommt man zurück zur Reiseauflistung 
+
