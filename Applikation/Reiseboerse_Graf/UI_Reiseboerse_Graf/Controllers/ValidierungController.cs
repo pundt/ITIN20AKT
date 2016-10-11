@@ -13,9 +13,13 @@ namespace UI_Reiseboerse_Graf.Controllers
     /// </summary>
     public class ValidierungController : Controller
     {
+        /// <summary>
         /// Überprüft ob eine Email bereits vorhanden ist
         /// wenn ja, dann gib auf der Registrierungs-View false,
         /// ansonsten gib true aus
+        /// </summary>
+        /// <param name="email">die zu prüfende Email-Adresse</param>
+        /// <returns>true oder false</returns>
         public JsonResult EmailFrei(string email)
         {
             bool benutzerExistiert = false;

@@ -5,9 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Benutzeroberfläche
-/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>
