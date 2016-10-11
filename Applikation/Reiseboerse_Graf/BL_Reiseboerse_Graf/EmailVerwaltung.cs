@@ -7,6 +7,9 @@ using System.Net;
 using System.Net.Mail;
 using System.Diagnostics;
 
+/// <summary>
+/// Geschäftslogik inklusive Datenbankverbindung
+/// </summary>
 namespace BL_Reiseboerse_Graf
 {
     /// <summary>
