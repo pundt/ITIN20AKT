@@ -5,8 +5,14 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Model zur Textsuche auf der Oberfläche
+    /// </summary>
     public class TextsucheModel
     {
+        /// <summary>
+        /// Der eingegebene Suchtext
+        /// </summary>
         public string Suchtext { get; set; }
     }
 }
