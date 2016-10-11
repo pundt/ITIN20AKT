@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
+/// <summary>
+/// Benutzeroberfläche
+/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>
@@ -11,41 +14,91 @@ namespace UI_Reiseboerse_Graf.Models
     /// </summary>
     public class ReiseAnlegenModel
     {
-        // id
+        /// <summary>
+        /// id der Reise
+        /// </summary>
         public int Id { get; set; }
-        // Titel
+
+        /// <summary>
+        /// Titel der Reise
+        /// </summary>
         [Required(ErrorMessage ="Pflichtfeld")]
         public string Titel { get; set; }
-        // Beschreibung
+
+        /// <summary>
+        /// Beschreibung der Reise 
+        /// </summary>
         [Required(ErrorMessage = "Pflichtfeld")]
+        [DataType(DataType.MultilineText)]
         public string Beschreibung { get; set; }
-        //Liste von allen angelegten Ländern
+
+        /// <summary>
+        /// Liste von allen angelegten Ländern
+        /// </summary>
         public List<LandModel> Reiseland { get; set; }
-        // Land_id
+
+        /// <summary>
+        /// Land_id/ mit der wird die Reise eruiert und gespeichert
+        /// </summary>
         public int Land_id { get; set; }
-        // falls das Land noch nicht angelegt ist, kann ein neues angelegt werden
+
+        /// <summary>
+        /// falls das Land noch nicht angelegt ist, kann ein neues angelegt werden
+        /// </summary>
         public string NeuesLand { get; set; }
-        // Liste von allen angelegten Orten
+
+        /// <summary>
+        /// Liste von allen angelegten Orten
+        /// </summary>
         public List<OrtModel> ReiseOrt { get; set; }
-        // Ort_id
+
+        /// <summary>
+        /// Ort_id / mit der wird der Ort eruiert und gespeichert
+        /// </summary>
         public int Ort_id { get; set; }
-        // falls der Ort noch nicht angelegt ist, kann ein neuer angelegt werden
+
+        /// <summary>
+        /// falls ein neuer Ort angelegt werden muss
+        /// </summary>
         public string NeuerOrt { get; set; }
-        // Preis für Erwachsene
-        [Required(ErrorMessage = "Pflichtfeld")]      
+
+        /// <summary>
+        /// Preis für Erwachsene
+        /// </summary>
+        [Required(ErrorMessage = "Pflichtfeld")] 
+        [Range(0,9999,ErrorMessage ="Preis darf nicht höher als 9999 sein")]     
         public double PreisErw { get; set; }
-        // Preis für Kinder
+
+        /// <summary>
+        /// Preis für Kinder
+        /// </summary>
         [Required(ErrorMessage = "Pflichtfeld")]
+        [Range(0, 9999, ErrorMessage = "Preis darf nicht höher als 9999 sein")]
         public double PreisKind { get; set; }
-        // Liste von allen Verpflegungsmöglichkeiten
+
+        /// <summary>
+        /// Liste von allen Verpflegungsmöglichkeiten
+        /// </summary>
         public List<VerpflegungModel> Verpflegung { get; set; }
-        // Verpflegungs_ID
+
+        /// <summary>
+        /// Verpflegungs_ID
+        /// </summary>
         public int Verpflegung_id { get; set; }
-        // Liste von allen Unterkünften
+
+        /// <summary>
+        /// Liste von allen Unterkünften
+        /// </summary>
         public List<UnterkunftdetailModel> Unterkunft { get; set; }
-        // falls die Unterkunft noch nicht angelegt ist, kann eine neue angelegt werden
+
+        /// <summary>
+        /// falls die Unterkunft noch nicht angelegt ist, kann eine neue angelegt werden
+        /// </summary>
         public UnterkunftdetailModel NeueUnterkunft { get; set; }
-        // Unterkunft_id
+
+        /// <summary>
+        /// Unterkunft_id
+        /// </summary>
         public int Unterkunft_id { get; set; }
      
 
