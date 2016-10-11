@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
+/// <summary>
+/// Benutzeroberfläche
+/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     public class ReisedurchfuehrenModel
