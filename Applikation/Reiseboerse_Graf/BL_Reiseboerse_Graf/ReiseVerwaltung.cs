@@ -501,7 +501,7 @@ namespace BL_Reiseboerse_Graf
             Debug.WriteLine("ReiseVerwaltung - SucheUnterkunft");
             Debug.Indent();
             int index = 0;
-            Reise reise = new Reise();
+            
             using (var context = new reisebueroEntities())
             {
                 try
@@ -510,7 +510,7 @@ namespace BL_Reiseboerse_Graf
                     for (int i = 0; i < Anzahl; i++)
                     {
                         Reisedurchfuehrung neuerReiseDurchgang = new Reisedurchfuehrung();
-                        reise = context.AlleReisen.Where(x => x.ID == reisedatum.Reise.ID).FirstOrDefault();
+                        Reise reise = context.AlleReisen.Where(x => x.ID == reisedatum.Reise.ID).FirstOrDefault();
                         reisedatum.Reise = reise;
                         neuerReiseDurchgang.Reisedatum = reisedatum;
                         context.AlleReisedurchfuehrungen.Add(neuerReiseDurchgang);

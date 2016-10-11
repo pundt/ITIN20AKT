@@ -6,7 +6,9 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
-    // Kunde erbt von Benutzer
+    /// <summary>
+    /// KundenModel, erbt von KundenAnlegenModel
+    /// </summary>
     public class KundenModel : KundenAnlegenModel
     {
         
