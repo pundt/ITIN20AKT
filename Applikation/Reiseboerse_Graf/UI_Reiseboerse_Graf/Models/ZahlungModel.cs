@@ -7,16 +7,35 @@ using System.Web.Mvc;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Model zur Eingabe einer Zahlung (Formular)
+    /// </summary>
     public class ZahlungModel
     {
+        /// <summary>
+        /// Vorname des Karten-/Kontoinhabers
+        /// </summary>
         [Required(AllowEmptyStrings =false,ErrorMessage ="Pflichtfeld")]
         public string Vorname { get; set; }
+        /// <summary>
+        /// Nachname des Karten-/Kontoinhabers
+        /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
         public string Nachname { get; set; }
+        /// <summary>
+        /// Nummer der Karte bzw. des Konto
+        /// Remotevalidierung (bei Kreditkarte Luhnalgorithmus bei Kontonummer auf Gültigkeit prüfen)
+        /// </summary>
         [Remote("LuhnUndIBANPruefung", "Validierung", ErrorMessage = "Geben Sie eine gültige IBAN- oder Kreditkartennummer ein")]
         public string Nummer { get; set; }
+        /// <summary>
+        /// Id der Zahlungsart (wird über Dropdownliste selektiert)
+        /// </summary>
         [Display(Name ="Zahlungsart")]
         public int Zahlungsart_ID { get; set; }
+        /// <summary>
+        /// Dropdownliste Zahlungsarten (eine Liste von Zahlungsartmodeln)
+        /// </summary>
         public List<ZahlungsartModel> Zahlungsarten { get; set; }
         //public int Reisedatum_ID { get; set; }
     }
