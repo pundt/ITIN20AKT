@@ -19,11 +19,13 @@ namespace UI_Reiseboerse_Graf.Models
         /// Vorname des Reisenden (Pflichtefeld)
         /// </summary>
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [RegularExpression(@"^[a-zA-Z--]+$", ErrorMessage = "Nur Buchstaben von A bis Z erlaubt")]
         public string Vorname { get; set; }
         /// <summary>
         /// Nachname des Reisenden (Pflichtfeld)
         /// </summary>
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [RegularExpression(@"^[a-zA-Z--]+$", ErrorMessage = "Nur Buchstaben von A bis Z erlaubt")]
         public string Nachname { get; set; }
         /// <summary>
         /// Reisepassnummer (Validierung auf gültige Reisepassnummer, Pflichtfeld)

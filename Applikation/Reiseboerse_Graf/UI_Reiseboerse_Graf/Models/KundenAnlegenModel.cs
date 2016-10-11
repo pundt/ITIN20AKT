@@ -55,6 +55,7 @@ namespace UI_Reiseboerse_Graf.Models
         /// Vorname eines Benutzers
         /// </summary>
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [RegularExpression(@"^[a-zA-Z--]+$", ErrorMessage = "Nur Buchstaben von A bis Z erlaubt")]
         [DisplayName("Vorname")]
         public string Vorname { get; set; }
 
@@ -62,6 +63,7 @@ namespace UI_Reiseboerse_Graf.Models
         /// Nachname eines Benutzers
         /// </summary>
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [RegularExpression(@"^[a-zA-Z--]+$", ErrorMessage = "Nur Buchstaben von A bis Z erlaubt")]
         [DisplayName("Nachname")]
         public string Nachname { get; set; }
 
@@ -69,6 +71,7 @@ namespace UI_Reiseboerse_Graf.Models
         /// Telefonnummer eines Benutzers
         /// </summary>
         [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Nur Zahlen erlaubt")]
         [DisplayName("Telefonnr")]
         public string Telefon { get; set; }
 
