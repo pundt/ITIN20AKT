@@ -15,7 +15,9 @@ namespace UI_Reiseboerse_Graf.Models
         /// Id für die eindeutige Zuweisung
         /// </summary>
         public int Id { get; set; }
-
+        /// <summary>
+        /// Bezeichnung der Bezeichnung
+        /// </summary>
         public string Bezeichnung { get; set; }
     }
 }
