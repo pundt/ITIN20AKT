@@ -548,7 +548,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         /// </summary>
         /// <param name="Reiseid"></param>
         /// <returns></returns>        
-        public ActionResult ReiseAnzahlErstellen(int? Reiseid)
+        public ActionResult ReiseAnzahlErstellen(int Reiseid)
         {
             ReisedurchfuehrenModel DatumUndAnzahl = new ReisedurchfuehrenModel();
             if (Reiseid == null)
@@ -566,7 +566,7 @@ namespace UI_Reiseboerse_Graf.Controllers
         [HttpPost]
         public ActionResult ReiseAnzahlErstellen(ReisedurchfuehrenModel anzahlReisen)
         {
-            int index = 0;
+           
             Debug.WriteLine("ReiseAnzahlErstellen - ReiseController - POST");
             Debug.Indent();
 
@@ -575,18 +575,15 @@ namespace UI_Reiseboerse_Graf.Controllers
                 if (anzahlReisen.ReiseAnzahl > 0)
                 {
                     Reisedatum ReiseDaten = new Reisedatum();
-                    //ReiseDaten.Reise = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheReise(anzahlReisen.Reise_id);
+                    ReiseDaten.Reise = BL_Reiseboerse_Graf.ReiseVerwaltung.SucheReise(anzahlReisen.Reise_id);
                     ReiseDaten.Startdatum = anzahlReisen.StartDatum;
                     ReiseDaten.Enddatum = anzahlReisen.EndDatum;
                     ReiseDaten.Anmeldefrist = anzahlReisen.Anmeldefrist;
                     ReiseDaten.ID = ReiseVerwaltung.SpeicherReiseDatum(ReiseDaten);
 
-                    if (ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten, anzahlReisen.ReiseAnzahl) >= 1)
+                    ReiseVerwaltung.SpeicherReiseAnzahl(ReiseDaten, anzahlReisen.ReiseAnzahl);
+                    Debug.WriteLine("Speichern aller ReisenDurchgange erfolgreich");
 
-                        if (index == anzahlReisen.ReiseAnzahl)
-                        {
-                            Debug.WriteLine("Speichern aller ReisenDurchgange erfolgreich");
-                        }
                 }
             }
             if (anzahlReisen.WeitereReisenHinzufuegen)
