@@ -6,23 +6,22 @@ using System.Web;
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>
-    /// Das View-Model, das zum Anzeigen der Oberfläche Reise\Laden benötigt wird
+    /// Viewmodel für die Startseite mit Anzeige aller Reisen
     /// </summary>
     public class ReiseLadenModel
     {
         /// <summary>
-        /// Das FilterModel, das alle benötigten Informationen für den Filter enthält
+        /// Filtermodel für die Filterung der Reisen nach bestimmten Kriterien
         /// </summary>
         public FilterModel Filter { get; set; }
-
         /// <summary>
-        /// Enthält alle Reisen zum Anzeigen auf der Seite
+        /// Liste von Reisemodeln (aus der Datenbank geladen und auf Reise umgemappt)
         /// </summary>
         public List<ReiseModel> Reisen{ get; set; }
-
         /// <summary>
-        /// Dient zum Auslesen des Suchtextes aus der Oberfläche
+        /// Model für die Suche mittels Schlagworten (Beschreibungstext der Reise wird durchsucht)
         /// </summary>
         public string TextSuche { get; set; }
+        //IEnumerable<UI_Reiseboerse_Graf.Models.ReiseModel
     }
 }
