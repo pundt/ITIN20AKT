@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Geschäftslogik inklusive Datenbankverbindung
+/// </summary>
 namespace BL_Reiseboerse_Graf
 {
     /// <summary>

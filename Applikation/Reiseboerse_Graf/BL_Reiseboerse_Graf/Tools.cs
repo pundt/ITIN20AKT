@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Diagnostics;
 
+/// <summary>
+/// Geschäftslogik inklusive Datenbankverbindung
+/// </summary>
 namespace BL_Reiseboerse_Graf
 {
     public class Tools

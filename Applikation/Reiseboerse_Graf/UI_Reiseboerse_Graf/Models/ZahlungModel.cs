@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+/// <summary>
+/// Benutzeroberfläche
+/// </summary>
 namespace UI_Reiseboerse_Graf.Models
 {
     /// <summary>

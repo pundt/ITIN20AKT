@@ -1,0 +1,56 @@
+NEUE REISE ANLEGEN
+
+- Auf der Verwaltung der Seite für die Mitarbeiter unter Reisen
+REISEN/VERWALTEN
+- Hier sind alle vorhanden Reisen aufgelistet mit ID, Reisetitel 
+(1)Mit Klick auf Button "Anzeigen" : Detaillierte Informationen zur Reise
+   (Titel,  Verpflegung, Datum, Restplätze....)
+(2) Mit Klick auf alle Reisedaten : Auflistung der ausgewählten Reise mit Beginndatum 
+
+REISEN/REISEHINZUFUEGEN
+(1) Eingabefelder : Titel, Beschreibung, Preis Erwachsen, Preis Kind, 
+(2) Auswahl von bereits bestehenden Einträgen bei : Land, Ort, Verpflegung, Unterkunft
+(3) Es gibt die Möglichkeit bei Land, Ort und Unterkunft mittels Klick auf " ... hinzufuegen" einen neuen Eintrag zu erstellen (hier erscheint
+    ein neues Eingabefeld)
+(4) Zu Reisebild/Unterkunftbild: Es wird der Explorer geöffnet, um Bilddateien von der Festplatte hinzufügen zu können.
+(5) Mit Klick auf Button "Erstellen" wird eine neue Reise hinzugefügt und man wird auf die nächste Seite weitergeleitet, um ein Reisedatum einzugeben
+
+REISE/REISEDATEN
+ - Man sieht die Beginndaten der ausgewählten Reise
+(1) Mit Klick auf Button "Alle Buchungen" erhält man alle eingelangte Buchungen
+(2) Information "Anmeldefrist in : x Tagen" : Vom heutigen Datum bis zur Anmeldefrist dauert es x Tage.
+	
+(3)Um eine neue Reise anzulegen, Klick auf de Button "Neue Reise anlegen"
+
+
+BUCHUNGEN/VERWALTEN
+ Auflistung aller gebuchten Reisen
+(1) Mit Klick auf Button "Stornieren" wird dieser Eintrag storniert
+
+
+
+
+
+
+REISEDATUM VERWALTEN:
+REISEN/REISEANZAHLERSTELLEN
+(1) Eingabe von Anmeldefrist, Statdatum und Enddatum der Reise, die Anzahl der Plätze für die jeweilige Reise
+(2) Checkbox "weitereReisehinzufuegen" : Wenn man ein Häkchen setzt, kann man Reisedaten für jeweilige Reise an einem späteren Datum festlegen
+(3) Klick auf Button "Erstellen" : Weiterleitung auf die Startseite, ToastrMeldung "Das neue Reisedatum 
+    wurde erfolgreich hinzugefügt"
+
+-------
+
+
+
+
+
+
+
+BUCHUNGEN/STORNOVERWALTEN
+- Auf der Verwaltung der Reisen für die MItarbeitern unter "Stornoaufträge"
+(1) Auflistugn der Buchungen, welche zum Stornieren vorgesehen sind mit Name der buchenden Person,
+    Passnummer, Geburtsdatum, Gebuchtam und Preis
+
+(2) Mit Klick auf Button "Rückgängig machen" wird die Stornierung rückgängig gemacht
+
