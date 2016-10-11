@@ -18,12 +18,14 @@ namespace UI_Reiseboerse_Graf.Models
         /// <summary>
         /// Vorname des Karten-/Kontoinhabers
         /// </summary>
-        [Required(AllowEmptyStrings =false,ErrorMessage ="Pflichtfeld")]
+        [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [RegularExpression(@"^[a-zA-Z--]+$", ErrorMessage = "Nur Buchstaben von A bis Z erlaubt")]
         public string Vorname { get; set; }
         /// <summary>
         /// Nachname des Karten-/Kontoinhabers
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Pflichtfeld")]
+        [Required(ErrorMessage = "Pflichtfeld!", AllowEmptyStrings = false)]
+        [RegularExpression(@"^[a-zA-Z--]+$", ErrorMessage = "Nur Buchstaben von A bis Z erlaubt")]
         public string Nachname { get; set; }
         /// <summary>
         /// Nummer der Karte bzw. des Konto
