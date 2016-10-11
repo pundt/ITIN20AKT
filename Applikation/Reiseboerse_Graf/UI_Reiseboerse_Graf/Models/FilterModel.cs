@@ -6,11 +6,20 @@ using System.Web;
 
 namespace UI_Reiseboerse_Graf.Models
 {
+    /// <summary>
+    /// Das Model dient zur Filterung der Reisen
+    /// </summary>
     public class FilterModel 
     {
+        /// <summary>
+        /// PreisMin ist der Minimum-Preis, der im Range-Slider (Schieberegler) angezeigt wird
+        /// </summary>
         [Display(Name = "Preis von")]
         public int PreisMin { get; set; }
 
+        /// <summary>
+        /// PreisMax ist der Maximum-Preis, der im Range-Slider (Schieberegler) angezeigt wird
+        /// </summary>
         [Display(Name = "bis")]
         public int PreisMax { get; set; }
 
