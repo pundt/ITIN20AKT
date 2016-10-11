@@ -30,7 +30,9 @@ namespace UI_Reiseboerse_Graf.Models
         {
             get { return string.Format("{0} bis {1}",Beginndatum.ToShortDateString(),Enddatum.ToShortDateString()); }
         }
-
+        /// <summary>
+        /// Prüft ob zu diesem Reisedatum schon Buchungen existieren
+        /// </summary>
         public bool BuchungenVorhanden { get; set; }
 
     }
