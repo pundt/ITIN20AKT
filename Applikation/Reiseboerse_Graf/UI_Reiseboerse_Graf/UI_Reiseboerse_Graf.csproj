@@ -810,6 +810,7 @@
     <Content Include="Documentation\toc\roottoc.xml" />
     <Content Include="Documentation\WebKI.xml" />
     <Content Include="Documentation\WebTOC.xml" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

@@ -221,7 +221,7 @@ namespace BL_Reiseboerse_Graf
             using (reisebueroEntities context = new reisebueroEntities())
             {
                 try
-                {
+                {   
                     gesuchterOrt = context.AlleOrte.Include("Land").Where(x => x.ID == ort_id).FirstOrDefault();
                     Debug.WriteLine("Ortsuche erfolgreich");
                 }

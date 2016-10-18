@@ -175,11 +175,16 @@ namespace UI_Reiseboerse_Graf.Controllers
                     {
                         if (LaenderVerwaltung.SucheAdresse(bm.Adresse) == null)
                         {
-                            b.Adresse = new Adresse()
-                            {
-                                Adressdaten = bm.Adresse,
-                                Ort = LaenderVerwaltung.SucheOrt(bm.Ort_ID)
-                            };
+                            //b.Adresse = new Adresse()
+                            //{
+                            //    Adressdaten = bm.Adresse,
+                            //    Ort = LaenderVerwaltung.SucheOrt(bm.Ort_ID)
+                            //};
+
+                            b.Adresse = new Adresse();
+                            b.Adresse.Adressdaten = bm.Adresse;
+                            b.Adresse.Ort = LaenderVerwaltung.SucheOrt(bm.Ort_ID);
+                            
                         }
                         else
                         {
